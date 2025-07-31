@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTonWallet: The Definitive Guide - by Peaceman</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+        :root {
+            --background-color: #0A0F14;
+            --primary-color: #0098EA;
+            --text-color: #E6F1FF;
+            --text-color-secondary: #8A9CB1;
+            --card-bg: #10171F;
+            --border-color: #2C3A4B;
+            --success-color: #238636;
+            --error-color: #da3633;
+            --shadow-light: rgba(0, 152, 234, 0.25);
+            --shadow-dark: rgba(0, 152, 234, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            cursor: grab;
+        }
+
+        #language-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 15, 20, 0.9);
+            backdrop-filter: blur(15px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #language-modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        #language-modal h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        #language-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .lang-select-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1.5rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .lang-select-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 20px var(--shadow-dark);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            box-shadow: 0 0 35px var(--shadow-light);
+            text-shadow: 0 0 15px var(--shadow-light);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: -webkit-linear-gradient(45deg, #FFF, #0098EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-color-secondary);
+        }
+
+        .info-section {
+            padding: 2rem 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #FFF;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        
+        #checklist-instruction {
+            text-align: center;
+            color: var(--text-color-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+            cursor: pointer;
+            opacity: 0.7;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card.checked {
+            opacity: 1;
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--shadow-dark);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card p {
+            flex-grow: 1;
+            color: var(--text-color-secondary);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            margin-right: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .checkbox svg {
+            width: 14px;
+            height: 14px;
+            stroke: #fff;
+            stroke-width: 3;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s;
+        }
+        
+        .feature-card.checked .checkbox {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+        }
+
+        .feature-card.checked .checkbox svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .quiz-cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-cta p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .quiz-cta p strong {
+             color: #fff;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #007ecc;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--shadow-light);
+        }
+
+        .btn:disabled {
+            background: #30363d;
+            color: #8b949e;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #quiz-section, #results-section {
+            display: none;
+            padding: 3rem 0;
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        #question-container {
+            margin-bottom: 2rem;
+        }
+
+        #question-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1rem;
+            text-align: left;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-color);
+            background-color: var(--shadow-dark);
+        }
+        
+        .option-btn.correct { background-color: var(--success-color); border-color: var(--success-color); color: #fff; }
+        .option-btn.wrong { background-color: var(--error-color); border-color: var(--error-color); color: #fff; }
+        
+        #progress-text { text-align: center; margin-top: 2rem; font-weight: 500; }
+
+        .certificate {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 0 30px var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .certificate::before {
+            content: 'MW';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 10rem;
+            font-weight: 900;
+            color: rgba(0, 152, 234, 0.05);
+            z-index: 0;
+            transform: rotate(-20deg);
+        }
+
+        .certificate-content { position: relative; z-index: 1; }
+        #certificate-title { font-size: 2.5rem; font-weight: 900; color: var(--primary-color); }
+        #final-score { font-size: 1.8rem; margin: 1rem 0; }
+        #motivational-text { font-size: 1.2rem; color: var(--text-color-secondary); margin-bottom: 2rem; font-style: italic; }
+        #peaceman-proud-text { margin-bottom: 2.5rem; font-weight: 500; }
+
+        .social-share {
+            margin-top: 2rem;
+            background: rgba(10, 15, 20, 0.5);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .social-share h3 { color: #FFF; margin-bottom: 1.5rem; }
+        .input-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; align-items: center; justify-content: center; }
+        .input-group input { background: var(--background-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 0.8rem; border-radius: 6px; font-size: 1rem; flex-grow: 1; min-width: 200px; }
+        .social-share p { font-size: 0.9rem; max-width: 500px; margin: 0 auto 1rem auto; line-height: 1.5; }
+        .contest-disclaimer { font-size: 0.8rem !important; color: var(--text-color-secondary); margin-top: 1.5rem !important; }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .official-channels { margin-bottom: 2rem; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem;}
+        .footer-credit { font-size: 0.9rem; color: var(--text-color-secondary); }
+        .footer-credit a { color: var(--primary-color); text-decoration: none; }
+        .footer-credit a:hover { text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="language-modal">
+        <h1 data-key="language_select_title">Select Your Language</h1>
+        <div id="language-grid"></div>
+    </div>
+
+    <div class="container" style="display: block; opacity: 0; transition: opacity 0.5s ease;">
+        <header>
+            <div class="logo">MW</div>
+            <h1 data-key="main_title"></h1>
+            <p data-key="subtitle"></p>
+        </header>
+
+        <main>
+            <section class="info-section">
+                <h2 data-key="checklist_title"></h2>
+                <p id="checklist-instruction" data-key="checklist_instruction"></p>
+                <div class="features-grid">
+                    <!-- Feature cards will be dynamically generated by JS -->
+                </div>
+            </section>
+
+            <section class="quiz-cta" id="quiz-cta-section">
+                <h2 data-key="quiz_cta_title"></h2>
+                <p data-key="quiz_cta_desc"></p>
+                <button class="btn" id="start-quiz-btn" data-key="start_quiz_btn" disabled></button>
+            </section>
+
+            <section id="quiz-section">
+                <div class="quiz-container">
+                    <div id="question-container">
+                        <p id="question-text"></p>
+                        <div id="options-container" class="options-grid"></div>
+                    </div>
+                    <p id="progress-text"></p>
+                </div>
+            </section>
+
+            <section id="results-section">
+                <div class="certificate">
+                    <div class="certificate-content">
+                        <h2 id="certificate-title" data-key="certificate_title"></h2>
+                        <p id="final-score"></p>
+                        <p id="motivational-text"></p>
+                        <p id="peaceman-proud-text" data-key="peaceman_proud"></p>
+                        
+                        <div class="social-share">
+                            <h3 data-key="contest_title"></h3>
+                            <p data-key="contest_rules_follow"></p>
+                            <p data-key="contest_rules_screenshot"></p>
+                             <div class="input-group">
+                                <input type="text" id="twitter-handle" data-placeholder-key="twitter_handle_placeholder">
+                                <button class="btn" id="repost-btn" data-key="repost_btn"></button>
+                            </div>
+                            <p data-key="contest_ai_winner"></p>
+                            <p class="contest-disclaimer" data-key="contest_disclaimer"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="official-channels">
+                 <a href="https://mytonwallet.app/" target="_blank" class="btn" data-key="official_site"></a>
+                 <a href="https://apps.apple.com/app/mytonwallet-ton-wallet/id6464677844" target="_blank" class="btn" data-key="download_ios"></a>
+                 <a href="https://mytonwallet.app/get/android" target="_blank" class="btn" data-key="download_android"></a>
+                 <a href="https://github.com/mytonwalletorg/mytonwallet" target="_blank" class="btn" data-key="view_source"></a>
+            </div>
+            <div class="footer-credit" data-key="footer_credit"></div>
+        </footer>
+    </div>
+
+    <script>
+    const translations = {
+        en: {
+            language_select_title: "Select Your Language",
+            main_title: "The MyTonWallet Definitive Guide",
+            subtitle: "The most advanced, secure, and feature-rich wallet for The Open Network. Discover why it's the ultimate choice for your crypto journey.",
+            checklist_title: "20 Core Advantages",
+            checklist_instruction: "Click each card to learn about a key feature. The quiz unlocks once you've reviewed them all.",
+            features: [
+                { key: "f1", title: "🛡️ Ultimate Security: Self-Custody", desc: "You, and only you, control your private keys. MyTonWallet is non-custodial, ensuring complete sovereignty over your assets." },
+                { key: "f2", title: "🔒 Hardware Wallet Integration", desc: "Maximize security by connecting your Ledger hardware wallet. The safest way to manage significant crypto holdings." },
+                { key: "f3", title: "🌐 Universal dApp Access (TON Connect)", desc: "Powered by TON Connect 2.0, securely interact with the entire TON ecosystem of services and applications right from your wallet." },
+                { key: "f4", title: "💰 Native Staking", desc: "Don't just hold your TON, grow it. Earn passive income by participating in network validation directly within the app." },
+                { key: "f5", title: "🎁 NFT Gifts & Cards", desc: "Send TON and NFTs as personalized gifts with encrypted messages. A unique social feature popularized by Pavel Durov's own use." },
+                { key: "f6", title: "🖼️ Full NFT Functionality", desc: "Beyond gifts, MyTonWallet offers a complete suite for managing your NFT portfolio: view, send, receive, and organize your collection." },
+                { key: "f7", title: "🔄 Cross-Chain Swaps", desc: "MyTonWallet pioneers interoperability by supporting swaps with other blockchains like TRON, with more networks like ETH and BSC coming soon." },
+                { key: "f8", title: "💸 Gasless Payments", desc: "Pay network fees using the token you're sending (e.g., USDT). No need to always have a separate TON balance for gas fees." },
+                { key: "f9", title: "⚡️ Lightning Fast & Ultra-Low Cost", desc: "Experience the power of TON. Transactions are confirmed in seconds with fees that are fractions of a cent. Unbeatably efficient." },
+                { key: "f10", title: "👥 Multi-Account Management", desc: "Effortlessly create and manage multiple wallet addresses under one account. Perfect for separating personal and business funds." },
+                { key: "f11", title: "💻 Full Cross-Platform Support", desc: "Use MyTonWallet seamlessly on any device: iOS, Android, Web, and as a browser extension for Chrome & Firefox." },
+                { key: "f12", title: "👁️ Open Source & Audited", desc: "The wallet's code is fully open-source on GitHub and has been professionally audited by security firms like CertiK for maximum transparency." },
+                { key: "f13", title: "📛 TON DNS & .ton Domains", desc: "Replace long, complex addresses with simple, human-readable names (e.g., 'peaceman.ton')." },
+                { key: "f14", title: "🌐 TON Sites Browsing", desc: "Access decentralized websites hosted on the TON blockchain directly through the wallet's integrated browser." },
+                { key: "f15", title: "📈 Real-Time Price Charts", desc: "Track the value of your assets with interactive, real-time price charts integrated directly into the wallet interface." },
+                { key: "f16", title: "📔 Smart Address Book", desc: "Save and label frequently used addresses to prevent errors and speed up transactions." },
+                { key: "f17", title: "🚫 Built-in Spam Protection", desc: "Automatic filters protect you from receiving spam NFTs and malicious tokens, keeping your wallet clean and secure." },
+                { key: "f18", title: "🔗 Third-Party Integrations", desc: "Connects with essential services like CoinMarketCap and Getgems for a richer, more informed user experience." },
+                { key: "f19", title: "✨ Modern & Intuitive UI", desc: "A clean, user-friendly interface that makes navigating the world of crypto easy for beginners and efficient for experts." },
+                { key: "f20", title: "🆓 Completely Free to Use", desc: "All these powerful features, from multi-accounts to staking, are provided entirely for free. No subscriptions, no hidden costs." }
+            ],
+            quiz_cta_title: "Test Your Knowledge & Win!",
+            quiz_cta_desc: "Think you're a MyTonWallet expert now? Prove it, take the quiz and get a chance to win <strong>$100 USD!</strong>",
+            start_quiz_btn: "Start the Quiz",
+            certificate_title: "MyTonWallet Pro",
+            peaceman_proud: "<strong>Peaceman</strong> is proud, and you are grateful for learning about the best wallet on TON.",
+            contest_title: "Chance to Win $100 USD!",
+            contest_rules_follow: "<strong>Rules:</strong> Follow <strong>@mcdropke</strong> & <strong>@mytonwallet</strong> on X, then like and repost the tweet.",
+            contest_rules_screenshot: "Post a comment with a <strong>screenshot of this certificate</strong> to complete your entry!",
+            contest_ai_winner: "If there are multiple 100% scores, an AI will fairly select the winner. May the best one win!",
+            contest_disclaimer: "<strong>Important condition:</strong> The $100 prize pool is made available if I win the MyTonWallet Ambassador contest. Your participation helps tremendously!",
+            twitter_handle_placeholder: "Your X @handle",
+            repost_btn: "Repost on X",
+            official_site: "Official Website",
+            download_ios: "Download for iOS",
+            download_android: "Download for Android",
+            view_source: "View Source Code",
+            footer_credit: "Created by <a href='https://x.com/mcdropke' target='_blank'>Peaceman</a> | Analysis based on data from the <a href='https://mytonwallet.app/' target='_blank'>official MyTonWallet website</a>.",
+            quiz_progress: "Question {current} of {total}",
+            quiz_score_text: "Your score: {score}/{total}",
+            motivational: { 5: "Perfect score! You are a true MyTonWallet Pro!", 3: "Excellent work! You have a strong grasp of the key advantages.", 1: "Good start! Review the info again to become an expert.", 0: "Don't worry! Every expert starts somewhere. Try again!" },
+            repost_tweet: "I've achieved {certificateTitle} status! 🚀\n\nI now know everything about MyTonWallet, the fastest and most secure wallet on @ton_blockchain.\n\nThanks to the guide by @mcdropke, I have a chance to win $100!\n\nJoin me: #MyTonWallet #TON #Crypto @mytonwallet",
+            alert_handle: "Please enter your X @handle!",
+            quizQuestions: [
+                { question: "What advanced security feature does MyTonWallet support besides self-custody?", options: ["Ledger hardware wallets", "Biometric-only login", "A 24/7 security team"], answer: "Ledger hardware wallets" },
+                { question: "What technology allows MyTonWallet to connect securely to dApps?", options: ["TON Connect 2.0", "WalletConnect", "Bluetooth"], answer: "TON Connect 2.0" },
+                { question: "What can you do with your TON directly inside MyTonWallet to earn rewards?", options: ["Staking", "Trading on an exchange", "Lending to other users"], answer: "Staking" },
+                { question: "What is a unique privacy feature of sending TON as a gift?", options: ["The message is encrypted", "The transaction is hidden", "It uses a different network"], answer: "The message is encrypted" },
+                { question: "Are the advanced features in MyTonWallet, like multi-account, part of a paid subscription?", options: ["No, all features are free", "Yes, there is a Pro version", "Only for business users"], answer: "No, all features are free" }
+            ]
+        },
+        ru: {
+            language_select_title: "Выберите ваш язык",
+            main_title: "Полное руководство по MyTonWallet",
+            subtitle: "Самый продвинутый, безопасный и многофункциональный кошелек для The Open Network. Узнайте, почему это лучший выбор для вашего крипто-путешествия.",
+            checklist_title: "20 ключевых преимуществ",
+            checklist_instruction: "Нажмите на каждую карточку, чтобы узнать о ключевой функции. Викторина откроется, как только вы просмотрите все.",
+            features: [
+                { key: "f1", title: "🛡️ Максимальная безопасность: Самостоятельное хранение", desc: "Только вы контролируете свои приватные ключи. MyTonWallet является некастодиальным, обеспечивая полный суверенитет над вашими активами." },
+                { key: "f2", title: "🔒 Интеграция с аппаратными кошельками", desc: "Максимизируйте безопасность, подключив ваш аппаратный кошелек Ledger. Самый безопасный способ управления значительными крипто-активами." },
+                { key: "f3", title: "🌐 Универсальный доступ к dApp (TON Connect)", desc: "Благодаря TON Connect 2.0, безопасно взаимодействуйте со всей экосистемой сервисов и приложений TON прямо из вашего кошелька." },
+                { key: "f4", title: "💰 Нативный стейкинг", desc: "Не просто храните свои TON, приумножайте их. Получайте пассивный доход, участвуя в валидации сети прямо в приложении." },
+                { key: "f5", title: "🎁 NFT-подарки и открытки", desc: "Отправляйте TON и NFT в качестве персонализированных подарков с зашифрованными сообщениями. Уникальная социальная функция, популяризированная самим Павлом Дуровым." },
+                { key: "f6", title: "🖼️ Полный функционал NFT", desc: "Помимо подарков, MyTonWallet предлагает полный набор для управления вашим NFT-портфолио: просмотр, отправка, получение и организация вашей коллекции." },
+                { key: "f7", title: "🔄 Межсетевые обмены", desc: "MyTonWallet является пионером в области совместимости, поддерживая обмены с другими блокчейнами, такими как TRON, и скоро добавит сети ETH и BSC." },
+                { key: "f8", title: "💸 Платежи без газа", desc: "Оплачивайте сетевые комиссии токеном, который вы отправляете (например, USDT). Нет необходимости всегда иметь отдельный баланс TON для комиссий." },
+                { key: "f9", title: "⚡️ Молниеносно и сверхдешево", desc: "Оцените мощь TON. Транзакции подтверждаются за секунды с комиссиями в доли цента. Непревзойденная эффективность." },
+                { key: "f10", title: "👥 Управление несколькими счетами", desc: "Легко создавайте и управляйте несколькими адресами кошельков в рамках одной учетной записи. Идеально для разделения личных и деловых средств." },
+                { key: "f11", title: "💻 Полная кросс-платформенная поддержка", desc: "Используйте MyTonWallet без проблем на любом устройстве: iOS, Android, Web и в виде расширения для Chrome и Firefox." },
+                { key: "f12", title: "👁️ Открытый исходный код и аудит", desc: "Код кошелька полностью открыт на GitHub и прошел профессиональный аудит от фирм безопасности, таких как CertiK, для максимальной прозрачности." },
+                { key: "f13", title: "📛 TON DNS и домены .ton", desc: "Замените длинные, сложные адреса простыми, человекочитаемыми именами (например, 'peaceman.ton')." },
+                { key: "f14", title: "🌐 Просмотр TON Sites", desc: "Получайте доступ к децентрализованным сайтам, размещенным на блокчейне TON, прямо через встроенный браузер кошелька." },
+                { key: "f15", title: "📈 Графики цен в реальном времени", desc: "Отслеживайте стоимость ваших активов с помощью интерактивных графиков цен в реальном времени, интегрированных прямо в интерфейс кошелька." },
+                { key: "f16", title: "📔 Умная адресная книга", desc: "Сохраняйте и помечайте часто используемые адреса, чтобы избежать ошибок и ускорить транзакции." },
+                { key: "f17", title: "🚫 Встроенная защита от спама", desc: "Автоматические фильтры защищают вас от получения спам-NFT и вредоносных токенов, сохраняя ваш кошелек чистым и безопасным." },
+                { key: "f18", title: "🔗 Интеграции со сторонними сервисами", desc: "Подключается к важным сервисам, таким как CoinMarketCap и Getgems, для более богатого и информированного пользовательского опыта." },
+                { key: "f19", title: "✨ Современный и интуитивный интерфейс", desc: "Чистый, удобный интерфейс, который делает навигацию в мире криптовалют легкой для новичков и эффективной для экспертов." },
+                { key: "f20", title: "🆓 Полностью бесплатное использование", desc: "Все эти мощные функции, от мульти-аккаунтов до стейкинга, предоставляются абсолютно бесплатно. Никаких подписок, никаких скрытых платежей." }
+            ],
+            quiz_cta_title: "Проверьте свои знания и выиграйте!",
+            quiz_cta_desc: "Считаете себя экспертом в MyTonWallet? Докажите это, пройдите викторину и получите шанс выиграть <strong>$100 USD!</strong>",
+            start_quiz_btn: "Начать викторину",
+            certificate_title: "MyTonWallet Pro",
+            peaceman_proud: "<strong>Peaceman</strong> гордится, а вы благодарны за то, что узнали о лучшем кошельке в сети TON.",
+            contest_title: "Шанс выиграть $100 USD!",
+            contest_rules_follow: "<strong>Правила:</strong> Подпишитесь на <strong>@mcdropke</strong> и <strong>@mytonwallet</strong> в X, затем поставьте лайк и сделайте репост твита.",
+            contest_rules_screenshot: "Опубликуйте комментарий со <strong>скриншотом этого сертификата</strong>, чтобы завершить участие!",
+            contest_ai_winner: "Если будет несколько участников со 100% результатом, победитель будет честно выбран с помощью ИИ. Пусть победит сильнейший!",
+            contest_disclaimer: "<strong>Важное условие:</strong> Призовой фонд в $100 будет доступен, если я выиграю конкурс амбассадоров MyTonWallet. Ваше участие очень помогает!",
+            twitter_handle_placeholder: "Ваш @ник в X",
+            repost_btn: "Репост в X",
+            official_site: "Официальный сайт",
+            download_ios: "Скачать для iOS",
+            download_android: "Скачать для Android",
+            view_source: "Посмотреть исходный код",
+            footer_credit: "Создано <a href='https://x.com/mcdropke' target='_blank'>Peaceman</a> | Анализ основан на данных с <a href='https://mytonwallet.app/' target='_blank'>официального сайта MyTonWallet</a>.",
+            quiz_progress: "Вопрос {current} из {total}",
+            quiz_score_text: "Ваш счет: {score}/{total}",
+            motivational: { 5: "Идеальный результат! Вы настоящий MyTonWallet Pro!", 3: "Отличная работа! Вы хорошо разбираетесь в ключевых преимуществах.", 1: "Хорошее начало! Изучите информацию еще раз, чтобы стать экспертом.", 0: "Не волнуйтесь! Каждый эксперт с чего-то начинал. Попробуйте снова!" },
+            repost_tweet: "Я получил статус {certificateTitle}! 🚀\n\nТеперь я знаю все о MyTonWallet, самом быстром и безопасном кошельке на @ton_blockchain.\n\nБлагодаря руководству от @mcdropke, у меня есть шанс выиграть $100!\n\nПрисоединяйтесь: #MyTonWallet #TON #Crypto @mytonwallet",
+            alert_handle: "Пожалуйста, введите ваш @ник в X!",
+            quizQuestions: [
+                { question: "Какую продвинутую функцию безопасности поддерживает MyTonWallet помимо самоуправления?", options: ["Аппаратные кошельки Ledger", "Вход только по биометрии", "Круглосуточная служба безопасности"], answer: "Аппаратные кошельки Ledger" },
+                { question: "Какая технология позволяет MyTonWallet безопасно подключаться к dApp?", options: ["TON Connect 2.0", "WalletConnect", "Bluetooth"], answer: "TON Connect 2.0" },
+                { question: "Что вы можете делать со своими TON прямо в MyTonWallet, чтобы получать вознаграждения?", options: ["Стейкинг", "Торговля на бирже", "Предоставление взаймы другим пользователям"], answer: "Стейкинг" },
+                { question: "В чем уникальность функции конфиденциальности при отправке TON в качестве подарка?", options: ["Сообщение зашифровано", "Транзакция скрыта", "Используется другая сеть"], answer: "Сообщение зашифровано" },
+                { question: "Являются ли продвинутые функции в MyTonWallet, такие как мульти-аккаунт, частью платной подписки?", options: ["Нет, все функции бесплатны", "Да, есть Pro-версия", "Только для бизнес-пользователей"], answer: "Нет, все функции бесплатны" }
+            ]
+        },
+        zh: {
+            language_select_title: "选择你的语言",
+            main_title: "MyTonWallet 权威指南",
+            subtitle: "The Open Network 上最先进、最安全、功能最丰富的钱包。了解为什么它是您加密之旅的终极选择。",
+            checklist_title: "20个核心优势",
+            checklist_instruction: "点击每张卡片以了解一项关键功能。查看完所有功能后，测验将解锁。",
+            features: [
+                { key: "f1", title: "🛡️ 终极安全：自我保管", desc: "只有您自己能控制您的私钥。MyTonWallet 是非托管的，确保您对资产拥有完全主权。" },
+                { key: "f2", title: "🔒 硬件钱包集成", desc: "通过连接您的 Ledger 硬件钱包，最大限度地提高安全性。这是管理大量加密资产的最安全方式。" },
+                { key: "f3", title: "🌐 通用 dApp 访问 (TON Connect)", desc: "由 TON Connect 2.0 提供支持，直接从您的钱包安全地与整个 TON 生态系统的服务和应用程序进行交互。" },
+                { key: "f4", title: "💰 原生质押", desc: "不要只持有您的 TON，让它增值。通过直接在应用中参与网络验证来赚取被动收入。" },
+                { key: "f5", title: "🎁 NFT 礼物和卡片", desc: "以带有加密消息的个性化礼物形式发送 TON 和 NFT。Pavel Durov 本人的使用也推广了这一独特的社交功能。" },
+                { key: "f6", title: "🖼️ 完整的 NFT 功能", desc: "除了礼物，MyTonWallet 还提供一整套管理您 NFT 投资组合的功能：查看、发送、接收和整理您的收藏。" },
+                { key: "f7", title: "🔄 跨链兑换", desc: "MyTonWallet 通过支持与 TRON 等其他区块链的兑换，开创了互操作性的先河，并将很快支持 ETH 和 BSC 等更多网络。" },
+                { key: "f8", title: "💸 无 Gas 费支付", desc: "使用您正在发送的代币（例如 USDT）支付网络费用。无需为 Gas 费始终保留单独的 TON 余额。" },
+                { key: "f9", title: "⚡️ 闪电般的速度和超低成本", desc: "体验 TON 的力量。交易在几秒钟内确认，费用仅为几分之一美分。无与伦比的效率。" },
+                { key: "f10", title: "👥 多账户管理", desc: "在一个账户下轻松创建和管理多个钱包地址。非常适合区分个人和商业资金。" },
+                { key: "f11", title: "💻 全面的跨平台支持", desc: "在任何设备上无缝使用 MyTonWallet：iOS、Android、Web 以及作为 Chrome 和 Firefox 的浏览器扩展。" },
+                { key: "f12", title: "👁️ 开源和审计", desc: "钱包的代码在 GitHub 上完全开源，并经过 CertiK 等安全公司的专业审计，以实现最大程度的透明度。" },
+                { key: "f13", title: "📛 TON DNS 和 .ton 域名", desc: "用简单、易读的名称（例如 'peaceman.ton'）替换冗长复杂的地址。" },
+                { key: "f14", title: "🌐 TON 网站浏览", desc: "直接通过钱包的集成浏览器访问托管在 TON 区块链上的去中心化网站。" },
+                { key: "f15", title: "📈 实时价格图表", desc: "通过直接集成到钱包界面的交互式实时价格图表，跟踪您的资产价值。" },
+                { key: "f16", title: "📔 智能地址簿", desc: "保存并标记常用地址，以防止错误并加快交易速度。" },
+                { key: "f17", title: "🚫 内置垃圾邮件防护", desc: "自动过滤器可保护您免受垃圾 NFT 和恶意代币的侵害，保持您的钱包干净安全。" },
+                { key: "f18", title: "🔗 第三方集成", desc: "与 CoinMarketCap 和 Getgems 等基本服务连接，提供更丰富、更明智的用户体验。" },
+                { key: "f19", title: "✨ 现代直观的用户界面", desc: "一个干净、用户友好的界面，使初学者可以轻松驾驭加密世界，专家可以高效操作。" },
+                { key: "f20", title: "🆓 完全免费使用", desc: "所有这些强大的功能，从多账户到质押，都完全免费提供。没有订阅，没有隐藏费用。" }
+            ],
+            quiz_cta_title: "测试您的知识并赢取大奖！",
+            quiz_cta_desc: "认为您现在是 MyTonWallet 专家了吗？证明一下，参加测验，就有机会赢得 <strong>$100 美元！</strong>",
+            start_quiz_btn: "开始测验",
+            certificate_title: "MyTonWallet 专家",
+            peaceman_proud: "<strong>Peaceman</strong> 为您感到骄傲，您也为学习了 TON 上最好的钱包而心存感激。",
+            contest_title: "赢取 100 美元的机会！",
+            contest_rules_follow: "<strong>规则：</strong>在 X 上关注 <strong>@mcdropke</strong> 和 <strong>@mytonwallet</strong>，然后点赞并转发推文。",
+            contest_rules_screenshot: "发表评论并附上<strong>此证书的截图</strong>以完成您的参与！",
+            contest_ai_winner: "如果有多人获得 100% 的分数，人工智能将公平地选出获胜者。祝最好运的人获胜！",
+            contest_disclaimer: "<strong>重要条件：</strong>如果我赢得 MyTonWallet 大使竞赛，将提供 100 美元的奖金池。您的参与非常有帮助！",
+            twitter_handle_placeholder: "您的 X @用户名",
+            repost_btn: "在 X 上转发",
+            official_site: "官方网站",
+            download_ios: "下载 iOS 版",
+            download_android: "下载 Android 版",
+            view_source: "查看源代码",
+            footer_credit: "由 <a href='https://x.com/mcdropke' target='_blank'>Peaceman</a> 创建 | 分析基于 <a href='https://mytonwallet.app/' target='_blank'>MyTonWallet 官方网站</a> 的数据。",
+            quiz_progress: "问题 {current} / {total}",
+            quiz_score_text: "您的得分: {score}/{total}",
+            motivational: { 5: "满分！您是真正的 MyTonWallet 专家！", 3: "干得漂亮！您对核心优势有深刻的理解。", 1: "良好的开端！再次阅读信息，成为专家。", 0: "别担心！每个专家都是从零开始的。再试一次！" },
+            repost_tweet: "我已获得 {certificateTitle} 身份！🚀\n\n我现在了解了关于 MyTonWallet 的一切，它是 @ton_blockchain 上最快、最安全的钱包。\n\n感谢 @mcdropke 的指南，我有机会赢得 100 美元！\n\n加入我：#MyTonWallet #TON #加密货币 @mytonwallet",
+            alert_handle: "请输入您的 X @用户名！",
+            quizQuestions: [
+                { question: "除了自我保管，MyTonWallet 还支持哪种高级安全功能？", options: ["Ledger 硬件钱包", "仅生物识别登录", "24/7 安全团队"], answer: "Ledger 硬件钱包" },
+                { question: "什么技术使 MyTonWallet 能够安全地连接到 dApp？", options: ["TON Connect 2.0", "WalletConnect", "蓝牙"], answer: "TON Connect 2.0" },
+                { question: "您可以直接在 MyTonWallet 中对您的 TON 做什么来赚取奖励？", options: ["质押", "在交易所交易", "借给其他用户"], answer: "质押" },
+                { question: "将 TON 作为礼物发送时，其独特的隐私功能是什么？", options: ["消息是加密的", "交易是隐藏的", "它使用不同的网络"], answer: "消息是加密的" },
+                { question: "MyTonWallet 中的多账户等高级功能是付费订阅的一部分吗？", options: ["不，所有功能都是免费的", "是的，有专业版", "仅限商业用户"], answer: "不，所有功能都是免费的" }
+            ]
+        }
+    };
+    
+    // --- Global Variables ---
+    const supportedLangs = {
+        en: 'English', 
+        ru: 'Русский', 
+        zh: '中文'
+    };
+    let currentLang = 'en';
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let mouseX = 0, mouseY = 0;
+
+    // --- DOM Elements ---
+    const languageModal = document.getElementById('language-modal');
+    const languageGrid = document.getElementById('language-grid');
+    const mainContainer = document.querySelector('.container');
+    const featuresGrid = document.querySelector('.features-grid');
+    const startQuizBtn = document.getElementById('start-quiz-btn');
+    const quizCtaSection = document.getElementById('quiz-cta-section');
+    const quizSection = document.getElementById('quiz-section');
+    const resultsSection = document.getElementById('results-section');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const progressText = document.getElementById('progress-text');
+    const repostBtn = document.getElementById('repost-btn');
+    const twitterHandleInput = document.getElementById('twitter-handle');
+
+    // --- 3D Background Setup ---
+    let scene, camera, renderer, particles;
+    function init3D() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const particleCount = 7000;
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 20;
+        }
+        
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const primaryColorValue = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+        const particlesMaterial = new THREE.PointsMaterial({
+            color: new THREE.Color(primaryColorValue),
+            size: 0.02,
+            map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png'),
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+        
+        camera.position.z = 5;
+        
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+        animate3D();
+    }
+
+    function onDocumentMouseMove(event) {
+        mouseX = (event.clientX - window.innerWidth / 2) / 200;
+        mouseY = (event.clientY - window.innerHeight / 2) / 200;
+    }
+
+    function animate3D() {
+        requestAnimationFrame(animate3D);
+        
+        camera.position.x += (mouseX - camera.position.x) * 0.02;
+        camera.position.y += (-mouseY - camera.position.y) * 0.02;
+        camera.lookAt(scene.position);
+
+        particles.rotation.y += 0.0002;
+        renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // --- Language & Content Functions ---
+    function selectLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        
+        languageModal.classList.add('hidden');
+        mainContainer.style.opacity = '1';
+
+        updateAllText();
+        populateFeatures();
+        checkChecklistCompletion();
+    }
+
+    function updateAllText() {
+        const langData = translations[currentLang];
+        document.querySelectorAll('[data-key]').forEach(element => {
+            const key = element.dataset.key;
+            if (langData && langData[key]) {
+                element.innerHTML = langData[key];
+            }
+        });
+        
+        document.querySelectorAll('[data-placeholder-key]').forEach(element => {
+            const key = element.dataset.placeholderKey;
+             if (langData && langData[key]) {
+                element.placeholder = langData[key];
+            }
+        });
+    }
+
+    function populateLanguageSelector() {
+        for (const [code, name] of Object.entries(supportedLangs)) {
+            const button = document.createElement('button');
+            button.className = 'lang-select-btn';
+            button.textContent = name;
+            button.dataset.lang = code;
+            button.addEventListener('click', () => selectLanguage(code));
+            languageGrid.appendChild(button);
+        }
+    }
+    
+    function populateFeatures() {
+        featuresGrid.innerHTML = '';
+        const langFeatures = translations[currentLang].features;
+        langFeatures.forEach(feature => {
+            const card = document.createElement('div');
+            card.className = 'feature-card';
+            card.dataset.featureKey = feature.key;
+            card.innerHTML = `
+                <h3>
+                    <span class="checkbox">
+                        <svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <span>${feature.title}</span>
+                </h3>
+                <p>${feature.desc}</p>
+            `;
+            featuresGrid.appendChild(card);
+            card.addEventListener('click', () => {
+                card.classList.toggle('checked');
+                checkChecklistCompletion();
+            });
+        });
+    }
+
+    function checkChecklistCompletion() {
+        const cards = document.querySelectorAll('.feature-card');
+        const checkedCards = document.querySelectorAll('.feature-card.checked');
+        if (cards.length > 0 && cards.length === checkedCards.length) {
+            startQuizBtn.disabled = false;
+        } else {
+            startQuizBtn.disabled = true;
+        }
+    }
+
+    function showQuestion() {
+        resetState();
+        const langQuestions = translations[currentLang].quizQuestions;
+        const question = langQuestions[currentQuestionIndex];
+        
+        questionText.innerText = question.question;
+        progressText.innerText = translations[currentLang].quiz_progress
+            .replace('{current}', currentQuestionIndex + 1)
+            .replace('{total}', langQuestions.length);
+
+        question.options.forEach(option => {
+            const button = document.createElement('button');
+            button.innerText = option;
+            button.classList.add('option-btn');
+            button.addEventListener('click', (e) => selectAnswer(e));
+            optionsContainer.appendChild(button);
+        });
+    }
+
+    function resetState() {
+        while (optionsContainer.firstChild) {
+            optionsContainer.removeChild(optionsContainer.firstChild);
+        }
+    }
+
+    function selectAnswer(e) {
+        const selectedBtn = e.target;
+        const langQuestions = translations[currentLang].quizQuestions;
+        const correct = selectedBtn.innerText === langQuestions[currentQuestionIndex].answer;
+
+        if (correct) {
+            score++;
+            selectedBtn.classList.add('correct');
+        } else {
+            selectedBtn.classList.add('wrong');
+        }
+        
+        Array.from(optionsContainer.children).forEach(button => {
+            if (button.innerText === langQuestions[currentQuestionIndex].answer) {
+                 button.classList.add('correct');
+            }
+            button.disabled = true;
+        });
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < langQuestions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }, 1500);
+    }
+
+    function showResults() {
+        quizSection.style.display = 'none';
+        resultsSection.style.display = 'block';
+        window.scrollTo({ top: resultsSection.offsetTop - 100, behavior: 'smooth' });
+
+        const langQuestions = translations[currentLang].quizQuestions;
+        const finalScoreEl = document.getElementById('final-score');
+        const motivationalTextEl = document.getElementById('motivational-text');
+
+        finalScoreEl.innerText = translations[currentLang].quiz_score_text
+            .replace('{score}', score)
+            .replace('{total}', langQuestions.length);
+
+        let messageKey = 0;
+        if (score === 5) messageKey = 5;
+        else if (score >= 3) messageKey = 3;
+        else if (score >= 1) messageKey = 1;
+        
+        motivationalTextEl.innerText = translations[currentLang].motivational[messageKey];
+    }
+
+    // --- Event Listeners ---
+    startQuizBtn.addEventListener('click', () => {
+        currentQuestionIndex = 0;
+        score = 0;
+        quizCtaSection.style.display = 'none';
+        resultsSection.style.display = 'none';
+        quizSection.style.display = 'block';
+        window.scrollTo({ top: quizSection.offsetTop - 100, behavior: 'smooth' });
+        showQuestion();
+    });
+    
+    repostBtn.addEventListener('click', () => {
+        const twitterHandle = twitterHandleInput.value.trim();
+        if (twitterHandle === "") {
+            twitterHandleInput.style.borderColor = 'var(--error-color)';
+            setTimeout(() => { twitterHandleInput.style.borderColor = 'var(--border-color)'; }, 2000);
+            return;
+        }
+        const certificateTitle = translations[currentLang].certificate_title;
+        const text = translations[currentLang].repost_tweet.replace('{certificateTitle}', certificateTitle);
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+        window.open(twitterUrl, '_blank');
+    });
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+        init3D();
+        populateLanguageSelector();
+        document.querySelector('#language-modal h1').innerText = translations.en.language_select_title;
+    });
+
+    </script>
+</body>
+</html>
