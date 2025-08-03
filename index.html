@@ -1,929 +1,1134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
+    <!-- === META TAGS === -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyTonWallet: The Definitive Guide - by Peaceman</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+    <title>AILeer.nl - AI-Cursussen, Tools & Certificaten</title>
+    <meta name="description" content="Leer AI met de beste cursussen, tools en tutorials op AILeer.nl. Krijg exclusieve kortingen en verdien een officieel AI-certificaat!">
+    <meta name="keywords" content="AI-cursussen, beste AI-tools, AI-certificaat, AI-educatie, AI-tutorials, leer AI online, AI voor beginners, AI-tools met korting, kunstmatige intelligentie, machine learning">
+    <meta name="author" content="AILeer.nl">
+    <link rel="canonical" href="https://aileer.nl/">
+    <link rel="icon" href="https://placehold.co/32x32/007BFF/FFFFFF?text=AI" type="image/png">
 
+    <!-- === GOOGLE FONTS & ICONS === -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+
+    <!-- === INLINE CSS (IMPROVED) === -->
+    <style>
+        /* === ALGEMENE STIJLEN & VARIABELEN === */
         :root {
-            --background-color: #0A0F14;
-            --primary-color: #0098EA;
-            --text-color: #E6F1FF;
-            --text-color-secondary: #8A9CB1;
-            --card-bg: #10171F;
-            --border-color: #2C3A4B;
-            --success-color: #238636;
-            --error-color: #da3633;
-            --shadow-light: rgba(0, 152, 234, 0.25);
-            --shadow-dark: rgba(0, 152, 234, 0.1);
+            --primary-color: #007BFF;
+            --primary-hover: #0056b3;
+            --secondary-color: #343a40;
+            --background-color: #f8f9fa;
+            --surface-color: #FFFFFF;
+            --text-color: #212529;
+            --light-text-color: #6c757d;
+            --font-primary: 'Roboto', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+            --border-radius: 8px;
         }
 
+        /* Reset en basisinstellingen */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-secondary);
+            line-height: 1.7;
             background-color: var(--background-color);
             color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            cursor: grab;
-        }
-
-        #language-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(10, 15, 20, 0.9);
-            backdrop-filter: blur(15px);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            transition: opacity 0.5s ease, visibility 0.5s;
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        #language-modal.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        #language-modal h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        #language-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            max-width: 600px;
-            width: 90%;
-        }
-
-        .lang-select-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 1.5rem 2rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .lang-select-btn:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 20px var(--shadow-dark);
         }
 
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
         }
 
+        h1, h2, h3 {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; color: var(--primary-color); text-align: center; margin-bottom: 40px; }
+        h3 { font-size: 1.5rem; }
+
+        section {
+            padding: 80px 0;
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+        }
+
+        .button, .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), #0056b3);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .button:hover, .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .animated.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* === HEADER & NAVIGATIE === */
         header {
-            text-align: center;
-            padding: 4rem 0;
+            background: var(--surface-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
         }
 
         .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1.5rem auto;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 2px solid var(--primary-color);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary-color);
-            box-shadow: 0 0 35px var(--shadow-light);
-            text-shadow: 0 0 15px var(--shadow-light);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            background: -webkit-linear-gradient(45deg, #FFF, #0098EA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--text-color-secondary);
-        }
-
-        .info-section {
-            padding: 2rem 0;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-family: var(--font-primary);
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: #FFF;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            margin-right: 12px;
+            height: 45px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            padding-bottom: 5px;
+            position: relative;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #lang-selector {
+            padding: 8px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: var(--secondary-color);
+            margin-bottom: 4px;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* === HOME SECTIE (HERO) === */
+        #home {
+            background: url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop') no-repeat center center/cover;
+            color: white;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
             position: relative;
         }
 
-        h2::after {
+        #home::before {
             content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary-color);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 21, 41, 0.7);
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        #home h1 {
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-size: 4rem;
+        }
+
+        #home .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 20px auto 40px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         
-        #checklist-instruction {
-            text-align: center;
-            color: var(--text-color-secondary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .features-grid {
+        /* === GRID & CARDS (voor Tools, Cursussen, Blog) === */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
-            cursor: pointer;
-            opacity: 0.7;
+        .card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
         }
-        
-        .feature-card.checked {
-            opacity: 1;
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--shadow-dark);
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
-        .feature-card h3 {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .feature-card p {
-            flex-grow: 1;
-            color: var(--text-color-secondary);
+        .card .card-img-container {
+            overflow: hidden;
+            height: 200px;
         }
 
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border-color);
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content p {
+            flex-grow: 1;
+            margin-bottom: 20px;
+            color: var(--light-text-color);
+        }
+
+        /* === QUIZ SECTIE === */
+        #quiz-container {
+            max-width: 800px;
+            margin: auto;
+            background: var(--surface-color);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+        
+        #quiz-progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background-color: #e9ecef;
             border-radius: 5px;
-            margin-right: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        #quiz-progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.4s ease-in-out;
+        }
+
+        #username {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            background: var(--surface-color);
+            cursor: pointer;
             transition: all 0.2s;
+            text-align: left;
+            font-size: 1rem;
+        }
+        .quiz-option:hover { background-color: #f8f9fa; transform: translateX(5px); }
+        .quiz-option.correct { border-color: #28a745; background-color: #e9f7ec; }
+        .quiz-option.incorrect { border-color: #dc3545; background-color: #fbebed; }
+        .quiz-option:disabled { cursor: not-allowed; }
+
+        #certificate-wrapper {
+            margin: 30px 0;
+            border: 1px solid #ddd;
+            box-shadow: var(--shadow-sm);
+        }
+        #certificate-canvas {
+            width: 100%;
+            height: auto;
+        }
+        #share-x-btn {
+            background: #000;
+        }
+        #share-x-btn:hover { background: #333; }
+        .result-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* === CONTACT SECTIE === */
+        #contact-form {
+            max-width: 700px;
+            margin: 30px auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        #contact-form input, #contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        /* === POPUP & CHATBOT === */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1002;
+        }
+        #chatbot-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary-color), #0056b3);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+        }
+        #chatbot-icon:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+        #chatbot-window {
+            display: none;
+            width: 350px;
+            height: 450px;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            flex-direction: column;
+            overflow: hidden;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+        }
+        #chatbot-header {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 15px;
+            font-weight: bold;
+        }
+        #chatbot-body {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: var(--background-color);
+            display: flex;
+            flex-direction: column;
+        }
+        .chatbot-message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 85%;
+            line-height: 1.5;
+        }
+        .bot {
+            background: #e9ecef;
+            color: var(--text-color);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+        .user {
+            background: var(--primary-color);
+            color: #fff;
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+        #chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        #chatbot-user-input {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin-right: 10px;
+        }
+        #chatbot-send-btn {
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
             flex-shrink: 0;
         }
 
-        .checkbox svg {
-            width: 14px;
-            height: 14px;
-            stroke: #fff;
-            stroke-width: 3;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.2s;
-        }
-        
-        .feature-card.checked .checkbox {
-            background-color: var(--success-color);
-            border-color: var(--success-color);
-        }
-
-        .feature-card.checked .checkbox svg {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .quiz-cta {
-            text-align: center;
-            padding: 3rem;
-            background: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .quiz-cta p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        .quiz-cta p strong {
-             color: #fff;
-        }
-
-        .btn {
-            background: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background: #007ecc;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--shadow-light);
-        }
-
-        .btn:disabled {
-            background: #30363d;
-            color: #8b949e;
-            cursor: not-allowed;
-            opacity: 0.7;
-            transform: none;
-            box-shadow: none;
-        }
-
-        #quiz-section, #results-section {
-            display: none;
-            padding: 3rem 0;
-        }
-
-        .quiz-container {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-        
-        #question-container {
-            margin-bottom: 2rem;
-        }
-
-        #question-text {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        .option-btn {
-            width: 100%;
-            background: transparent;
-            border: 2px solid var(--border-color);
-            color: var(--text-color);
-            padding: 1rem;
-            text-align: left;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary-color);
-            background-color: var(--shadow-dark);
-        }
-        
-        .option-btn.correct { background-color: var(--success-color); border-color: var(--success-color); color: #fff; }
-        .option-btn.wrong { background-color: var(--error-color); border-color: var(--error-color); color: #fff; }
-        
-        #progress-text { text-align: center; margin-top: 2rem; font-weight: 500; }
-
-        .certificate {
-            background: var(--card-bg);
-            border: 2px solid var(--primary-color);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 0 30px var(--shadow-light);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .certificate::before {
-            content: 'MW';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            font-size: 10rem;
-            font-weight: 900;
-            color: rgba(0, 152, 234, 0.05);
-            z-index: 0;
-            transform: rotate(-20deg);
-        }
-
-        .certificate-content { position: relative; z-index: 1; }
-        #certificate-title { font-size: 2.5rem; font-weight: 900; color: var(--primary-color); }
-        #final-score { font-size: 1.8rem; margin: 1rem 0; }
-        #motivational-text { font-size: 1.2rem; color: var(--text-color-secondary); margin-bottom: 2rem; font-style: italic; }
-        #peaceman-proud-text { margin-bottom: 2.5rem; font-weight: 500; }
-
-        .social-share {
-            margin-top: 2rem;
-            background: rgba(10, 15, 20, 0.5);
-            padding: 2rem;
-            border-radius: 8px;
-        }
-        
-        .social-share h3 { color: #FFF; margin-bottom: 1.5rem; }
-        .input-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; align-items: center; justify-content: center; }
-        .input-group input { background: var(--background-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 0.8rem; border-radius: 6px; font-size: 1rem; flex-grow: 1; min-width: 200px; }
-        .social-share p { font-size: 0.9rem; max-width: 500px; margin: 0 auto 1rem auto; line-height: 1.5; }
-        .contest-disclaimer { font-size: 0.8rem !important; color: var(--text-color-secondary); margin-top: 1.5rem !important; }
-
+        /* === FOOTER === */
         footer {
+            background: var(--secondary-color);
+            color: #fff;
             text-align: center;
-            padding: 4rem 2rem 2rem 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            margin-top: 60px;
         }
-        
-        .official-channels { margin-bottom: 2rem; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem;}
-        .footer-credit { font-size: 0.9rem; color: var(--text-color-secondary); }
-        .footer-credit a { color: var(--primary-color); text-decoration: none; }
-        .footer-credit a:hover { text-decoration: underline; }
 
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            #home h1 { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: -100%;
+                background: var(--surface-color);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transition: left 0.3s ease-in-out;
+                box-shadow: var(--shadow-md);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            #home h1 { font-size: 2.8rem; }
+            .cta-buttons {
+                flex-direction: column;
+            }
+            section { padding: 60px 0; }
+        }
     </style>
+
+    <!-- === STRUCTURED DATA (JSON-LD) === -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "AILeer.nl",
+          "url": "https://aileer.nl",
+          "logo": "https://aileer.nl/images/logo.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "info@aileer.nl",
+            "contactType": "customer support"
+          },
+          "description": "Jouw platform voor AI-educatie, met exclusieve deals voor de beste AI-tools en cursussen."
+        },
+        {
+          "@type": "WebSite",
+          "name": "AILeer.nl",
+          "url": "https://aileer.nl",
+          "description": "Leer AI met cursussen, tools en certificaten. Krijg exclusieve kortingen!",
+          "publisher": {
+            "@type": "Organization",
+            "name": "AILeer.nl"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "Hoe leer ik AI in 2025?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "De beste manier om AI te leren is door een combinatie van gestructureerde cursussen, praktische projecten met AI-tools, en het volgen van de laatste trends via blogs. AILeer.nl biedt bronnen voor al deze stappen, inclusief cursussen voor beginners en exclusieve deals voor top AI-tools."
+            }
+          },{
+            "@type": "Question",
+            "name": "Wat zijn de beste AI-tools?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "De 'beste' AI-tools hangen af van je doel. Voor contentcreatie zijn tools als ChatGPT en Midjourney populair. Voor automatisering en development zijn er platformen zoals AVEO_TECH. AILeer.nl heeft een gecureerde lijst met de top AI-tools, vaak met speciale kortingen via onze links."
+            }
+          }]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
 
-    <div id="language-modal">
-        <h1 data-key="language_select_title">Select Your Language</h1>
-        <div id="language-grid"></div>
-    </div>
-
-    <div class="container" style="display: block; opacity: 0; transition: opacity 0.5s ease;">
-        <header>
-            <div class="logo">MW</div>
-            <h1 data-key="main_title"></h1>
-            <p data-key="subtitle"></p>
-        </header>
-
-        <main>
-            <section class="info-section">
-                <h2 data-key="checklist_title"></h2>
-                <p id="checklist-instruction" data-key="checklist_instruction"></p>
-                <div class="features-grid">
-                    <!-- Feature cards will be dynamically generated by JS -->
+    <!-- === HEADER & NAVIGATION === -->
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo" data-section="home">
+                    <img src="https://placehold.co/45x45/007BFF/FFFFFF?text=AI" alt="AILeer.nl Logo" class="logo-img">
+                    <span class="logo-text">AILeer.nl</span>
                 </div>
-            </section>
-
-            <section class="quiz-cta" id="quiz-cta-section">
-                <h2 data-key="quiz_cta_title"></h2>
-                <p data-key="quiz_cta_desc"></p>
-                <button class="btn" id="start-quiz-btn" data-key="start_quiz_btn" disabled></button>
-            </section>
-
-            <section id="quiz-section">
-                <div class="quiz-container">
-                    <div id="question-container">
-                        <p id="question-text"></p>
-                        <div id="options-container" class="options-grid"></div>
+                <ul class="nav-links">
+                    <li><a class="nav-link" data-section="home" data-lang-key="nav_home">Home</a></li>
+                    <li><a class="nav-link" data-section="tools" data-lang-key="nav_tools">AI Tools</a></li>
+                    <li><a class="nav-link" data-section="courses" data-lang-key="nav_courses">Cursussen</a></li>
+                    <li><a class="nav-link" data-section="blog" data-lang-key="nav_blog">Blog</a></li>
+                    <li><a class="nav-link" data-section="quiz" data-lang-key="nav_quiz">Quiz</a></li>
+                    <li><a class="nav-link" data-section="about" data-lang-key="nav_about">Over Ons</a></li>
+                    <li><a class="nav-link" data-section="contact" data-lang-key="nav_contact">Contact</a></li>
+                </ul>
+                <div class="nav-right">
+                    <div class="language-switcher">
+                        <select id="lang-selector">
+                            <option value="nl">Nederlands</option>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="zh">中文</option>
+                            <option value="fr">Français</option>
+                        </select>
                     </div>
-                    <p id="progress-text"></p>
+                    <div class="menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </nav>
+    </header>
 
-            <section id="results-section">
-                <div class="certificate">
-                    <div class="certificate-content">
-                        <h2 id="certificate-title" data-key="certificate_title"></h2>
-                        <p id="final-score"></p>
-                        <p id="motivational-text"></p>
-                        <p id="peaceman-proud-text" data-key="peaceman_proud"></p>
-                        
-                        <div class="social-share">
-                            <h3 data-key="contest_title"></h3>
-                            <p data-key="contest_rules_follow"></p>
-                            <p data-key="contest_rules_screenshot"></p>
-                             <div class="input-group">
-                                <input type="text" id="twitter-handle" data-placeholder-key="twitter_handle_placeholder">
-                                <button class="btn" id="repost-btn" data-key="repost_btn"></button>
-                            </div>
-                            <p data-key="contest_ai_winner"></p>
-                            <p class="contest-disclaimer" data-key="contest_disclaimer"></p>
+    <main>
+        <!-- === HOME SECTION === -->
+        <section id="home" class="active">
+            <div class="container hero-container animated fade-in">
+                <h1 data-lang-key="home_title">Ontdek AILeer.nl – Jouw Weg naar AI-Kennis!</h1>
+                <p class="subtitle" data-lang-key="home_subtitle">Leer AI, ontdek top-tools met exclusieve kortingen en verdien een certificaat om je vaardigheden te tonen!</p>
+                <div class="cta-buttons">
+                    <button class="cta-button" data-section="tools" data-lang-key="home_cta_tools"><i class="fas fa-cogs"></i> Ontdek AI Tools</button>
+                    <button class="cta-button" data-section="quiz" data-lang-key="home_cta_quiz"><i class="fas fa-graduation-cap"></i> Start de Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- === ABOUT US SECTION === -->
+        <section id="about">
+            <div class="container">
+                <h2 class="animated" data-lang-key="about_title">Over AILeer.nl – Jouw AI-Experts</h2>
+                <p class="animated" data-lang-key="about_text" style="max-width: 800px; margin: 0 auto 30px; text-align: center;">Bij AILeer zijn we een gepassioneerd team dat dol is op kunstmatige intelligentie. We delen onze kennis via toegankelijke tutorials, cursussen en de nieuwste AI-inzichten. Met onze exclusieve links krijg je kortingen op top-AI-tools, zodat jij AI moeiteloos kunt integreren in je werk en leven. Doe onze quiz, verdien een certificaat en deel je prestatie met de wereld!</p>
+                <div style="text-align: center;" class="animated">
+                    <button class="cta-button" data-section="tools" data-lang-key="about_cta">Probeer onze Exclusieve AI-Tooldeals</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- === AI TOOLS SECTION === -->
+        <section id="tools">
+            <div class="container">
+                <h2 class="animated" data-lang-key="tools_title">Beste AI-Tools 2025 met Exclusieve Deals</h2>
+                <p class="animated" data-lang-key="tools_subtitle" style="max-width: 800px; margin: -20px auto 40px; text-align: center;">Wij hebben de beste AI-tools voor je geselecteerd. Gebruik onze links voor de beste deals en laagste prijzen.</p>
+                <div id="tools-grid" class="grid">
+                    <!-- Referral links will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- === COURSES SECTION === -->
+        <section id="courses">
+            <div class="container">
+                <h2 class="animated" data-lang-key="courses_title">AI-Cursussen voor Beginners en Experts</h2>
+                <div class="grid">
+                    <!-- Course 1 -->
+                    <div class="card animated">
+                        <div class="card-img-container"><img src="https://images.unsplash.com/photo-1599658880436-c61792e70672?q=80&w=2070&auto=format&fit=crop" alt="AI voor Beginners Cursus" class="card-img"></div>
+                        <div class="card-content">
+                            <h3 data-lang-key="course1_title">AI voor Beginners</h3>
+                            <p data-lang-key="course1_desc">Start je reis in de wereld van AI. Geen voorkennis vereist.</p>
+                            <a href="#" class="button" data-lang-key="course_cta_start">Start Gratis Proefles</a>
+                        </div>
+                    </div>
+                    <!-- Course 2 -->
+                    <div class="card animated">
+                        <div class="card-img-container"><img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop" alt="Deep Learning Basis Cursus" class="card-img"></div>
+                        <div class="card-content">
+                            <h3 data-lang-key="course2_title">Deep Learning Basis</h3>
+                            <p data-lang-key="course2_desc">Leer de fundamenten van neurale netwerken en deep learning.</p>
+                            <a href="#" class="button" data-lang-key="course_cta_discount">Krijg 10% Korting</a>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="official-channels">
-                 <a href="https://mytonwallet.app/" target="_blank" class="btn" data-key="official_site"></a>
-                 <a href="https://apps.apple.com/app/mytonwallet-ton-wallet/id6464677844" target="_blank" class="btn" data-key="download_ios"></a>
-                 <a href="https://mytonwallet.app/get/android" target="_blank" class="btn" data-key="download_android"></a>
-                 <a href="https://github.com/mytonwalletorg/mytonwallet" target="_blank" class="btn" data-key="view_source"></a>
             </div>
-            <div class="footer-credit" data-key="footer_credit"></div>
-        </footer>
+        </section>
+
+        <!-- === BLOG SECTION === -->
+        <section id="blog">
+            <div class="container">
+                <h2 class="animated" data-lang-key="blog_title">AI Inzichten & Trends</h2>
+                 <div class="grid">
+                    <!-- Blog Post 1 -->
+                    <div class="card animated">
+                        <div class="card-img-container"><img src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=2070&auto=format&fit=crop" alt="Top 5 AI Tools in 2025" class="card-img"></div>
+                        <div class="card-content">
+                            <h3 data-lang-key="blog1_title">Top 5 AI-Tools in 2025</h3>
+                            <p data-lang-key="blog1_desc">Een overzicht van de meest impactvolle AI-tools die je nu moet proberen. Profiteer van onze deals!</p>
+                             <a href="#" class="read-more" data-lang-key="blog_read_more">Lees meer... <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="card animated">
+                         <div class="card-img-container"><img src="https://images.unsplash.com/photo-1507146153580-69a196d2ba21?q=80&w=2070&auto=format&fit=crop" alt="Hoe AI je bedrijf transformeert" class="card-img"></div>
+                        <div class="card-content">
+                            <h3 data-lang-key="blog2_title">Hoe AI je Bedrijf Transformeert</h3>
+                            <p data-lang-key="blog2_desc">Ontdek praktische toepassingen van AI die de efficiëntie en groei van je bedrijf kunnen versnellen.</p>
+                             <a href="#" class="read-more" data-lang-key="blog_read_more">Lees meer... <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === QUIZ SECTION === -->
+        <section id="quiz">
+            <div class="container">
+                <h2 class="animated" data-lang-key="quiz_title">Test je AI-Kennis & Verdien je Certificaat!</h2>
+                <div id="quiz-container" class="animated">
+                    <!-- Quiz Start Screen -->
+                    <div id="quiz-start">
+                        <p data-lang-key="quiz_intro">Ben je klaar om je kennis te testen? Vul je naam in om op het certificaat te plaatsen en start de quiz!</p>
+                        <input type="text" id="username" placeholder="Jouw naam" aria-label="Jouw naam voor het certificaat">
+                        <button id="start-quiz-btn" class="button" data-lang-key="quiz_start_btn">Start Quiz</button>
+                    </div>
+                    <!-- Quiz Questions -->
+                    <div id="quiz-questions" style="display:none;">
+                        <div id="quiz-progress-bar-container"><div id="quiz-progress-bar"></div></div>
+                        <div id="question-container"></div>
+                        <button id="next-question-btn" class="button" style="display:none; margin-top: 20px;" data-lang-key="quiz_next_btn">Volgende Vraag</button>
+                    </div>
+                    <!-- Quiz Result Screen -->
+                    <div id="quiz-result" style="display:none;">
+                        <h3 data-lang-key="quiz_result_title">Resultaat</h3>
+                        <p id="score-text" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+                        <div id="certificate-wrapper">
+                            <canvas id="certificate-canvas" width="800" height="565"></canvas>
+                        </div>
+                        <div class="result-buttons">
+                             <a id="download-certificate-btn" class="button" href="#" download="AILeer_Certificaat.png" data-lang-key="quiz_download_btn"><i class="fas fa-download"></i> Download</a>
+                             <button id="share-x-btn" class="button" data-lang-key="quiz_share_btn"><i class="fab fa-twitter"></i> Deel op X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === CONTACT SECTION === -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="animated" data-lang-key="contact_title">Neem Contact Op</h2>
+                <p class="animated" data-lang-key="contact_intro" style="max-width: 800px; margin: -20px auto 40px; text-align: center;">Heb je vragen of suggesties? We horen graag van je!</p>
+                <form id="contact-form" class="animated" onsubmit="event.preventDefault(); alert('Bedankt voor je bericht!'); this.reset();">
+                    <input type="text" name="name" required data-lang-placeholder="contact_form_name">
+                    <input type="email" name="email" required data-lang-placeholder="contact_form_email">
+                    <textarea name="message" rows="5" required data-lang-placeholder="contact_form_message"></textarea>
+                    <button type="submit" class="button" data-lang-key="contact_form_submit">Verstuur</button>
+                </form>
+                <div class="socials animated">
+                    <p data-lang-key="contact_follow">Volg ons voor de laatste AI-tips:</p>
+                    <a href="https://x.com/mcdropke" target="_blank">X (@mcdropke)</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> AILeer.nl - Alle rechten voorbehouden.</p>
+        </div>
+    </footer>
+    
+    <!-- === POP-UP & CHATBOT === -->
+    <div id="chatbot-container">
+        <div id="chatbot-icon">🤖</div>
+        <div id="chatbot-window">
+            <div id="chatbot-header">AILeer Assistent <span id="close-chatbot" style="cursor: pointer;">&times;</span></div>
+            <div id="chatbot-body">
+                <div class="chatbot-message bot" data-lang-key="chatbot_welcome"></div>
+            </div>
+            <div id="chatbot-input">
+                <input type="text" id="chatbot-user-input" data-lang-placeholder="chatbot_placeholder">
+                <button id="chatbot-send-btn">➤</button>
+            </div>
+        </div>
     </div>
 
+
+    <!-- === INLINE JAVASCRIPT (IMPROVED) === -->
     <script>
-    const translations = {
-        en: {
-            language_select_title: "Select Your Language",
-            main_title: "The MyTonWallet Definitive Guide",
-            subtitle: "The most advanced, secure, and feature-rich wallet for The Open Network. Discover why it's the ultimate choice for your crypto journey.",
-            checklist_title: "20 Core Advantages",
-            checklist_instruction: "Click each card to learn about a key feature. The quiz unlocks once you've reviewed them all.",
-            features: [
-                { key: "f1", title: "🛡️ Ultimate Security: Self-Custody", desc: "You, and only you, control your private keys. MyTonWallet is non-custodial, ensuring complete sovereignty over your assets." },
-                { key: "f2", title: "🔒 Hardware Wallet Integration", desc: "Maximize security by connecting your Ledger hardware wallet. The safest way to manage significant crypto holdings." },
-                { key: "f3", title: "🌐 Universal dApp Access (TON Connect)", desc: "Powered by TON Connect 2.0, securely interact with the entire TON ecosystem of services and applications right from your wallet." },
-                { key: "f4", title: "💰 Native Staking", desc: "Don't just hold your TON, grow it. Earn passive income by participating in network validation directly within the app." },
-                { key: "f5", title: "🎁 NFT Gifts & Cards", desc: "Send TON and NFTs as personalized gifts with encrypted messages. A unique social feature popularized by Pavel Durov's own use." },
-                { key: "f6", title: "🖼️ Full NFT Functionality", desc: "Beyond gifts, MyTonWallet offers a complete suite for managing your NFT portfolio: view, send, receive, and organize your collection." },
-                { key: "f7", title: "🔄 Cross-Chain Swaps", desc: "MyTonWallet pioneers interoperability by supporting swaps with other blockchains like TRON, with more networks like ETH and BSC coming soon." },
-                { key: "f8", title: "💸 Gasless Payments", desc: "Pay network fees using the token you're sending (e.g., USDT). No need to always have a separate TON balance for gas fees." },
-                { key: "f9", title: "⚡️ Lightning Fast & Ultra-Low Cost", desc: "Experience the power of TON. Transactions are confirmed in seconds with fees that are fractions of a cent. Unbeatably efficient." },
-                { key: "f10", title: "👥 Multi-Account Management", desc: "Effortlessly create and manage multiple wallet addresses under one account. Perfect for separating personal and business funds." },
-                { key: "f11", title: "💻 Full Cross-Platform Support", desc: "Use MyTonWallet seamlessly on any device: iOS, Android, Web, and as a browser extension for Chrome & Firefox." },
-                { key: "f12", title: "👁️ Open Source & Audited", desc: "The wallet's code is fully open-source on GitHub and has been professionally audited by security firms like CertiK for maximum transparency." },
-                { key: "f13", title: "📛 TON DNS & .ton Domains", desc: "Replace long, complex addresses with simple, human-readable names (e.g., 'peaceman.ton')." },
-                { key: "f14", title: "🌐 TON Sites Browsing", desc: "Access decentralized websites hosted on the TON blockchain directly through the wallet's integrated browser." },
-                { key: "f15", title: "📈 Real-Time Price Charts", desc: "Track the value of your assets with interactive, real-time price charts integrated directly into the wallet interface." },
-                { key: "f16", title: "📔 Smart Address Book", desc: "Save and label frequently used addresses to prevent errors and speed up transactions." },
-                { key: "f17", title: "🚫 Built-in Spam Protection", desc: "Automatic filters protect you from receiving spam NFTs and malicious tokens, keeping your wallet clean and secure." },
-                { key: "f18", title: "🔗 Third-Party Integrations", desc: "Connects with essential services like CoinMarketCap and Getgems for a richer, more informed user experience." },
-                { key: "f19", title: "✨ Modern & Intuitive UI", desc: "A clean, user-friendly interface that makes navigating the world of crypto easy for beginners and efficient for experts." },
-                { key: "f20", title: "🆓 Completely Free to Use", desc: "All these powerful features, from multi-accounts to staking, are provided entirely for free. No subscriptions, no hidden costs." }
-            ],
-            quiz_cta_title: "Test Your Knowledge & Win!",
-            quiz_cta_desc: "Think you're a MyTonWallet expert now? Prove it, take the quiz and get a chance to win <strong>$100 USD!</strong>",
-            start_quiz_btn: "Start the Quiz",
-            certificate_title: "MyTonWallet Pro",
-            peaceman_proud: "<strong>Peaceman</strong> is proud, and you are grateful for learning about the best wallet on TON.",
-            contest_title: "Chance to Win $100 USD!",
-            contest_rules_follow: "<strong>Rules:</strong> Follow <strong>@mcdropke</strong> & <strong>@mytonwallet</strong> on X, then like and repost the tweet.",
-            contest_rules_screenshot: "Post a comment with a <strong>screenshot of this certificate</strong> to complete your entry!",
-            contest_ai_winner: "If there are multiple 100% scores, an AI will fairly select the winner. May the best one win!",
-            contest_disclaimer: "<strong>Important condition:</strong> The $100 prize pool is made available if I win the MyTonWallet Ambassador contest. Your participation helps tremendously!",
-            twitter_handle_placeholder: "Your X @handle",
-            repost_btn: "Repost on X",
-            official_site: "Official Website",
-            download_ios: "Download for iOS",
-            download_android: "Download for Android",
-            view_source: "View Source Code",
-            footer_credit: "Created by <a href='https://x.com/mcdropke' target='_blank'>Peaceman</a> | Analysis based on data from the <a href='https://mytonwallet.app/' target='_blank'>official MyTonWallet website</a>.",
-            quiz_progress: "Question {current} of {total}",
-            quiz_score_text: "Your score: {score}/{total}",
-            motivational: { 5: "Perfect score! You are a true MyTonWallet Pro!", 3: "Excellent work! You have a strong grasp of the key advantages.", 1: "Good start! Review the info again to become an expert.", 0: "Don't worry! Every expert starts somewhere. Try again!" },
-            repost_tweet: "I've achieved {certificateTitle} status! 🚀\n\nI now know everything about MyTonWallet, the fastest and most secure wallet on @ton_blockchain.\n\nThanks to the guide by @mcdropke, I have a chance to win $100!\n\nJoin me: #MyTonWallet #TON #Crypto @mytonwallet",
-            alert_handle: "Please enter your X @handle!",
-            quizQuestions: [
-                { question: "What advanced security feature does MyTonWallet support besides self-custody?", options: ["Ledger hardware wallets", "Biometric-only login", "A 24/7 security team"], answer: "Ledger hardware wallets" },
-                { question: "What technology allows MyTonWallet to connect securely to dApps?", options: ["TON Connect 2.0", "WalletConnect", "Bluetooth"], answer: "TON Connect 2.0" },
-                { question: "What can you do with your TON directly inside MyTonWallet to earn rewards?", options: ["Staking", "Trading on an exchange", "Lending to other users"], answer: "Staking" },
-                { question: "What is a unique privacy feature of sending TON as a gift?", options: ["The message is encrypted", "The transaction is hidden", "It uses a different network"], answer: "The message is encrypted" },
-                { question: "Are the advanced features in MyTonWallet, like multi-account, part of a paid subscription?", options: ["No, all features are free", "Yes, there is a Pro version", "Only for business users"], answer: "No, all features are free" }
-            ]
-        },
-        ru: {
-            language_select_title: "Выберите ваш язык",
-            main_title: "Полное руководство по MyTonWallet",
-            subtitle: "Самый продвинутый, безопасный и многофункциональный кошелек для The Open Network. Узнайте, почему это лучший выбор для вашего крипто-путешествия.",
-            checklist_title: "20 ключевых преимуществ",
-            checklist_instruction: "Нажмите на каждую карточку, чтобы узнать о ключевой функции. Викторина откроется, как только вы просмотрите все.",
-            features: [
-                { key: "f1", title: "🛡️ Максимальная безопасность: Самостоятельное хранение", desc: "Только вы контролируете свои приватные ключи. MyTonWallet является некастодиальным, обеспечивая полный суверенитет над вашими активами." },
-                { key: "f2", title: "🔒 Интеграция с аппаратными кошельками", desc: "Максимизируйте безопасность, подключив ваш аппаратный кошелек Ledger. Самый безопасный способ управления значительными крипто-активами." },
-                { key: "f3", title: "🌐 Универсальный доступ к dApp (TON Connect)", desc: "Благодаря TON Connect 2.0, безопасно взаимодействуйте со всей экосистемой сервисов и приложений TON прямо из вашего кошелька." },
-                { key: "f4", title: "💰 Нативный стейкинг", desc: "Не просто храните свои TON, приумножайте их. Получайте пассивный доход, участвуя в валидации сети прямо в приложении." },
-                { key: "f5", title: "🎁 NFT-подарки и открытки", desc: "Отправляйте TON и NFT в качестве персонализированных подарков с зашифрованными сообщениями. Уникальная социальная функция, популяризированная самим Павлом Дуровым." },
-                { key: "f6", title: "🖼️ Полный функционал NFT", desc: "Помимо подарков, MyTonWallet предлагает полный набор для управления вашим NFT-портфолио: просмотр, отправка, получение и организация вашей коллекции." },
-                { key: "f7", title: "🔄 Межсетевые обмены", desc: "MyTonWallet является пионером в области совместимости, поддерживая обмены с другими блокчейнами, такими как TRON, и скоро добавит сети ETH и BSC." },
-                { key: "f8", title: "💸 Платежи без газа", desc: "Оплачивайте сетевые комиссии токеном, который вы отправляете (например, USDT). Нет необходимости всегда иметь отдельный баланс TON для комиссий." },
-                { key: "f9", title: "⚡️ Молниеносно и сверхдешево", desc: "Оцените мощь TON. Транзакции подтверждаются за секунды с комиссиями в доли цента. Непревзойденная эффективность." },
-                { key: "f10", title: "👥 Управление несколькими счетами", desc: "Легко создавайте и управляйте несколькими адресами кошельков в рамках одной учетной записи. Идеально для разделения личных и деловых средств." },
-                { key: "f11", title: "💻 Полная кросс-платформенная поддержка", desc: "Используйте MyTonWallet без проблем на любом устройстве: iOS, Android, Web и в виде расширения для Chrome и Firefox." },
-                { key: "f12", title: "👁️ Открытый исходный код и аудит", desc: "Код кошелька полностью открыт на GitHub и прошел профессиональный аудит от фирм безопасности, таких как CertiK, для максимальной прозрачности." },
-                { key: "f13", title: "📛 TON DNS и домены .ton", desc: "Замените длинные, сложные адреса простыми, человекочитаемыми именами (например, 'peaceman.ton')." },
-                { key: "f14", title: "🌐 Просмотр TON Sites", desc: "Получайте доступ к децентрализованным сайтам, размещенным на блокчейне TON, прямо через встроенный браузер кошелька." },
-                { key: "f15", title: "📈 Графики цен в реальном времени", desc: "Отслеживайте стоимость ваших активов с помощью интерактивных графиков цен в реальном времени, интегрированных прямо в интерфейс кошелька." },
-                { key: "f16", title: "📔 Умная адресная книга", desc: "Сохраняйте и помечайте часто используемые адреса, чтобы избежать ошибок и ускорить транзакции." },
-                { key: "f17", title: "🚫 Встроенная защита от спама", desc: "Автоматические фильтры защищают вас от получения спам-NFT и вредоносных токенов, сохраняя ваш кошелек чистым и безопасным." },
-                { key: "f18", title: "🔗 Интеграции со сторонними сервисами", desc: "Подключается к важным сервисам, таким как CoinMarketCap и Getgems, для более богатого и информированного пользовательского опыта." },
-                { key: "f19", title: "✨ Современный и интуитивный интерфейс", desc: "Чистый, удобный интерфейс, который делает навигацию в мире криптовалют легкой для новичков и эффективной для экспертов." },
-                { key: "f20", title: "🆓 Полностью бесплатное использование", desc: "Все эти мощные функции, от мульти-аккаунтов до стейкинга, предоставляются абсолютно бесплатно. Никаких подписок, никаких скрытых платежей." }
-            ],
-            quiz_cta_title: "Проверьте свои знания и выиграйте!",
-            quiz_cta_desc: "Считаете себя экспертом в MyTonWallet? Докажите это, пройдите викторину и получите шанс выиграть <strong>$100 USD!</strong>",
-            start_quiz_btn: "Начать викторину",
-            certificate_title: "MyTonWallet Pro",
-            peaceman_proud: "<strong>Peaceman</strong> гордится, а вы благодарны за то, что узнали о лучшем кошельке в сети TON.",
-            contest_title: "Шанс выиграть $100 USD!",
-            contest_rules_follow: "<strong>Правила:</strong> Подпишитесь на <strong>@mcdropke</strong> и <strong>@mytonwallet</strong> в X, затем поставьте лайк и сделайте репост твита.",
-            contest_rules_screenshot: "Опубликуйте комментарий со <strong>скриншотом этого сертификата</strong>, чтобы завершить участие!",
-            contest_ai_winner: "Если будет несколько участников со 100% результатом, победитель будет честно выбран с помощью ИИ. Пусть победит сильнейший!",
-            contest_disclaimer: "<strong>Важное условие:</strong> Призовой фонд в $100 будет доступен, если я выиграю конкурс амбассадоров MyTonWallet. Ваше участие очень помогает!",
-            twitter_handle_placeholder: "Ваш @ник в X",
-            repost_btn: "Репост в X",
-            official_site: "Официальный сайт",
-            download_ios: "Скачать для iOS",
-            download_android: "Скачать для Android",
-            view_source: "Посмотреть исходный код",
-            footer_credit: "Создано <a href='https://x.com/mcdropke' target='_blank'>Peaceman</a> | Анализ основан на данных с <a href='https://mytonwallet.app/' target='_blank'>официального сайта MyTonWallet</a>.",
-            quiz_progress: "Вопрос {current} из {total}",
-            quiz_score_text: "Ваш счет: {score}/{total}",
-            motivational: { 5: "Идеальный результат! Вы настоящий MyTonWallet Pro!", 3: "Отличная работа! Вы хорошо разбираетесь в ключевых преимуществах.", 1: "Хорошее начало! Изучите информацию еще раз, чтобы стать экспертом.", 0: "Не волнуйтесь! Каждый эксперт с чего-то начинал. Попробуйте снова!" },
-            repost_tweet: "Я получил статус {certificateTitle}! 🚀\n\nТеперь я знаю все о MyTonWallet, самом быстром и безопасном кошельке на @ton_blockchain.\n\nБлагодаря руководству от @mcdropke, у меня есть шанс выиграть $100!\n\nПрисоединяйтесь: #MyTonWallet #TON #Crypto @mytonwallet",
-            alert_handle: "Пожалуйста, введите ваш @ник в X!",
-            quizQuestions: [
-                { question: "Какую продвинутую функцию безопасности поддерживает MyTonWallet помимо самоуправления?", options: ["Аппаратные кошельки Ledger", "Вход только по биометрии", "Круглосуточная служба безопасности"], answer: "Аппаратные кошельки Ledger" },
-                { question: "Какая технология позволяет MyTonWallet безопасно подключаться к dApp?", options: ["TON Connect 2.0", "WalletConnect", "Bluetooth"], answer: "TON Connect 2.0" },
-                { question: "Что вы можете делать со своими TON прямо в MyTonWallet, чтобы получать вознаграждения?", options: ["Стейкинг", "Торговля на бирже", "Предоставление взаймы другим пользователям"], answer: "Стейкинг" },
-                { question: "В чем уникальность функции конфиденциальности при отправке TON в качестве подарка?", options: ["Сообщение зашифровано", "Транзакция скрыта", "Используется другая сеть"], answer: "Сообщение зашифровано" },
-                { question: "Являются ли продвинутые функции в MyTonWallet, такие как мульти-аккаунт, частью платной подписки?", options: ["Нет, все функции бесплатны", "Да, есть Pro-версия", "Только для бизнес-пользователей"], answer: "Нет, все функции бесплатны" }
-            ]
-        },
-        zh: {
-            language_select_title: "选择你的语言",
-            main_title: "MyTonWallet 权威指南",
-            subtitle: "The Open Network 上最先进、最安全、功能最丰富的钱包。了解为什么它是您加密之旅的终极选择。",
-            checklist_title: "20个核心优势",
-            checklist_instruction: "点击每张卡片以了解一项关键功能。查看完所有功能后，测验将解锁。",
-            features: [
-                { key: "f1", title: "🛡️ 终极安全：自我保管", desc: "只有您自己能控制您的私钥。MyTonWallet 是非托管的，确保您对资产拥有完全主权。" },
-                { key: "f2", title: "🔒 硬件钱包集成", desc: "通过连接您的 Ledger 硬件钱包，最大限度地提高安全性。这是管理大量加密资产的最安全方式。" },
-                { key: "f3", title: "🌐 通用 dApp 访问 (TON Connect)", desc: "由 TON Connect 2.0 提供支持，直接从您的钱包安全地与整个 TON 生态系统的服务和应用程序进行交互。" },
-                { key: "f4", title: "💰 原生质押", desc: "不要只持有您的 TON，让它增值。通过直接在应用中参与网络验证来赚取被动收入。" },
-                { key: "f5", title: "🎁 NFT 礼物和卡片", desc: "以带有加密消息的个性化礼物形式发送 TON 和 NFT。Pavel Durov 本人的使用也推广了这一独特的社交功能。" },
-                { key: "f6", title: "🖼️ 完整的 NFT 功能", desc: "除了礼物，MyTonWallet 还提供一整套管理您 NFT 投资组合的功能：查看、发送、接收和整理您的收藏。" },
-                { key: "f7", title: "🔄 跨链兑换", desc: "MyTonWallet 通过支持与 TRON 等其他区块链的兑换，开创了互操作性的先河，并将很快支持 ETH 和 BSC 等更多网络。" },
-                { key: "f8", title: "💸 无 Gas 费支付", desc: "使用您正在发送的代币（例如 USDT）支付网络费用。无需为 Gas 费始终保留单独的 TON 余额。" },
-                { key: "f9", title: "⚡️ 闪电般的速度和超低成本", desc: "体验 TON 的力量。交易在几秒钟内确认，费用仅为几分之一美分。无与伦比的效率。" },
-                { key: "f10", title: "👥 多账户管理", desc: "在一个账户下轻松创建和管理多个钱包地址。非常适合区分个人和商业资金。" },
-                { key: "f11", title: "💻 全面的跨平台支持", desc: "在任何设备上无缝使用 MyTonWallet：iOS、Android、Web 以及作为 Chrome 和 Firefox 的浏览器扩展。" },
-                { key: "f12", title: "👁️ 开源和审计", desc: "钱包的代码在 GitHub 上完全开源，并经过 CertiK 等安全公司的专业审计，以实现最大程度的透明度。" },
-                { key: "f13", title: "📛 TON DNS 和 .ton 域名", desc: "用简单、易读的名称（例如 'peaceman.ton'）替换冗长复杂的地址。" },
-                { key: "f14", title: "🌐 TON 网站浏览", desc: "直接通过钱包的集成浏览器访问托管在 TON 区块链上的去中心化网站。" },
-                { key: "f15", title: "📈 实时价格图表", desc: "通过直接集成到钱包界面的交互式实时价格图表，跟踪您的资产价值。" },
-                { key: "f16", title: "📔 智能地址簿", desc: "保存并标记常用地址，以防止错误并加快交易速度。" },
-                { key: "f17", title: "🚫 内置垃圾邮件防护", desc: "自动过滤器可保护您免受垃圾 NFT 和恶意代币的侵害，保持您的钱包干净安全。" },
-                { key: "f18", title: "🔗 第三方集成", desc: "与 CoinMarketCap 和 Getgems 等基本服务连接，提供更丰富、更明智的用户体验。" },
-                { key: "f19", title: "✨ 现代直观的用户界面", desc: "一个干净、用户友好的界面，使初学者可以轻松驾驭加密世界，专家可以高效操作。" },
-                { key: "f20", title: "🆓 完全免费使用", desc: "所有这些强大的功能，从多账户到质押，都完全免费提供。没有订阅，没有隐藏费用。" }
-            ],
-            quiz_cta_title: "测试您的知识并赢取大奖！",
-            quiz_cta_desc: "认为您现在是 MyTonWallet 专家了吗？证明一下，参加测验，就有机会赢得 <strong>$100 美元！</strong>",
-            start_quiz_btn: "开始测验",
-            certificate_title: "MyTonWallet 专家",
-            peaceman_proud: "<strong>Peaceman</strong> 为您感到骄傲，您也为学习了 TON 上最好的钱包而心存感激。",
-            contest_title: "赢取 100 美元的机会！",
-            contest_rules_follow: "<strong>规则：</strong>在 X 上关注 <strong>@mcdropke</strong> 和 <strong>@mytonwallet</strong>，然后点赞并转发推文。",
-            contest_rules_screenshot: "发表评论并附上<strong>此证书的截图</strong>以完成您的参与！",
-            contest_ai_winner: "如果有多人获得 100% 的分数，人工智能将公平地选出获胜者。祝最好运的人获胜！",
-            contest_disclaimer: "<strong>重要条件：</strong>如果我赢得 MyTonWallet 大使竞赛，将提供 100 美元的奖金池。您的参与非常有帮助！",
-            twitter_handle_placeholder: "您的 X @用户名",
-            repost_btn: "在 X 上转发",
-            official_site: "官方网站",
-            download_ios: "下载 iOS 版",
-            download_android: "下载 Android 版",
-            view_source: "查看源代码",
-            footer_credit: "由 <a href='https://x.com/mcdropke' target='_blank'>Peaceman</a> 创建 | 分析基于 <a href='https://mytonwallet.app/' target='_blank'>MyTonWallet 官方网站</a> 的数据。",
-            quiz_progress: "问题 {current} / {total}",
-            quiz_score_text: "您的得分: {score}/{total}",
-            motivational: { 5: "满分！您是真正的 MyTonWallet 专家！", 3: "干得漂亮！您对核心优势有深刻的理解。", 1: "良好的开端！再次阅读信息，成为专家。", 0: "别担心！每个专家都是从零开始的。再试一次！" },
-            repost_tweet: "我已获得 {certificateTitle} 身份！🚀\n\n我现在了解了关于 MyTonWallet 的一切，它是 @ton_blockchain 上最快、最安全的钱包。\n\n感谢 @mcdropke 的指南，我有机会赢得 100 美元！\n\n加入我：#MyTonWallet #TON #加密货币 @mytonwallet",
-            alert_handle: "请输入您的 X @用户名！",
-            quizQuestions: [
-                { question: "除了自我保管，MyTonWallet 还支持哪种高级安全功能？", options: ["Ledger 硬件钱包", "仅生物识别登录", "24/7 安全团队"], answer: "Ledger 硬件钱包" },
-                { question: "什么技术使 MyTonWallet 能够安全地连接到 dApp？", options: ["TON Connect 2.0", "WalletConnect", "蓝牙"], answer: "TON Connect 2.0" },
-                { question: "您可以直接在 MyTonWallet 中对您的 TON 做什么来赚取奖励？", options: ["质押", "在交易所交易", "借给其他用户"], answer: "质押" },
-                { question: "将 TON 作为礼物发送时，其独特的隐私功能是什么？", options: ["消息是加密的", "交易是隐藏的", "它使用不同的网络"], answer: "消息是加密的" },
-                { question: "MyTonWallet 中的多账户等高级功能是付费订阅的一部分吗？", options: ["不，所有功能都是免费的", "是的，有专业版", "仅限商业用户"], answer: "不，所有功能都是免费的" }
-            ]
-        }
-    };
-    
-    // --- Global Variables ---
-    const supportedLangs = {
-        en: 'English', 
-        ru: 'Русский', 
-        zh: '中文'
-    };
-    let currentLang = 'en';
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let mouseX = 0, mouseY = 0;
+    document.addEventListener('DOMContentLoaded', () => {
 
-    // --- DOM Elements ---
-    const languageModal = document.getElementById('language-modal');
-    const languageGrid = document.getElementById('language-grid');
-    const mainContainer = document.querySelector('.container');
-    const featuresGrid = document.querySelector('.features-grid');
-    const startQuizBtn = document.getElementById('start-quiz-btn');
-    const quizCtaSection = document.getElementById('quiz-cta-section');
-    const quizSection = document.getElementById('quiz-section');
-    const resultsSection = document.getElementById('results-section');
-    const questionText = document.getElementById('question-text');
-    const optionsContainer = document.getElementById('options-container');
-    const progressText = document.getElementById('progress-text');
-    const repostBtn = document.getElementById('repost-btn');
-    const twitterHandleInput = document.getElementById('twitter-handle');
-
-    // --- 3D Background Setup ---
-    let scene, camera, renderer, particles;
-    function init3D() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        const particleCount = 7000;
-        const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 20;
-        }
+        // === DATA (EMBEDDED JSON) ===
+        const referralsData = [
+          {
+            "name": "AVEO_TECH AI Agents",
+            "image": "https://images.unsplash.com/photo-1620712943543-2858200f7426?q=80&w=2070&auto=format&fit=crop",
+            "url": "https://aveo.tech?ref=aileer",
+            "description": {
+              "nl": "Automatiseer je workflows met krachtige AI-agenten. Efficiënt en schaalbaar.",
+              "en": "Automate your workflows with powerful AI agents. Efficient and scalable."
+            },
+            "cta": { "nl": "Krijg 20% Korting", "en": "Get 20% Discount" }
+          },
+          {
+            "name": "AI Content Creator X",
+            "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop",
+            "url": "https://example.com/creator-x?ref=aileer",
+            "description": {
+              "nl": "Genereer hoogwaardige marketingteksten, blogs en social media posts in seconden.",
+              "en": "Generate high-quality marketing copy, blogs, and social media posts in seconds."
+            },
+            "cta": { "nl": "Start Gratis Proefperiode", "en": "Start Free Trial" }
+          },
+          {
+            "name": "Midjourney",
+            "image": "https://images.unsplash.com/photo-1678379329328-687413a1a4f9?q=80&w=2070&auto=format&fit=crop",
+            "url": "https://www.midjourney.com?ref=aileer",
+             "description": {
+              "nl": "Creëer adembenemende afbeeldingen en kunst met de kracht van AI.",
+              "en": "Create breathtaking images and art with the power of AI."
+            },
+            "cta": { "nl": "Ontdek de Magie", "en": "Discover the Magic" }
+          }
+        ];
         
-        const particlesGeometry = new THREE.BufferGeometry();
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        
-        const primaryColorValue = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
-        const particlesMaterial = new THREE.PointsMaterial({
-            color: new THREE.Color(primaryColorValue),
-            size: 0.02,
-            map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png'),
-            transparent: true,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
-        });
+        const translations = {
+          "nl": { "nav_home": "Home", "nav_tools": "AI Tools", "nav_courses": "Cursussen", "nav_blog": "Blog", "nav_quiz": "Quiz", "nav_about": "Over Ons", "nav_contact": "Contact", "home_title": "Ontdek AILeer.nl – Jouw Weg naar AI-Kennis!", "home_subtitle": "Leer AI, ontdek top-tools met exclusieve kortingen en verdien een certificaat om je vaardigheden te tonen!", "home_cta_tools": "Ontdek AI Tools", "home_cta_quiz": "Start de Quiz", "about_title": "Over AILeer.nl – Jouw AI-Experts", "about_text": "Bij AILeer zijn we een gepassioneerd team dat dol is op kunstmatige intelligentie. We delen onze kennis via toegankelijke tutorials, cursussen en de nieuwste AI-inzichten. Met onze exclusieve links krijg je kortingen op top-AI-tools, zodat jij AI moeiteloos kunt integreren in je werk en leven. Doe onze quiz, verdien een certificaat en deel je prestatie met de wereld!", "about_cta": "Probeer onze Exclusieve AI-Tooldeals", "tools_title": "Beste AI-Tools 2025 met Exclusieve Deals", "tools_subtitle": "Wij hebben de beste AI-tools voor je geselecteerd. Gebruik onze links voor de beste deals en laagste prijzen.", "courses_title": "AI-Cursussen voor Beginners en Experts", "course1_title": "AI voor Beginners", "course1_desc": "Start je reis in de wereld van AI. Geen voorkennis vereist.", "course2_title": "Deep Learning Basis", "course2_desc": "Leer de fundamenten van neurale netwerken en deep learning.", "course_cta_start": "Start Gratis Proefles", "course_cta_discount": "Krijg 10% Korting", "blog_title": "AI Inzichten & Trends", "blog1_title": "Top 5 AI-Tools in 2025", "blog1_desc": "Een overzicht van de meest impactvolle AI-tools die je nu moet proberen. Profiteer van onze deals!", "blog2_title": "Hoe AI je Bedrijf Transformeert", "blog2_desc": "Ontdek praktische toepassingen van AI die de efficiëntie en groei van je bedrijf kunnen versnellen.", "blog_read_more": "Lees meer...", "quiz_title": "Test je AI-Kennis & Verdien je Certificaat!", "quiz_intro": "Ben je klaar om je kennis te testen? Vul je naam in om op het certificaat te plaatsen en start de quiz!", "quiz_start_btn": "Start Quiz", "quiz_next_btn": "Volgende Vraag", "quiz_result_title": "Resultaat", "quiz_result_text": "Gefeliciteerd! Je hebt {score} van de {total} vragen correct beantwoord.", "quiz_download_btn": "Download", "quiz_share_btn": "Deel op X", "contact_title": "Neem Contact Op", "contact_intro": "Heb je vragen of suggesties? We horen graag van je!", "contact_form_name": "Naam", "contact_form_email": "E-mail", "contact_form_message": "Bericht", "contact_form_submit": "Verstuur", "contact_follow": "Volg ons voor de laatste AI-tips:", "chatbot_welcome": "Hallo! Hoe kan ik je helpen? Vraag naar 'tools' of 'cursussen'.", "chatbot_placeholder": "Typ je vraag...", "quiz": { "questions": [ { "question": "Wat is de primaire functie van een Neuraal Netwerk?", "options": ["Data opslaan in tabellen", "Complexe patronen in data herkennen", "Websites ontwerpen", "E-mails versturen"], "answer": 1 }, { "question": "Welke term beschrijft een AI die leert zonder gelabelde data?", "options": ["Supervised Learning", "Reinforcement Learning", "Unsupervised Learning", "Classification"], "answer": 2 }, { "question": "Wat betekent de 'T' in 'GPT'?", "options": ["Technologie", "Transformer", "Training", "Test"], "answer": 1 }, { "question": "Welke van deze tools wordt voornamelijk gebruikt voor het genereren van afbeeldingen?", "options": ["ChatGPT", "AVEO_TECH", "Midjourney", "Google Translate"], "answer": 2 }, { "question": "Wat is 'Machine Learning'?", "options": ["Een type computer dat kan denken", "Software die automatisch update", "Een veld binnen AI waar computers leren van data", "Een mens die een machine bedient"], "answer": 2 } ] } },
+          "en": { "nav_home": "Home", "nav_tools": "AI Tools", "nav_courses": "Courses", "nav_blog": "Blog", "nav_quiz": "Quiz", "nav_about": "About Us", "nav_contact": "Contact", "home_title": "Discover AILeer.nl – Your Path to AI Knowledge!", "home_subtitle": "Learn AI, discover top tools with exclusive discounts, and earn a certificate to showcase your skills!", "home_cta_tools": "Discover AI Tools", "home_cta_quiz": "Start the Quiz", "about_title": "About AILeer.nl – Your AI Experts", "about_text": "At AILeer, we are a passionate team that loves artificial intelligence. We share our knowledge through accessible tutorials, courses, and the latest AI insights. With our exclusive links, you get discounts on top AI tools, so you can effortlessly integrate AI into your work and life. Take our quiz, earn a certificate, and share your achievement with the world!", "about_cta": "Try our Exclusive AI Tool Deals", "tools_title": "Best AI Tools 2025 with Exclusive Deals", "tools_subtitle": "We have selected the best AI tools for you. Use our links for the best deals and lowest prices.", "courses_title": "AI Courses for Beginners and Experts", "course1_title": "AI for Beginners", "course1_desc": "Start your journey into the world of AI. No prior knowledge required.", "course2_title": "Deep Learning Fundamentals", "course2_desc": "Learn the basics of neural networks and deep learning.", "course_cta_start": "Start Free Trial", "course_cta_discount": "Get 10% Discount", "blog_title": "AI Insights & Trends", "blog1_title": "Top 5 AI Tools in 2025", "blog1_desc": "An overview of the most impactful AI tools you should try now. Take advantage of our deals!", "blog2_title": "How AI Transforms Your Business", "blog2_desc": "Discover practical applications of AI that can accelerate your business's efficiency and growth.", "blog_read_more": "Read more...", "quiz_title": "Test Your AI Knowledge & Earn Your Certificate!", "quiz_intro": "Ready to test your knowledge? Enter your name for the certificate and start the quiz!", "quiz_start_btn": "Start Quiz", "quiz_next_btn": "Next Question", "quiz_result_title": "Result", "quiz_result_text": "Congratulations! You answered {score} out of {total} questions correctly.", "quiz_download_btn": "Download", "quiz_share_btn": "Share on X", "contact_title": "Contact Us", "contact_intro": "Have questions or suggestions? We'd love to hear from you!", "contact_form_name": "Name", "contact_form_email": "Email", "contact_form_message": "Message", "contact_form_submit": "Send", "contact_follow": "Follow us for the latest AI tips:", "chatbot_welcome": "Hello! How can I help you? Ask about 'tools' or 'courses'.", "chatbot_placeholder": "Type your question...", "quiz": { "questions": [ { "question": "What is the primary function of a Neural Network?", "options": ["Storing data in tables", "Recognizing complex patterns in data", "Designing websites", "Sending emails"], "answer": 1 }, { "question": "Which term describes an AI that learns without labeled data?", "options": ["Supervised Learning", "Reinforcement Learning", "Unsupervised Learning", "Classification"], "answer": 2 }, { "question": "What does the 'T' in 'GPT' stand for?", "options": ["Technology", "Transformer", "Training", "Test"], "answer": 1 }, { "question": "Which of these tools is primarily used for generating images?", "options": ["ChatGPT", "AVEO_TECH", "Midjourney", "Google Translate"], "answer": 2 }, { "question": "What is 'Machine Learning'?", "options": ["A type of computer that can think", "Software that updates automatically", "A field within AI where computers learn from data", "A human operating a machine"], "answer": 2 } ] } },
+          "es": { "nav_home": "Inicio", "home_title": "¡Descubre AILeer.nl – Tu Camino hacia el Conocimiento de IA!", "home_subtitle": "¡Aprende IA, descubre las mejores herramientas con descuentos exclusivos y obtén un certificado para demostrar tus habilidades!", "quiz_title": "¡Prueba tus Conocimientos de IA y Gana tu Certificado!", "tools_title": "Las Mejores Herramientas de IA 2025 con Ofertas Exclusivas" },
+          "zh": { "nav_home": "首页", "home_title": "探索AILeer.nl – 您的人工智能知识之路!", "home_subtitle": "学习AI，发现带有独家折扣的顶尖工具，并获得证书以展示您的技能！", "quiz_title": "测试您的AI知识并赢取证书！", "tools_title": "2025年最佳AI工具独家优惠" },
+          "fr": { "nav_home": "Accueil", "home_title": "Découvrez AILeer.nl – Votre Chemin vers la Connaissance de l'IA !", "home_subtitle": "Apprenez l'IA, découvrez les meilleurs outils avec des remises exclusives et obtenez un certificat pour mettre en valeur vos compétences !", "quiz_title": "Testez vos Connaissances en IA et Gagnez votre Certificat !", "tools_title": "Meilleurs Outils d'IA 2025 avec des Offres Exclusives" }
+        };
 
-        particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particles);
-        
-        camera.position.z = 5;
-        
-        document.addEventListener('mousemove', onDocumentMouseMove, false);
-        animate3D();
-    }
+        // === NAVIGATION & ANIMATION ===
+        const navInteractionElements = document.querySelectorAll('.nav-link, .logo, .cta-button');
+        const sections = document.querySelectorAll('main section');
+        const navLinkItems = document.querySelectorAll('.nav-links a');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-links');
 
-    function onDocumentMouseMove(event) {
-        mouseX = (event.clientX - window.innerWidth / 2) / 200;
-        mouseY = (event.clientY - window.innerHeight / 2) / 200;
-    }
+        const showSection = (sectionId) => {
+            if (!sectionId) return;
+            sections.forEach(section => section.classList.remove('active'));
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) activeSection.classList.add('active');
 
-    function animate3D() {
-        requestAnimationFrame(animate3D);
-        
-        camera.position.x += (mouseX - camera.position.x) * 0.02;
-        camera.position.y += (-mouseY - camera.position.y) * 0.02;
-        camera.lookAt(scene.position);
+            navLinkItems.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === sectionId) link.classList.add('active');
+            });
+            
+            if (navMenu.classList.contains('active')) navMenu.classList.remove('active');
+            window.scrollTo(0, 0);
+        };
 
-        particles.rotation.y += 0.0002;
-        renderer.render(scene, camera);
-    }
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // --- Language & Content Functions ---
-    function selectLanguage(lang) {
-        currentLang = lang;
-        document.documentElement.lang = lang;
-        
-        languageModal.classList.add('hidden');
-        mainContainer.style.opacity = '1';
-
-        updateAllText();
-        populateFeatures();
-        checkChecklistCompletion();
-    }
-
-    function updateAllText() {
-        const langData = translations[currentLang];
-        document.querySelectorAll('[data-key]').forEach(element => {
-            const key = element.dataset.key;
-            if (langData && langData[key]) {
-                element.innerHTML = langData[key];
-            }
-        });
-        
-        document.querySelectorAll('[data-placeholder-key]').forEach(element => {
-            const key = element.dataset.placeholderKey;
-             if (langData && langData[key]) {
-                element.placeholder = langData[key];
-            }
-        });
-    }
-
-    function populateLanguageSelector() {
-        for (const [code, name] of Object.entries(supportedLangs)) {
-            const button = document.createElement('button');
-            button.className = 'lang-select-btn';
-            button.textContent = name;
-            button.dataset.lang = code;
-            button.addEventListener('click', () => selectLanguage(code));
-            languageGrid.appendChild(button);
-        }
-    }
-    
-    function populateFeatures() {
-        featuresGrid.innerHTML = '';
-        const langFeatures = translations[currentLang].features;
-        langFeatures.forEach(feature => {
-            const card = document.createElement('div');
-            card.className = 'feature-card';
-            card.dataset.featureKey = feature.key;
-            card.innerHTML = `
-                <h3>
-                    <span class="checkbox">
-                        <svg fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                    </span>
-                    <span>${feature.title}</span>
-                </h3>
-                <p>${feature.desc}</p>
-            `;
-            featuresGrid.appendChild(card);
-            card.addEventListener('click', () => {
-                card.classList.toggle('checked');
-                checkChecklistCompletion();
+        navInteractionElements.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection(link.dataset.section);
             });
         });
-    }
-
-    function checkChecklistCompletion() {
-        const cards = document.querySelectorAll('.feature-card');
-        const checkedCards = document.querySelectorAll('.feature-card.checked');
-        if (cards.length > 0 && cards.length === checkedCards.length) {
-            startQuizBtn.disabled = false;
-        } else {
-            startQuizBtn.disabled = true;
-        }
-    }
-
-    function showQuestion() {
-        resetState();
-        const langQuestions = translations[currentLang].quizQuestions;
-        const question = langQuestions[currentQuestionIndex];
         
-        questionText.innerText = question.question;
-        progressText.innerText = translations[currentLang].quiz_progress
-            .replace('{current}', currentQuestionIndex + 1)
-            .replace('{total}', langQuestions.length);
+        menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 
-        question.options.forEach(option => {
-            const button = document.createElement('button');
-            button.innerText = option;
-            button.classList.add('option-btn');
-            button.addEventListener('click', (e) => selectAnswer(e));
-            optionsContainer.appendChild(button);
-        });
-    }
+        const animatedElements = document.querySelectorAll('.animated');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElements.forEach(el => observer.observe(el));
 
-    function resetState() {
-        while (optionsContainer.firstChild) {
-            optionsContainer.removeChild(optionsContainer.firstChild);
-        }
-    }
-
-    function selectAnswer(e) {
-        const selectedBtn = e.target;
-        const langQuestions = translations[currentLang].quizQuestions;
-        const correct = selectedBtn.innerText === langQuestions[currentQuestionIndex].answer;
-
-        if (correct) {
-            score++;
-            selectedBtn.classList.add('correct');
-        } else {
-            selectedBtn.classList.add('wrong');
-        }
+        // === LANGUAGE SWITCHER ===
+        const langSelector = document.getElementById('lang-selector');
         
-        Array.from(optionsContainer.children).forEach(button => {
-            if (button.innerText === langQuestions[currentQuestionIndex].answer) {
-                 button.classList.add('correct');
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('aileer_lang', lang);
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                const translation = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]) || el.textContent;
+                el.innerHTML = translation;
+            });
+            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+                const key = el.dataset.langPlaceholder;
+                el.placeholder = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]) || el.placeholder;
+            });
+            
+            loadReferrals();
+            initializeQuiz();
+        }
+
+        langSelector.addEventListener('change', (e) => setLanguage(e.target.value));
+
+        // === REFERRALS LOADER ===
+        function loadReferrals() {
+            const toolsGrid = document.getElementById('tools-grid');
+            toolsGrid.innerHTML = '';
+            const lang = localStorage.getItem('aileer_lang') || 'nl';
+
+            referralsData.forEach(tool => {
+                const card = document.createElement('div');
+                card.className = 'card animated';
+                card.innerHTML = `
+                    <div class="card-img-container"><img src="${tool.image}" alt="${tool.name}" class="card-img"></div>
+                    <div class="card-content">
+                        <h3>${tool.name}</h3>
+                        <p>${tool.description[lang] || tool.description['en']}</p>
+                        <a href="${tool.url}" target="_blank" rel="noopener noreferrer" class="button">${tool.cta[lang] || tool.cta['en']}</a>
+                    </div>
+                `;
+                toolsGrid.appendChild(card);
+                observer.observe(card);
+            });
+        }
+
+        // === QUIZ LOGIC ===
+        let quizData = [];
+        const quizStartScreen = document.getElementById('quiz-start');
+        const quizQuestionsScreen = document.getElementById('quiz-questions');
+        const quizResultScreen = document.getElementById('quiz-result');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const questionContainer = document.getElementById('question-container');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const scoreText = document.getElementById('score-text');
+        const usernameInput = document.getElementById('username');
+        const shareXBtn = document.getElementById('share-x-btn');
+        const downloadCertBtn = document.getElementById('download-certificate-btn');
+        const progressBar = document.getElementById('quiz-progress-bar');
+        
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function initializeQuiz() {
+            const lang = localStorage.getItem('aileer_lang') || 'nl';
+            quizData = (translations[lang] && translations[lang].quiz.questions) || translations['en'].quiz.questions;
+        }
+
+        startQuizBtn.addEventListener('click', () => {
+            if (usernameInput.value.trim() === '') {
+                alert('Vul alsjeblieft je naam in.');
+                return;
             }
-            button.disabled = true;
+            quizStartScreen.style.display = 'none';
+            quizQuestionsScreen.style.display = 'block';
+            currentQuestionIndex = 0;
+            score = 0;
+            updateProgressBar();
+            showQuestion();
         });
+        
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
 
-        setTimeout(() => {
+        function showQuestion() {
+            const question = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <h3>${currentQuestionIndex + 1}. ${question.question}</h3>
+                <div class="options-container">
+                    ${question.options.map((option, index) => `
+                        <button class="quiz-option" data-index="${index}">${option}</button>
+                    `).join('')}
+                </div>
+            `;
+            
+            document.querySelectorAll('.quiz-option').forEach(button => {
+                button.addEventListener('click', selectAnswer);
+            });
+            nextQuestionBtn.style.display = 'none';
+        }
+
+        function selectAnswer(e) {
+            const selectedButton = e.target;
+            const selectedIndex = parseInt(selectedButton.dataset.index);
+            const correctIndex = quizData[currentQuestionIndex].answer;
+
+            document.querySelectorAll('.quiz-option').forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === correctIndex) btn.classList.add('correct');
+                else if (index === selectedIndex) btn.classList.add('incorrect');
+            });
+            
+            if (selectedIndex === correctIndex) score++;
+            nextQuestionBtn.style.display = 'block';
+        }
+        
+        nextQuestionBtn.addEventListener('click', () => {
             currentQuestionIndex++;
-            if (currentQuestionIndex < langQuestions.length) {
+            updateProgressBar();
+            if (currentQuestionIndex < quizData.length) {
                 showQuestion();
             } else {
-                showResults();
+                progressBar.style.width = '100%';
+                setTimeout(showResult, 500);
             }
-        }, 1500);
-    }
-
-    function showResults() {
-        quizSection.style.display = 'none';
-        resultsSection.style.display = 'block';
-        window.scrollTo({ top: resultsSection.offsetTop - 100, behavior: 'smooth' });
-
-        const langQuestions = translations[currentLang].quizQuestions;
-        const finalScoreEl = document.getElementById('final-score');
-        const motivationalTextEl = document.getElementById('motivational-text');
-
-        finalScoreEl.innerText = translations[currentLang].quiz_score_text
-            .replace('{score}', score)
-            .replace('{total}', langQuestions.length);
-
-        let messageKey = 0;
-        if (score === 5) messageKey = 5;
-        else if (score >= 3) messageKey = 3;
-        else if (score >= 1) messageKey = 1;
+        });
         
-        motivationalTextEl.innerText = translations[currentLang].motivational[messageKey];
-    }
-
-    // --- Event Listeners ---
-    startQuizBtn.addEventListener('click', () => {
-        currentQuestionIndex = 0;
-        score = 0;
-        quizCtaSection.style.display = 'none';
-        resultsSection.style.display = 'none';
-        quizSection.style.display = 'block';
-        window.scrollTo({ top: quizSection.offsetTop - 100, behavior: 'smooth' });
-        showQuestion();
-    });
-    
-    repostBtn.addEventListener('click', () => {
-        const twitterHandle = twitterHandleInput.value.trim();
-        if (twitterHandle === "") {
-            twitterHandleInput.style.borderColor = 'var(--error-color)';
-            setTimeout(() => { twitterHandleInput.style.borderColor = 'var(--border-color)'; }, 2000);
-            return;
+        function showResult() {
+            quizQuestionsScreen.style.display = 'none';
+            quizResultScreen.style.display = 'block';
+            
+            const lang = localStorage.getItem('aileer_lang') || 'nl';
+            const resultTextTemplate = (translations[lang] && translations[lang].quiz.result_text) || translations['en'].quiz.result_text;
+            scoreText.textContent = resultTextTemplate.replace('{score}', score).replace('{total}', quizData.length);
+            
+            generateCertificate();
         }
-        const certificateTitle = translations[currentLang].certificate_title;
-        const text = translations[currentLang].repost_tweet.replace('{certificateTitle}', certificateTitle);
-        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
-        window.open(twitterUrl, '_blank');
-    });
 
-    // --- Initialization ---
-    document.addEventListener('DOMContentLoaded', () => {
-        init3D();
-        populateLanguageSelector();
-        document.querySelector('#language-modal h1').innerText = translations.en.language_select_title;
-    });
+        function generateCertificate() {
+            const canvas = document.getElementById('certificate-canvas');
+            const ctx = canvas.getContext('2d');
+            const username = usernameInput.value;
+            const date = new Date().toLocaleDateString('nl-NL');
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Subtle background pattern
+            ctx.strokeStyle = 'rgba(0, 123, 255, 0.05)';
+            for(let i=0; i<50; i++) {
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.stroke();
+            }
+
+            // Border
+            ctx.strokeStyle = '#007BFF';
+            ctx.lineWidth = 10;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+            // Text
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 50px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillStyle = '#343a40';
+            ctx.fillText('Certificaat van Voltooiing', canvas.width / 2, 120);
+            ctx.font = '26px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillText('Uitreikt aan', canvas.width / 2, 200);
+            ctx.font = 'bold 60px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillStyle = '#007BFF';
+            ctx.fillText(username, canvas.width / 2, 280);
+            ctx.font = '26px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillStyle = '#343a40';
+            ctx.fillText('voor het succesvol afronden van de', canvas.width / 2, 350);
+            ctx.font = 'bold 38px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillText('AILeer Basis AI Quiz', canvas.width / 2, 410);
+            
+            // Seal
+            ctx.beginPath();
+            ctx.arc(canvas.width - 120, canvas.height - 120, 50, 0, Math.PI * 2);
+            ctx.fillStyle = '#007BFF';
+            ctx.fill();
+            ctx.font = 'bold 20px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillStyle = '#fff';
+            ctx.fillText('AILeer', canvas.width - 120, canvas.height - 125);
+            ctx.fillText('2025', canvas.width - 120, canvas.height - 100);
+
+
+            ctx.font = '18px ' + getComputedStyle(document.body).fontFamily;
+            ctx.fillStyle = '#6c757d';
+            ctx.fillText(`Datum: ${date}`, 150, canvas.height - 60);
+            
+            downloadCertBtn.href = canvas.toDataURL('image/png');
+        }
+
+        shareXBtn.addEventListener('click', () => {
+            const text = `Ik heb de AILeer-quiz gehaald en mijn certificaat verdiend! 🤩 Test jouw AI-kennis ook op aileer.nl en volg @mcdropke voor meer AI-tips! #AILeer #AICertificaat`;
+            const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        });
+
+        // === CHATBOT ===
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const closeChatbot = document.getElementById('close-chatbot');
+        const chatbotBody = document.getElementById('chatbot-body');
+        const chatbotInput = document.getElementById('chatbot-user-input');
+        const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+
+        chatbotIcon.addEventListener('click', () => { chatbotWindow.style.display = 'flex'; chatbotIcon.style.display = 'none'; });
+        closeChatbot.addEventListener('click', () => { chatbotWindow.style.display = 'none'; chatbotIcon.style.display = 'flex'; });
+        
+        const handleChat = () => {
+            const userInput = chatbotInput.value.trim().toLowerCase();
+            if(userInput === '') return;
+            addMessage(userInput, 'user');
+            chatbotInput.value = '';
+            setTimeout(() => {
+                let botResponse = "Sorry, dat begrijp ik niet. Probeer 'tools' of 'cursussen'.";
+                if (userInput.includes('tool') || userInput.includes('deal')) botResponse = "Geweldig! Bekijk onze exclusieve deals op de 'AI Tools' pagina.";
+                else if (userInput.includes('cursus') || userInput.includes('leren')) botResponse = "Perfect! Start je leerreis op onze 'Cursussen' pagina.";
+                else if (userInput.includes('hallo') || userInput.includes('hoi')) botResponse = "Hallo! Hoe kan ik je vandaag helpen met je AI-reis?";
+                addMessage(botResponse, 'bot');
+            }, 1000);
+        };
+
+        chatbotSendBtn.addEventListener('click', handleChat);
+        chatbotInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChat(); });
+
+        function addMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chatbot-message ${type}`;
+            messageDiv.textContent = text;
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+
+        // === UTILITIES & INITIALISATIE ===
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const initialSetup = () => {
+            const savedLang = localStorage.getItem('aileer_lang') || 'nl';
+            langSelector.value = savedLang;
+            setLanguage(savedLang);
+            showSection('home');
+        };
+
+        initialSetup();
+    });
     </script>
 </body>
 </html>
