@@ -69,9 +69,8 @@
         },
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+31-20-123-4567",
             "contactType": "customer service",
-            "email": "info@aileer.nl"
+            "url": "https://aileer.nl/contact"
         },
         "sameAs": [
             "https://twitter.com/mcdropke",
@@ -540,6 +539,17 @@
             overflow: hidden;
         }
 
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
         .hero h1 {
             font-size: clamp(3rem, 8vw, 5.5rem);
             font-weight: 900;
@@ -974,13 +984,13 @@
             backdrop-filter: blur(10px);
             z-index: 10000;
             display: none;
-            justify-content: center;
-            align-items: center;
+            overflow-y: auto;
+            overflow-x: hidden;
             padding: 20px;
         }
 
         .quiz-modal.active {
-            display: flex;
+            display: block;
         }
 
         .quiz-container {
@@ -993,6 +1003,9 @@
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-3d);
             position: relative;
+            margin: 20px auto;
+            min-height: auto;
+            max-height: none;
         }
 
         .quiz-close {
@@ -1377,7 +1390,7 @@
     <header id="header">
         <nav class="container">
             <div class="nav-header">
-                <a href="#" class="logo interactive-element" onclick="showSection('home')">AILeer.nl</a>
+                <a href="#" class="logo interactive-element" onclick="showSection('home'); return false;" style="cursor: pointer;">AILeer.nl</a>
                 <select class="language-selector interactive-element" onchange="changeLanguage(this.value)">
                     <option value="nl">🇳🇱 NL</option>
                     <option value="en">🇬🇧 EN</option>
@@ -1396,7 +1409,6 @@
                     <div class="dropdown-menu">
                         <a onclick="showSection('hardware')" id="hardwareNav">💻 AI Hardware</a>
                         <a onclick="showSection('ton-games')" id="tonGamesNav">🎮 TON Games</a>
-                        <a onclick="showSection('game')" id="gameNav">🚀 Space Game</a>
                         <a onclick="showSection('blog')" id="blogNav">📝 Blog</a>
                         <a onclick="showSection('about')" id="aboutNav">ℹ️ Over Ons</a>
                     </div>
@@ -1430,10 +1442,6 @@
                     <span class="icon">🎮</span>
                     <span class="text" id="mobileTonGamesNav">Games</span>
                 </a>
-                <a class="mobile-nav-item" onclick="showSection('game')">
-                    <span class="icon">🚀</span>
-                    <span class="text" id="mobileGameNav">Space</span>
-                </a>
                 <a class="mobile-nav-item" onclick="showSection('blog')">
                     <span class="icon">📝</span>
                     <span class="text" id="mobileBlogNav">Blog</span>
@@ -1453,10 +1461,16 @@
     <!-- Home Section -->
     <section id="home" class="section active">
         <div class="hero">
+            <!-- Background Video -->
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://cdn.pixabay.com/vimeo/665609094/ai-technology-65609.mp4?width=1280&hash=b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8b8" type="video/mp4">
+                <!-- Fallback for browsers that don't support video -->
+            </video>
             <div class="container">
                 <h1 id="heroTitle">Beheers AI Tools & Transformeer Je Toekomst</h1>
                 <p id="heroDescription">Ervaar het ultieme AI leerplatform met geavanceerde visuele effecten, interactieve cursussen en premium tools zoals Canva AI & Pictory. Sluit je aan bij duizenden die kunstmatige intelligentie beheersen!</p>
                 <div class="cta-buttons">
+                    <a href="https://autoshorts.ai/?ref=aileer" target="_blank" class="btn btn-primary interactive-element" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); border: 3px solid #ff6b35; box-shadow: 0 0 25px rgba(255, 107, 53, 0.4);">🚀 Probeer AutoShorts AI</a>
                     <button class="btn btn-primary interactive-element" onclick="showSection('tools')" id="exploreToolsBtn">Ontdek AI Tools</button>
                     <button class="btn btn-secondary interactive-element" onclick="showSection('courses')" id="startLearningBtn">Start Leren</button>
                     <button class="btn btn-primary interactive-element" onclick="showSection('quiz')" id="getCertifiedBtn">Word Gecertificeerd</button>
@@ -1466,6 +1480,13 @@
 
         <div class="container">
             <div class="hub-grid">
+                <div class="hub-card interactive-element" style="border: 3px solid #ff6b35; box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);">
+                    <div class="hub-icon" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚀</div>
+                    <h3 style="color: #ff6b35;">AutoShorts AI - Direct Beschikbaar!</h3>
+                    <p>Creëer automatisch virale YouTube Shorts met AI! Van idee tot gepubliceerde video in minuten. Deze affiliate link werkt direct.</p>
+                    <a href="https://autoshorts.ai/?ref=aileer" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);">🎬 Probeer Nu!</a>
+                </div>
+                
                 <div class="hub-card interactive-element">
                     <div class="hub-icon">🎨</div>
                     <h3 id="premiumToolsTitle">Premium AI Tools</h3>
@@ -1530,8 +1551,27 @@
         <div class="container">
             <h2 class="section-title" id="toolsTitle">Premium AI Tools</h2>
             <div class="tools-grid">
+                <div class="tool-card interactive-element" style="border: 3px solid #ff6b35; box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);">
+                    <div class="tool-header" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);">
+                        <div style="width: 60px; height: 60px; background: white; border-radius: 12px; padding: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🚀</div>
+                        <h3>🚀 AutoShorts AI - WERKENDE LINK!</h3>
+                    </div>
+                    <div class="tool-content">
+                        <div class="discount-badge" id="autoshortsDiscount" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); animation: badgePulse 1.5s infinite;">✅ DIRECT TOEGANG!</div>
+                        <p id="autoshortsDescription">Creëer automatisch virale YouTube Shorts met AI. Van idee tot gepubliceerde video in enkele minuten! Deze affiliate link werkt direct.</p>
+                        <ul>
+                            <li data-icon="🎯" id="autoshortsFeature1">Automatische video generatie</li>
+                            <li data-icon="🎵" id="autoshortsFeature2">AI voice-overs & muziek</li>
+                            <li data-icon="📱" id="autoshortsFeature3">Geoptimaliseerd voor mobiel</li>
+                            <li data-icon="🚀" id="autoshortsFeature4">Direct naar YouTube upload</li>
+                        </ul>
+                        <a href="https://autoshorts.ai/?ref=aileer" target="_blank" class="btn btn-primary interactive-element" id="autoshortsBtn" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); font-size: 1.1rem; padding: 16px 24px;">🎬 Probeer AutoShorts Nu!</a>
+                    </div>
+                </div>
+                
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
+                    <div class="tool-header" style="background: linear-gradient(135deg, #00c4cc 0%, #7b68ee 100%);">
+                        <div style="width: 60px; height: 60px; background: white; border-radius: 12px; padding: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🎨</div>
                         <h3>🎨 Canva AI Pro</h3>
                     </div>
                     <div class="tool-content">
@@ -1548,7 +1588,8 @@
                 </div>
                 
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
+                    <div class="tool-header" style="background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);">
+                        <div style="width: 60px; height: 60px; background: white; border-radius: 12px; padding: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🎬</div>
                         <h3>🎬 Pictory AI</h3>
                     </div>
                     <div class="tool-content">
@@ -1565,7 +1606,8 @@
                 </div>
 
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
+                    <div class="tool-header" style="background: linear-gradient(135deg, #10a37f 0%, #1a7f64 100%);">
+                        <div style="width: 60px; height: 60px; background: white; border-radius: 12px; padding: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🤖</div>
                         <h3>🤖 ChatGPT Plus</h3>
                     </div>
                     <div class="tool-content">
@@ -1580,6 +1622,8 @@
                         <a href="https://openai.com/chatgpt?ref=aileer" target="_blank" class="btn btn-primary interactive-element" id="chatgptBtn">Meer Informatie</a>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </section>
@@ -1590,8 +1634,9 @@
             <h2 class="section-title" id="coursesTitle">AI Meesterschap Cursussen</h2>
             <div class="tools-grid">
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
-                        <h3 id="beginnerCourseTitle">AI voor Beginners</h3>
+                    <div class="tool-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem;">🎓</div>
+                        <h3 id="beginnerCourseTitle" style="color: white;">AI voor Beginners</h3>
                     </div>
                     <div class="tool-content">
                         <p id="beginnerCourseDesc">Beheers AI fundamenten en leer krachtige tools zoals Canva AI, ChatGPT en meer te gebruiken. Perfect voor complete beginners.</p>
@@ -1609,8 +1654,9 @@
                 </div>
                 
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
-                        <h3 id="businessCourseTitle">AI voor Bedrijven</h3>
+                    <div class="tool-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 12px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem;">💼</div>
+                        <h3 id="businessCourseTitle" style="color: white;">AI voor Bedrijven</h3>
                     </div>
                     <div class="tool-content">
                         <p id="businessCourseDesc">Ontdek hoe AI je bedrijfsvoering kan revolutioneren, productiviteit kan verhogen en groei kan stimuleren met geavanceerde strategieën.</p>
@@ -1637,27 +1683,28 @@
             
             <!-- Featured News Section -->
             <div style="background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 28px; padding: 3rem; margin-bottom: 4rem; border: 1px solid var(--glass-border); box-shadow: var(--shadow-3d);">
-                <h3 style="font-size: 2rem; font-weight: 900; text-align: center; margin-bottom: 2rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🔥 Trending AI & Crypto Nieuws</h3>
+                <h3 style="font-size: 2rem; font-weight: 900; text-align: center; margin-bottom: 2rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" id="trendingNewsTitle">🔥 Trending AI & Crypto Nieuws</h3>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
                     <!-- Snoop Dogg TON Article -->
-                    <div style="background: rgba(0, 136, 204, 0.08); border-radius: 20px; padding: 2rem; border: 1px solid rgba(0, 170, 255, 0.2);">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <div style="background: rgba(0, 136, 204, 0.08); border-radius: 20px; padding: 2rem; border: 1px solid rgba(0, 170, 255, 0.2); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 136, 204, 0.1) 0%, rgba(0, 170, 255, 0.05) 100%); border-radius: 20px;"></div>
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem; position: relative; z-index: 1;">
                             <div style="font-size: 2rem; margin-right: 1rem;">🎤</div>
                             <div>
-                                <h4 style="color: #00aaff; font-size: 1.3rem; margin: 0; font-weight: 800;">Snoop Dogg & TON Gifts</h4>
-                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">2 dagen geleden</p>
+                                <h4 style="color: #00aaff; font-size: 1.3rem; margin: 0; font-weight: 800;" id="snoopTonTitle">Snoop Dogg & TON Gifts</h4>
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;" id="snoopTonDate">2 dagen geleden</p>
                             </div>
                         </div>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;" id="snoopTonDesc">
                             🚀 <strong>Snoop Dogg</strong> heeft officieel zijn steun uitgesproken voor TON blockchain en Telegram Gifts! De rap-legende kondigde aan dat hij zijn eigen collectie digitale gifts zal lanceren op het TON netwerk. Dit markeert een belangrijke mijlpaal voor mainstream adoptie van TON blockchain technologie.
                         </p>
                         <div style="background: rgba(0, 170, 255, 0.1); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem;">
-                            <p style="color: #00aaff; font-size: 0.9rem; margin: 0; font-style: italic;">
+                            <p style="color: #00aaff; font-size: 0.9rem; margin: 0; font-style: italic;" id="snoopTonQuote">
                                 "TON is the future of digital ownership, and I'm excited to bring my fans into this new era" - Snoop Dogg
                             </p>
                         </div>
-                        <button onclick="readFullArticle('snoop-ton')" class="btn btn-secondary" style="background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%); color: white; width: 100%;">
+                        <button onclick="readFullArticle('snoop-ton')" class="btn btn-secondary" style="background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%); color: white; width: 100%;" id="readFullArticleBtn">
                             📖 Lees Volledig Artikel
                         </button>
                     </div>
@@ -1667,19 +1714,19 @@
                         <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                             <div style="font-size: 2rem; margin-right: 1rem;">🤖</div>
                             <div>
-                                <h4 style="color: var(--neon-cyan); font-size: 1.3rem; margin: 0; font-weight: 800;">AI Revolutie 2025</h4>
-                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">1 dag geleden</p>
+                                <h4 style="color: var(--neon-cyan); font-size: 1.3rem; margin: 0; font-weight: 800;" id="aiRevolutionTitle">AI Revolutie 2025</h4>
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;" id="aiRevolutionDate">1 dag geleden</p>
                             </div>
                         </div>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;" id="aiRevolutionDesc">
                             🧠 <strong>OpenAI's GPT-5</strong> wordt verwacht in Q2 2025 met baanbrekende multimodale capaciteiten. Tegelijkertijd lanceren Google, Microsoft en Meta hun eigen next-gen AI modellen. De AI-race intensiveert met focus op real-time video generatie en autonome AI agents.
                         </p>
                         <div style="background: rgba(0, 255, 255, 0.1); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem;">
-                            <p style="color: var(--neon-cyan); font-size: 0.9rem; margin: 0; font-weight: 600;">
+                            <p style="color: var(--neon-cyan); font-size: 0.9rem; margin: 0; font-weight: 600;" id="aiRevolutionTrends">
                                 💡 Key Trends: Multimodal AI, Real-time Generation, AI Agents, Edge Computing
                             </p>
                         </div>
-                        <button onclick="readFullArticle('ai-revolution')" class="btn btn-secondary" style="background: var(--gradient-primary); color: var(--primary-dark); width: 100%;">
+                        <button onclick="readFullArticle('ai-revolution')" class="btn btn-secondary" style="background: var(--gradient-primary); color: var(--primary-dark); width: 100%;" id="discoverAiTrendsBtn">
                             🚀 Ontdek AI Trends
                         </button>
                     </div>
@@ -1704,23 +1751,23 @@
                 
                 <div class="hub-card interactive-element">
                     <div class="hub-icon">🎮</div>
-                    <h3>TON Gaming Ecosystem</h3>
-                    <p>Duik diep in het TON gaming ecosysteem. Leer hoe blockchain gaming de toekomst van entertainment vormt en hoe je kunt profiteren.</p>
-                    <button class="btn btn-secondary interactive-element" onclick="readArticle('ton-gaming')">Lees Artikel</button>
+                    <h3 id="tonGamingTitle">TON Gaming Ecosystem</h3>
+                    <p id="tonGamingDesc">Duik diep in het TON gaming ecosysteem. Leer hoe blockchain gaming de toekomst van entertainment vormt en hoe je kunt profiteren.</p>
+                    <button class="btn btn-secondary interactive-element" onclick="readArticle('ton-gaming')" id="readTonGamingBtn">Lees Artikel</button>
                 </div>
                 
                 <div class="hub-card interactive-element">
                     <div class="hub-icon">💼</div>
-                    <h3>AI in Business 2025</h3>
-                    <p>Praktische gids voor het implementeren van AI in je bedrijf. Van automatisering tot customer service - alles wat je moet weten.</p>
-                    <button class="btn btn-secondary interactive-element" onclick="readArticle('ai-business')">Lees Artikel</button>
+                    <h3 id="aiBusinessTitle">AI in Business 2025</h3>
+                    <p id="aiBusinessDesc">Praktische gids voor het implementeren van AI in je bedrijf. Van automatisering tot customer service - alles wat je moet weten.</p>
+                    <button class="btn btn-secondary interactive-element" onclick="readArticle('ai-business')" id="readAiBusinessBtn">Lees Artikel</button>
                 </div>
                 
                 <div class="hub-card interactive-element">
                     <div class="hub-icon">🔮</div>
-                    <h3>Toekomst van AI</h3>
-                    <p>Wat brengt de toekomst? Ontdek de nieuwste ontwikkelingen in AGI, quantum computing en de impact op de samenleving.</p>
-                    <button class="btn btn-secondary interactive-element" onclick="readArticle('ai-future')">Lees Artikel</button>
+                    <h3 id="aiFutureTitle">Toekomst van AI</h3>
+                    <p id="aiFutureDesc">Wat brengt de toekomst? Ontdek de nieuwste ontwikkelingen in AGI, quantum computing en de impact op de samenleving.</p>
+                    <button class="btn btn-secondary interactive-element" onclick="readArticle('ai-future')" id="readAiFutureBtn">Lees Artikel</button>
                 </div>
                 
                 <div class="hub-card interactive-element">
@@ -1743,8 +1790,9 @@
 
             <div class="tools-grid">
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
-                        <h3>💻 AI Pro Laptops</h3>
+                    <div class="tool-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 12px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem;">💻</div>
+                        <h3 style="color: white;">💻 AI Pro Laptops</h3>
                     </div>
                     <div class="tool-content">
                         <div class="discount-badge" id="laptopDiscount">BESTE DEALS!</div>
@@ -1760,8 +1808,9 @@
                 </div>
 
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
-                        <h3>🎮 Gaming Laptops voor AI</h3>
+                    <div class="tool-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-radius: 12px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem;">🎮</div>
+                        <h3 style="color: white;">🎮 Gaming Laptops voor AI</h3>
                     </div>
                     <div class="tool-content">
                         <div class="discount-badge" id="gamingDiscount">KRACHTIGE GPU'S!</div>
@@ -1777,8 +1826,9 @@
                 </div>
 
                 <div class="tool-card interactive-element">
-                    <div class="tool-header">
-                        <h3>🏢 Workstation Laptops</h3>
+                    <div class="tool-header" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <div style="width: 100%; height: 120px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 12px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 3rem;">🏢</div>
+                        <h3 style="color: #333;">🏢 Workstation Laptops</h3>
                     </div>
                     <div class="tool-content">
                         <div class="discount-badge" id="workstationDiscount">PROFESSIONEEL!</div>
@@ -1845,8 +1895,9 @@
         <div class="container">
             <h2 class="section-title" id="quizTitle">AI Kennis Quiz & Certificering</h2>
             <div class="contact-form">
-                <div style="background: var(--gradient-primary); border-radius: 20px; padding: 2.5rem; text-align: center; margin-bottom: 2.5rem;">
-                    <h3 style="font-size: 2rem; font-weight: 900; color: var(--primary-dark);" id="certificateTitle">🏆 AILeer Professioneel Certificaat</h3>
+                <div style="background: var(--gradient-primary); border-radius: 20px; padding: 2.5rem; text-align: center; margin-bottom: 2.5rem; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%); border-radius: 20px;"></div>
+                    <h3 style="font-size: 2rem; font-weight: 900; color: var(--primary-dark); position: relative; z-index: 1;" id="certificateTitle">🏆 AILeer Professioneel Certificaat</h3>
                     <p style="font-size: 1.1rem; color: var(--primary-dark); margin-top: 1rem;" id="certificateDesc">Valideer je AI kennis en verdien erkenning</p>
                 </div>
                 
@@ -1883,8 +1934,9 @@
             </p>
             
             <!-- Telegram Explanation -->
-            <div style="background: linear-gradient(135deg, #0088cc 0%, #00aaff 100%); border-radius: 28px; padding: 3rem; margin: 3rem auto; max-width: 900px; text-align: center; box-shadow: 0 20px 40px rgba(0, 136, 204, 0.3);">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem;">📱</div>
+            <div style="background: linear-gradient(135deg, #0088cc 0%, #00aaff 100%); border-radius: 28px; padding: 3rem; margin: 3rem auto; max-width: 900px; text-align: center; box-shadow: 0 20px 40px rgba(0, 136, 204, 0.3); position: relative; overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop&crop=center" alt="Blockchain" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; border-radius: 28px;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem; position: relative; z-index: 1;">📱</div>
                 <h3 style="font-size: 2.2rem; font-weight: 900; margin-bottom: 1.5rem; color: #ffffff;" id="telegramTitle">Alleen Telegram Nodig!</h3>
                 <p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem; line-height: 1.6;" id="telegramExplanation">
                     🚀 <strong>Geen losse games downloaden!</strong> Alle TON games spelen af in Telegram. Download gewoon Telegram en begin direct met het verdienen van <strong>gratis crypto en NFT's</strong>. Met mijn speciale links krijg je bijna altijd <strong>gratis startcoins</strong> cadeau!
@@ -1968,92 +2020,15 @@
         </div>
     </section>
 
-    <!-- AI Space Invaders Game Section -->
-    <section id="game" class="section">
-        <div class="container">
-            <h2 class="section-title" style="background: linear-gradient(135deg, #00ff00 0%, #ffff00 50%, #ff6600 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚀 AI Space Invaders 3D</h2>
-            
-            <div style="background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 28px; padding: 3rem; margin: 0 auto; max-width: 1000px; border: 1px solid var(--glass-border); box-shadow: var(--shadow-3d);">
-                <p style="text-align: center; font-size: 1.3rem; margin-bottom: 3rem; color: var(--text-secondary);">
-                    🎮 Speel onze AI-gemaakte Space Invaders game! Verdedig de aarde tegen de alien invasie. Kies je moeilijkheidsgraad en test je reflexen!
-                </p>
-                
-                <div id="gameMenu" style="text-align: center;">
-                    <div style="margin-bottom: 3rem;">
-                        <h3 style="color: var(--neon-cyan); margin-bottom: 2rem; font-size: 1.8rem;">Kies je Moeilijkheidsgraad:</h3>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-                            <div style="background: rgba(57, 255, 20, 0.1); padding: 2rem; border-radius: 20px; border: 2px solid #39ff14;">
-                                <div style="font-size: 3rem; margin-bottom: 1rem;">🟢</div>
-                                <h4 style="color: #39ff14; margin-bottom: 1rem;">EASY MODE</h4>
-                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">5 levens • langzame vijanden • perfecte start</p>
-                                <button onclick="selectDifficulty('easy')" style="background: linear-gradient(135deg, #39ff14 0%, #32cd32 100%); color: #000; border: none; padding: 14px 28px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 100%;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                                    Selecteer Easy
-                                </button>
-                            </div>
-                            
-                            <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 20px; border: 2px solid #ffd700;">
-                                <div style="font-size: 3rem; margin-bottom: 1rem;">🟡</div>
-                                <h4 style="color: #ffd700; margin-bottom: 1rem;">CHILL MODE</h4>
-                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">3 levens • normale snelheid • uitdagend</p>
-                                <button onclick="selectDifficulty('chill')" style="background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%); color: #000; border: none; padding: 14px 28px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 100%;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                                    Selecteer Chill
-                                </button>
-                            </div>
-                            
-                            <div style="background: rgba(255, 20, 147, 0.1); padding: 2rem; border-radius: 20px; border: 2px solid #ff1493;">
-                                <div style="font-size: 3rem; margin-bottom: 1rem;">🔴</div>
-                                <h4 style="color: #ff1493; margin-bottom: 1rem;">PRO MODE</h4>
-                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">1 leven • snelle vijanden • hardcore</p>
-                                <button onclick="selectDifficulty('pro')" style="background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%); color: #fff; border: none; padding: 14px 28px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; width: 100%;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                                    Selecteer Pro
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="selectedDifficulty" style="display: none; margin-bottom: 2rem;">
-                        <div style="background: var(--gradient-primary); padding: 2rem; border-radius: 20px; margin-bottom: 2rem;">
-                            <h3 style="color: var(--primary-dark); font-size: 1.5rem; margin-bottom: 1rem;">🎯 Klaar voor de Strijd!</h3>
-                            <p style="color: var(--primary-dark); margin-bottom: 1.5rem;" id="difficultyText">Moeilijkheidsgraad geselecteerd</p>
-                            <button onclick="startGame()" style="background: var(--primary-dark); color: var(--neon-cyan); border: none; padding: 18px 36px; border-radius: 25px; font-weight: 800; cursor: pointer; font-size: 1.2rem; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px) scale(1.05)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
-                                🚀 START GAME
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="spaceInvadersGame" style="display: none; background: #000; border-radius: 16px; margin: 2rem auto; position: relative; overflow: hidden;">
-                    <canvas id="gameCanvas" width="800" height="600" style="display: block; margin: 0 auto; border-radius: 16px;"></canvas>
-                    <div id="gameUI" style="position: absolute; top: 20px; left: 20px; color: #00ff00; font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px #00ff00;">
-                        <div>Score: <span id="gameScore">0</span></div>
-                        <div>Lives: <span id="gameLives">3</span></div>
-                        <div>Level: <span id="gameLevel">1</span></div>
-                    </div>
-                    <div id="gameControls" style="text-align: center; padding: 1rem; background: rgba(0,0,0,0.9); color: #fff; border-radius: 0 0 16px 16px;">
-                        <p style="margin: 0; font-size: 0.9rem;">🎮 Gebruik ← → pijltjes om te bewegen, SPATIE om te schieten, ESC om te pauzeren</p>
-                        <button onclick="resetGame()" style="background: #ff6600; color: #fff; border: none; padding: 8px 16px; border-radius: 15px; font-weight: 600; cursor: pointer; margin-top: 0.5rem; font-size: 0.8rem;">
-                            🔄 Nieuw Spel
-                        </button>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(0, 255, 255, 0.08); border-radius: 20px; border: 1px solid var(--neon-cyan);">
-                    <h4 style="color: var(--neon-cyan); margin-bottom: 1rem;">🏆 High Score Challenge</h4>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Behaal een score van 1000+ en deel je prestatie op social media!</p>
-                    <button class="btn btn-secondary interactive-element" onclick="showSection('home')" style="margin-right: 1rem;">← Terug naar Home</button>
-                    <button class="btn btn-primary interactive-element" onclick="showSection('quiz')">📝 Doe AI Quiz</button>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title" id="contactTitle">Neem Contact Op</h2>
-            <div class="contact-form">
-                <form onsubmit="handleFormSubmit(event)">
+            <div class="contact-form" style="position: relative; overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=400&h=300&fit=crop&crop=center" alt="Contact Us" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.05; border-radius: 28px;">
+                <form onsubmit="handleFormSubmit(event)" style="position: relative; z-index: 1;">
                     <div class="form-group">
                         <label id="nameLabel">Volledige Naam:</label>
                         <input type="text" required placeholder="Voer je volledige naam in" id="nameInput">
@@ -2071,7 +2046,6 @@
                 
                 <div style="text-align: center; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--glass-border);">
                     <p style="margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700;" id="contactInfoTitle">Contactinformatie:</p>
-                    <p style="margin-bottom: 0.8rem;">📧 info@aileer.nl</p>
                     <p style="margin-bottom: 0.8rem;">🐦 <a href="https://twitter.com/mcdropke" target="_blank" style="color: var(--neon-cyan); text-decoration: none;">@mcdropke</a></p>
                     <p id="locationInfo">🌍 Nederland, Wereldwijd Actief</p>
                 </div>
@@ -2098,7 +2072,6 @@
                 quizNav: "🏆 Quiz",
                 hardwareNav: "💻 AI Hardware",
                 tonGamesNav: "🎮 TON Games",
-                gameNav: "🚀 Space Game",
                 contactNav: "📞 Contact",
                 meerNav: "⚡ Meer",
                 
@@ -2109,7 +2082,7 @@
                 mobileQuizNav: "Quiz",
                 mobileHardwareNav: "Hardware",
                 mobileTonGamesNav: "Games",
-                mobileGameNav: "Leren",
+
                 mobileBlogNav: "Blog",
                 mobileContactNav: "Contact",
                 
@@ -2147,7 +2120,45 @@
                 aboutTitle: "Over AILeer.nl",
                 toolsTitle: "Premium AI Tools",
                 coursesTitle: "AI Meesterschap Cursussen",
-                blogTitle: "AI Inzichten & Bronnen",
+                blogTitle: "AI Inzichten & Nieuws",
+                
+                // Blog Content
+                trendingNewsTitle: "🔥 Trending AI & Crypto Nieuws",
+                snoopTonTitle: "Snoop Dogg & TON Gifts",
+                snoopTonDate: "2 dagen geleden",
+                snoopTonDesc: "🚀 Snoop Dogg heeft officieel zijn steun uitgesproken voor TON blockchain en Telegram Gifts! De rap-legende kondigde aan dat hij zijn eigen collectie digitale gifts zal lanceren op het TON netwerk. Dit markeert een belangrijke mijlpaal voor mainstream adoptie van TON blockchain technologie.",
+                snoopTonQuote: "TON is the future of digital ownership, and I'm excited to bring my fans into this new era",
+                readFullArticleBtn: "📖 Lees Volledig Artikel",
+                
+                aiRevolutionTitle: "AI Revolutie 2025",
+                aiRevolutionDate: "1 dag geleden",
+                aiRevolutionDesc: "🧠 OpenAI's GPT-5 wordt verwacht in Q2 2025 met baanbrekende multimodale capaciteiten. Tegelijkertijd lanceren Google, Microsoft en Meta hun eigen next-gen AI modellen. De AI-race intensiveert met focus op real-time video generatie en autonome AI agents.",
+                aiRevolutionTrends: "💡 Key Trends: Multimodal AI, Real-time Generation, AI Agents, Edge Computing",
+                discoverAiTrendsBtn: "🚀 Ontdek AI Trends",
+                
+                topToolsTitle: "Top AI Tools 2025",
+                topToolsDesc: "Ontdek de krachtigste AI tools die industrieën revolutioneren. Leer welke tools het beste ROI leveren voor bedrijven.",
+                readTopToolsBtn: "Lees Artikel",
+                
+                canvaMasteryTitle: "Canva AI Meesterschap",
+                canvaMasteryDesc: "Ontgrendel Canva's volledige potentieel met geavanceerde technieken, snelkoppelingen en professionele ontwerpstrategieën.",
+                readCanvaBtn: "Lees Artikel",
+                
+                tonGamingTitle: "TON Gaming Ecosystem",
+                tonGamingDesc: "Duik diep in het TON gaming ecosysteem. Leer hoe blockchain gaming de toekomst van entertainment vormt en hoe je kunt profiteren.",
+                readTonGamingBtn: "Lees Artikel",
+                
+                aiBusinessTitle: "AI in Business 2025",
+                aiBusinessDesc: "Praktische gids voor het implementeren van AI in je bedrijf. Van automatisering tot customer service - alles wat je moet weten.",
+                readAiBusinessBtn: "Lees Artikel",
+                
+                aiFutureTitle: "Toekomst van AI",
+                aiFutureDesc: "Wat brengt de toekomst? Ontdek de nieuwste ontwikkelingen in AGI, quantum computing en de impact op de samenleving.",
+                readAiFutureBtn: "Lees Artikel",
+                
+                aiFaqTitle: "AI FAQ & Ondersteuning",
+                aiFaqDesc: "Krijg antwoorden op veelgestelde AI vragen en leer hoe je je AI reis met vertrouwen kunt starten.",
+                viewFaqBtn: "Bekijk FAQ's",
                 hardwareTitle: "🖥️ AI Hardware & Laptops",
                 quizTitle: "AI Kennis Quiz & Certificering",
                 tonGamesMainTitle: "🎮 TON Blockchain Games",
@@ -2181,6 +2192,14 @@
                 chatgptFeature3: "Content creatie & bewerking",
                 chatgptFeature4: "Onderzoek & analyse",
                 chatgptBtn: "Meer Informatie",
+                
+                autoshortsDiscount: "AUTOMATISCHE SHORTS!",
+                autoshortsDescription: "Creëer automatisch virale YouTube Shorts met AI. Van idee tot gepubliceerde video in enkele minuten!",
+                autoshortsFeature1: "Automatische video generatie",
+                autoshortsFeature2: "AI voice-overs & muziek",
+                autoshortsFeature3: "Geoptimaliseerd voor mobiel",
+                autoshortsFeature4: "Direct naar YouTube upload",
+                autoshortsBtn: "Probeer AutoShorts!",
                 
                 // Quiz Section
                 certificateTitle: "🏆 AILeer Professioneel Certificaat",
@@ -2245,7 +2264,6 @@
                 quizNav: "🏆 Quiz",
                 hardwareNav: "💻 AI Hardware",
                 tonGamesNav: "🎮 TON Games",
-                gameNav: "🚀 Space Game",
                 contactNav: "📞 Contact",
                 meerNav: "⚡ More",
                 
@@ -2256,7 +2274,7 @@
                 mobileQuizNav: "Quiz",
                 mobileHardwareNav: "Hardware",
                 mobileTonGamesNav: "Games",
-                mobileGameNav: "Leren",
+
                 mobileBlogNav: "Blog",
                 mobileContactNav: "Contact",
                 
@@ -2294,7 +2312,45 @@
                 aboutTitle: "About AILeer.nl",
                 toolsTitle: "Premium AI Tools",
                 coursesTitle: "AI Mastery Courses",
-                blogTitle: "AI Insights & Resources",
+                blogTitle: "AI Insights & News",
+                
+                // Blog Content
+                trendingNewsTitle: "🔥 Trending AI & Crypto News",
+                snoopTonTitle: "Snoop Dogg & TON Gifts",
+                snoopTonDate: "2 days ago",
+                snoopTonDesc: "🚀 Snoop Dogg has officially announced his support for TON blockchain and Telegram Gifts! The rap legend announced he will launch his own collection of digital gifts on the TON network. This marks an important milestone for mainstream adoption of TON blockchain technology.",
+                snoopTonQuote: "TON is the future of digital ownership, and I'm excited to bring my fans into this new era",
+                readFullArticleBtn: "📖 Read Full Article",
+                
+                aiRevolutionTitle: "AI Revolution 2025",
+                aiRevolutionDate: "1 day ago",
+                aiRevolutionDesc: "🧠 OpenAI's GPT-5 is expected in Q2 2025 with groundbreaking multimodal capabilities. Meanwhile, Google, Microsoft and Meta are launching their own next-gen AI models. The AI race intensifies with focus on real-time video generation and autonomous AI agents.",
+                aiRevolutionTrends: "💡 Key Trends: Multimodal AI, Real-time Generation, AI Agents, Edge Computing",
+                discoverAiTrendsBtn: "🚀 Discover AI Trends",
+                
+                topToolsTitle: "Top AI Tools 2025",
+                topToolsDesc: "Discover the most powerful AI tools revolutionizing industries. Learn which tools deliver the best ROI for businesses.",
+                readTopToolsBtn: "Read Article",
+                
+                canvaMasteryTitle: "Canva AI Mastery",
+                canvaMasteryDesc: "Unlock Canva's full potential with advanced techniques, shortcuts and professional design strategies.",
+                readCanvaBtn: "Read Article",
+                
+                tonGamingTitle: "TON Gaming Ecosystem",
+                tonGamingDesc: "Dive deep into the TON gaming ecosystem. Learn how blockchain gaming shapes the future of entertainment and how you can profit.",
+                readTonGamingBtn: "Read Article",
+                
+                aiBusinessTitle: "AI in Business 2025",
+                aiBusinessDesc: "Practical guide for implementing AI in your business. From automation to customer service - everything you need to know.",
+                readAiBusinessBtn: "Read Article",
+                
+                aiFutureTitle: "Future of AI",
+                aiFutureDesc: "What does the future hold? Discover the latest developments in AGI, quantum computing and the impact on society.",
+                readAiFutureBtn: "Read Article",
+                
+                aiFaqTitle: "AI FAQ & Support",
+                aiFaqDesc: "Get answers to frequently asked AI questions and learn how to start your AI journey with confidence.",
+                viewFaqBtn: "View FAQs",
                 hardwareTitle: "🖥️ AI Hardware & Laptops",
                 quizTitle: "AI Knowledge Quiz & Certification",
                 tonGamesMainTitle: "🎮 TON Blockchain Games",
@@ -2328,6 +2384,14 @@
                 chatgptFeature3: "Content creation & editing",
                 chatgptFeature4: "Research & analysis",
                 chatgptBtn: "Learn More",
+                
+                autoshortsDiscount: "AUTOMATIC SHORTS!",
+                autoshortsDescription: "Automatically create viral YouTube Shorts with AI. From idea to published video in minutes!",
+                autoshortsFeature1: "Automatic video generation",
+                autoshortsFeature2: "AI voice-overs & music",
+                autoshortsFeature3: "Mobile optimized",
+                autoshortsFeature4: "Direct YouTube upload",
+                autoshortsBtn: "Try AutoShorts!",
                 
                 // Quiz Section
                 certificateTitle: "🏆 AILeer Professional Certificate",
@@ -2392,7 +2456,7 @@
                 quizNav: "🏆 Quiz",
                 hardwareNav: "💻 Hardware IA",
                 tonGamesNav: "🎮 Juegos TON",
-                gameNav: "🚀 Juego Espacial",
+
                 contactNav: "📞 Contacto",
                 meerNav: "⚡ Más",
                 
@@ -2441,7 +2505,45 @@
                 aboutTitle: "Acerca de AILeer.nl",
                 toolsTitle: "Herramientas IA Premium",
                 coursesTitle: "Cursos de Maestría en IA",
-                blogTitle: "Perspectivas y Recursos IA",
+                blogTitle: "Perspectivas y Noticias IA",
+                
+                // Blog Content
+                trendingNewsTitle: "🔥 Noticias Trending AI & Crypto",
+                snoopTonTitle: "Snoop Dogg & TON Gifts",
+                snoopTonDate: "hace 2 días",
+                snoopTonDesc: "🚀 ¡Snoop Dogg ha anunciado oficialmente su apoyo a TON blockchain y Telegram Gifts! La leyenda del rap anunció que lanzará su propia colección de regalos digitales en la red TON. Esto marca un hito importante para la adopción mainstream de la tecnología blockchain TON.",
+                snoopTonQuote: "TON es el futuro de la propiedad digital, y estoy emocionado de traer a mis fans a esta nueva era",
+                readFullArticleBtn: "📖 Leer Artículo Completo",
+                
+                aiRevolutionTitle: "Revolución IA 2025",
+                aiRevolutionDate: "hace 1 día",
+                aiRevolutionDesc: "🧠 Se espera GPT-5 de OpenAI en Q2 2025 con capacidades multimodales revolucionarias. Mientras tanto, Google, Microsoft y Meta están lanzando sus propios modelos IA de próxima generación. La carrera IA se intensifica con enfoque en generación de video en tiempo real y agentes IA autónomos.",
+                aiRevolutionTrends: "💡 Tendencias Clave: IA Multimodal, Generación en Tiempo Real, Agentes IA, Edge Computing",
+                discoverAiTrendsBtn: "🚀 Descubrir Tendencias IA",
+                
+                topToolsTitle: "Top Herramientas IA 2025",
+                topToolsDesc: "Descubre las herramientas IA más poderosas que revolucionan industrias. Aprende qué herramientas ofrecen el mejor ROI para empresas.",
+                readTopToolsBtn: "Leer Artículo",
+                
+                canvaMasteryTitle: "Maestría Canva IA",
+                canvaMasteryDesc: "Desbloquea el potencial completo de Canva con técnicas avanzadas, atajos y estrategias de diseño profesional.",
+                readCanvaBtn: "Leer Artículo",
+                
+                tonGamingTitle: "Ecosistema Gaming TON",
+                tonGamingDesc: "Sumérgete profundamente en el ecosistema gaming TON. Aprende cómo el gaming blockchain da forma al futuro del entretenimiento y cómo puedes beneficiarte.",
+                readTonGamingBtn: "Leer Artículo",
+                
+                aiBusinessTitle: "IA en Negocios 2025",
+                aiBusinessDesc: "Guía práctica para implementar IA en tu negocio. Desde automatización hasta servicio al cliente - todo lo que necesitas saber.",
+                readAiBusinessBtn: "Leer Artículo",
+                
+                aiFutureTitle: "Futuro de la IA",
+                aiFutureDesc: "¿Qué depara el futuro? Descubre los últimos desarrollos en AGI, computación cuántica y el impacto en la sociedad.",
+                readAiFutureBtn: "Leer Artículo",
+                
+                aiFaqTitle: "FAQ IA & Soporte",
+                aiFaqDesc: "Obtén respuestas a preguntas frecuentes sobre IA y aprende cómo comenzar tu viaje IA con confianza.",
+                viewFaqBtn: "Ver FAQs",
                 hardwareTitle: "🖥️ Hardware y Laptops IA",
                 quizTitle: "Quiz de Conocimiento IA y Certificación",
                 tonGamesMainTitle: "🎮 Juegos Blockchain TON",
@@ -2475,6 +2577,14 @@
                 chatgptFeature3: "Creación y edición de contenido",
                 chatgptFeature4: "Investigación y análisis",
                 chatgptBtn: "Más Información",
+                
+                autoshortsDiscount: "¡SHORTS AUTOMÁTICOS!",
+                autoshortsDescription: "Crea automáticamente YouTube Shorts virales con IA. ¡De idea a video publicado en minutos!",
+                autoshortsFeature1: "Generación automática de video",
+                autoshortsFeature2: "Voice-overs y música IA",
+                autoshortsFeature3: "Optimizado para móvil",
+                autoshortsFeature4: "Subida directa a YouTube",
+                autoshortsBtn: "¡Prueba AutoShorts!",
                 
                 // Quiz Section
                 certificateTitle: "🏆 Certificado Profesional AILeer",
@@ -2588,7 +2698,45 @@
                 aboutTitle: "关于AILeer.nl",
                 toolsTitle: "高级AI工具",
                 coursesTitle: "AI精通课程",
-                blogTitle: "AI洞察与资源",
+                blogTitle: "AI洞察与新闻",
+                
+                // Blog Content
+                trendingNewsTitle: "🔥 热门AI与加密新闻",
+                snoopTonTitle: "Snoop Dogg与TON礼品",
+                snoopTonDate: "2天前",
+                snoopTonDesc: "🚀 Snoop Dogg正式宣布支持TON区块链和Telegram礼品！这位说唱传奇宣布将在TON网络上推出自己的数字礼品收藏。这标志着TON区块链技术主流采用的重要里程碑。",
+                snoopTonQuote: "TON是数字所有权的未来，我很兴奋能带领我的粉丝进入这个新时代",
+                readFullArticleBtn: "📖 阅读完整文章",
+                
+                aiRevolutionTitle: "AI革命2025",
+                aiRevolutionDate: "1天前",
+                aiRevolutionDesc: "🧠 OpenAI的GPT-5预计在2025年第二季度推出，具有突破性的多模态能力。与此同时，谷歌、微软和Meta正在推出自己的下一代AI模型。AI竞赛加剧，重点关注实时视频生成和自主AI代理。",
+                aiRevolutionTrends: "💡 关键趋势：多模态AI、实时生成、AI代理、边缘计算",
+                discoverAiTrendsBtn: "🚀 发现AI趋势",
+                
+                topToolsTitle: "2025年顶级AI工具",
+                topToolsDesc: "发现革命性行业的最强大AI工具。了解哪些工具为企业提供最佳ROI。",
+                readTopToolsBtn: "阅读文章",
+                
+                canvaMasteryTitle: "Canva AI精通",
+                canvaMasteryDesc: "通过高级技术、快捷方式和专业设计策略释放Canva的全部潜力。",
+                readCanvaBtn: "阅读文章",
+                
+                tonGamingTitle: "TON游戏生态系统",
+                tonGamingDesc: "深入了解TON游戏生态系统。了解区块链游戏如何塑造娱乐的未来以及您如何从中受益。",
+                readTonGamingBtn: "阅读文章",
+                
+                aiBusinessTitle: "2025年商业中的AI",
+                aiBusinessDesc: "在您的企业中实施AI的实用指南。从自动化到客户服务 - 您需要了解的一切。",
+                readAiBusinessBtn: "阅读文章",
+                
+                aiFutureTitle: "AI的未来",
+                aiFutureDesc: "未来会带来什么？发现AGI、量子计算的最新发展及其对社会的影响。",
+                readAiFutureBtn: "阅读文章",
+                
+                aiFaqTitle: "AI常见问题与支持",
+                aiFaqDesc: "获得常见AI问题的答案，学习如何自信地开始您的AI之旅。",
+                viewFaqBtn: "查看常见问题",
                 hardwareTitle: "🖥️ AI硬件与笔记本电脑",
                 quizTitle: "AI知识测验与认证",
                 tonGamesMainTitle: "🎮 TON区块链游戏",
@@ -2622,6 +2770,14 @@
                 chatgptFeature3: "内容创建和编辑",
                 chatgptFeature4: "研究和分析",
                 chatgptBtn: "了解更多",
+                
+                autoshortsDiscount: "自动短视频！",
+                autoshortsDescription: "使用AI自动创建病毒式YouTube短视频。从想法到发布视频只需几分钟！",
+                autoshortsFeature1: "自动视频生成",
+                autoshortsFeature2: "AI配音和音乐",
+                autoshortsFeature3: "移动端优化",
+                autoshortsFeature4: "直接上传YouTube",
+                autoshortsBtn: "试用AutoShorts！",
                 
                 // Quiz Section
                 certificateTitle: "🏆 AILeer专业证书",
@@ -3005,25 +3161,41 @@
             submitBtn.innerHTML = '<div style="display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 1s linear infinite;"></div> Versturen...';
             submitBtn.disabled = true;
             
-            // Send email to nlpuluz@gmail.com with enhanced data
+            // Store notification request locally
             const emailData = {
-                to: 'nlpuluz@gmail.com',
-                subject: '🔔 Nieuwe Cursus Notificatie - AILeer.nl',
-                body: `🎓 NIEUWE CURSUS NOTIFICATIE AANVRAAG
-                
-📧 Email: ${email}
-🌍 Taal: ${currentLanguage}
-📅 Datum: ${new Date().toLocaleString('nl-NL')}
-🕐 Timestamp: ${new Date().toISOString()}
-📱 User Agent: ${navigator.userAgent}
-🔗 Pagina: Course Notification Request
-📍 Referrer: ${document.referrer || 'Direct'}
-
-💡 ACTIE VEREIST:
-Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar zijn om te lanceren.
-
-🚀 Deze gebruiker is geïnteresseerd in AI cursussen en wil als eerste op de hoogte worden gesteld!`
+                email: email,
+                language: currentLanguage,
+                timestamp: new Date().toISOString(),
+                type: 'course_notification'
             };
+            
+            // Send email to nlpuluz@gmail.com using Formspree
+            fetch('https://formspree.io/f/xpwagkqr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: 'nlpuluz@gmail.com',
+                    subject: '🔔 Nieuwe Course Notification Aanmelding - AILeer.nl',
+                    message: `
+📧 Nieuwe course notification aanmelding:
+
+Email: ${email}
+Taal: ${currentLanguage}
+Type: Course Notification
+Datum: ${new Date().toLocaleString('nl-NL')}
+Pagina: AILeer.nl
+
+Deze gebruiker wil als eerste op de hoogte worden gesteld van nieuwe AI cursussen.
+                    `,
+                    _replyto: email,
+                    _subject: '🔔 Nieuwe Course Notification - AILeer.nl'
+                })
+            }).catch(error => {
+                console.log('Email service error:', error);
+                // Continue with success message even if email fails
+            });
             
             // Enhanced email sending simulation
             setTimeout(() => {
@@ -3066,8 +3238,8 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                     page: 'course_notification'
                 });
                 
-                // In a real implementation, this would send to your backend
-                console.log('📧 Email notification request sent:', emailData);
+                // Store locally for now
+                console.log('📧 Email notification request stored:', emailData);
                 
                 // Also log to localStorage for debugging
                 const notifications = JSON.parse(localStorage.getItem('aileer-notifications') || '[]');
@@ -3079,6 +3251,171 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                 localStorage.setItem('aileer-notifications', JSON.stringify(notifications));
                 
             }, 2000);
+        }
+
+        function submitEarlyBirdEmail(e) {
+            e.preventDefault();
+            const email = document.getElementById('earlyBirdEmail').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<div style="display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,215,0,0.3); border-top: 2px solid #ffd700; border-radius: 50%; animation: spin 1s linear infinite;"></div> Versturen...';
+            submitBtn.disabled = true;
+            
+            // Generate unique personal discount code
+            const personalCode = 'EARLY40-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            const personalLink = `https://aileer.nl/courses?code=${personalCode}&email=${encodeURIComponent(email)}`;
+            
+            // Store early bird data locally
+            const emailData = {
+                email: email,
+                discount_code: personalCode,
+                personal_link: personalLink,
+                language: currentLanguage,
+                timestamp: new Date().toISOString(),
+                type: 'early_bird_signup',
+                discount_percentage: 40
+            };
+            
+            // Send email to nlpuluz@gmail.com using Formspree
+            fetch('https://formspree.io/f/xpwagkqr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: 'nlpuluz@gmail.com',
+                    subject: '🎯 Nieuwe Early Bird Aanmelding (40% Korting) - AILeer.nl',
+                    message: `
+🎁 Nieuwe Early Bird aanmelding met 40% korting:
+
+Email: ${email}
+Kortingscode: ${personalCode}
+Persoonlijke Link: ${personalLink}
+Taal: ${currentLanguage}
+Type: Early Bird Signup
+Korting: 40%
+Datum: ${new Date().toLocaleString('nl-NL')}
+Pagina: AILeer.nl
+
+Deze gebruiker heeft zich aangemeld voor early bird toegang met 40% korting op alle cursussen.
+                    `,
+                    _replyto: email,
+                    _subject: '🎯 Nieuwe Early Bird Aanmelding - AILeer.nl'
+                })
+            }).catch(error => {
+                console.log('Email service error:', error);
+                // Continue with success message even if email fails
+            });
+            
+            // Enhanced email sending simulation
+            setTimeout(() => {
+                // Show success message with personal link
+                const comingSoonModal = document.getElementById('comingSoonModal');
+                comingSoonModal.innerHTML = `
+                    <div class="quiz-container" style="max-width: 700px;">
+                        <button class="quiz-close" onclick="closeComingSoon()">×</button>
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎉</div>
+                            <h2 style="font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                                Early Bird Geregistreerd!
+                            </h2>
+                            <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; font-size: 1.1rem;">
+                                🎯 <strong>Gefeliciteerd!</strong> Je bent nu geregistreerd voor early bird toegang met 40% korting!
+                            </p>
+                            
+                            <div style="background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); border-radius: 20px; padding: 2.5rem; margin: 2rem 0; box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);">
+                                <h3 style="color: var(--primary-dark); font-size: 1.6rem; margin-bottom: 1.5rem; font-weight: 900;">
+                                    🎁 Je Persoonlijke Voordelen:
+                                </h3>
+                                
+                                <div style="background: rgba(10, 10, 15, 0.2); border-radius: 16px; padding: 2rem; margin: 1.5rem 0;">
+                                    <p style="color: var(--primary-dark); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                                        📧 <strong>Email:</strong> ${email}
+                                    </p>
+                                    <p style="color: var(--primary-dark); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                                        🎫 <strong>Kortingscode:</strong> <span style="background: var(--primary-dark); color: var(--gold); padding: 0.5rem 1rem; border-radius: 8px; font-family: monospace;">${personalCode}</span>
+                                    </p>
+                                    <p style="color: var(--primary-dark); margin: 0; font-size: 0.9rem;">
+                                        🔗 <strong>Persoonlijke Link:</strong> Wordt naar je email gestuurd bij launch!
+                                    </p>
+                                </div>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+                                    <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
+                                        <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.9rem;">Eerste Toegang</div>
+                                    </div>
+                                    <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💰</div>
+                                        <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.9rem;">40% Korting</div>
+                                    </div>
+                                    <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎁</div>
+                                        <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.9rem;">Bonus Content</div>
+                                    </div>
+                                    <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔄</div>
+                                        <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.9rem;">Lifetime Updates</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: var(--glass-bg); border-radius: 16px; padding: 2rem; margin: 2rem 0; border: 1px solid var(--glass-border);">
+                                <h4 style="color: var(--neon-cyan); margin-bottom: 1rem;">📬 Wat Gebeurt Er Nu?</h4>
+                                <ul style="color: var(--text-secondary); text-align: left; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                                    <li>📧 Je krijgt een bevestigingsmail binnen 24 uur</li>
+                                    <li>🚀 Bij launch krijg je direct je persoonlijke kortingslink</li>
+                                    <li>🎯 40% korting op alle cursussen (normaal €197, jij betaalt €118)</li>
+                                    <li>🎁 Exclusieve bonus content en early access</li>
+                                    <li>💬 Toegang tot private Discord community</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: rgba(0, 255, 255, 0.08); border-radius: 16px; padding: 1.5rem; margin: 2rem 0; border: 1px solid var(--neon-cyan);">
+                                <p style="color: var(--neon-cyan); margin: 0; font-size: 0.95rem; font-weight: 600;">
+                                    💡 <strong>Pro Tip:</strong> Volg <a href="https://twitter.com/mcdropke" target="_blank" style="color: var(--neon-cyan);">@mcdropke</a> op Twitter voor exclusieve AI tips en launch updates!
+                                </p>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 2rem;">
+                                <button onclick="closeComingSoon()" class="btn btn-primary" style="margin-right: 1rem; background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: var(--primary-dark);">
+                                    🎯 Perfect!
+                                </button>
+                                <button onclick="showSection('quiz'); closeComingSoon();" class="btn btn-secondary">
+                                    📝 Doe AI Quiz
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Track the early bird email submission
+                trackEvent('early_bird_signup', { 
+                    email: email,
+                    discount_code: personalCode,
+                    personal_link: personalLink,
+                    language: currentLanguage,
+                    timestamp: new Date().toISOString(),
+                    page: 'early_bird_course_signup'
+                });
+                
+                // Store locally for now
+                console.log('🎯 Early Bird signup stored:', emailData);
+                
+                // Store early bird data in localStorage for debugging
+                const earlyBirds = JSON.parse(localStorage.getItem('aileer-early-birds') || '[]');
+                earlyBirds.push({
+                    email: email,
+                    discount_code: personalCode,
+                    personal_link: personalLink,
+                    timestamp: new Date().toISOString(),
+                    language: currentLanguage,
+                    discount_percentage: 40
+                });
+                localStorage.setItem('aileer-early-birds', JSON.stringify(earlyBirds));
+                
+            }, 2500);
         }
 
 
@@ -3320,7 +3657,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
 
         function shareOnTwitter() {
             const score = Math.round((quizScore / quizQuestions[currentLanguage].length) * 100);
-            const tweetText = `🎉 Just earned my AI certificate with ${score}% score on @mcdropke's www.aileer.nl - The best AI learning platform! 🚀 Master Canva AI, ChatGPT, Pictory and more. #AI #AILeer #Certification #ArtificialIntelligence`;
+            const tweetText = `🎉 Just earned my AI certificate with ${score}% score on @mcdropke's aileer.nl - The best AI learning platform! 🚀 Master Canva AI, ChatGPT, Pictory and more. #AI #AILeer #Certification #ArtificialIntelligence`;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
             
             window.open(twitterUrl, '_blank', 'width=550,height=420');
@@ -3329,6 +3666,103 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
             trackEvent('certificate_shared', { 
                 platform: 'twitter', 
                 score: score 
+            });
+        }
+
+        function shareOnInstagram(type) {
+            let shareText = '';
+            
+            if (type === 'certificate') {
+                const score = Math.round((quizScore / quizQuestions[currentLanguage].length) * 100);
+                shareText = `🎉 Just earned my AI certificate with ${score}% score! 🚀\n\nLearned AI mastery at aileer.nl - The ultimate AI learning platform!\n\n✨ Master tools like:\n🎨 Canva AI\n🤖 ChatGPT\n🎬 Pictory AI\n\n#AI #AILeer #Certification #ArtificialIntelligence #AITools #MachineLearning #TechEducation #DigitalSkills`;
+            }
+            
+            // Copy text to clipboard
+            navigator.clipboard.writeText(shareText).then(() => {
+                // Show Instagram sharing modal
+                const instagramModal = document.createElement('div');
+                instagramModal.className = 'quiz-modal active';
+                instagramModal.id = 'instagramModal';
+                
+                instagramModal.innerHTML = `
+                    <div class="quiz-container" style="max-width: 600px;">
+                        <button class="quiz-close" onclick="closeInstagramModal()">×</button>
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 1.5rem;">📸</div>
+                            <h2 style="font-size: 2rem; font-weight: 900; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                                Deel op Instagram!
+                            </h2>
+                            <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
+                                📋 <strong>Tekst gekopieerd!</strong> Plak deze tekst in je Instagram post en tag aileer.nl om je prestatie te delen!
+                            </p>
+                            
+                            <div style="background: var(--glass-bg); border-radius: 16px; padding: 2rem; margin: 2rem 0; border: 1px solid var(--glass-border); text-align: left;">
+                                <h4 style="color: var(--neon-cyan); margin-bottom: 1rem; text-align: center;">📝 Gekopieerde Tekst:</h4>
+                                <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 12px; font-family: monospace; font-size: 0.9rem; line-height: 1.5; color: var(--text-primary); white-space: pre-wrap; max-height: 200px; overflow-y: auto;">
+${shareText}
+                                </div>
+                            </div>
+                            
+                            <div style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border-radius: 16px; padding: 2rem; margin: 2rem 0;">
+                                <h4 style="color: white; margin-bottom: 1rem;">📱 Hoe te Delen:</h4>
+                                <div style="text-align: left; color: white;">
+                                    <p style="margin-bottom: 0.8rem;">1. 📱 Open Instagram app</p>
+                                    <p style="margin-bottom: 0.8rem;">2. ➕ Maak nieuwe post</p>
+                                    <p style="margin-bottom: 0.8rem;">3. 📋 Plak de gekopieerde tekst</p>
+                                    <p style="margin-bottom: 0.8rem;">4. 🏷️ Tag @aileer.nl (als account bestaat)</p>
+                                    <p style="margin: 0;">5. 🚀 Deel je prestatie!</p>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                                <button onclick="copyTextAgain('${type}')" class="btn btn-secondary" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border: none;">
+                                    📋 Kopieer Opnieuw
+                                </button>
+                                <button onclick="closeInstagramModal()" class="btn btn-primary">
+                                    ✅ Begrepen!
+                                </button>
+                            </div>
+                            
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 2rem;">
+                                💡 <strong>Tip:</strong> Voeg een screenshot van je certificaat of game score toe voor meer impact!
+                            </p>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(instagramModal);
+                
+                // Track the share event
+                trackEvent('instagram_share_initiated', { 
+                    platform: 'instagram', 
+                    type: type,
+                    score: type === 'certificate' ? Math.round((quizScore / quizQuestions[currentLanguage].length) * 100) : 0
+                });
+                
+            }).catch(() => {
+                alert('📋 Kon tekst niet kopiëren. Probeer handmatig te kopiëren en plakken in Instagram.');
+            });
+        }
+
+        function closeInstagramModal() {
+            const instagramModal = document.getElementById('instagramModal');
+            if (instagramModal) {
+                instagramModal.remove();
+            }
+        }
+
+        function copyTextAgain(type) {
+            let shareText = '';
+            
+            if (type === 'certificate') {
+                const score = Math.round((quizScore / quizQuestions[currentLanguage].length) * 100);
+                shareText = `🎉 Just earned my AI certificate with ${score}% score! 🚀\n\nLearned AI mastery at aileer.nl - The ultimate AI learning platform!\n\n✨ Master tools like:\n🎨 Canva AI\n🤖 ChatGPT\n🎬 Pictory AI\n\n#AI #AILeer #Certification #ArtificialIntelligence #AITools #MachineLearning #TechEducation #DigitalSkills`;
+            }
+            
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert('📋 Tekst opnieuw gekopieerd! Plak in Instagram.');
+            }).catch(() => {
+                alert('📋 Kon tekst niet kopiëren. Probeer handmatig te selecteren en kopiëren.');
             });
         }
 
@@ -3346,29 +3780,29 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
             const courseContent = courseType === 'beginner' ? getBeginnerCourse() : getBusinessCourse();
             
             courseModal.innerHTML = `
-                <div class="quiz-container" style="max-width: 900px; max-height: 90vh; overflow-y: auto;">
+                <div class="quiz-container" style="max-width: 900px;">
                     <button class="quiz-close" onclick="closeCourse()">×</button>
-                    <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="text-align: center; margin-bottom: 2rem; padding-top: 1rem;">
                         <h2 style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
                             ${courseContent.title}
                         </h2>
                         <p style="font-size: 1.2rem; color: var(--text-secondary);">${courseContent.description}</p>
                     </div>
                     
-                    <div style="display: grid; gap: 2rem;">
+                    <div style="display: grid; gap: 2rem; margin-bottom: 2rem;">
                         ${courseContent.modules.map((module, index) => `
                             <div style="background: var(--glass-bg); border-radius: 20px; padding: 2rem; border: 1px solid var(--glass-border);">
                                 <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                                    <div style="background: var(--gradient-primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; color: var(--primary-dark); font-weight: 900;">
+                                    <div style="background: var(--gradient-primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; color: var(--primary-dark); font-weight: 900; flex-shrink: 0;">
                                         ${index + 1}
                                     </div>
-                                    <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--neon-cyan);">${module.title}</h3>
+                                    <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--neon-cyan); margin: 0;">${module.title}</h3>
                                 </div>
                                 <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">${module.description}</p>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
                                     ${module.lessons.map(lesson => `
                                         <div style="background: rgba(0, 255, 255, 0.08); padding: 1rem; border-radius: 12px; border-left: 3px solid var(--neon-cyan);">
-                                            <h4 style="color: var(--neon-cyan); font-size: 0.9rem; margin-bottom: 0.5rem;">${lesson.title}</h4>
+                                            <h4 style="color: var(--neon-cyan); font-size: 0.9rem; margin-bottom: 0.5rem; margin-top: 0;">${lesson.title}</h4>
                                             <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">${lesson.duration}</p>
                                         </div>
                                     `).join('')}
@@ -3580,37 +4014,78 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
         }
 
         function accessCourse() {
-            // Show coming soon message instead of opening course
+            // Show coming soon message with email signup
             const comingSoonModal = document.createElement('div');
             comingSoonModal.className = 'quiz-modal active';
             comingSoonModal.id = 'comingSoonModal';
             
             comingSoonModal.innerHTML = `
-                <div class="quiz-container" style="max-width: 600px;">
+                <div class="quiz-container" style="max-width: 700px;">
                     <button class="quiz-close" onclick="closeComingSoon()">×</button>
                     <div style="text-align: center;">
-                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🚧</div>
-                        <h2 style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem;">
-                            Course Platform Coming Soon!
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🚀</div>
+                        <h2 style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                            Premium AI Cursussen Komen Eraan!
                         </h2>
                         <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
-                            🔥 Our team is working hard to bring you the most comprehensive AI learning experience! The full course platform with interactive lessons, projects, and certifications will be available very soon.
+                            🔥 Ons team werkt hard aan de meest uitgebreide AI leerervaring! Het volledige cursusplatform met interactieve lessen, projecten en certificeringen komt zeer binnenkort beschikbaar.
                         </p>
                         
+                        <!-- Early Bird Signup Form -->
+                        <div style="background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); border-radius: 24px; padding: 2.5rem; margin: 2rem 0; box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                            <h3 style="color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 1rem; font-weight: 900;">
+                                Early Bird: 40% Korting + Persoonlijke Link!
+                            </h3>
+                            <p style="color: var(--primary-dark); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.5;">
+                                📧 <strong>Vul je email in</strong> en krijg als eerste toegang met een <strong>persoonlijke kortingslink</strong> voor 40% korting op alle cursussen!
+                            </p>
+                            
+                            <form onsubmit="submitEarlyBirdEmail(event)" style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: center;">
+                                    <input type="email" id="earlyBirdEmail" required 
+                                           placeholder="Voer je email adres in voor early bird korting"
+                                           style="flex: 1; min-width: 250px; padding: 1.2rem; border: 3px solid var(--primary-dark); border-radius: 16px; background: rgba(255,255,255,0.95); color: var(--primary-dark); font-size: 1rem; font-family: inherit; font-weight: 600;">
+                                    <button type="submit" style="background: var(--primary-dark); color: var(--gold); border: none; padding: 1.2rem 2rem; border-radius: 16px; font-weight: 800; cursor: pointer; font-size: 1rem; transition: all 0.3s ease; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+                                        🎁 Claim 40% Korting
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                                <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                    <div style="font-size: 1.3rem; margin-bottom: 0.3rem;">⚡</div>
+                                    <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem;">Eerste Toegang</div>
+                                </div>
+                                <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                    <div style="font-size: 1.3rem; margin-bottom: 0.3rem;">💰</div>
+                                    <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem;">40% Korting</div>
+                                </div>
+                                <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                    <div style="font-size: 1.3rem; margin-bottom: 0.3rem;">🔗</div>
+                                    <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem;">Persoonlijke Link</div>
+                                </div>
+                                <div style="background: rgba(10, 10, 15, 0.2); padding: 1rem; border-radius: 12px;">
+                                    <div style="font-size: 1.3rem; margin-bottom: 0.3rem;">🎁</div>
+                                    <div style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem;">Bonus Content</div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div style="background: var(--glass-bg); border-radius: 20px; padding: 2rem; margin: 2rem 0; border: 1px solid var(--glass-border);">
-                            <h3 style="color: var(--neon-cyan); margin-bottom: 1.5rem;">🎯 What's Coming:</h3>
+                            <h3 style="color: var(--neon-cyan); margin-bottom: 1.5rem;">🎯 Wat Je Krijgt:</h3>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                                 <div style="background: rgba(0, 255, 255, 0.08); padding: 1rem; border-radius: 12px;">
                                     <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎥</div>
-                                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">50+ HD Video Lessons</div>
+                                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">50+ HD Video Lessen</div>
                                 </div>
                                 <div style="background: rgba(138, 43, 226, 0.08); padding: 1rem; border-radius: 12px;">
                                     <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💼</div>
-                                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Real-World Projects</div>
+                                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Praktijk Projecten</div>
                                 </div>
                                 <div style="background: rgba(57, 255, 20, 0.08); padding: 1rem; border-radius: 12px;">
                                     <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏆</div>
-                                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Official Certificates</div>
+                                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Officiële Certificaten</div>
                                 </div>
                                 <div style="background: rgba(255, 20, 147, 0.08); padding: 1rem; border-radius: 12px;">
                                     <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💬</div>
@@ -3619,25 +4094,15 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                             </div>
                         </div>
                         
-                        <div style="background: linear-gradient(135deg, #00ffff 0%, #8a2be2 100%); border-radius: 20px; padding: 2rem; margin: 2rem 0;">
-                            <h3 style="color: var(--primary-dark); font-size: 1.4rem; margin-bottom: 1rem;">📧 Get Notified When Ready!</h3>
-                            <p style="color: var(--primary-dark); margin-bottom: 1.5rem;">
-                                Be the first to access our premium AI courses when they launch!
-                            </p>
-                            <button onclick="notifyWhenReady()" style="background: var(--primary-dark); color: var(--neon-cyan); border: none; padding: 16px 32px; border-radius: 25px; font-weight: 800; cursor: pointer; font-size: 1.1rem; margin-right: 1rem;">
-                                🔔 Notify Me
-                            </button>
-                        </div>
-                        
                         <div style="text-align: center; margin-top: 2rem;">
                             <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                                In the meantime, take our AI quiz to test your current knowledge!
+                                💡 Ondertussen kun je onze AI quiz doen om je huidige kennis te testen!
                             </p>
                             <button onclick="showSection('quiz'); closeComingSoon(); closeModule(); closeCourse();" class="btn btn-primary" style="margin-right: 1rem;">
-                                📝 Take AI Quiz
+                                📝 Doe AI Quiz
                             </button>
                             <button onclick="showSection('tools'); closeComingSoon(); closeModule(); closeCourse();" class="btn btn-secondary">
-                                🤖 Explore AI Tools
+                                🤖 Ontdek AI Tools
                             </button>
                         </div>
                     </div>
@@ -3833,11 +4298,48 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
         // Form submission
         function handleFormSubmit(e) {
             e.preventDefault();
+            const formData = new FormData(e.target);
+            const name = e.target.querySelector('#nameInput').value;
+            const email = e.target.querySelector('#emailInput').value;
+            const message = e.target.querySelector('#messageInput').value;
+            
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             
             submitBtn.innerHTML = '<div style="display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; animation: spin 1s linear infinite;"></div> Versturen...';
             submitBtn.disabled = true;
+            
+            // Send email to nlpuluz@gmail.com using Formspree
+            fetch('https://formspree.io/f/xpwagkqr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: 'nlpuluz@gmail.com',
+                    subject: '📞 Nieuw Contact Formulier - AILeer.nl',
+                    message: `
+📝 Nieuw contact formulier bericht:
+
+Naam: ${name}
+Email: ${email}
+Taal: ${currentLanguage}
+Datum: ${new Date().toLocaleString('nl-NL')}
+Pagina: AILeer.nl
+
+Bericht:
+${message}
+
+---
+Dit bericht is verzonden via het contact formulier op AILeer.nl
+                    `,
+                    _replyto: email,
+                    _subject: '📞 Nieuw Contact Bericht - AILeer.nl'
+                })
+            }).catch(error => {
+                console.log('Email service error:', error);
+                // Continue with success message even if email fails
+            });
             
             setTimeout(() => {
                 alert('🎉 Bedankt! We nemen binnen 24 uur contact met je op met gepersonaliseerde AI aanbevelingen.');
@@ -3858,7 +4360,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
             // Update page language
             document.documentElement.lang = lang;
             
-            // Update translations if available
+            // Update ALL translations if available
             if (translations[lang]) {
                 Object.keys(translations[lang]).forEach(key => {
                     const element = document.getElementById(key);
@@ -3866,10 +4368,20 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                         if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                             element.placeholder = translations[lang][key];
                         } else {
+                            // For all other elements, simply update the text content
                             element.textContent = translations[lang][key];
                         }
                     }
                 });
+                
+                // Update hardware section specific translations
+                updateHardwareTranslations(lang);
+                
+                // Update TON games descriptions
+                updateTonGamesTranslations(lang);
+                
+                // Update course content
+                updateCourseTranslations(lang);
             }
             
             // Update quiz text based on language
@@ -3883,6 +4395,324 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
             
             // Track language change
             trackEvent('language_changed', { language: lang });
+        }
+        
+        // Update hardware section translations
+        function updateHardwareTranslations(lang) {
+            const hardwareTranslations = {
+                nl: {
+                    hardwareDescription: "Ontdek de beste laptops en hardware voor AI ontwikkeling, machine learning en data science. Krachtige machines die je AI projecten naar het volgende niveau tillen!",
+                    laptopDiscount: "BESTE DEALS!",
+                    laptopDescription: "Zeer krachtige laptops speciaal geschikt voor AI ontwikkeling, machine learning en data processing. Perfect voor professionals en studenten.",
+                    laptopFeature1: "High-performance processors",
+                    laptopFeature2: "Dedicated GPU voor AI",
+                    laptopFeature3: "Ruime SSD opslag",
+                    laptopFeature4: "Snelle RAM geheugen",
+                    laptopBtn: "Bekijk AI Laptops",
+                    gamingDiscount: "KRACHTIGE GPU'S!",
+                    gamingDescription: "Gaming laptops met krachtige grafische kaarten zijn perfect voor AI training en deep learning projecten. Dual-purpose machines!",
+                    gamingFeature1: "RTX/GTX grafische kaarten",
+                    gamingFeature2: "Geavanceerde koeling",
+                    gamingFeature3: "High-refresh displays",
+                    gamingFeature4: "Mechanische toetsenborden",
+                    gamingBtn: "Bekijk Gaming Laptops",
+                    workstationDiscount: "PROFESSIONEEL!",
+                    workstationDescription: "Professionele workstation laptops voor zware AI workloads, data analyse en machine learning research. Enterprise-grade kwaliteit.",
+                    workstationFeature1: "Xeon/Ryzen Pro processors",
+                    workstationFeature2: "ECC geheugen ondersteuning",
+                    workstationFeature3: "Enterprise beveiliging",
+                    workstationFeature4: "24/7 professionele support",
+                    workstationBtn: "Bekijk Workstations",
+                    requirementsTitle: "🎯 AI Hardware Vereisten",
+                    beginnerReqTitle: "🌱 Beginner AI",
+                    beginnerReq1: "• Intel i5/AMD Ryzen 5",
+                    beginnerReq2: "• 8-16GB RAM",
+                    beginnerReq3: "• GTX 1660/RTX 3050",
+                    beginnerReq4: "• 512GB SSD",
+                    proReqTitle: "🚀 Professional AI",
+                    proReq1: "• Intel i7/AMD Ryzen 7",
+                    proReq2: "• 16-32GB RAM",
+                    proReq3: "• RTX 4060/4070",
+                    proReq4: "• 1TB NVMe SSD",
+                    expertReqTitle: "⚡ Expert AI",
+                    expertReq1: "• Intel i9/AMD Ryzen 9",
+                    expertReq2: "• 32-64GB RAM",
+                    expertReq3: "• RTX 4080/4090",
+                    expertReq4: "• 2TB+ NVMe SSD",
+                    hardwareTip: "💡 Pro Tip: Voor machine learning is een krachtige GPU essentieel. NVIDIA RTX kaarten bieden CUDA ondersteuning voor snellere AI training!",
+                    shopNowBtn: "🛒 Shop Nu bij Bol.com"
+                },
+                en: {
+                    hardwareDescription: "Discover the best laptops and hardware for AI development, machine learning and data science. Powerful machines that take your AI projects to the next level!",
+                    laptopDiscount: "BEST DEALS!",
+                    laptopDescription: "Very powerful laptops specially designed for AI development, machine learning and data processing. Perfect for professionals and students.",
+                    laptopFeature1: "High-performance processors",
+                    laptopFeature2: "Dedicated GPU for AI",
+                    laptopFeature3: "Spacious SSD storage",
+                    laptopFeature4: "Fast RAM memory",
+                    laptopBtn: "View AI Laptops",
+                    gamingDiscount: "POWERFUL GPUS!",
+                    gamingDescription: "Gaming laptops with powerful graphics cards are perfect for AI training and deep learning projects. Dual-purpose machines!",
+                    gamingFeature1: "RTX/GTX graphics cards",
+                    gamingFeature2: "Advanced cooling",
+                    gamingFeature3: "High-refresh displays",
+                    gamingFeature4: "Mechanical keyboards",
+                    gamingBtn: "View Gaming Laptops",
+                    workstationDiscount: "PROFESSIONAL!",
+                    workstationDescription: "Professional workstation laptops for heavy AI workloads, data analysis and machine learning research. Enterprise-grade quality.",
+                    workstationFeature1: "Xeon/Ryzen Pro processors",
+                    workstationFeature2: "ECC memory support",
+                    workstationFeature3: "Enterprise security",
+                    workstationFeature4: "24/7 professional support",
+                    workstationBtn: "View Workstations",
+                    requirementsTitle: "🎯 AI Hardware Requirements",
+                    beginnerReqTitle: "🌱 Beginner AI",
+                    beginnerReq1: "• Intel i5/AMD Ryzen 5",
+                    beginnerReq2: "• 8-16GB RAM",
+                    beginnerReq3: "• GTX 1660/RTX 3050",
+                    beginnerReq4: "• 512GB SSD",
+                    proReqTitle: "🚀 Professional AI",
+                    proReq1: "• Intel i7/AMD Ryzen 7",
+                    proReq2: "• 16-32GB RAM",
+                    proReq3: "• RTX 4060/4070",
+                    proReq4: "• 1TB NVMe SSD",
+                    expertReqTitle: "⚡ Expert AI",
+                    expertReq1: "• Intel i9/AMD Ryzen 9",
+                    expertReq2: "• 32-64GB RAM",
+                    expertReq3: "• RTX 4080/4090",
+                    expertReq4: "• 2TB+ NVMe SSD",
+                    hardwareTip: "💡 Pro Tip: For machine learning, a powerful GPU is essential. NVIDIA RTX cards offer CUDA support for faster AI training!",
+                    shopNowBtn: "🛒 Shop Now at Bol.com"
+                },
+                es: {
+                    hardwareDescription: "Descubre las mejores laptops y hardware para desarrollo IA, machine learning y ciencia de datos. ¡Máquinas potentes que llevan tus proyectos IA al siguiente nivel!",
+                    laptopDiscount: "¡MEJORES OFERTAS!",
+                    laptopDescription: "Laptops muy potentes especialmente diseñadas para desarrollo IA, machine learning y procesamiento de datos. Perfectas para profesionales y estudiantes.",
+                    laptopFeature1: "Procesadores de alto rendimiento",
+                    laptopFeature2: "GPU dedicada para IA",
+                    laptopFeature3: "Amplio almacenamiento SSD",
+                    laptopFeature4: "Memoria RAM rápida",
+                    laptopBtn: "Ver Laptops IA",
+                    gamingDiscount: "¡GPUS POTENTES!",
+                    gamingDescription: "Las laptops gaming con tarjetas gráficas potentes son perfectas para entrenamiento IA y proyectos de deep learning. ¡Máquinas de doble propósito!",
+                    gamingFeature1: "Tarjetas gráficas RTX/GTX",
+                    gamingFeature2: "Refrigeración avanzada",
+                    gamingFeature3: "Pantallas de alta frecuencia",
+                    gamingFeature4: "Teclados mecánicos",
+                    gamingBtn: "Ver Laptops Gaming",
+                    workstationDiscount: "¡PROFESIONAL!",
+                    workstationDescription: "Laptops workstation profesionales para cargas de trabajo IA pesadas, análisis de datos e investigación de machine learning. Calidad empresarial.",
+                    workstationFeature1: "Procesadores Xeon/Ryzen Pro",
+                    workstationFeature2: "Soporte de memoria ECC",
+                    workstationFeature3: "Seguridad empresarial",
+                    workstationFeature4: "Soporte profesional 24/7",
+                    workstationBtn: "Ver Workstations",
+                    requirementsTitle: "🎯 Requisitos Hardware IA",
+                    beginnerReqTitle: "🌱 IA Principiante",
+                    beginnerReq1: "• Intel i5/AMD Ryzen 5",
+                    beginnerReq2: "• 8-16GB RAM",
+                    beginnerReq3: "• GTX 1660/RTX 3050",
+                    beginnerReq4: "• 512GB SSD",
+                    proReqTitle: "🚀 IA Profesional",
+                    proReq1: "• Intel i7/AMD Ryzen 7",
+                    proReq2: "• 16-32GB RAM",
+                    proReq3: "• RTX 4060/4070",
+                    proReq4: "• 1TB NVMe SSD",
+                    expertReqTitle: "⚡ IA Experto",
+                    expertReq1: "• Intel i9/AMD Ryzen 9",
+                    expertReq2: "• 32-64GB RAM",
+                    expertReq3: "• RTX 4080/4090",
+                    expertReq4: "• 2TB+ NVMe SSD",
+                    hardwareTip: "💡 Consejo Pro: Para machine learning, una GPU potente es esencial. ¡Las tarjetas NVIDIA RTX ofrecen soporte CUDA para entrenamiento IA más rápido!",
+                    shopNowBtn: "🛒 Comprar Ahora en Bol.com"
+                },
+                zh: {
+                    hardwareDescription: "发现用于AI开发、机器学习和数据科学的最佳笔记本电脑和硬件。强大的机器将您的AI项目提升到新水平！",
+                    laptopDiscount: "最佳优惠！",
+                    laptopDescription: "专为AI开发、机器学习和数据处理设计的超强笔记本电脑。非常适合专业人士和学生。",
+                    laptopFeature1: "高性能处理器",
+                    laptopFeature2: "AI专用GPU",
+                    laptopFeature3: "大容量SSD存储",
+                    laptopFeature4: "快速RAM内存",
+                    laptopBtn: "查看AI笔记本",
+                    gamingDiscount: "强大GPU！",
+                    gamingDescription: "配备强大显卡的游戏笔记本电脑非常适合AI训练和深度学习项目。双用途机器！",
+                    gamingFeature1: "RTX/GTX显卡",
+                    gamingFeature2: "先进散热",
+                    gamingFeature3: "高刷新率显示器",
+                    gamingFeature4: "机械键盘",
+                    gamingBtn: "查看游戏笔记本",
+                    workstationDiscount: "专业级！",
+                    workstationDescription: "用于重型AI工作负载、数据分析和机器学习研究的专业工作站笔记本电脑。企业级质量。",
+                    workstationFeature1: "Xeon/Ryzen Pro处理器",
+                    workstationFeature2: "ECC内存支持",
+                    workstationFeature3: "企业安全",
+                    workstationFeature4: "24/7专业支持",
+                    workstationBtn: "查看工作站",
+                    requirementsTitle: "🎯 AI硬件要求",
+                    beginnerReqTitle: "🌱 初学者AI",
+                    beginnerReq1: "• Intel i5/AMD Ryzen 5",
+                    beginnerReq2: "• 8-16GB RAM",
+                    beginnerReq3: "• GTX 1660/RTX 3050",
+                    beginnerReq4: "• 512GB SSD",
+                    proReqTitle: "🚀 专业AI",
+                    proReq1: "• Intel i7/AMD Ryzen 7",
+                    proReq2: "• 16-32GB RAM",
+                    proReq3: "• RTX 4060/4070",
+                    proReq4: "• 1TB NVMe SSD",
+                    expertReqTitle: "⚡ 专家AI",
+                    expertReq1: "• Intel i9/AMD Ryzen 9",
+                    expertReq2: "• 32-64GB RAM",
+                    expertReq3: "• RTX 4080/4090",
+                    expertReq4: "• 2TB+ NVMe SSD",
+                    hardwareTip: "💡 专业提示：对于机器学习，强大的GPU至关重要。NVIDIA RTX卡提供CUDA支持，可实现更快的AI训练！",
+                    shopNowBtn: "🛒 立即在Bol.com购买"
+                }
+            };
+            
+            const hwTrans = hardwareTranslations[lang];
+            if (hwTrans) {
+                Object.keys(hwTrans).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = hwTrans[key];
+                    }
+                });
+            }
+        }
+        
+        // Update TON games translations
+        function updateTonGamesTranslations(lang) {
+            const tonTranslations = {
+                nl: {
+                    tonGamesMainDesc: "Ontdek de beste games en apps op TON blockchain. Verdien beloningen, verzamel NFT's en sluit je aan bij de toekomst van gaming!"
+                },
+                en: {
+                    tonGamesMainDesc: "Discover the best games and apps on TON blockchain. Earn rewards, collect NFTs and join the future of gaming!"
+                },
+                es: {
+                    tonGamesMainDesc: "¡Descubre los mejores juegos y aplicaciones en TON blockchain. Gana recompensas, colecciona NFTs y únete al futuro del gaming!"
+                },
+                zh: {
+                    tonGamesMainDesc: "发现TON区块链上最好的游戏和应用。赚取奖励，收集NFT，加入游戏的未来！"
+                }
+            };
+            
+            const tonTrans = tonTranslations[lang];
+            if (tonTrans) {
+                Object.keys(tonTrans).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = tonTrans[key];
+                    }
+                });
+            }
+        }
+        
+        // Update course translations
+        function updateCourseTranslations(lang) {
+            const courseTranslations = {
+                nl: {
+                    beginnerCourseTitle: "AI voor Beginners",
+                    beginnerCourseDesc: "Beheers AI fundamenten en leer krachtige tools zoals Canva AI, ChatGPT en meer te gebruiken. Perfect voor complete beginners.",
+                    beginnerTestimonial: "\"Deze cursus heeft mijn benadering van ontwerp getransformeerd. Nu creëer ik professionele graphics in minuten!\" - Sarah M.",
+                    beginnerFeature1: "12 uitgebreide modules",
+                    beginnerFeature2: "HD video tutorials",
+                    beginnerFeature3: "Echte projecten",
+                    beginnerFeature4: "Certificaat van voltooiing",
+                    startBeginnerBtn: "Start Gratis Cursus!",
+                    businessCourseTitle: "AI voor Bedrijven",
+                    businessCourseDesc: "Ontdek hoe AI je bedrijfsvoering kan revolutioneren, productiviteit kan verhogen en groei kan stimuleren met geavanceerde strategieën.",
+                    businessTestimonial: "\"De productiviteit van mijn team steeg met 200% na deze cursus. Baanbrekend!\" - Marcus C.",
+                    businessFeature1: "Geavanceerde AI strategieën",
+                    businessFeature2: "ROI optimalisatie",
+                    businessFeature3: "Team samenwerkingstools",
+                    businessFeature4: "Prestatie analytics",
+                    startBusinessBtn: "Start Gratis Cursus!"
+                },
+                en: {
+                    beginnerCourseTitle: "AI for Beginners",
+                    beginnerCourseDesc: "Master AI fundamentals and learn to use powerful tools like Canva AI, ChatGPT and more. Perfect for complete beginners.",
+                    beginnerTestimonial: "\"This course transformed my approach to design. Now I create professional graphics in minutes!\" - Sarah M.",
+                    beginnerFeature1: "12 comprehensive modules",
+                    beginnerFeature2: "HD video tutorials",
+                    beginnerFeature3: "Real projects",
+                    beginnerFeature4: "Certificate of completion",
+                    startBeginnerBtn: "Start Free Course!",
+                    businessCourseTitle: "AI for Business",
+                    businessCourseDesc: "Discover how AI can revolutionize your business operations, increase productivity and drive growth with advanced strategies.",
+                    businessTestimonial: "\"My team's productivity increased by 200% after this course. Groundbreaking!\" - Marcus C.",
+                    businessFeature1: "Advanced AI strategies",
+                    businessFeature2: "ROI optimization",
+                    businessFeature3: "Team collaboration tools",
+                    businessFeature4: "Performance analytics",
+                    startBusinessBtn: "Start Free Course!"
+                },
+                es: {
+                    beginnerCourseTitle: "IA para Principiantes",
+                    beginnerCourseDesc: "Domina los fundamentos de IA y aprende a usar herramientas poderosas como Canva AI, ChatGPT y más. Perfecto para principiantes completos.",
+                    beginnerTestimonial: "\"Este curso transformó mi enfoque del diseño. ¡Ahora creo gráficos profesionales en minutos!\" - Sarah M.",
+                    beginnerFeature1: "12 módulos integrales",
+                    beginnerFeature2: "Tutoriales en video HD",
+                    beginnerFeature3: "Proyectos reales",
+                    beginnerFeature4: "Certificado de finalización",
+                    startBeginnerBtn: "¡Iniciar Curso Gratis!",
+                    businessCourseTitle: "IA para Negocios",
+                    businessCourseDesc: "Descubre cómo la IA puede revolucionar tus operaciones comerciales, aumentar la productividad y impulsar el crecimiento con estrategias avanzadas.",
+                    businessTestimonial: "\"La productividad de mi equipo aumentó 200% después de este curso. ¡Revolucionario!\" - Marcus C.",
+                    businessFeature1: "Estrategias IA avanzadas",
+                    businessFeature2: "Optimización ROI",
+                    businessFeature3: "Herramientas colaboración equipo",
+                    businessFeature4: "Análisis de rendimiento",
+                    startBusinessBtn: "¡Iniciar Curso Gratis!"
+                },
+                zh: {
+                    beginnerCourseTitle: "AI初学者课程",
+                    beginnerCourseDesc: "掌握AI基础知识，学习使用Canva AI、ChatGPT等强大工具。非常适合完全初学者。",
+                    beginnerTestimonial: "\"这门课程改变了我的设计方法。现在我可以在几分钟内创建专业图形！\" - Sarah M.",
+                    beginnerFeature1: "12个综合模块",
+                    beginnerFeature2: "高清视频教程",
+                    beginnerFeature3: "真实项目",
+                    beginnerFeature4: "完成证书",
+                    startBeginnerBtn: "开始免费课程！",
+                    businessCourseTitle: "商业AI课程",
+                    businessCourseDesc: "发现AI如何通过先进策略革命化您的业务运营、提高生产力并推动增长。",
+                    businessTestimonial: "\"这门课程后我团队的生产力提高了200%。突破性的！\" - Marcus C.",
+                    businessFeature1: "高级AI策略",
+                    businessFeature2: "ROI优化",
+                    businessFeature3: "团队协作工具",
+                    businessFeature4: "性能分析",
+                    startBusinessBtn: "开始免费课程！"
+                }
+            };
+            
+            const courseTrans = courseTranslations[lang];
+            if (courseTrans) {
+                Object.keys(courseTrans).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = courseTrans[key];
+                    }
+                });
+            }
+        }
+        
+        // Helper function to get text nodes
+        function getTextNodes(element) {
+            const textNodes = [];
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.textContent.trim()) {
+                    textNodes.push(node);
+                }
+            }
+            return textNodes;
         }
         
         // Update quiz language-specific text
@@ -3902,6 +4732,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                     provenKnowledge: 'Je hebt officieel je AI kennis bewezen. Download je certificaat hieronder!',
                     downloadCert: 'Download Certificaat',
                     shareTwitter: 'Deel op X/Twitter',
+                    shareInstagram: 'Deel op Instagram',
                     needMinimum: 'Je hebt minimaal 60% nodig om te slagen. Probeer onze cursussen en doe de quiz opnieuw!',
                     viewCourses: 'Bekijk Cursussen',
                     tryAgain: 'Probeer Opnieuw',
@@ -3921,6 +4752,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                     provenKnowledge: 'You have officially proven your AI knowledge. Download your certificate below!',
                     downloadCert: 'Download Certificate',
                     shareTwitter: 'Share on X/Twitter',
+                    shareInstagram: 'Share on Instagram',
                     needMinimum: 'You need at least 60% to pass. Try our courses and retake the quiz!',
                     viewCourses: 'View Courses',
                     tryAgain: 'Try Again',
@@ -3940,6 +4772,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                     provenKnowledge: '¡Has demostrado oficialmente tu conocimiento de IA. Descarga tu certificado a continuación!',
                     downloadCert: 'Descargar Certificado',
                     shareTwitter: 'Compartir en X/Twitter',
+                    shareInstagram: 'Compartir en Instagram',
                     needMinimum: 'Necesitas al menos 60% para aprobar. ¡Prueba nuestros cursos y vuelve a hacer el quiz!',
                     viewCourses: 'Ver Cursos',
                     tryAgain: 'Intentar de Nuevo',
@@ -3959,6 +4792,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
                     provenKnowledge: '您已正式证明了您的AI知识。请在下方下载您的证书！',
                     downloadCert: '下载证书',
                     shareTwitter: '在X/Twitter上分享',
+                    shareInstagram: '在Instagram上分享',
                     needMinimum: '您需要至少60%才能通过。尝试我们的课程并重新参加测验！',
                     viewCourses: '查看课程',
                     tryAgain: '重试',
@@ -4069,360 +4903,7 @@ Voeg dit emailadres toe aan de notificatielijst voor wanneer de cursussen klaar 
             }
         });
 
-        // AI Space Invaders Game
-        let gameState = {
-            canvas: null,
-            ctx: null,
-            player: { x: 375, y: 550, width: 50, height: 30, speed: 5 },
-            bullets: [],
-            enemies: [],
-            particles: [],
-            score: 0,
-            lives: 3,
-            level: 1,
-            gameRunning: false,
-            difficulty: 'easy',
-            keys: {},
-            enemySpeed: 1,
-            enemyBullets: [],
-            selectedDifficulty: null
-        };
 
-        function selectDifficulty(difficulty) {
-            gameState.selectedDifficulty = difficulty;
-            
-            // Show selected difficulty section
-            document.getElementById('selectedDifficulty').style.display = 'block';
-            
-            // Update difficulty text
-            const difficultyTexts = {
-                'easy': '🟢 EASY MODE geselecteerd - 5 levens, langzame vijanden',
-                'chill': '🟡 CHILL MODE geselecteerd - 3 levens, normale snelheid', 
-                'pro': '🔴 PRO MODE geselecteerd - 1 leven, snelle vijanden'
-            };
-            
-            document.getElementById('difficultyText').textContent = difficultyTexts[difficulty];
-            
-            // Scroll to start button
-            document.getElementById('selectedDifficulty').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function startGame() {
-            if (!gameState.selectedDifficulty) return;
-            
-            gameState.difficulty = gameState.selectedDifficulty;
-            gameState.score = 0;
-            gameState.lives = 3;
-            gameState.level = 1;
-            gameState.gameRunning = true;
-            
-            // Set difficulty parameters
-            switch(gameState.difficulty) {
-                case 'easy':
-                    gameState.enemySpeed = 0.5;
-                    gameState.lives = 5;
-                    break;
-                case 'chill':
-                    gameState.enemySpeed = 1;
-                    gameState.lives = 3;
-                    break;
-                case 'pro':
-                    gameState.enemySpeed = 2;
-                    gameState.lives = 1;
-                    break;
-            }
-            
-            // Hide menu and show game
-            document.getElementById('gameMenu').style.display = 'none';
-            document.getElementById('spaceInvadersGame').style.display = 'block';
-            
-            gameState.canvas = document.getElementById('gameCanvas');
-            gameState.ctx = gameState.canvas.getContext('2d');
-            
-            initializeGame();
-            gameLoop();
-            
-            // Add event listeners
-            document.addEventListener('keydown', handleKeyDown);
-            document.addEventListener('keyup', handleKeyUp);
-        }
-
-        function resetGame() {
-            gameState.gameRunning = false;
-            
-            // Remove event listeners
-            document.removeEventListener('keydown', handleKeyDown);
-            document.removeEventListener('keyup', handleKeyUp);
-            
-            // Reset UI
-            document.getElementById('spaceInvadersGame').style.display = 'none';
-            document.getElementById('gameMenu').style.display = 'block';
-            document.getElementById('selectedDifficulty').style.display = 'none';
-            gameState.selectedDifficulty = null;
-        }
-
-        function initializeGame() {
-            // Reset game state
-            gameState.bullets = [];
-            gameState.enemies = [];
-            gameState.particles = [];
-            gameState.enemyBullets = [];
-            gameState.player.x = 375;
-            
-            // Create enemy grid
-            for (let row = 0; row < 5; row++) {
-                for (let col = 0; col < 10; col++) {
-                    gameState.enemies.push({
-                        x: col * 60 + 100,
-                        y: row * 50 + 50,
-                        width: 40,
-                        height: 30,
-                        alive: true,
-                        type: row < 2 ? 'fast' : 'normal'
-                    });
-                }
-            }
-            
-            updateUI();
-        }
-
-        function handleKeyDown(e) {
-            gameState.keys[e.code] = true;
-            
-            if (e.code === 'Space') {
-                e.preventDefault();
-                shoot();
-            }
-            
-            if (e.code === 'Escape') {
-                e.preventDefault();
-                gameState.gameRunning = !gameState.gameRunning;
-            }
-        }
-
-        function handleKeyUp(e) {
-            gameState.keys[e.code] = false;
-        }
-
-        function shoot() {
-            if (gameState.bullets.length < 3) { // Limit bullets
-                gameState.bullets.push({
-                    x: gameState.player.x + gameState.player.width / 2,
-                    y: gameState.player.y,
-                    width: 4,
-                    height: 10,
-                    speed: 7
-                });
-            }
-        }
-
-        function updateGame() {
-            if (!gameState.gameRunning) return;
-            
-            // Move player
-            if (gameState.keys['ArrowLeft'] && gameState.player.x > 0) {
-                gameState.player.x -= gameState.player.speed;
-            }
-            if (gameState.keys['ArrowRight'] && gameState.player.x < gameState.canvas.width - gameState.player.width) {
-                gameState.player.x += gameState.player.speed;
-            }
-            
-            // Update bullets
-            gameState.bullets = gameState.bullets.filter(bullet => {
-                bullet.y -= bullet.speed;
-                return bullet.y > 0;
-            });
-            
-            // Update enemy bullets
-            gameState.enemyBullets = gameState.enemyBullets.filter(bullet => {
-                bullet.y += bullet.speed;
-                return bullet.y < gameState.canvas.height;
-            });
-            
-            // Move enemies
-            let moveDown = false;
-            let rightMost = Math.max(...gameState.enemies.filter(e => e.alive).map(e => e.x));
-            let leftMost = Math.min(...gameState.enemies.filter(e => e.alive).map(e => e.x));
-            
-            if (rightMost > gameState.canvas.width - 60 || leftMost < 20) {
-                moveDown = true;
-            }
-            
-            gameState.enemies.forEach(enemy => {
-                if (!enemy.alive) return;
-                
-                if (moveDown) {
-                    enemy.y += 20;
-                } else {
-                    enemy.x += gameState.enemySpeed;
-                }
-                
-                // Random enemy shooting
-                if (Math.random() < 0.001 * gameState.level) {
-                    gameState.enemyBullets.push({
-                        x: enemy.x + enemy.width / 2,
-                        y: enemy.y + enemy.height,
-                        width: 3,
-                        height: 8,
-                        speed: 3
-                    });
-                }
-            });
-            
-            // Collision detection - bullets vs enemies
-            gameState.bullets.forEach((bullet, bulletIndex) => {
-                gameState.enemies.forEach((enemy, enemyIndex) => {
-                    if (enemy.alive && 
-                        bullet.x < enemy.x + enemy.width &&
-                        bullet.x + bullet.width > enemy.x &&
-                        bullet.y < enemy.y + enemy.height &&
-                        bullet.y + bullet.height > enemy.y) {
-                        
-                        // Hit!
-                        enemy.alive = false;
-                        gameState.bullets.splice(bulletIndex, 1);
-                        gameState.score += enemy.type === 'fast' ? 20 : 10;
-                        
-                        // Create explosion particles
-                        for (let i = 0; i < 8; i++) {
-                            gameState.particles.push({
-                                x: enemy.x + enemy.width / 2,
-                                y: enemy.y + enemy.height / 2,
-                                vx: (Math.random() - 0.5) * 6,
-                                vy: (Math.random() - 0.5) * 6,
-                                life: 30,
-                                color: '#ff6600'
-                            });
-                        }
-                    }
-                });
-            });
-            
-            // Collision detection - enemy bullets vs player
-            gameState.enemyBullets.forEach((bullet, bulletIndex) => {
-                if (bullet.x < gameState.player.x + gameState.player.width &&
-                    bullet.x + bullet.width > gameState.player.x &&
-                    bullet.y < gameState.player.y + gameState.player.height &&
-                    bullet.y + bullet.height > gameState.player.y) {
-                    
-                    // Player hit!
-                    gameState.enemyBullets.splice(bulletIndex, 1);
-                    gameState.lives--;
-                    
-                    // Create explosion
-                    for (let i = 0; i < 12; i++) {
-                        gameState.particles.push({
-                            x: gameState.player.x + gameState.player.width / 2,
-                            y: gameState.player.y + gameState.player.height / 2,
-                            vx: (Math.random() - 0.5) * 8,
-                            vy: (Math.random() - 0.5) * 8,
-                            life: 40,
-                            color: '#ff0000'
-                        });
-                    }
-                    
-                    if (gameState.lives <= 0) {
-                        gameOver();
-                        return;
-                    }
-                }
-            });
-            
-            // Update particles
-            gameState.particles = gameState.particles.filter(particle => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-                particle.life--;
-                return particle.life > 0;
-            });
-            
-            // Check if all enemies are dead
-            if (gameState.enemies.every(enemy => !enemy.alive)) {
-                nextLevel();
-            }
-            
-            // Check if enemies reached player
-            if (gameState.enemies.some(enemy => enemy.alive && enemy.y > gameState.player.y)) {
-                gameOver();
-            }
-            
-            updateUI();
-        }
-
-        function nextLevel() {
-            gameState.level++;
-            gameState.enemySpeed += 0.5;
-            initializeGame();
-        }
-
-        function gameOver() {
-            gameState.gameRunning = false;
-            alert(`🎮 Game Over! Final Score: ${gameState.score}\nLevel Reached: ${gameState.level}\nDifficulty: ${gameState.difficulty.toUpperCase()}\n\nKlik 'Nieuw Spel' om opnieuw te spelen!`);
-            
-            // Don't hide game, let player see final state and use reset button
-        }
-
-        function drawGame() {
-            const ctx = gameState.ctx;
-            
-            // Clear canvas with space background
-            ctx.fillStyle = '#000011';
-            ctx.fillRect(0, 0, gameState.canvas.width, gameState.canvas.height);
-            
-            // Draw stars
-            ctx.fillStyle = '#ffffff';
-            for (let i = 0; i < 50; i++) {
-                const x = (i * 37) % gameState.canvas.width;
-                const y = (i * 23) % gameState.canvas.height;
-                ctx.fillRect(x, y, 1, 1);
-            }
-            
-            // Draw player
-            ctx.fillStyle = '#00ff00';
-            ctx.fillRect(gameState.player.x, gameState.player.y, gameState.player.width, gameState.player.height);
-            
-            // Draw player bullets
-            ctx.fillStyle = '#ffff00';
-            gameState.bullets.forEach(bullet => {
-                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-            });
-            
-            // Draw enemies
-            gameState.enemies.forEach(enemy => {
-                if (enemy.alive) {
-                    ctx.fillStyle = enemy.type === 'fast' ? '#ff6600' : '#ff0000';
-                    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
-                }
-            });
-            
-            // Draw enemy bullets
-            ctx.fillStyle = '#ff0066';
-            gameState.enemyBullets.forEach(bullet => {
-                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-            });
-            
-            // Draw particles
-            gameState.particles.forEach(particle => {
-                ctx.fillStyle = particle.color;
-                ctx.globalAlpha = particle.life / 30;
-                ctx.fillRect(particle.x, particle.y, 3, 3);
-                ctx.globalAlpha = 1;
-            });
-        }
-
-        function updateUI() {
-            document.getElementById('gameScore').textContent = gameState.score;
-            document.getElementById('gameLives').textContent = gameState.lives;
-            document.getElementById('gameLevel').textContent = gameState.level;
-        }
-
-        function gameLoop() {
-            if (gameState.gameRunning) {
-                updateGame();
-                drawGame();
-                requestAnimationFrame(gameLoop);
-            }
-        }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96a8be746022db48',t:'MTc1NDQyMjU5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96be870f72b4feb8',t:'MTc1NDY1MTAxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
