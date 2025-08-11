@@ -111,7 +111,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
     <!-- Advanced Schema.org Structured Data for Maximum SEO -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="mainStructuredData">
     {
         "@context": "https://schema.org",
         "@graph": [
@@ -189,9 +189,10 @@
             },
             {
                 "@type": "Course",
-                "@id": "https://aileer.nl/#ai-course",
+                "@id": "https://aileer.nl/ai-cursussen#ai-course",
                 "name": "AI Tools Masterclass - Canva AI, ChatGPT, Pictory",
                 "description": "Uitgebreide AI cursus voor beginners en professionals. Leer Canva AI, ChatGPT, Pictory, AutoShorts AI en meer.",
+                "url": "https://aileer.nl/ai-cursussen",
                 "provider": {
                     "@id": "https://aileer.nl/#organization"
                 },
@@ -223,8 +224,9 @@
             },
             {
                 "@type": "SoftwareApplication",
-                "@id": "https://aileer.nl/#platform",
-                "name": "AILeer.nl Platform",
+                "@id": "https://aileer.nl/ai-tools#platform",
+                "name": "AILeer.nl AI Tools Platform",
+                "url": "https://aileer.nl/ai-tools",
                 "applicationCategory": "EducationalApplication",
                 "operatingSystem": "Web Browser",
                 "offers": {
@@ -237,6 +239,30 @@
                     "ratingValue": "4.9",
                     "reviewCount": "3421"
                 }
+            },
+            {
+                "@type": "Quiz",
+                "@id": "https://aileer.nl/ai-quiz-certificering#quiz",
+                "name": "AI Knowledge Certification Quiz",
+                "url": "https://aileer.nl/ai-quiz-certificering",
+                "description": "Test je AI kennis en verdien een officieel certificaat. 5 vragen over Canva AI, ChatGPT, Pictory en meer.",
+                "about": "Artificial Intelligence Tools",
+                "educationalLevel": "beginner",
+                "timeRequired": "PT10M",
+                "provider": {
+                    "@id": "https://aileer.nl/#organization"
+                }
+            },
+            {
+                "@type": "Blog",
+                "@id": "https://aileer.nl/ai-nieuws-blog#blog",
+                "name": "AI Nieuws & Inzichten Blog",
+                "url": "https://aileer.nl/ai-nieuws-blog",
+                "description": "Live AI nieuws van top bronnen: OpenAI, Google AI, NVIDIA. ChatGPT updates, AI crypto trends, TON blockchain nieuws.",
+                "publisher": {
+                    "@id": "https://aileer.nl/#organization"
+                },
+                "inLanguage": "nl-NL"
             },
             {
                 "@type": "FAQPage",
@@ -270,6 +296,10 @@
             }
         ]
     }
+    </script>
+    
+    <!-- Dynamic Structured Data for Subpages -->
+    <script type="application/ld+json" id="dynamicStructuredData">
     </script>
     
     <!-- Performance Optimized Font Loading -->
@@ -3651,6 +3681,9 @@
             initializeScrollEffects();
             initializeInteractiveElements();
             
+            // Initialize routing system
+            initializeRouting();
+            
             // Set language with smooth initialization
             updateQuizLanguage(language); // Initialize quiz texts first
             changeLanguage(language);
@@ -4250,6 +4283,173 @@
                         sourceIcon: feed.icon,
                         sourceColor: feed.color
                     }
+                ],
+                // Crypto/Blockchain AI Mock Articles
+                coindesk: [
+                    {
+                        title: "AI Trading Bots Generate $2.3 Billion in Crypto Volume as Institutional Adoption Soars",
+                        link: "https://www.coindesk.com/markets/ai-trading-bots-institutional-adoption-2024",
+                        description: "Artificial intelligence-powered trading algorithms are revolutionizing cryptocurrency markets, with institutional investors increasingly relying on AI for portfolio management and risk assessment. The technology shows 40% better performance than traditional trading methods.",
+                        pubDate: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    },
+                    {
+                        title: "Ethereum Layer 2 Integrates AI Oracle Network for Smart Contract Automation",
+                        link: "https://www.coindesk.com/tech/ethereum-l2-ai-oracle-integration",
+                        description: "A major Ethereum Layer 2 solution announces integration with AI-powered oracle networks, enabling smart contracts to make autonomous decisions based on real-world data analysis. This could transform DeFi protocols and automated trading strategies.",
+                        pubDate: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                cointelegraph: [
+                    {
+                        title: "ChatGPT Creator OpenAI Explores Blockchain Integration for AI Model Verification",
+                        link: "https://cointelegraph.com/news/openai-blockchain-ai-model-verification",
+                        description: "OpenAI is reportedly investigating blockchain technology to create immutable records of AI model training and outputs, addressing concerns about AI authenticity and deepfakes. The system could revolutionize AI transparency and trust.",
+                        pubDate: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    },
+                    {
+                        title: "Decentralized AI Network Launches with $50M Token Sale for Distributed Computing",
+                        link: "https://cointelegraph.com/news/decentralized-ai-network-token-sale-distributed-computing",
+                        description: "A new blockchain project aims to democratize AI computing power by creating a decentralized network where users can contribute GPU resources and earn tokens. The platform promises to make AI training more accessible and cost-effective.",
+                        pubDate: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                decrypt: [
+                    {
+                        title: "AI-Powered NFT Generator Creates $10M in Sales Using Machine Learning Art",
+                        link: "https://decrypt.co/ai-nft-generator-machine-learning-art-sales",
+                        description: "An innovative AI system that generates unique NFT artwork using advanced machine learning algorithms has generated over $10 million in sales. The platform allows users to create personalized digital art by simply describing their vision.",
+                        pubDate: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    },
+                    {
+                        title: "Crypto Wallet Integrates AI Assistant for Automated DeFi Strategy Optimization",
+                        link: "https://decrypt.co/crypto-wallet-ai-assistant-defi-optimization",
+                        description: "A popular cryptocurrency wallet has integrated an AI assistant that automatically optimizes users' DeFi strategies, rebalances portfolios, and identifies yield farming opportunities. The AI analyzes market conditions 24/7 to maximize returns.",
+                        pubDate: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                ton_blog: [
+                    {
+                        title: "TON Blockchain Launches AI-Powered Smart Contract Auditing System",
+                        link: "https://blog.ton.org/ai-smart-contract-auditing-system-launch",
+                        description: "The Open Network introduces an innovative AI system that automatically audits smart contracts for security vulnerabilities and optimization opportunities. This breakthrough technology makes TON the safest blockchain for developers and users.",
+                        pubDate: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    },
+                    {
+                        title: "TON Gaming Ecosystem Integrates AI NPCs for Enhanced Player Experience",
+                        link: "https://blog.ton.org/ton-gaming-ai-npcs-integration",
+                        description: "TON-based games now feature AI-powered non-player characters that adapt to player behavior and create dynamic storylines. This innovation positions TON as the leading blockchain for next-generation gaming experiences.",
+                        pubDate: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                telegram_blog: [
+                    {
+                        title: "Telegram Introduces AI-Powered Message Translation for 100+ Languages",
+                        link: "https://telegram.org/blog/ai-message-translation-feature",
+                        description: "Telegram's new AI translation feature breaks down language barriers by instantly translating messages in over 100 languages. The system uses advanced neural networks to maintain context and cultural nuances in translations.",
+                        pubDate: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    },
+                    {
+                        title: "Telegram Bots Get AI Upgrade: Natural Language Processing for Better User Interaction",
+                        link: "https://telegram.org/blog/telegram-bots-ai-nlp-upgrade",
+                        description: "Telegram bot developers can now integrate advanced AI capabilities, enabling bots to understand natural language, context, and user intent. This update transforms simple bots into intelligent assistants.",
+                        pubDate: new Date(Date.now() - 9 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                theblock: [
+                    {
+                        title: "Institutional Crypto Fund Deploys AI for $500M Portfolio Management Strategy",
+                        link: "https://www.theblock.co/institutional-crypto-fund-ai-portfolio-management",
+                        description: "A major institutional cryptocurrency fund announces the deployment of AI algorithms to manage its $500 million portfolio, using machine learning to predict market trends and optimize asset allocation across DeFi protocols.",
+                        pubDate: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                blockworks: [
+                    {
+                        title: "AI-Driven Yield Farming Protocol Launches with Automated Strategy Optimization",
+                        link: "https://blockworks.co/ai-yield-farming-protocol-automated-optimization",
+                        description: "A new DeFi protocol uses artificial intelligence to automatically optimize yield farming strategies, dynamically moving funds between different protocols to maximize returns while minimizing risk exposure.",
+                        pubDate: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                aicoinnews: [
+                    {
+                        title: "AI Coin Market Cap Surpasses $50 Billion as Institutional Interest Grows",
+                        link: "https://www.aicoinnews.com/ai-coin-market-cap-50-billion-institutional-interest",
+                        description: "The combined market capitalization of AI-focused cryptocurrencies has exceeded $50 billion, driven by institutional adoption and the integration of artificial intelligence in blockchain applications.",
+                        pubDate: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                cryptoslate: [
+                    {
+                        title: "Machine Learning Algorithm Predicts Crypto Market Movements with 85% Accuracy",
+                        link: "https://cryptoslate.com/machine-learning-crypto-market-prediction-accuracy",
+                        description: "Researchers develop a machine learning system that can predict cryptocurrency price movements with 85% accuracy by analyzing social sentiment, on-chain data, and market indicators in real-time.",
+                        pubDate: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                defipulse: [
+                    {
+                        title: "AI-Powered DeFi Insurance Protocol Reduces Claims Processing Time by 90%",
+                        link: "https://www.defipulse.com/blog/ai-defi-insurance-claims-processing",
+                        description: "A revolutionary DeFi insurance protocol uses AI to automatically assess and process claims, reducing processing time from weeks to hours while maintaining high accuracy in fraud detection.",
+                        pubDate: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
+                ],
+                web3news: [
+                    {
+                        title: "Web3 Social Platform Integrates AI Content Moderation for Decentralized Communities",
+                        link: "https://web3.news/web3-social-platform-ai-content-moderation",
+                        description: "A leading Web3 social platform implements AI-powered content moderation that respects decentralization principles while effectively filtering harmful content and maintaining community standards.",
+                        pubDate: new Date(Date.now() - 10 * 60 * 60 * 1000).toISOString(),
+                        source: feed.name,
+                        sourceIcon: feed.icon,
+                        sourceColor: feed.color
+                    }
                 ]
             };
             
@@ -4694,15 +4894,349 @@
             });
         }
 
-        // Section navigation
-        function showSection(sectionName) {
+        // Enhanced routing system for real subpages
+        function showSection(sectionName, updateURL = true) {
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
             
-            document.getElementById(sectionName).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Update URL and page title
+                if (updateURL) {
+                    updatePageURL(sectionName);
+                }
+                
+                // Track page view
+                trackPageView(sectionName);
+                
+                // Update meta description based on section
+                updateMetaDescription(sectionName);
+                
+                // Load section-specific content if needed
+                loadSectionContent(sectionName);
+            }
+        }
+
+        // Update URL and page title for each section
+        function updatePageURL(sectionName) {
+            const pageData = {
+                home: {
+                    url: '/',
+                    title: 'AILeer.nl - #1 AI Tools Platform Nederland | Canva AI, ChatGPT, Pictory Kortingen 2025',
+                    description: '🚀 Nederland\'s beste AI leerplatform! Leer Canva AI, ChatGPT, Pictory + krijg tot 40% korting. Gratis AI cursussen, certificering & TON blockchain games. 50.000+ tevreden gebruikers!'
+                },
+                tools: {
+                    url: '/ai-tools',
+                    title: 'Premium AI Tools met Kortingen | Canva AI, ChatGPT, Pictory, AutoShorts - AILeer.nl',
+                    description: '🤖 Ontdek premium AI tools met exclusieve kortingen! Canva AI (30% korting), ChatGPT Plus, Pictory AI (25% korting), AutoShorts AI. Direct werkende links + tutorials.'
+                },
+                courses: {
+                    url: '/ai-cursussen',
+                    title: 'AI Cursussen & Training | Leer Canva AI, ChatGPT, Pictory - Gratis Certificering',
+                    description: '📚 Gratis AI cursussen voor beginners & professionals. Leer Canva AI, ChatGPT, Pictory met hands-on projecten. Officiële certificering + lifetime toegang.'
+                },
+                quiz: {
+                    url: '/ai-quiz-certificering',
+                    title: 'AI Knowledge Quiz & Gratis Certificering | Test Je AI Vaardigheden - AILeer.nl',
+                    description: '🏆 Test je AI kennis met onze gratis quiz! Verdien officieel AILeer certificaat. 5 vragen, 10 minuten, deel op LinkedIn. Start je AI certificering nu!'
+                },
+                blog: {
+                    url: '/ai-nieuws-blog',
+                    title: 'AI Nieuws & Blog | Live AI Trends, ChatGPT Updates, Crypto AI - AILeer.nl',
+                    description: '📝 Live AI nieuws van top bronnen: OpenAI, Google AI, NVIDIA. ChatGPT updates, AI crypto trends, TON blockchain nieuws. Dagelijks verse AI inzichten!'
+                },
+                hardware: {
+                    url: '/ai-hardware-laptops',
+                    title: 'Beste AI Hardware & Laptops 2025 | Gaming Laptops voor Machine Learning',
+                    description: '💻 Ontdek de beste laptops voor AI ontwikkeling! Gaming laptops, workstations, AI hardware requirements. RTX 4090, CUDA support, machine learning specs.'
+                },
+                'ton-games': {
+                    url: '/ton-blockchain-games',
+                    title: 'TON Blockchain Games | Gratis Crypto Games in Telegram - Verdien NFTs',
+                    description: '🎮 Speel TON blockchain games in Telegram! Boinkers, Catizen, DuckyGram, Lions. Verdien gratis crypto & NFTs. Alleen Telegram nodig - geen downloads!'
+                },
+                about: {
+                    url: '/over-aileer',
+                    title: 'Over AILeer.nl | Nederland\'s #1 AI Educatie Platform - 50.000+ Gebruikers',
+                    description: 'ℹ️ Leer meer over AILeer.nl - Nederland\'s premium AI educatieplatform. 50.000+ tevreden gebruikers, 4.9/5 sterren, expert AI training sinds 2024.'
+                },
+                contact: {
+                    url: '/contact',
+                    title: 'Contact AILeer.nl | AI Expert Ondersteuning & Gepersonaliseerde Aanbevelingen',
+                    description: '📞 Neem contact op met AILeer.nl voor AI tool aanbevelingen, ondersteuning en partnerships. Nederland, wereldwijd actief. @mcdropke op Twitter.'
+                }
+            };
+
+            const page = pageData[sectionName] || pageData.home;
+            
+            // Update URL without page reload
+            const newURL = window.location.origin + page.url;
+            window.history.pushState({ section: sectionName }, page.title, newURL);
+            
+            // Update page title
+            document.title = page.title;
+            
+            // Update meta description
+            let metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute('content', page.description);
+            }
+            
+            // Update Open Graph tags
+            let ogTitle = document.querySelector('meta[property="og:title"]');
+            let ogDesc = document.querySelector('meta[property="og:description"]');
+            let ogUrl = document.querySelector('meta[property="og:url"]');
+            
+            if (ogTitle) ogTitle.setAttribute('content', page.title);
+            if (ogDesc) ogDesc.setAttribute('content', page.description);
+            if (ogUrl) ogUrl.setAttribute('content', newURL);
+            
+            // Update Twitter Card tags
+            let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+            let twitterDesc = document.querySelector('meta[name="twitter:description"]');
+            let twitterUrl = document.querySelector('meta[name="twitter:url"]');
+            
+            if (twitterTitle) twitterTitle.setAttribute('content', page.title);
+            if (twitterDesc) twitterDesc.setAttribute('content', page.description);
+            if (twitterUrl) twitterUrl.setAttribute('content', newURL);
+            
+            // Update canonical URL
+            let canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) {
+                canonical.setAttribute('href', newURL);
+            }
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.section) {
+                showSection(event.state.section, false);
+            } else {
+                // Parse URL to determine section
+                const section = getSectionFromURL();
+                showSection(section, false);
+            }
+        });
+
+        // Get section from current URL
+        function getSectionFromURL() {
+            const path = window.location.pathname;
+            const urlToSection = {
+                '/': 'home',
+                '/ai-tools': 'tools',
+                '/ai-cursussen': 'courses',
+                '/ai-quiz-certificering': 'quiz',
+                '/ai-nieuws-blog': 'blog',
+                '/ai-hardware-laptops': 'hardware',
+                '/ton-blockchain-games': 'ton-games',
+                '/over-aileer': 'about',
+                '/contact': 'contact'
+            };
+            
+            return urlToSection[path] || 'home';
+        }
+
+        // Initialize routing on page load
+        function initializeRouting() {
+            const section = getSectionFromURL();
+            showSection(section, false);
+        }
+
+        // Update meta description based on section
+        function updateMetaDescription(sectionName) {
+            const descriptions = {
+                home: '🚀 Nederland\'s beste AI leerplatform! Leer Canva AI, ChatGPT, Pictory + krijg tot 40% korting. Gratis AI cursussen, certificering & TON blockchain games.',
+                tools: '🤖 Premium AI tools met exclusieve kortingen! Canva AI (30% korting), ChatGPT Plus, Pictory AI (25% korting), AutoShorts AI. Direct werkende links.',
+                courses: '📚 Gratis AI cursussen voor beginners & professionals. Leer Canva AI, ChatGPT, Pictory met hands-on projecten. Officiële certificering.',
+                quiz: '🏆 Test je AI kennis met onze gratis quiz! Verdien officieel AILeer certificaat. 5 vragen, 10 minuten, deel op LinkedIn.',
+                blog: '📝 Live AI nieuws van top bronnen: OpenAI, Google AI, NVIDIA. ChatGPT updates, AI crypto trends, TON blockchain nieuws.',
+                hardware: '💻 Beste laptops voor AI ontwikkeling! Gaming laptops, workstations, AI hardware requirements. RTX 4090, CUDA support.',
+                'ton-games': '🎮 Speel TON blockchain games in Telegram! Boinkers, Catizen, DuckyGram. Verdien gratis crypto & NFTs. Alleen Telegram nodig.',
+                about: 'ℹ️ Nederland\'s premium AI educatieplatform. 50.000+ tevreden gebruikers, 4.9/5 sterren, expert AI training sinds 2024.',
+                contact: '📞 Contact AILeer.nl voor AI tool aanbevelingen, ondersteuning en partnerships. Nederland, wereldwijd actief.'
+            };
+            
+            const description = descriptions[sectionName] || descriptions.home;
+            let metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute('content', description);
+            }
+        }
+
+        // Load section-specific content
+        function loadSectionContent(sectionName) {
+            // Update structured data for current section
+            updateStructuredData(sectionName);
+            
+            switch(sectionName) {
+                case 'blog':
+                    // Auto-load RSS feeds when visiting blog
+                    setTimeout(() => {
+                        if (document.querySelector('.section.active').id === 'blog') {
+                            loadFeed('all');
+                        }
+                    }, 1000);
+                    break;
+                case 'tools':
+                    // Track tools page visit
+                    trackEvent('tools_page_visit', { timestamp: new Date().toISOString() });
+                    break;
+                case 'quiz':
+                    // Prepare quiz content
+                    updateQuizLanguage(currentLanguage);
+                    break;
+            }
+        }
+
+        // Update structured data for specific sections
+        function updateStructuredData(sectionName) {
+            const dynamicScript = document.getElementById('dynamicStructuredData');
+            let structuredData = {};
+            
+            switch(sectionName) {
+                case 'tools':
+                    structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        "name": "Premium AI Tools met Kortingen",
+                        "description": "Ontdek premium AI tools met exclusieve kortingen! Canva AI, ChatGPT Plus, Pictory AI, AutoShorts AI.",
+                        "url": "https://aileer.nl/ai-tools",
+                        "mainEntity": [
+                            {
+                                "@type": "SoftwareApplication",
+                                "name": "Canva AI",
+                                "applicationCategory": "DesignApplication",
+                                "offers": {
+                                    "@type": "Offer",
+                                    "priceSpecification": {
+                                        "@type": "PriceSpecification",
+                                        "price": "30% korting",
+                                        "priceCurrency": "EUR"
+                                    }
+                                }
+                            },
+                            {
+                                "@type": "SoftwareApplication", 
+                                "name": "AutoShorts AI",
+                                "applicationCategory": "VideoApplication",
+                                "description": "Automatisch virale YouTube Shorts maken met AI"
+                            }
+                        ]
+                    };
+                    break;
+                    
+                case 'courses':
+                    structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "EducationalOrganization",
+                        "name": "AILeer.nl AI Cursussen",
+                        "url": "https://aileer.nl/ai-cursussen",
+                        "description": "Gratis AI cursussen voor beginners & professionals. Leer Canva AI, ChatGPT, Pictory.",
+                        "hasOfferCatalog": {
+                            "@type": "OfferCatalog",
+                            "name": "AI Cursussen Catalogus",
+                            "itemListElement": [
+                                {
+                                    "@type": "Course",
+                                    "name": "AI voor Beginners",
+                                    "description": "Beheers AI fundamenten en leer krachtige tools",
+                                    "provider": {
+                                        "@type": "Organization",
+                                        "name": "AILeer.nl"
+                                    }
+                                }
+                            ]
+                        }
+                    };
+                    break;
+                    
+                case 'hardware':
+                    structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        "name": "Beste AI Hardware & Laptops 2025",
+                        "description": "Ontdek de beste laptops voor AI ontwikkeling! Gaming laptops, workstations, AI hardware requirements.",
+                        "url": "https://aileer.nl/ai-hardware-laptops",
+                        "about": {
+                            "@type": "Thing",
+                            "name": "AI Hardware Requirements"
+                        }
+                    };
+                    break;
+                    
+                case 'ton-games':
+                    structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        "name": "TON Blockchain Games",
+                        "description": "Speel TON blockchain games in Telegram! Verdien gratis crypto & NFTs.",
+                        "url": "https://aileer.nl/ton-blockchain-games",
+                        "about": {
+                            "@type": "Thing",
+                            "name": "TON Blockchain Gaming"
+                        },
+                        "mainEntity": [
+                            {
+                                "@type": "Game",
+                                "name": "Boinkers",
+                                "gameLocation": "Telegram",
+                                "description": "Gratis social game waar je munten farmt"
+                            },
+                            {
+                                "@type": "Game", 
+                                "name": "Catizen",
+                                "gameLocation": "Telegram",
+                                "description": "Kat-thema game in het Bombie ecosysteem"
+                            }
+                        ]
+                    };
+                    break;
+                    
+                case 'blog':
+                    structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "Blog",
+                        "name": "AI Nieuws & Blog",
+                        "description": "Live AI nieuws van top bronnen: OpenAI, Google AI, NVIDIA.",
+                        "url": "https://aileer.nl/ai-nieuws-blog",
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "AILeer.nl"
+                        },
+                        "inLanguage": "nl-NL"
+                    };
+                    break;
+                    
+                case 'contact':
+                    structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "ContactPage",
+                        "name": "Contact AILeer.nl",
+                        "description": "Neem contact op met AILeer.nl voor AI tool aanbevelingen en ondersteuning.",
+                        "url": "https://aileer.nl/contact",
+                        "mainEntity": {
+                            "@type": "Organization",
+                            "name": "AILeer.nl",
+                            "contactPoint": {
+                                "@type": "ContactPoint",
+                                "contactType": "customer service",
+                                "availableLanguage": ["Dutch", "English", "Spanish", "Chinese"]
+                            }
+                        }
+                    };
+                    break;
+            }
+            
+            if (Object.keys(structuredData).length > 0) {
+                dynamicScript.textContent = JSON.stringify(structuredData, null, 2);
+            } else {
+                dynamicScript.textContent = '';
+            }
         }
 
         // Quiz functionality
@@ -6254,5 +6788,5 @@ ${shareText}
 
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96d7579b33f39fc9',t:'MTc1NDkxMTIxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96d7b13f14b833d0',t:'MTc1NDkxNDg4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
