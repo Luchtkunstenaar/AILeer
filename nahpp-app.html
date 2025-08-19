@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAHpp - Cognitieve Assistent voor NAH | AIleer.nl</title>
+    <meta name="description" content="NAHpp - Professionele cognitieve assistent voor mensen met Niet-Aangeboren Hersenletsel. Ontwikkeld door Paul Evers na 13 jaar NAH ervaring.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-green: #059669;
+            --light-blue: #dbeafe;
+            --light-green: #d1fae5;
+            --soft-gray: #f8fafc;
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-light: #64748b;
+            --border-light: #e2e8f0;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--soft-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            background: var(--light-blue);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: var(--light-blue);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 2rem 0;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Dashboard */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-subtitle {
+            color: var(--text-medium);
+            font-size: 1rem;
+        }
+
+        .next-appointment {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .appointment-label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .appointment-info {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .appointment-time {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-btn {
+            background: var(--white);
+            border: 2px solid var(--border-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-btn:hover {
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .action-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-desc {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        /* Recorder Page */
+        .recorder-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .recorder-status {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .record-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: none;
+            background: var(--danger);
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .record-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .record-btn.recording {
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .recording-time {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .recording-status {
+            color: var(--text-medium);
+        }
+
+        /* Agenda Page */
+        .agenda-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .agenda-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            background: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .view-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .view-btn.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .appointment-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .appointment-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .appointment-datetime {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+
+        .travel-info {
+            background: var(--light-green);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .travel-time {
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-details {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        /* NAHpp Page */
+        .nahpp-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nahpp-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .nahpp-subtitle {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .concept-notice {
+            background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .founder-story {
+            background: var(--light-blue);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .founder-name {
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .story-text {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .new-conversation-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .new-conversation-btn:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+
+        .conversations-list {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .conversations-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .conversation-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .conversation-item:hover {
+            background: var(--soft-gray);
+        }
+
+        .conversation-item:last-child {
+            border-bottom: none;
+        }
+
+        .conversation-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .conversation-date {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+
+        /* Settings Page */
+        .settings-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .settings-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-weight: 500;
+        }
+
+        .setting-desc {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--border-light);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .toggle-switch.active {
+            background: var(--primary-blue);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: var(--white);
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(26px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            transition: right 0.3s;
+            z-index: 200;
+            padding: 2rem 1rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .menu-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-medium);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item:hover {
+            background: var(--soft-gray);
+        }
+
+        .menu-item.active {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .menu-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+
+            .page-section {
+                padding: 1rem 0;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .action-btn {
+                padding: 1.25rem;
+            }
+
+            .action-icon {
+                font-size: 2rem;
+            }
+
+            .dashboard-title {
+                font-size: 1.5rem;
+            }
+
+            .nahpp-title {
+                font-size: 1.7rem;
+            }
+
+            .appointment-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-light: #000000;
+                --text-medium: #000000;
+            }
+        }
+
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-light);
+            border-radius: 50%;
+            border-top-color: var(--primary-blue);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: var(--light-green);
+            color: var(--primary-green);
+            border: 1px solid var(--success);
+        }
+
+        .message.error {
+            background: #fef2f2;
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo-icon">AI</div>
+                <div class="logo-text">AIleer.nl</div>
+            </div>
+            <button class="menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-header">
+            <div class="menu-title">Menu</div>
+            <button class="close-menu" onclick="closeMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="menu-item active" onclick="showPage('dashboard')">
+            <i class="fas fa-home menu-icon"></i>
+            <span>Dashboard</span>
+        </div>
+        <div class="menu-item" onclick="showPage('recorder')">
+            <i class="fas fa-microphone menu-icon"></i>
+            <span>Gesprek Opnemen</span>
+        </div>
+        <div class="menu-item" onclick="showPage('agenda')">
+            <i class="fas fa-calendar menu-icon"></i>
+            <span>Mijn Agenda</span>
+        </div>
+        <div class="menu-item" onclick="showPage('nahpp')">
+            <i class="fas fa-edit menu-icon"></i>
+            <span>NAHpp</span>
+        </div>
+        <div class="menu-item" onclick="showPage('energy')">
+            <i class="fas fa-battery-half menu-icon"></i>
+            <span>Energie Monitor</span>
+        </div>
+        <div class="menu-item" onclick="showPage('support')">
+            <i class="fas fa-users menu-icon"></i>
+            <span>Thuisfront</span>
+        </div>
+        <div class="menu-item" onclick="showPage('settings')">
+            <i class="fas fa-cog menu-icon"></i>
+            <span>Instellingen</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Dashboard Page -->
+        <section id="dashboard" class="page-section active">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Welkom bij NAHpp</h1>
+                <p class="dashboard-subtitle">Jouw persoonlijke cognitieve assistent</p>
+            </div>
+
+            <div class="concept-notice">
+                🚧 Dit is nog maar een concept. De echte versie wordt veel beter, maar we zoeken investeerders!
+            </div>
+
+            <div class="next-appointment">
+                <div class="appointment-label">Eerstvolgende afspraak</div>
+                <div class="appointment-info">Logopedie - Ziekenhuis Centrum</div>
+                <div class="appointment-time">Morgen om 14:30</div>
+            </div>
+
+            <div class="quick-actions">
+                <div class="action-btn" onclick="showPage('recorder')">
+                    <div class="action-icon">🗣️</div>
+                    <div class="action-title">Start Gesprek</div>
+                    <div class="action-desc">Neem gesprek op en krijg automatisch verslag</div>
+                </div>
+
+                <div class="action-btn" onclick="showPage('agenda')">
+                    <div class="action-icon">🗓️</div>
+                    <div class="action-title">Mijn Agenda</div>
+                    <div class="action-desc">Bekijk afspraken en reisplanning</div>
+                </div>
+
+                <div class="action-btn" onclick="showPage('nahpp')">
+                    <div class="action-icon">✍️</div>
+                    <div class="action-title">NAHpp</div>
+                    <div class="action-desc">Bereid gesprekken voor en maak notities</div>
+                </div>
+
+                <div class="action-btn" onclick="showPage('energy')">
+                    <div class="action-icon">🔋</div>
+                    <div class="action-title">Energie Monitor</div>
+                    <div class="action-desc">Volg je energieniveau en vermijd overprikkeling</div>
+                </div>
+
+                <div class="action-btn" onclick="showPage('support')">
+                    <div class="action-icon">👥</div>
+                    <div class="action-title">Thuisfront</div>
+                    <div class="action-desc">Deel informatie met je ondersteuningsnetwerk</div>
+                </div>
+
+                <div class="action-btn" onclick="showPage('settings')">
+                    <div class="action-icon">⚙️</div>
+                    <div class="action-title">Instellingen</div>
+                    <div class="action-desc">Pas de app aan naar jouw behoeften</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recorder Page -->
+        <section id="recorder" class="page-section">
+            <div class="recorder-container">
+                <h2 class="dashboard-title">Gesprek Opnemen</h2>
+                
+                <div class="recorder-status">
+                    <button class="record-btn" id="recordBtn" onclick="toggleRecording()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="recording-time" id="recordingTime">00:00</div>
+                    <div class="recording-status" id="recordingStatus">Druk op de knop om te starten</div>
+                </div>
+
+                <div class="message success" style="display: none;" id="successMessage">
+                    ✅ Opname voltooid! Het verslag wordt automatisch gegenereerd...
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">Opname Instellingen</h3>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Automatisch verslag maken</div>
+                            <div class="setting-desc">Zet audio automatisch om naar tekst</div>
+                        </div>
+                        <div class="toggle-switch active">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Deel met thuisfront</div>
+                            <div class="setting-desc">Stuur verslag naar contactpersonen</div>
+                        </div>
+                        <div class="toggle-switch">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agenda Page -->
+        <section id="agenda" class="page-section">
+            <div class="agenda-header">
+                <h2 class="agenda-title">Mijn Agenda</h2>
+                <div class="view-toggle">
+                    <button class="view-btn active">Dag</button>
+                    <button class="view-btn">Week</button>
+                </div>
+            </div>
+
+            <div class="appointment-card">
+                <div class="appointment-header">
+                    <div>
+                        <div class="appointment-title">Logopedie</div>
+                        <div class="appointment-datetime">Morgen, 14:30 - 15:30</div>
+                    </div>
+                </div>
+                <div class="travel-info">
+                    <div class="travel-time">🚗 Vertrek om 14:00 (25 min reistijd)</div>
+                    <div class="travel-details">Ziekenhuis Centrum, Hoofdstraat 123</div>
+                </div>
+            </div>
+
+            <div class="appointment-card">
+                <div class="appointment-header">
+                    <div>
+                        <div class="appointment-title">Controle Neuroloog</div>
+                        <div class="appointment-datetime">Vrijdag, 10:00 - 11:00</div>
+                    </div>
+                </div>
+                <div class="travel-info">
+                    <div class="travel-time">🚌 Vertrek om 09:15 (Bus 42 naar Centraal)</div>
+                    <div class="travel-details">Academisch Ziekenhuis, Universiteitslaan 1</div>
+                </div>
+            </div>
+
+            <div class="appointment-card">
+                <div class="appointment-header">
+                    <div>
+                        <div class="appointment-title">Fysiotherapie</div>
+                        <div class="appointment-datetime">Maandag, 16:00 - 17:00</div>
+                    </div>
+                </div>
+                <div class="travel-info">
+                    <div class="travel-time">🚴 Vertrek om 15:45 (12 min fietsen)</div>
+                    <div class="travel-details">Fysiotherapie Centrum, Parkstraat 45</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAHpp Page -->
+        <section id="nahpp" class="page-section">
+            <div class="nahpp-header">
+                <h1 class="nahpp-title">NAHpp</h1>
+                <p class="nahpp-subtitle">Jouw hulp voor het voorbereiden en onthouden van gesprekken</p>
+                
+                <div class="founder-story">
+                    <div class="founder-name">Paul Evers - Grondlegger NAHpp</div>
+                    <div class="story-text">
+                        <strong>21 februari 2012</strong> - Ik was net 21 toen mijn leven voorgoed veranderde. Aangereden door een vrachtwagen met 80 km/u terwijl ik lopend de weg overstak. Een maand in coma, hersenschade die nooit meer te repareren is.
+                        <br><br>
+                        <strong>Het geluk-masker</strong> - Jarenlang zette ik een masker op van "geluk hebben" omdat ik er nog was. Maar de klachten werden erger: onbegrip, miscommunicatie, overvraging, overprikkeling. Ik heb mensen pijn gedaan door mijn beperkingen.
+                        <br><br>
+                        <strong>De oplossing</strong> - Wanneer je thuisfront weet waar je echt last van hebt en wat je besproken hebt tijdens behandelingen, wordt het leven makkelijker. Minder keuzes = minder stress. 
+                        <br><br>
+                        <em>Deze app is de hulp die ik iedereen met NAH wil geven. De ondersteuning die ik 13 jaar heb gemist.</em>
+                    </div>
+                </div>
+            </div>
+
+            <button class="new-conversation-btn" onclick="startNewConversation()">
+                <i class="fas fa-plus"></i> Nieuw Gesprek Voorbereiden
+            </button>
+
+            <div class="conversations-list">
+                <h3 class="conversations-title">Eerdere Gesprekken</h3>
+                
+                <div class="conversation-item" onclick="openConversation(1)">
+                    <div class="conversation-title">Logopedie - Voortgangsgesprek</div>
+                    <div class="conversation-date">Gisteren, 14:30</div>
+                </div>
+                
+                <div class="conversation-item" onclick="openConversation(2)">
+                    <div class="conversation-title">Neuroloog - Controle</div>
+                    <div class="conversation-date">Vorige week dinsdag, 10:00</div>
+                </div>
+                
+                <div class="conversation-item" onclick="openConversation(3)">
+                    <div class="conversation-title">Fysiotherapie - Intake</div>
+                    <div class="conversation-date">2 weken geleden, 16:00</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Energy Monitor Page -->
+        <section id="energy" class="page-section">
+            <h2 class="dashboard-title">Energie Monitor</h2>
+            <p style="text-align: center; color: var(--text-medium); margin-bottom: 2rem;">
+                Volg je energieniveau om overprikkeling te voorkomen
+            </p>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Huidig Energieniveau</h3>
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(var(--success) 0deg 216deg, var(--border-light) 216deg 360deg); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                        <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--success);">
+                            60%
+                        </div>
+                    </div>
+                    <div style="font-size: 1.2rem; font-weight: 600; color: var(--success); margin-bottom: 0.5rem;">Goed</div>
+                    <div style="color: var(--text-medium);">Je kunt nog activiteiten ondernemen</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin: 1.5rem 0;">
+                    <button class="energy-btn active" onclick="setEnergyLevel(1)" style="background: var(--danger); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+                        Uitgeput
+                    </button>
+                    <button class="energy-btn" onclick="setEnergyLevel(2)" style="background: var(--warning); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+                        Moe
+                    </button>
+                    <button class="energy-btn" onclick="setEnergyLevel(3)" style="background: var(--primary-blue); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+                        Oké
+                    </button>
+                    <button class="energy-btn" onclick="setEnergyLevel(4)" style="background: var(--primary-green); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+                        Goed
+                    </button>
+                    <button class="energy-btn" onclick="setEnergyLevel(5)" style="background: var(--success); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
+                        Uitstekend
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Dagelijkse Energie Trend</h3>
+                <div style="height: 200px; background: var(--soft-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-medium);">
+                    📊 Energie grafiek (7 dagen)
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Overprikkeling Waarschuwingen</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Automatische pauze suggesties</div>
+                        <div class="setting-desc">Krijg een melding bij laag energieniveau</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Activiteit aanpassingen</div>
+                        <div class="setting-desc">Stel agenda aan op basis van energie</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Energie Tips</h3>
+                <div style="background: var(--light-blue); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-blue);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">💡 Tip van de dag</div>
+                    <div style="color: var(--text-medium);">
+                        Plan zware activiteiten wanneer je energie hoog is. Neem regelmatig pauzes van 10-15 minuten.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Network Page -->
+        <section id="support" class="page-section">
+            <h2 class="dashboard-title">Thuisfront & Ondersteuning</h2>
+            <p style="text-align: center; color: var(--text-medium); margin-bottom: 2rem;">
+                Deel belangrijke informatie met je ondersteuningsnetwerk
+            </p>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Mijn Ondersteuningsnetwerk</h3>
+                
+                <div class="conversation-item" style="border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--primary-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                            M
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <div class="conversation-title">Moeder - Hoofdcontact</div>
+                            <div class="conversation-date">Ontvangt alle verslagen automatisch</div>
+                        </div>
+                        <div style="color: var(--success);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation-item" style="border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--primary-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                            P
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <div class="conversation-title">Partner</div>
+                            <div class="conversation-date">Ontvangt energie updates</div>
+                        </div>
+                        <div style="color: var(--success);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conversation-item" style="border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--warning); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                            Z
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <div class="conversation-title">Zus</div>
+                            <div class="conversation-date">Noodcontact</div>
+                        </div>
+                        <div style="color: var(--text-medium);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="new-conversation-btn" onclick="addSupportContact()" style="background: var(--primary-blue); margin-top: 1rem;">
+                    <i class="fas fa-plus"></i> Contactpersoon Toevoegen
+                </button>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Automatisch Delen</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Gesprek verslagen</div>
+                        <div class="setting-desc">Deel automatisch na elke afspraak</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Energie niveau</div>
+                        <div class="setting-desc">Deel dagelijks energieniveau</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Noodsituaties</div>
+                        <div class="setting-desc">Stuur alert bij zeer laag energieniveau</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Recente Gedeelde Updates</h3>
+                
+                <div style="background: var(--light-green); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--success);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <div style="font-weight: 600; color: var(--success);">Logopedie Verslag</div>
+                        <div style="font-size: 0.8rem; color: var(--text-medium);">Gisteren 15:45</div>
+                    </div>
+                    <div style="color: var(--text-medium); font-size: 0.9rem;">
+                        Gedeeld met: Moeder, Partner • Vooruitgang in spraak, volgende afspraak over 2 weken
+                    </div>
+                </div>
+
+                <div style="background: var(--light-blue); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--primary-blue);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <div style="font-weight: 600; color: var(--primary-blue);">Energie Update</div>
+                        <div style="font-size: 0.8rem; color: var(--text-medium);">Vandaag 09:00</div>
+                    </div>
+                    <div style="color: var(--text-medium); font-size: 0.9rem;">
+                        Gedeeld met: Partner • Energieniveau: Goed (60%) - Kan normale activiteiten doen
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Page -->
+        <section id="settings" class="page-section">
+            <h2 class="dashboard-title">Instellingen</h2>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Notificaties</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Afspraak herinneringen</div>
+                        <div class="setting-desc">5 minuten voor afspraak</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Vertrektijd waarschuwing</div>
+                        <div class="setting-desc">Herinnering om te vertrekken</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Audio & Opname</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Automatisch transcriptie</div>
+                        <div class="setting-desc">Zet opnames om naar tekst</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Opname kwaliteit</div>
+                        <div class="setting-desc">Hoge kwaliteit voor betere transcriptie</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Privacy & Delen</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Automatisch delen</div>
+                        <div class="setting-desc">Deel verslagen met thuisfront</div>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Data opslag</div>
+                        <div class="setting-desc">Bewaar gegevens lokaal op apparaat</div>
+                    </div>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 class="settings-title">Toegankelijkheid</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Grote tekst</div>
+                        <div class="setting-desc">Vergroot lettergrootte voor betere leesbaarheid</div>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Hoog contrast</div>
+                        <div class="setting-desc">Verhoog contrast voor betere zichtbaarheid</div>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleSetting(this)">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Global variables
+        let isRecording = false;
+        let recordingStartTime = null;
+        let recordingInterval = null;
+        let currentPage = 'dashboard';
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update menu items
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Find and activate corresponding menu item
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if ((pageId === 'dashboard' && text.includes('dashboard')) ||
+                    (pageId === 'recorder' && text.includes('gesprek')) ||
+                    (pageId === 'agenda' && text.includes('agenda')) ||
+                    (pageId === 'nahpp' && text.includes('nahpp')) ||
+                    (pageId === 'energy' && text.includes('energie')) ||
+                    (pageId === 'support' && text.includes('thuisfront')) ||
+                    (pageId === 'settings' && text.includes('instellingen'))) {
+                    item.classList.add('active');
+                }
+            });
+            
+            currentPage = pageId;
+            closeMenu();
+        }
+
+        // Menu functions
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('menuOverlay');
+            
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Recording functions
+        function toggleRecording() {
+            if (!isRecording) {
+                startRecording();
+            } else {
+                stopRecording();
+            }
+        }
+
+        function startRecording() {
+            isRecording = true;
+            recordingStartTime = Date.now();
+            
+            const recordBtn = document.getElementById('recordBtn');
+            const recordingStatus = document.getElementById('recordingStatus');
+            
+            recordBtn.classList.add('recording');
+            recordBtn.innerHTML = '<i class="fas fa-stop"></i>';
+            recordingStatus.textContent = 'Opname bezig...';
+            
+            // Start timer
+            recordingInterval = setInterval(updateRecordingTime, 1000);
+            
+            // Simulate recording (in real app, this would use Web Audio API)
+            console.log('Recording started...');
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            
+            const recordBtn = document.getElementById('recordBtn');
+            const recordingStatus = document.getElementById('recordingStatus');
+            const successMessage = document.getElementById('successMessage');
+            
+            recordBtn.classList.remove('recording');
+            recordBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            recordingStatus.textContent = 'Opname gestopt - Verslag wordt gegenereerd...';
+            
+            // Stop timer
+            clearInterval(recordingInterval);
+            
+            // Show success message
+            setTimeout(() => {
+                successMessage.style.display = 'block';
+                recordingStatus.textContent = 'Druk op de knop om te starten';
+                document.getElementById('recordingTime').textContent = '00:00';
+                
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }, 2000);
+            
+            console.log('Recording stopped...');
+        }
+
+        function updateRecordingTime() {
+            if (!isRecording || !recordingStartTime) return;
+            
+            const elapsed = Date.now() - recordingStartTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            
+            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('recordingTime').textContent = timeString;
+        }
+
+        // Settings functions
+        function toggleSetting(toggleElement) {
+            toggleElement.classList.toggle('active');
+            
+            // In a real app, this would save the setting
+            const isActive = toggleElement.classList.contains('active');
+            console.log('Setting toggled:', isActive);
+        }
+
+        // Energy Monitor functions
+        let currentEnergyLevel = 4; // Default to "Goed"
+        
+        function setEnergyLevel(level) {
+            currentEnergyLevel = level;
+            
+            // Update energy buttons
+            document.querySelectorAll('.energy-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index + 1 === level) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update energy display
+            updateEnergyDisplay(level);
+            
+            // Notify support network if enabled
+            if (level <= 2) {
+                showLowEnergyAlert(level);
+            }
+            
+            console.log(`Energy level set to: ${level}`);
+        }
+        
+        function updateEnergyDisplay(level) {
+            const percentage = level * 20;
+            const colors = ['#ef4444', '#f59e0b', '#2563eb', '#059669', '#10b981'];
+            const labels = ['Uitgeput', 'Moe', 'Oké', 'Goed', 'Uitstekend'];
+            
+            // Update circular progress (simplified for demo)
+            const progressElement = document.querySelector('[style*="conic-gradient"]');
+            if (progressElement) {
+                const degrees = (percentage / 100) * 360;
+                progressElement.style.background = `conic-gradient(${colors[level-1]} 0deg ${degrees}deg, var(--border-light) ${degrees}deg 360deg)`;
+            }
+            
+            // Update percentage text
+            const percentageElement = progressElement?.querySelector('div div');
+            if (percentageElement) {
+                percentageElement.textContent = `${percentage}%`;
+                percentageElement.style.color = colors[level-1];
+            }
+            
+            // Update label
+            const labelElement = percentageElement?.parentElement?.nextElementSibling;
+            if (labelElement) {
+                labelElement.textContent = labels[level-1];
+                labelElement.style.color = colors[level-1];
+            }
+        }
+        
+        function showLowEnergyAlert(level) {
+            const alertMessages = {
+                1: "⚠️ Zeer laag energieniveau gedetecteerd. Overweeg een pauze en informeer je ondersteuningsnetwerk.",
+                2: "💛 Laag energieniveau. Tijd voor een rustpauze. Je thuisfront wordt geïnformeerd."
+            };
+            
+            // Show alert
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'message error';
+            alertDiv.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div>${alertMessages[level]}</div>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.2rem;">×</button>
+                </div>
+            `;
+            
+            const container = document.querySelector('#energy .container, #energy');
+            if (container) {
+                container.insertBefore(alertDiv, container.firstChild);
+                
+                // Auto-remove after 10 seconds
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 10000);
+            }
+        }
+
+        // Support Network functions
+        function addSupportContact() {
+            const contactModal = document.createElement('div');
+            contactModal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; 
+                display: flex; align-items: center; justify-content: center; padding: 1rem;
+            `;
+            
+            contactModal.innerHTML = `
+                <div style="background: var(--white); border-radius: 16px; padding: 2rem; max-width: 400px; width: 100%;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-dark);">Contactpersoon Toevoegen</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Naam</label>
+                        <input type="text" class="form-input" placeholder="Voer naam in" id="contactName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Relatie</label>
+                        <select class="form-input" id="contactRelation">
+                            <option>Familie</option>
+                            <option>Partner</option>
+                            <option>Vriend</option>
+                            <option>Zorgverlener</option>
+                            <option>Anders</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">E-mail</label>
+                        <input type="email" class="form-input" placeholder="email@voorbeeld.nl" id="contactEmail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Wat delen?</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" checked> Gesprek verslagen
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" checked> Energie updates
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox"> Agenda wijzigingen
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button onclick="saveContact()" class="btn" style="flex: 1; background: var(--primary-green); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                            Opslaan
+                        </button>
+                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" class="btn" style="flex: 1; background: var(--border-light); color: var(--text-dark); border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                            Annuleren
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(contactModal);
+        }
+        
+        function saveContact() {
+            const name = document.getElementById('contactName').value;
+            const relation = document.getElementById('contactRelation').value;
+            const email = document.getElementById('contactEmail').value;
+            
+            if (name && email) {
+                // In real app, this would save to database
+                console.log('Contact saved:', { name, relation, email });
+                
+                // Show success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'message success';
+                successDiv.textContent = `✅ ${name} is toegevoegd aan je ondersteuningsnetwerk`;
+                
+                const supportSection = document.getElementById('support');
+                if (supportSection) {
+                    supportSection.insertBefore(successDiv, supportSection.firstChild);
+                    
+                    setTimeout(() => {
+                        if (successDiv.parentNode) {
+                            successDiv.parentNode.removeChild(successDiv);
+                        }
+                    }, 3000);
+                }
+                
+                // Close modal
+                document.querySelector('[style*="position: fixed"]').remove();
+            } else {
+                alert('Vul alle verplichte velden in');
+            }
+        }
+
+        // NAHpp functions
+        function startNewConversation() {
+            const conversationModal = document.createElement('div');
+            conversationModal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; 
+                display: flex; align-items: center; justify-content: center; padding: 1rem;
+                overflow-y: auto;
+            `;
+            
+            conversationModal.innerHTML = `
+                <div style="background: var(--white); border-radius: 16px; padding: 2rem; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-dark);">📝 Nieuw Gesprek Voorbereiden</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">👤 Met wie heb je de afspraak?</label>
+                        <input type="text" class="form-input" placeholder="Bijv. Dr. Jansen (logopedist)" id="conversationWho">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">📍 Waar vindt het plaats?</label>
+                        <input type="text" class="form-input" placeholder="Bijv. Ziekenhuis Centrum, kamer 204" id="conversationWhere">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🗓️ Wanneer?</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <input type="date" class="form-input" id="conversationDate">
+                            <input type="time" class="form-input" id="conversationTime">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🎯 Wat is het doel van dit gesprek?</label>
+                        <textarea class="form-input form-textarea" placeholder="Bijv. Voortgang bespreken, nieuwe oefeningen krijgen, vragen over medicatie" id="conversationGoal"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">❓ Welke vragen wil je stellen?</label>
+                        <textarea class="form-input form-textarea" placeholder="Bijv. Hoe gaat het met mijn spraak? Kan ik de oefeningen aanpassen? Wanneer volgende controle?" id="conversationQuestions"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">📋 Wat wil je bespreken?</label>
+                        <textarea class="form-input form-textarea" placeholder="Bijv. Klachten deze week, vooruitgang, problemen thuis" id="conversationTopics"></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button onclick="saveConversationPrep()" class="btn" style="flex: 1; background: var(--primary-green); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                            💾 Opslaan & Toevoegen aan Agenda
+                        </button>
+                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" class="btn" style="background: var(--border-light); color: var(--text-dark); border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                            Annuleren
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(conversationModal);
+        }
+        
+        function saveConversationPrep() {
+            const who = document.getElementById('conversationWho').value;
+            const where = document.getElementById('conversationWhere').value;
+            const date = document.getElementById('conversationDate').value;
+            const time = document.getElementById('conversationTime').value;
+            const goal = document.getElementById('conversationGoal').value;
+            const questions = document.getElementById('conversationQuestions').value;
+            const topics = document.getElementById('conversationTopics').value;
+            
+            if (who && where && date && time) {
+                // In real app, this would save to database and add to calendar
+                console.log('Conversation prep saved:', { who, where, date, time, goal, questions, topics });
+                
+                // Show success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'message success';
+                successDiv.innerHTML = `
+                    ✅ Gesprek voorbereid en toegevoegd aan agenda<br>
+                    <small>${who} op ${date} om ${time}</small>
+                `;
+                
+                const nahppSection = document.getElementById('nahpp');
+                if (nahppSection) {
+                    nahppSection.insertBefore(successDiv, nahppSection.firstChild);
+                    
+                    setTimeout(() => {
+                        if (successDiv.parentNode) {
+                            successDiv.parentNode.removeChild(successDiv);
+                        }
+                    }, 5000);
+                }
+                
+                // Close modal
+                document.querySelector('[style*="position: fixed"]').remove();
+            } else {
+                alert('Vul minimaal wie, waar, datum en tijd in');
+            }
+        }
+
+        function openConversation(id) {
+            const conversations = {
+                1: {
+                    title: "Logopedie - Voortgangsgesprek",
+                    date: "Gisteren, 14:30",
+                    who: "Dr. Jansen (Logopedist)",
+                    where: "Ziekenhuis Centrum, kamer 204",
+                    goal: "Voortgang spraak bespreken en nieuwe oefeningen",
+                    discussed: "Spraak is verbeterd, minder moeite met lange zinnen. Nieuwe oefeningen voor thuis gekregen.",
+                    actions: "Dagelijks 15 min oefenen, volgende afspraak over 2 weken",
+                    audio: "Opname beschikbaar (12:34 min)"
+                },
+                2: {
+                    title: "Neuroloog - Controle",
+                    date: "Vorige week dinsdag, 10:00",
+                    who: "Dr. Peters (Neuroloog)",
+                    where: "Academisch Ziekenhuis",
+                    goal: "Controle hersenfuncties en medicatie",
+                    discussed: "Hersenscan toont stabiele situatie. Medicatie werkt goed.",
+                    actions: "Medicatie voortzetten, volgende controle over 6 maanden",
+                    audio: "Opname beschikbaar (8:45 min)"
+                }
+            };
+            
+            const conversation = conversations[id];
+            if (!conversation) return;
+            
+            const detailModal = document.createElement('div');
+            detailModal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.5); z-index: 1000; 
+                display: flex; align-items: center; justify-content: center; padding: 1rem;
+                overflow-y: auto;
+            `;
+            
+            detailModal.innerHTML = `
+                <div style="background: var(--white); border-radius: 16px; padding: 2rem; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h3 style="color: var(--text-dark); margin: 0;">${conversation.title}</h3>
+                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-medium);">×</button>
+                    </div>
+                    
+                    <div style="background: var(--light-blue); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div>
+                                <div style="font-weight: 600; color: var(--primary-blue); margin-bottom: 0.25rem;">👤 Met wie</div>
+                                <div>${conversation.who}</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; color: var(--primary-blue); margin-bottom: 0.25rem;">📍 Waar</div>
+                                <div>${conversation.where}</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; color: var(--primary-blue); margin-bottom: 0.25rem;">🗓️ Wanneer</div>
+                                <div>${conversation.date}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">🎯 Doel van gesprek</div>
+                        <div style="background: var(--soft-gray); padding: 1rem; border-radius: 8px;">${conversation.goal}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">💬 Wat is besproken</div>
+                        <div style="background: var(--light-green); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--success);">${conversation.discussed}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">✅ Actiepunten</div>
+                        <div style="background: var(--light-blue); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary-blue);">${conversation.actions}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">🎵 Audio opname</div>
+                        <div style="background: var(--soft-gray); padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 1rem;">
+                            <button style="background: var(--primary-blue); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
+                                ▶️ Afspelen
+                            </button>
+                            <span>${conversation.audio}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="shareConversation(${id})" class="btn" style="flex: 1; background: var(--primary-green); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                            📤 Deel met Thuisfront
+                        </button>
+                        <button onclick="editConversation(${id})" class="btn" style="background: var(--primary-blue); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
+                            ✏️ Bewerken
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(detailModal);
+        }
+        
+        function shareConversation(id) {
+            // In real app, this would send to selected contacts
+            const successDiv = document.createElement('div');
+            successDiv.className = 'message success';
+            successDiv.textContent = '✅ Gesprek verslag gedeeld met je ondersteuningsnetwerk';
+            
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                if (successDiv.parentNode) {
+                    successDiv.parentNode.removeChild(successDiv);
+                }
+            }, 3000);
+            
+            console.log(`Conversation ${id} shared with support network`);
+        }
+        
+        function editConversation(id) {
+            alert('Bewerk functie wordt geladen...\n\nHier zou je het gesprek verslag kunnen aanpassen en extra notities toevoegen.');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('NAHpp App initialized');
+            
+            // Set initial page
+            showPage('dashboard');
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // ESC to close menu
+                if (e.key === 'Escape') {
+                    closeMenu();
+                }
+                
+                // Space to toggle recording (when on recorder page)
+                if (e.key === ' ' && currentPage === 'recorder') {
+                    e.preventDefault();
+                    toggleRecording();
+                }
+            });
+            
+            // Add touch gestures for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            });
+            
+            document.addEventListener('touchend', function(e) {
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+                
+                // Swipe right to open menu (from left edge)
+                if (deltaX > 100 && Math.abs(deltaY) < 100 && touchStartX < 50) {
+                    toggleMenu();
+                }
+                
+                // Swipe left to close menu
+                if (deltaX < -100 && Math.abs(deltaY) < 100) {
+                    closeMenu();
+                }
+            });
+            
+            // Simulate notifications (in real app, these would be actual push notifications)
+            setTimeout(() => {
+                if (currentPage === 'dashboard') {
+                    console.log('Notification: Afspraak morgen om 14:30 - Logopedie');
+                }
+            }, 5000);
+        });
+
+        // Accessibility improvements
+        function announcePageChange(pageName) {
+            // For screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.style.position = 'absolute';
+            announcement.style.left = '-10000px';
+            announcement.textContent = `Navigated to ${pageName} page`;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('App error:', e.error);
+            
+            // In a real app, this would send error reports to a logging service
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'message error';
+            errorMessage.textContent = 'Er is een fout opgetreden. Probeer de pagina te vernieuwen.';
+            
+            const container = document.querySelector('.container');
+            if (container) {
+                container.insertBefore(errorMessage, container.firstChild);
+                
+                setTimeout(() => {
+                    if (errorMessage.parentNode) {
+                        errorMessage.parentNode.removeChild(errorMessage);
+                    }
+                }, 5000);
+            }
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            // Monitor app performance
+            if ('performance' in window) {
+                const loadTime = performance.now();
+                console.log(`App loaded in ${Math.round(loadTime)}ms`);
+                
+                // In a real app, this would be sent to analytics
+                if (loadTime > 3000) {
+                    console.warn('App loading slowly, consider optimization');
+                }
+            }
+        });
+
+        // Service Worker registration (for offline functionality)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed');
+                    });
+            });
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97156e7094ca670c',t:'MTc1NTU2MjI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
