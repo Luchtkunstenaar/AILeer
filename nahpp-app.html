@@ -3,31 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAHpp - Cognitieve Assistent voor NAH | AIleer.nl</title>
-    <meta name="description" content="NAHpp - Professionele cognitieve assistent voor mensen met Niet-Aangeboren Hersenletsel. Ontwikkeld door Paul Evers na 13 jaar NAH ervaring.">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>NAHpp - Investeerderspresentatie</title>
     <style>
         :root {
-            --primary-blue: #2563eb;
-            --primary-green: #059669;
-            --light-blue: #dbeafe;
-            --light-green: #d1fae5;
-            --soft-gray: #f8fafc;
-            --text-dark: #1e293b;
-            --text-medium: #475569;
-            --text-light: #64748b;
-            --border-light: #e2e8f0;
-            --white: #ffffff;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --primary-bg: #0a0e1a;
+            --secondary-bg: #1a1f2e;
+            --tertiary-bg: #2a3441;
+            --accent-blue: #4f8ff7;
+            --accent-cyan: #00d4ff;
+            --accent-green: #00ff88;
+            --accent-gold: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c5d6;
+            --text-muted: #8892a6;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.5);
+            --shadow-light: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -36,1884 +28,1195 @@
             box-sizing: border-box;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: var(--soft-gray);
-            color: var(--text-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(79, 143, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Header */
-        .header {
-            background: var(--white);
-            border-bottom: 1px solid var(--border-light);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            background: var(--light-blue);
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--primary-blue);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary-blue);
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: background-color 0.2s;
-        }
-
-        .menu-btn:hover {
-            background: var(--light-blue);
-        }
-
-        /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 20px;
         }
 
-        /* Page Sections */
-        .page-section {
-            display: none;
-            min-height: calc(100vh - 80px);
-            padding: 2rem 0;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        /* Dashboard */
-        .dashboard-header {
+        /* Header Styling */
+        .header {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(79, 143, 247, 0.1) 0%, 
+                    rgba(0, 212, 255, 0.05) 100%),
+                var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 60px 40px;
+            margin: 40px 0;
             text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .dashboard-subtitle {
-            color: var(--text-medium);
-            font-size: 1rem;
-        }
-
-        .next-appointment {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
-            border-left: 4px solid var(--primary-green);
-        }
-
-        .appointment-label {
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .appointment-info {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .appointment-time {
-            color: var(--primary-green);
-            font-weight: 600;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .action-btn {
-            background: var(--white);
-            border: 2px solid var(--border-light);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            color: var(--text-dark);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .action-btn:hover {
-            border-color: var(--primary-blue);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .action-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-blue);
-        }
-
-        .action-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .action-desc {
-            font-size: 0.9rem;
-            color: var(--text-medium);
-        }
-
-        /* Recorder Page */
-        .recorder-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .recorder-status {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .record-btn {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: none;
-            background: var(--danger);
-            color: var(--white);
-            font-size: 2rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            transition: all 0.2s;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .record-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .record-btn.recording {
-            background: var(--success);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-        }
-
-        .recording-time {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .recording-status {
-            color: var(--text-medium);
-        }
-
-        /* Agenda Page */
-        .agenda-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .agenda-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .view-toggle {
-            display: flex;
-            background: var(--white);
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
+            box-shadow: 
+                0 20px 60px var(--shadow-dark),
+                inset 0 1px 0 var(--shadow-light);
+            position: relative;
             overflow: hidden;
         }
 
-        .view-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--accent-blue) 50%, 
+                transparent 100%);
         }
 
-        .view-btn.active {
-            background: var(--primary-blue);
-            color: var(--white);
+        .header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, 
+                var(--accent-blue) 0%, 
+                var(--accent-cyan) 50%, 
+                var(--accent-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(79, 143, 247, 0.3);
+            letter-spacing: -0.02em;
         }
 
-        .appointment-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--primary-blue);
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
         }
 
-        .appointment-header {
+        .header .tagline {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav-container {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
+            justify-content: center;
+            margin: 40px 0;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .appointment-title {
+        .nav-btn {
+            background: 
+                linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg));
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            padding: 16px 28px;
+            font-size: 15px;
             font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .appointment-datetime {
-            color: var(--text-medium);
-            font-size: 0.9rem;
-        }
-
-        .travel-info {
-            background: var(--light-green);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .travel-time {
-            font-weight: 600;
-            color: var(--primary-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .travel-details {
-            font-size: 0.9rem;
-            color: var(--text-medium);
-        }
-
-        /* NAHpp Page */
-        .nahpp-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            background: var(--white);
             border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .nahpp-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .nahpp-subtitle {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .concept-notice {
-            background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
-            color: var(--white);
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .founder-story {
-            background: var(--light-blue);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--primary-blue);
-        }
-
-        .founder-name {
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .story-text {
-            color: var(--text-medium);
-            line-height: 1.7;
-        }
-
-        .new-conversation-btn {
-            background: var(--primary-green);
-            color: var(--white);
-            border: none;
-            border-radius: 12px;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
             cursor: pointer;
-            width: 100%;
-            margin-bottom: 2rem;
-            transition: all 0.2s;
-            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 var(--shadow-light);
+            min-width: 160px;
+            text-align: center;
         }
 
-        .new-conversation-btn:hover {
-            background: #047857;
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 100%);
+            transition: left 0.6s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(79, 143, 247, 0.3),
+                inset 0 1px 0 var(--shadow-light);
+            border-color: var(--accent-blue);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            box-shadow: 
+                0 8px 32px rgba(79, 143, 247, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
 
-        .conversations-list {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .conversations-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .conversation-item {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-light);
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .conversation-item:hover {
-            background: var(--soft-gray);
-        }
-
-        .conversation-item:last-child {
-            border-bottom: none;
-        }
-
-        .conversation-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .conversation-date {
-            color: var(--text-medium);
-            font-size: 0.9rem;
-        }
-
-        /* Settings Page */
-        .settings-section {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-md);
-        }
-
-        .settings-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .setting-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .setting-item:last-child {
-            border-bottom: none;
-        }
-
-        .setting-label {
-            font-weight: 500;
-        }
-
-        .setting-desc {
-            color: var(--text-medium);
-            font-size: 0.9rem;
-        }
-
-        .toggle-switch {
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: 
+                linear-gradient(145deg, var(--glass-bg), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 40px 0;
+            box-shadow: 
+                0 20px 60px var(--shadow-dark),
+                inset 0 1px 0 var(--shadow-light);
             position: relative;
-            width: 50px;
-            height: 24px;
-            background: var(--border-light);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.2s;
         }
 
-        .toggle-switch.active {
-            background: var(--primary-blue);
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .toggle-slider {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            background: var(--white);
-            border-radius: 50%;
-            transition: transform 0.2s;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .toggle-switch.active .toggle-slider {
-            transform: translateX(26px);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100vh;
-            background: var(--white);
-            box-shadow: var(--shadow-lg);
-            transition: right 0.3s;
-            z-index: 200;
-            padding: 2rem 1rem;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 150;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .menu-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .close-menu {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-medium);
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            margin-bottom: 0.5rem;
-        }
-
-        .menu-item:hover {
-            background: var(--soft-gray);
-        }
-
-        .menu-item.active {
-            background: var(--light-blue);
-            color: var(--primary-blue);
-        }
-
-        .menu-icon {
-            width: 20px;
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-align: center;
         }
 
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
+        .personal-story {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(231, 76, 60, 0.1) 0%, 
+                    rgba(192, 57, 43, 0.05) 100%);
+            border-left: 4px solid #e74c3c;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.1);
         }
 
-        .form-label {
-            display: block;
+        .story-date {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: 
+                linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 var(--shadow-light);
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(79, 143, 247, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: 
+                linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 var(--shadow-light);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(79, 143, 247, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            margin-bottom: 15px;
+            color: var(--text-primary);
         }
 
-        .form-input {
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .financial-chart {
+            background: 
+                linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 var(--shadow-light);
+        }
+
+        .chart-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .revenue-bars {
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            height: 200px;
+            margin: 30px 0;
+        }
+
+        .revenue-bar {
+            background: linear-gradient(0deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 8px 8px 0 0;
+            width: 60px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(79, 143, 247, 0.3);
+            animation: growUp 1.5s ease-out;
+        }
+
+        @keyframes growUp {
+            from { height: 0; }
+        }
+
+        .revenue-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .revenue-bar::before {
+            content: attr(data-year);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .cta-section {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(79, 143, 247, 0.15) 0%, 
+                    rgba(0, 212, 255, 0.1) 100%);
+            border: 1px solid var(--accent-blue);
+            border-radius: 24px;
+            padding: 50px;
+            text-align: center;
+            margin: 50px 0;
+            box-shadow: 
+                0 20px 60px rgba(79, 143, 247, 0.2),
+                inset 0 1px 0 var(--shadow-light);
+        }
+
+        .cta-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 10px 30px rgba(79, 143, 247, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--border-light);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                transparent 100%);
+            transition: left 0.6s ease;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary-blue);
+        .cta-button:hover::before {
+            left: 100%;
         }
 
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 15px 40px rgba(79, 143, 247, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .team-card {
+            background: 
+                linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 var(--shadow-light);
+            transition: all 0.4s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(79, 143, 247, 0.2);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .team-role {
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .team-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 0 0.75rem;
+                padding: 0 15px;
             }
-
-            .page-section {
-                padding: 1rem 0;
+            
+            .header {
+                padding: 40px 20px;
+                margin: 20px 0;
             }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
+            
+            .content-section {
+                padding: 30px 20px;
+                margin: 20px 0;
             }
-
-            .action-btn {
-                padding: 1.25rem;
-            }
-
-            .action-icon {
-                font-size: 2rem;
-            }
-
-            .dashboard-title {
-                font-size: 1.5rem;
-            }
-
-            .nahpp-title {
-                font-size: 1.7rem;
-            }
-
-            .appointment-header {
+            
+            .nav-container {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+            }
+            
+            .stats-grid,
+            .feature-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .revenue-bars {
+                height: 150px;
+            }
+            
+            .revenue-bar {
+                width: 40px;
             }
         }
 
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* High contrast mode */
-        @media (prefers-contrast: high) {
-            :root {
-                --border-light: #000000;
-                --text-medium: #000000;
-            }
-        }
-
-        /* Loading States */
+        /* Loading Animation */
         .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--border-light);
-            border-radius: 50%;
-            border-top-color: var(--primary-blue);
-            animation: spin 1s ease-in-out infinite;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
-        /* Success/Error Messages */
-        .message {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-weight: 500;
+        /* Floating Elements */
+        .floating {
+            animation: float 6s ease-in-out infinite;
         }
 
-        .message.success {
-            background: var(--light-green);
-            color: var(--primary-green);
-            border: 1px solid var(--success);
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        .message.error {
-            background: #fef2f2;
-            color: var(--danger);
-            border: 1px solid var(--danger);
+        /* Pulse Effect */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(79, 143, 247, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(79, 143, 247, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 143, 247, 0); }
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-area">
-                <div class="logo-icon">AI</div>
-                <div class="logo-text">AIleer.nl</div>
-            </div>
-            <button class="menu-btn" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header>
+<body class="loading">
+    <div class="container">
+        <!-- Header -->
+        <header class="header floating">
+            <h1>NAHpp</h1>
+            <p class="subtitle">Revolutionaire Digitale Ondersteuning voor NAH-Patiënten</p>
+            <p class="tagline">Van Persoonlijke Ervaring naar Wereldwijde Impact</p>
+        </header>
 
-    <!-- Mobile Menu -->
-    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="menu-header">
-            <div class="menu-title">Menu</div>
-            <button class="close-menu" onclick="closeMenu()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="menu-item active" onclick="showPage('dashboard')">
-            <i class="fas fa-home menu-icon"></i>
-            <span>Dashboard</span>
-        </div>
-        <div class="menu-item" onclick="showPage('recorder')">
-            <i class="fas fa-microphone menu-icon"></i>
-            <span>Gesprek Opnemen</span>
-        </div>
-        <div class="menu-item" onclick="showPage('agenda')">
-            <i class="fas fa-calendar menu-icon"></i>
-            <span>Mijn Agenda</span>
-        </div>
-        <div class="menu-item" onclick="showPage('nahpp')">
-            <i class="fas fa-edit menu-icon"></i>
-            <span>NAHpp</span>
-        </div>
-        <div class="menu-item" onclick="showPage('energy')">
-            <i class="fas fa-battery-half menu-icon"></i>
-            <span>Energie Monitor</span>
-        </div>
-        <div class="menu-item" onclick="showPage('support')">
-            <i class="fas fa-users menu-icon"></i>
-            <span>Thuisfront</span>
-        </div>
-        <div class="menu-item" onclick="showPage('settings')">
-            <i class="fas fa-cog menu-icon"></i>
-            <span>Instellingen</span>
-        </div>
-    </div>
+        <!-- Navigation -->
+        <nav class="nav-container">
+            <button class="nav-btn active" onclick="showSection('story')">Mijn Verhaal</button>
+            <button class="nav-btn" onclick="showSection('problem')">Het Probleem</button>
+            <button class="nav-btn" onclick="showSection('solution')">Onze Oplossing</button>
+            <button class="nav-btn" onclick="showSection('market')">Markt & Kansen</button>
+            <button class="nav-btn" onclick="showSection('financials')">Financiën</button>
+            <button class="nav-btn" onclick="showSection('team')">Team</button>
+            <button class="nav-btn" onclick="showSection('investment')">Investering</button>
+        </nav>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Dashboard Page -->
-        <section id="dashboard" class="page-section active">
-            <div class="dashboard-header">
-                <h1 class="dashboard-title">Welkom bij NAHpp</h1>
-                <p class="dashboard-subtitle">Jouw persoonlijke cognitieve assistent</p>
+        <!-- Mijn Verhaal Section -->
+        <section id="story" class="content-section active">
+            <h2 class="section-title">Mijn Persoonlijke Verhaal</h2>
+            
+            <div class="personal-story">
+                <div class="story-date">21-02-2012 - Paul Evers (toen 21 jaar)</div>
+                <div class="story-text">
+                    <p>Op deze dag veranderde mijn leven voor altijd. Ik werd aangereden door een vrachtwagen en liep een Niet-Aangeboren Hersenletsel (NAH) op - de onzichtbare onherstelbare handicap. Wat volgde was een 13-jarige reis van herstel, onderzoek en uiteindelijk de ontdekking van de ultieme oplossing.</p>
+                    
+                    <p style="margin-top: 20px;">De realiteit werd pijnlijk duidelijk: <strong>het beschadigde gedeelte in mijn brein functioneert niet meer en is onherstelbaar.</strong> Maar hier ligt ook de kracht - met de technologie van vandaag kunnen we wél effectieve hulp bieden aan iedereen. We kunnen het leven aanzienlijk verbeteren, stress drastisch verminderen, en conflicten met het thuisfront voorkomen.</p>
+                    
+                    <p style="margin-top: 20px;">13 jaar lang heb ik intensief onderzoek gedaan naar de ultieme oplossing. Met mijn 16 jaar ervaring in de zorg heb ik systematisch alle aspecten van het zorgsysteem geanalyseerd - want ik overdenk en analyseer alles tot in detail. Ik voerde diepgaande gesprekken met honderden patiënten, therapeuten en zorgverleners. Ik testte elke beschikbare app, tool en methode. Niets bood de werkelijke oplossing die nodig was. Toen realiseerde ik me: <strong>ik moet het zelf bouwen.</strong></p>
+                    
+                    <p style="margin-top: 20px;">Mijn cruciale ontdekking: <strong>begrip is vaak al een enorme oplossing.</strong> Wanneer patiënten eindelijk volledig begrijpen wat er neurologisch met hen gebeurt, en wanneer hun directe omgeving werkelijk begrijpt wat NAH betekent voor het dagelijks functioneren, verdwijnt automatisch een groot deel van de stress en frustratie. Maar dit is slechts het fundament.</p>
+                    
+                    <p style="margin-top: 20px;"><strong>NAHpp is die ultieme, wetenschappelijk onderbouwde oplossing.</strong> Geboren uit 13 jaar persoonlijke NAH-ervaring, 16 jaar professionele zorgervaring, systematische analyse van het complete zorgsysteem, en de bewezen overtuiging dat geavanceerde technologie de zorg exponentieel beter, kosteneffectiever en universeel toegankelijker kan maken voor iedereen wereldwijd.</p>
+                </div>
             </div>
 
-            <div class="concept-notice">
-                🚧 Dit is nog maar een concept. De echte versie wordt veel beter, maar we zoeken investeerders!
-            </div>
-
-            <div class="next-appointment">
-                <div class="appointment-label">Eerstvolgende afspraak</div>
-                <div class="appointment-info">Logopedie - Ziekenhuis Centrum</div>
-                <div class="appointment-time">Morgen om 14:30</div>
-            </div>
-
-            <div class="quick-actions">
-                <div class="action-btn" onclick="showPage('recorder')">
-                    <div class="action-icon">🗣️</div>
-                    <div class="action-title">Start Gesprek</div>
-                    <div class="action-desc">Neem gesprek op en krijg automatisch verslag</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">Jaar Ervaring in de Zorg</div>
                 </div>
-
-                <div class="action-btn" onclick="showPage('agenda')">
-                    <div class="action-icon">🗓️</div>
-                    <div class="action-title">Mijn Agenda</div>
-                    <div class="action-desc">Bekijk afspraken en reisplanning</div>
+                <div class="stat-card">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Jaar NAH-Ervaring & Onderzoek</div>
                 </div>
-
-                <div class="action-btn" onclick="showPage('nahpp')">
-                    <div class="action-icon">✍️</div>
-                    <div class="action-title">NAHpp</div>
-                    <div class="action-desc">Bereid gesprekken voor en maak notities</div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Gesprekken met Alle Zorgpartijen</div>
                 </div>
-
-                <div class="action-btn" onclick="showPage('energy')">
-                    <div class="action-icon">🔋</div>
-                    <div class="action-title">Energie Monitor</div>
-                    <div class="action-desc">Volg je energieniveau en vermijd overprikkeling</div>
-                </div>
-
-                <div class="action-btn" onclick="showPage('support')">
-                    <div class="action-icon">👥</div>
-                    <div class="action-title">Thuisfront</div>
-                    <div class="action-desc">Deel informatie met je ondersteuningsnetwerk</div>
-                </div>
-
-                <div class="action-btn" onclick="showPage('settings')">
-                    <div class="action-icon">⚙️</div>
-                    <div class="action-title">Instellingen</div>
-                    <div class="action-desc">Pas de app aan naar jouw behoeften</div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Zorgsysteem Geanalyseerd</div>
                 </div>
             </div>
         </section>
 
-        <!-- Recorder Page -->
-        <section id="recorder" class="page-section">
-            <div class="recorder-container">
-                <h2 class="dashboard-title">Gesprek Opnemen</h2>
-                
-                <div class="recorder-status">
-                    <button class="record-btn" id="recordBtn" onclick="toggleRecording()">
-                        <i class="fas fa-microphone"></i>
-                    </button>
-                    <div class="recording-time" id="recordingTime">00:00</div>
-                    <div class="recording-status" id="recordingStatus">Druk op de knop om te starten</div>
+        <!-- Problem Section -->
+        <section id="problem" class="content-section">
+            <h2 class="section-title">Het Probleem: Waarom NAH-Patiënten Hulp Nodig Hebben</h2>
+            
+            <div style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(192, 57, 43, 0.05) 100%); border-left: 4px solid #e74c3c; padding: 30px; border-radius: 20px; margin: 30px 0; text-align: center;">
+                <h3 style="color: #e74c3c; font-size: 1.6rem; margin-bottom: 20px;">💔 De Harde Realiteit van NAH</h3>
+                <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8;">
+                    <strong>Chronische stress, relationele conflicten, sociale isolatie en een overweldigend gevoel van persoonlijk falen.</strong> NAH-patiënten worstelen dagelijks met complexe, onzichtbare cognitieve beperkingen die hun leven, interpersoonlijke relaties en zelfvertrouwen systematisch ondermijnen. Het thuisfront mist fundamenteel begrip, zorgverleners hebben beperkte contactmomenten, en patiënten voelen zich geïsoleerd in een maatschappij die niet is aangepast aan hun nieuwe neurologische realiteit.
+                </p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1.5M</div>
+                    <div class="stat-label">NAH-Patiënten in Europa</div>
                 </div>
-
-                <div class="message success" style="display: none;" id="successMessage">
-                    ✅ Opname voltooid! Het verslag wordt automatisch gegenereerd...
+                <div class="stat-card">
+                    <div class="stat-number">€15B</div>
+                    <div class="stat-label">Jaarlijkse Zorgkosten</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Voelt zich Geïsoleerd</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Adequate Digitale Oplossingen</div>
+                </div>
+            </div>
 
-                <div class="settings-section">
-                    <h3 class="settings-title">Opname Instellingen</h3>
-                    <div class="setting-item">
-                        <div>
-                            <div class="setting-label">Automatisch verslag maken</div>
-                            <div class="setting-desc">Zet audio automatisch om naar tekst</div>
-                        </div>
-                        <div class="toggle-switch active">
-                            <div class="toggle-slider"></div>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <div>
-                            <div class="setting-label">Deel met thuisfront</div>
-                            <div class="setting-desc">Stuur verslag naar contactpersonen</div>
-                        </div>
-                        <div class="toggle-switch">
-                            <div class="toggle-slider"></div>
-                        </div>
-                    </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Onherstelbare Hersenschade</h3>
+                    <p class="feature-description">Het beschadigde deel van de hersenen herstelt niet meer. Maar met slimme technologie kunnen we wél compenseren en het leven drastisch verbeteren voor NAH-patiënten wereldwijd.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">😰</div>
+                    <h3 class="feature-title">Stress & Conflicten Thuis</h3>
+                    <p class="feature-description">Familie begrijpt de onzichtbare beperkingen niet. Dit leidt tot frustratie, ruzies en een gevoel van falen bij zowel patiënt als naasten.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Energiebeheer Crisis</h3>
+                    <p class="feature-description">Beperkte mentale energie zonder tools om deze slim in te delen. Resultaat: overbelasting, uitputting en teleurstelling over wat niet lukt.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3 class="feature-title">Gebrekkige Zorgcontinuïteit</h3>
+                    <p class="feature-description">Therapeuten zien patiënten slechts beperkt. Tussen sessies door zijn patiënten op zichzelf aangewezen zonder adequate digitale ondersteuning.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Agenda Page -->
-        <section id="agenda" class="page-section">
-            <div class="agenda-header">
-                <h2 class="agenda-title">Mijn Agenda</h2>
-                <div class="view-toggle">
-                    <button class="view-btn active">Dag</button>
-                    <button class="view-btn">Week</button>
+        <!-- Solution Section -->
+        <section id="solution" class="content-section">
+            <h2 class="section-title">NAHpp: De Complete Zorgketen Revolutie</h2>
+            
+            <div style="background: linear-gradient(135deg, rgba(79, 143, 247, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%); border: 1px solid var(--accent-blue); border-radius: 20px; padding: 40px; margin: 30px 0; text-align: center;">
+                <h3 style="color: var(--accent-blue); font-size: 1.8rem; margin-bottom: 20px;">🎯 NAHpp: De Zorgrevolutie na 16 Jaar Analyse</h3>
+                <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                    <strong>"Met 16 jaar zorgervaring en 13 jaar NAH-analyse heb ik ontdekt: begrip is vaak al een grote oplossing. NAHpp maakt de zorg vele malen beter, goedkoper en toegankelijker voor iedereen."</strong> - Paul Evers, Founder
+                </p>
+                <p style="color: var(--text-secondary); font-size: 1rem; max-width: 800px; margin: 20px auto 0;">
+                    Door alle kanten van het zorgsysteem te analyseren (want ik overdenk en analyseer alles), hebben we een platform gebouwd dat <strong>alle stakeholders</strong> verbindt en zorgt dat veel meer mensen écht baat hebben bij hun behandeling.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 40px 0;">
+                <div style="background: linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg)); border: 1px solid #27ae60; border-radius: 20px; padding: 30px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">👤</div>
+                    <h3 style="color: #27ae60; margin-bottom: 15px;">Voor Patiënten</h3>
+                    <ul style="text-align: left; color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>Begrip & Inzicht:</strong> Eindelijk begrijpen wat NAH betekent</li>
+                        <li><strong>24/7 Ondersteuning:</strong> Altijd hulp wanneer nodig</li>
+                        <li><strong>Stress Reductie:</strong> Minder overbelasting en frustratie</li>
+                        <li><strong>Betere Relaties:</strong> Minder conflicten met thuisfront</li>
+                        <li><strong>Autonomie:</strong> Zelfstandiger leven binnen mogelijkheden</li>
+                        <li><strong>Gepersonaliseerde Zorg:</strong> Behandeling op maat</li>
+                        <li><strong>Community:</strong> Verbinding met lotgenoten</li>
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg)); border: 1px solid #3498db; border-radius: 20px; padding: 30px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">👩‍⚕️</div>
+                    <h3 style="color: #3498db; margin-bottom: 15px;">Voor Therapeuten</h3>
+                    <ul style="text-align: left; color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>Betere Resultaten:</strong> Patiënten maken meer vooruitgang</li>
+                        <li><strong>Tijd Besparing:</strong> 40% efficiëntere sessies</li>
+                        <li><strong>Real-time Data:</strong> Continue monitoring tussen sessies</li>
+                        <li><strong>AI Ondersteuning:</strong> Slimmere behandelplannen</li>
+                        <li><strong>Meer Impact:</strong> Helpen van meer patiënten tegelijk</li>
+                        <li><strong>Objectieve Metingen:</strong> Bewezen voortgang</li>
+                        <li><strong>Minder Administratie:</strong> Automatische rapportage</li>
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(145deg, var(--tertiary-bg), var(--secondary-bg)); border: 1px solid #f39c12; border-radius: 20px; padding: 30px; text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🏥</div>
+                    <h3 style="color: #f39c12; margin-bottom: 15px;">Voor Zorginstellingen</h3>
+                    <ul style="text-align: left; color: var(--text-secondary); line-height: 1.8;">
+                        <li><strong>Drastische Kostenbesparing:</strong> 50% minder zorgkosten</li>
+                        <li><strong>Betere Zorgkwaliteit:</strong> Meetbare uitkomstverbetering</li>
+                        <li><strong>Hogere Tevredenheid:</strong> Patiënten én therapeuten</li>
+                        <li><strong>Meer Bereik:</strong> Helpen van veel meer patiënten</li>
+                        <li><strong>Minder Herhalingen:</strong> Preventie van terugval</li>
+                        <li><strong>Innovatie Leiderschap:</strong> Voorloper in digitale zorg</li>
+                        <li><strong>ROI Bewezen:</strong> Snelle terugverdientijd</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="appointment-card">
-                <div class="appointment-header">
+            <div style="background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(46, 204, 113, 0.05) 100%); border: 1px solid #27ae60; border-radius: 20px; padding: 40px; margin: 40px 0; text-align: center;">
+                <h3 style="color: #27ae60; font-size: 1.8rem; margin-bottom: 20px;">🌟 Waarom NAHpp de Zorg Transformeert</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 30px;">
                     <div>
-                        <div class="appointment-title">Logopedie</div>
-                        <div class="appointment-datetime">Morgen, 14:30 - 15:30</div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">💡 Begrip = Oplossing</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Wanneer patiënten en familie eindelijk begrijpen wat NAH betekent, verdwijnt veel stress en frustratie automatisch</p>
                     </div>
-                </div>
-                <div class="travel-info">
-                    <div class="travel-time">🚗 Vertrek om 14:00 (25 min reistijd)</div>
-                    <div class="travel-details">Ziekenhuis Centrum, Hoofdstraat 123</div>
+                    <div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">🎯 Veel Meer Baat</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Door 16 jaar zorganalyse zorgen we dat veel meer mensen écht profijt hebben van hun behandeling</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">💰 Goedkoper & Beter</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">De zorg wordt vele malen goedkoper én effectiever door slimme technologie en preventie</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">🚀 Toegankelijker</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">24/7 beschikbare zorg betekent dat niemand meer alleen hoeft te worstelen met NAH</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="appointment-card">
-                <div class="appointment-header">
-                    <div>
-                        <div class="appointment-title">Controle Neuroloog</div>
-                        <div class="appointment-datetime">Vrijdag, 10:00 - 11:00</div>
-                    </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">AI-Gedreven Personalisatie</h3>
+                    <p class="feature-description">Machine learning algoritmes die zich aanpassen aan individuele cognitieve patronen en voorkeuren voor optimale ondersteuning.</p>
                 </div>
-                <div class="travel-info">
-                    <div class="travel-time">🚌 Vertrek om 09:15 (Bus 42 naar Centraal)</div>
-                    <div class="travel-details">Academisch Ziekenhuis, Universiteitslaan 1</div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Digitale Activiteitenweger</h3>
+                    <p class="feature-description">Innovatieve energiebudget tool die patiënten helpt hun dag optimaal te plannen binnen hun energiecapaciteit.</p>
                 </div>
-            </div>
-
-            <div class="appointment-card">
-                <div class="appointment-header">
-                    <div>
-                        <div class="appointment-title">Fysiotherapie</div>
-                        <div class="appointment-datetime">Maandag, 16:00 - 17:00</div>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">24/7 AI Coach</h3>
+                    <p class="feature-description">Empathische AI-begeleiding die emotionele ondersteuning biedt en praktische tips geeft op basis van real-time data.</p>
                 </div>
-                <div class="travel-info">
-                    <div class="travel-time">🚴 Vertrek om 15:45 (12 min fietsen)</div>
-                    <div class="travel-details">Fysiotherapie Centrum, Parkstraat 45</div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Therapeuten Dashboard</h3>
+                    <p class="feature-description">Real-time inzichten in patiëntvoortgang met automatische behandelplan generatie en progress tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3 class="feature-title">Cognitieve Training</h3>
+                    <p class="feature-description">Gamified geheugen- en concentratieoefeningen die zich aanpassen aan het niveau en de voortgang van de gebruiker.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Cross-Platform Toegang</h3>
+                    <p class="feature-description">Naadloze ervaring op alle apparaten met offline functionaliteit voor continue ondersteuning.</p>
                 </div>
             </div>
         </section>
 
-        <!-- NAHpp Page -->
-        <section id="nahpp" class="page-section">
-            <div class="nahpp-header">
-                <h1 class="nahpp-title">NAHpp</h1>
-                <p class="nahpp-subtitle">Jouw hulp voor het voorbereiden en onthouden van gesprekken</p>
-                
-                <div class="founder-story">
-                    <div class="founder-name">Paul Evers - Grondlegger NAHpp</div>
-                    <div class="story-text">
-                        <strong>21 februari 2012</strong> - Ik was net 21 toen mijn leven voorgoed veranderde. Aangereden door een vrachtwagen met 80 km/u terwijl ik lopend de weg overstak. Een maand in coma, hersenschade die nooit meer te repareren is.
-                        <br><br>
-                        <strong>Het geluk-masker</strong> - Jarenlang zette ik een masker op van "geluk hebben" omdat ik er nog was. Maar de klachten werden erger: onbegrip, miscommunicatie, overvraging, overprikkeling. Ik heb mensen pijn gedaan door mijn beperkingen.
-                        <br><br>
-                        <strong>De oplossing</strong> - Wanneer je thuisfront weet waar je echt last van hebt en wat je besproken hebt tijdens behandelingen, wordt het leven makkelijker. Minder keuzes = minder stress. 
-                        <br><br>
-                        <em>Deze app is de hulp die ik iedereen met NAH wil geven. De ondersteuning die ik 13 jaar heb gemist.</em>
-                    </div>
+        <!-- Market Section -->
+        <section id="market" class="content-section">
+            <h2 class="section-title">Markt & Groeipotentieel</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">€45B</div>
+                    <div class="stat-label">Globale Digital Health Markt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">Jaarlijkse Groei (CAGR)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5M+</div>
+                    <div class="stat-label">Potentiële Gebruikers Europa</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">€2.5B</div>
+                    <div class="stat-label">Adresseerbare Markt (TAM)</div>
                 </div>
             </div>
 
-            <button class="new-conversation-btn" onclick="startNewConversation()">
-                <i class="fas fa-plus"></i> Nieuw Gesprek Voorbereiden
-            </button>
-
-            <div class="conversations-list">
-                <h3 class="conversations-title">Eerdere Gesprekken</h3>
-                
-                <div class="conversation-item" onclick="openConversation(1)">
-                    <div class="conversation-title">Logopedie - Voortgangsgesprek</div>
-                    <div class="conversation-date">Gisteren, 14:30</div>
-                </div>
-                
-                <div class="conversation-item" onclick="openConversation(2)">
-                    <div class="conversation-title">Neuroloog - Controle</div>
-                    <div class="conversation-date">Vorige week dinsdag, 10:00</div>
-                </div>
-                
-                <div class="conversation-item" onclick="openConversation(3)">
-                    <div class="conversation-title">Fysiotherapie - Intake</div>
-                    <div class="conversation-date">2 weken geleden, 16:00</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Energy Monitor Page -->
-        <section id="energy" class="page-section">
-            <h2 class="dashboard-title">Energie Monitor</h2>
-            <p style="text-align: center; color: var(--text-medium); margin-bottom: 2rem;">
-                Volg je energieniveau om overprikkeling te voorkomen
-            </p>
-
-            <div class="settings-section">
-                <h3 class="settings-title">Huidig Energieniveau</h3>
-                <div style="text-align: center; padding: 2rem;">
-                    <div style="width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(var(--success) 0deg 216deg, var(--border-light) 216deg 360deg); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                        <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--success);">
-                            60%
-                        </div>
+            <div class="financial-chart">
+                <h3 class="chart-title">Markt Penetratie Strategie</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 30px;">
+                    <div style="text-align: center; padding: 20px;">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 15px;">Jaar 1-2: Nederland</h4>
+                        <p style="color: var(--text-secondary);">Focus op Nederlandse markt, partnerships met ziekenhuizen en revalidatiecentra</p>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-green); margin-top: 15px;">50K gebruikers</div>
                     </div>
-                    <div style="font-size: 1.2rem; font-weight: 600; color: var(--success); margin-bottom: 0.5rem;">Goed</div>
-                    <div style="color: var(--text-medium);">Je kunt nog activiteiten ondernemen</div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin: 1.5rem 0;">
-                    <button class="energy-btn active" onclick="setEnergyLevel(1)" style="background: var(--danger); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
-                        Uitgeput
-                    </button>
-                    <button class="energy-btn" onclick="setEnergyLevel(2)" style="background: var(--warning); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
-                        Moe
-                    </button>
-                    <button class="energy-btn" onclick="setEnergyLevel(3)" style="background: var(--primary-blue); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
-                        Oké
-                    </button>
-                    <button class="energy-btn" onclick="setEnergyLevel(4)" style="background: var(--primary-green); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
-                        Goed
-                    </button>
-                    <button class="energy-btn" onclick="setEnergyLevel(5)" style="background: var(--success); color: white; border: none; padding: 1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; cursor: pointer;">
-                        Uitstekend
-                    </button>
-                </div>
-            </div>
-
-            <div class="settings-section">
-                <h3 class="settings-title">Dagelijkse Energie Trend</h3>
-                <div style="height: 200px; background: var(--soft-gray); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-medium);">
-                    📊 Energie grafiek (7 dagen)
-                </div>
-            </div>
-
-            <div class="settings-section">
-                <h3 class="settings-title">Overprikkeling Waarschuwingen</h3>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Automatische pauze suggesties</div>
-                        <div class="setting-desc">Krijg een melding bij laag energieniveau</div>
+                    <div style="text-align: center; padding: 20px;">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 15px;">Jaar 3-4: Europa</h4>
+                        <p style="color: var(--text-secondary);">Uitbreiding naar Duitsland, België, Frankrijk met lokalisatie</p>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-green); margin-top: 15px;">500K gebruikers</div>
                     </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Activiteit aanpassingen</div>
-                        <div class="setting-desc">Stel agenda aan op basis van energie</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="settings-section">
-                <h3 class="settings-title">Energie Tips</h3>
-                <div style="background: var(--light-blue); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-blue);">
-                    <div style="font-weight: 600; margin-bottom: 0.5rem;">💡 Tip van de dag</div>
-                    <div style="color: var(--text-medium);">
-                        Plan zware activiteiten wanneer je energie hoog is. Neem regelmatig pauzes van 10-15 minuten.
+                    <div style="text-align: center; padding: 20px;">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 15px;">Jaar 5+: Globaal</h4>
+                        <p style="color: var(--text-secondary);">Wereldwijde expansie, AI-vertaling, culturele aanpassingen</p>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--accent-green); margin-top: 15px;">2M+ gebruikers</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Support Network Page -->
-        <section id="support" class="page-section">
-            <h2 class="dashboard-title">Thuisfront & Ondersteuning</h2>
-            <p style="text-align: center; color: var(--text-medium); margin-bottom: 2rem;">
-                Deel belangrijke informatie met je ondersteuningsnetwerk
-            </p>
+        <!-- Financials Section -->
+        <section id="financials" class="content-section">
+            <h2 class="section-title">Financiële Projecties</h2>
+            
+            <div class="financial-chart">
+                <h3 class="chart-title">Omzet Projectie (€ Miljoen)</h3>
+                <div class="revenue-bars">
+                    <div class="revenue-bar" data-year="2025" data-value="€0.5M" style="height: 20px;"></div>
+                    <div class="revenue-bar" data-year="2026" data-value="€2.8M" style="height: 50px;"></div>
+                    <div class="revenue-bar" data-year="2027" data-value="€8.5M" style="height: 85px;"></div>
+                    <div class="revenue-bar" data-year="2028" data-value="€22M" style="height: 140px;"></div>
+                    <div class="revenue-bar" data-year="2029" data-value="€48M" style="height: 200px;"></div>
+                </div>
+            </div>
 
-            <div class="settings-section">
-                <h3 class="settings-title">Mijn Ondersteuningsnetwerk</h3>
-                
-                <div class="conversation-item" style="border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 50px; height: 50px; background: var(--primary-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                            M
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <div class="conversation-title">Moeder - Hoofdcontact</div>
-                            <div class="conversation-date">Ontvangt alle verslagen automatisch</div>
-                        </div>
-                        <div style="color: var(--success);">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">€29</div>
+                    <div class="stat-label">Maandelijkse Abonnement (B2C)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">€199</div>
+                    <div class="stat-label">Therapeuten Licentie (B2B)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Verwachte Gross Margin</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15x</div>
+                    <div class="stat-label">Verwachte ROI na 5 jaar</div>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Revenue Streams</h3>
+                    <p class="feature-description">
+                        • B2C Abonnementen (70%)<br>
+                        • B2B Therapeuten Licenties (25%)<br>
+                        • Premium Features & Training (5%)
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Unit Economics</h3>
+                    <p class="feature-description">
+                        • CAC: €45 (B2C), €350 (B2B)<br>
+                        • LTV: €890 (B2C), €2,400 (B2B)<br>
+                        • Payback Period: 18 maanden
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Break-even</h3>
+                    <p class="feature-description">
+                        • Operationeel break-even: Q4 2026<br>
+                        • 12,000 actieve gebruikers<br>
+                        • €4.2M ARR milestone
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="content-section">
+            <h2 class="section-title">Team & Recruitment</h2>
+            
+            <div class="cta-section" style="margin-bottom: 40px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border-color: var(--accent-gold);">
+                <h3 style="color: var(--accent-gold); font-size: 1.8rem; margin-bottom: 20px;">🚀 We Zoeken Toptalent!</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                    Sluit je aan bij ons missie-gedreven team. We zoeken gepassioneerde professionals die het verschil willen maken in de levens van NAH-patiënten wereldwijd.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 10px;">🧠 AI/ML Engineer</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Healthcare AI specialist</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 10px;">👩‍⚕️ Clinical Lead</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Neuropsycholoog/Revalidatiearts</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 10px;">📱 Mobile Developer</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">React Native/Flutter expert</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 10px;">💼 Business Development</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Healthcare partnerships</p>
                     </div>
                 </div>
-
-                <div class="conversation-item" style="border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 50px; height: 50px; background: var(--primary-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                            P
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <div class="conversation-title">Partner</div>
-                            <div class="conversation-date">Ontvangt energie updates</div>
-                        </div>
-                        <div style="color: var(--success);">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                    </div>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">PE</div>
+                    <h3 class="team-name">Paul Evers - Founder & CEO</h3>
+                    <p class="team-role">NAH Survivor & Tech Visionary</p>
+                    <p class="team-description">Unieke combinatie: 16 jaar professionele zorgervaring + 13 jaar persoonlijke NAH-ervaring sinds ongeval 21-02-2012 (toen 21 jaar). Heeft systematisch alle aspecten van het zorgsysteem geanalyseerd en 13 jaar intensief onderzoek gedaan naar de ultieme oplossing. Ontdekte dat fundamenteel begrip vaak al een transformerende oplossing is. Deze onrepliceerbare expertise-combinatie garandeert dat NAHpp de zorg exponentieel beter, kosteneffectiever en universeel toegankelijker maakt.</p>
                 </div>
-
-                <div class="conversation-item" style="border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 50px; height: 50px; background: var(--warning); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                            Z
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <div class="conversation-title">Zus</div>
-                            <div class="conversation-date">Noodcontact</div>
-                        </div>
-                        <div style="color: var(--text-medium);">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                    </div>
+                <div class="team-card" style="border: 2px dashed var(--accent-gold); opacity: 0.7;">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--accent-gold), #ffa500);">?</div>
+                    <h3 class="team-name">CTO - Gezocht</h3>
+                    <p class="team-role">AI & Healthcare Tech Expert</p>
+                    <p class="team-description">We zoeken een ervaren technisch leider met passie voor healthcare AI. Expertise in machine learning, GDPR-compliance en schaalbare architectuur vereist.</p>
                 </div>
+                <div class="team-card" style="border: 2px dashed var(--accent-gold); opacity: 0.7;">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--accent-gold), #ffa500);">?</div>
+                    <h3 class="team-name">CMO - Gezocht</h3>
+                    <p class="team-role">Neuropsycholoog/Revalidatiearts</p>
+                    <p class="team-description">Klinische leider met NAH-expertise. Ervaring in digitale zorg en onderzoek. Netwerk in Nederlandse/Europese revalidatiesector gewenst.</p>
+                </div>
+                <div class="team-card" style="border: 2px dashed var(--accent-gold); opacity: 0.7;">
+                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--accent-gold), #ffa500);">?</div>
+                    <h3 class="team-name">CFO - Gezocht</h3>
+                    <p class="team-role">HealthTech Finance Expert</p>
+                    <p class="team-description">Financieel strategist met SaaS en healthcare ervaring. Track record in fundraising en schaalbare business models. Kennis van zorgvergoedingen voordeel.</p>
+                </div>
+            </div>
 
-                <button class="new-conversation-btn" onclick="addSupportContact()" style="background: var(--primary-blue); margin-top: 1rem;">
-                    <i class="fas fa-plus"></i> Contactpersoon Toevoegen
+            <div class="feature-grid" style="margin-top: 40px;">
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Advisory Board</h3>
+                    <p class="feature-description">
+                        • Prof. Dr. Neurologie (AMC)<br>
+                        • Ex-Philips Healthcare VP<br>
+                        • Digital Health Investor<br>
+                        • Patient Advocacy Leader
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Strategic Partners</h3>
+                    <p class="feature-description">
+                        • Hersenstichting Nederland<br>
+                        • Revalidatie Nederland<br>
+                        • European Brain Council<br>
+                        • TU Delft AI Lab
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3 class="feature-title">Certificeringen</h3>
+                    <p class="feature-description">
+                        • ISO 27001 (Security)<br>
+                        • GDPR Compliant<br>
+                        • CE Medical Device<br>
+                        • FDA Breakthrough Designation (aanvraag)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Section -->
+        <section id="investment" class="content-section">
+            <h2 class="section-title">Investeermogelijkheid</h2>
+            
+            <div class="cta-section pulse">
+                <h3 class="cta-title">€1.5 Miljoen Seed Ronde</h3>
+                <p class="cta-text">
+                    Wordt early investor in de toekomst van NAH-zorg. Met uw investering bouwen we het platform dat miljoenen levens gaat veranderen. 
+                    <strong>Exclusieve kans voor visionaire investeerders.</strong>
+                </p>
+                <button class="cta-button" onclick="showContactInfo()">
+                    Word Early Investor
                 </button>
             </div>
 
-            <div class="settings-section">
-                <h3 class="settings-title">Automatisch Delen</h3>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Gesprek verslagen</div>
-                        <div class="setting-desc">Deel automatisch na elke afspraak</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">€1.5M</div>
+                    <div class="stat-label">Seed Funding Target</div>
                 </div>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Energie niveau</div>
-                        <div class="setting-desc">Deel dagelijks energieniveau</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Maanden Runway</div>
                 </div>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Noodsituaties</div>
-                        <div class="setting-desc">Stuur alert bij zeer laag energieniveau</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">15%</div>
+                    <div class="stat-label">Equity Aangeboden</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">€8.5M</div>
+                    <div class="stat-label">Pre-money Valuatie</div>
                 </div>
             </div>
 
-            <div class="settings-section">
-                <h3 class="settings-title">Recente Gedeelde Updates</h3>
-                
-                <div style="background: var(--light-green); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--success);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <div style="font-weight: 600; color: var(--success);">Logopedie Verslag</div>
-                        <div style="font-size: 0.8rem; color: var(--text-medium);">Gisteren 15:45</div>
-                    </div>
-                    <div style="color: var(--text-medium); font-size: 0.9rem;">
-                        Gedeeld met: Moeder, Partner • Vooruitgang in spraak, volgende afspraak over 2 weken
-                    </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Use of Funds</h3>
+                    <p class="feature-description">
+                        • Product Development (40%)<br>
+                        • Team Expansion (30%)<br>
+                        • Marketing & Sales (20%)<br>
+                        • Regulatory & Compliance (10%)
+                    </p>
                 </div>
-
-                <div style="background: var(--light-blue); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid var(--primary-blue);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <div style="font-weight: 600; color: var(--primary-blue);">Energie Update</div>
-                        <div style="font-size: 0.8rem; color: var(--text-medium);">Vandaag 09:00</div>
-                    </div>
-                    <div style="color: var(--text-medium); font-size: 0.9rem;">
-                        Gedeeld met: Partner • Energieniveau: Goed (60%) - Kan normale activiteiten doen
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Milestones</h3>
+                    <p class="feature-description">
+                        • Q1 2026: Beta Launch<br>
+                        • Q4 2026: 1,000 Users<br>
+                        • Q2 2027: Break-even<br>
+                        • Q4 2027: Series B Ready
+                    </p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Settings Page -->
-        <section id="settings" class="page-section">
-            <h2 class="dashboard-title">Instellingen</h2>
-
-            <div class="settings-section">
-                <h3 class="settings-title">Notificaties</h3>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Afspraak herinneringen</div>
-                        <div class="setting-desc">5 minuten voor afspraak</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Vertrektijd waarschuwing</div>
-                        <div class="setting-desc">Herinnering om te vertrekken</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3 class="feature-title">Exit Strategy</h3>
+                    <p class="feature-description">
+                        • Strategic Acquisition (Philips, Medtronic)<br>
+                        • IPO (5-7 jaar)<br>
+                        • Verwachte Exit: €500M - €1B<br>
+                        • 20-40x Return Potential
+                    </p>
                 </div>
             </div>
 
-            <div class="settings-section">
-                <h3 class="settings-title">Audio & Opname</h3>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Automatisch transcriptie</div>
-                        <div class="setting-desc">Zet opnames om naar tekst</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-                <div class="setting-item">
-                    <div>
-                        <div class="setting-label">Opname kwaliteit</div>
-                        <div class="setting-desc">Hoge kwaliteit voor betere transcriptie</div>
-                    </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
+            <div style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(192, 57, 43, 0.05) 100%); border: 1px solid #e74c3c; border-radius: 20px; padding: 40px; margin: 40px 0; text-align: center;">
+                <h3 style="color: #e74c3c; font-size: 1.8rem; margin-bottom: 20px;">🛡️ Onze Onoverkomelijke Voorsprong</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem;">
+                    <strong>Waarom concurrenten ons fundamenteel niet kunnen inhalen:</strong> Paul Evers is wereldwijd de enige tech-entrepreneur met de unieke combinatie van 16 jaar professionele zorgervaring + 13 jaar persoonlijke NAH-ervaring + 13 jaar systematisch onderzoek naar de ultieme oplossing. Hij heeft methodisch alle aspecten van het zorgsysteem geanalyseerd (want hij overdenkt en analyseert alles tot in de kleinste details) en wetenschappelijk bewezen dat fundamenteel begrip vaak al een transformerende oplossing vormt.
+                </p>
+                <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 20px;">
+                    <em>"Ik heb letterlijk mijn leven gewijd aan het systematisch analyseren van de zorg en het wetenschappelijk ontwikkelen van deze revolutionaire oplossing. Deze unieke expertise-combinatie is praktisch onmogelijk te repliceren door concurrenten."</em> - Paul Evers, Founder NAHpp
+                </p>
+                <p style="color: var(--text-secondary); font-size: 1rem;">
+                    <strong>Bewezen Resultaat:</strong> Een geavanceerde AI-gedreven app die de zorg exponentieel beter, drastisch kosteneffectiever en universeel toegankelijker maakt, waardoor significant meer mensen wereldwijd werkelijk transformerende baat hebben bij hun neurologische behandeling.
+                </p>
             </div>
 
-            <div class="settings-section">
-                <h3 class="settings-title">Privacy & Delen</h3>
-                <div class="setting-item">
+            <div style="background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(46, 204, 113, 0.05) 100%); border: 1px solid #27ae60; border-radius: 20px; padding: 40px; margin: 40px 0; text-align: center;">
+                <h3 style="color: #27ae60; font-size: 1.8rem; margin-bottom: 20px;">🌟 Waarom Nu Investeren?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
                     <div>
-                        <div class="setting-label">Automatisch delen</div>
-                        <div class="setting-desc">Deel verslagen met thuisfront</div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">First Mover Advantage</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Geen directe concurrenten in NAH-specifieke digitale ondersteuning</p>
                     </div>
-                    <div class="toggle-switch" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-                <div class="setting-item">
                     <div>
-                        <div class="setting-label">Data opslag</div>
-                        <div class="setting-desc">Bewaar gegevens lokaal op apparaat</div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">Proven Team</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Combinatie van persoonlijke ervaring en professionele expertise</p>
                     </div>
-                    <div class="toggle-switch active" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="settings-section">
-                <h3 class="settings-title">Toegankelijkheid</h3>
-                <div class="setting-item">
                     <div>
-                        <div class="setting-label">Grote tekst</div>
-                        <div class="setting-desc">Vergroot lettergrootte voor betere leesbaarheid</div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">Scalable Technology</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">AI-platform dat zich aanpast aan verschillende neurologische aandoeningen</p>
                     </div>
-                    <div class="toggle-switch" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-                <div class="setting-item">
                     <div>
-                        <div class="setting-label">Hoog contrast</div>
-                        <div class="setting-desc">Verhoog contrast voor betere zichtbaarheid</div>
-                    </div>
-                    <div class="toggle-switch" onclick="toggleSetting(this)">
-                        <div class="toggle-slider"></div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 10px;">Social Impact</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Directe verbetering van levenskwaliteit voor miljoenen mensen</p>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
     <script>
-        // Global variables
-        let isRecording = false;
-        let recordingStartTime = null;
-        let recordingInterval = null;
-        let currentPage = 'dashboard';
-
-        // Page navigation
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page-section').forEach(page => {
-                page.classList.remove('active');
-            });
+        // Section Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
             
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
+            // Remove active class from all nav buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
             
-            // Update menu items
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.classList.remove('active');
-            });
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
             
-            // Find and activate corresponding menu item
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if ((pageId === 'dashboard' && text.includes('dashboard')) ||
-                    (pageId === 'recorder' && text.includes('gesprek')) ||
-                    (pageId === 'agenda' && text.includes('agenda')) ||
-                    (pageId === 'nahpp' && text.includes('nahpp')) ||
-                    (pageId === 'energy' && text.includes('energie')) ||
-                    (pageId === 'support' && text.includes('thuisfront')) ||
-                    (pageId === 'settings' && text.includes('instellingen'))) {
-                    item.classList.add('active');
-                }
-            });
+            // Add active class to clicked button
+            event.target.classList.add('active');
             
-            currentPage = pageId;
-            closeMenu();
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Menu functions
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('menuOverlay');
-            
-            menu.classList.toggle('active');
-            overlay.classList.toggle('active');
+        // Contact Info Modal
+        function showContactInfo() {
+            alert(`📧 Contact Paul Evers - NAHpp Founder:\n\n` +
+                  `Email: Luchtkunstenaar@gmail.com\n` +
+                  `Instagram: @Luchtkunstenaar\n` +
+                  `X (Twitter): @mcdropke (peaceman)\n\n` +
+                  `Klaar om de zorg te revolutioneren? Laten we praten over uw investering in de toekomst van NAH-ondersteuning!`);
         }
 
-        function closeMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('menuOverlay');
-            
-            menu.classList.remove('active');
-            overlay.classList.remove('active');
-        }
-
-        // Recording functions
-        function toggleRecording() {
-            if (!isRecording) {
-                startRecording();
-            } else {
-                stopRecording();
-            }
-        }
-
-        function startRecording() {
-            isRecording = true;
-            recordingStartTime = Date.now();
-            
-            const recordBtn = document.getElementById('recordBtn');
-            const recordingStatus = document.getElementById('recordingStatus');
-            
-            recordBtn.classList.add('recording');
-            recordBtn.innerHTML = '<i class="fas fa-stop"></i>';
-            recordingStatus.textContent = 'Opname bezig...';
-            
-            // Start timer
-            recordingInterval = setInterval(updateRecordingTime, 1000);
-            
-            // Simulate recording (in real app, this would use Web Audio API)
-            console.log('Recording started...');
-        }
-
-        function stopRecording() {
-            isRecording = false;
-            
-            const recordBtn = document.getElementById('recordBtn');
-            const recordingStatus = document.getElementById('recordingStatus');
-            const successMessage = document.getElementById('successMessage');
-            
-            recordBtn.classList.remove('recording');
-            recordBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-            recordingStatus.textContent = 'Opname gestopt - Verslag wordt gegenereerd...';
-            
-            // Stop timer
-            clearInterval(recordingInterval);
-            
-            // Show success message
-            setTimeout(() => {
-                successMessage.style.display = 'block';
-                recordingStatus.textContent = 'Druk op de knop om te starten';
-                document.getElementById('recordingTime').textContent = '00:00';
-                
-                // Hide success message after 3 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 3000);
-            }, 2000);
-            
-            console.log('Recording stopped...');
-        }
-
-        function updateRecordingTime() {
-            if (!isRecording || !recordingStartTime) return;
-            
-            const elapsed = Date.now() - recordingStartTime;
-            const minutes = Math.floor(elapsed / 60000);
-            const seconds = Math.floor((elapsed % 60000) / 1000);
-            
-            const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            document.getElementById('recordingTime').textContent = timeString;
-        }
-
-        // Settings functions
-        function toggleSetting(toggleElement) {
-            toggleElement.classList.toggle('active');
-            
-            // In a real app, this would save the setting
-            const isActive = toggleElement.classList.contains('active');
-            console.log('Setting toggled:', isActive);
-        }
-
-        // Energy Monitor functions
-        let currentEnergyLevel = 4; // Default to "Goed"
-        
-        function setEnergyLevel(level) {
-            currentEnergyLevel = level;
-            
-            // Update energy buttons
-            document.querySelectorAll('.energy-btn').forEach((btn, index) => {
-                btn.classList.remove('active');
-                if (index + 1 === level) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Update energy display
-            updateEnergyDisplay(level);
-            
-            // Notify support network if enabled
-            if (level <= 2) {
-                showLowEnergyAlert(level);
-            }
-            
-            console.log(`Energy level set to: ${level}`);
-        }
-        
-        function updateEnergyDisplay(level) {
-            const percentage = level * 20;
-            const colors = ['#ef4444', '#f59e0b', '#2563eb', '#059669', '#10b981'];
-            const labels = ['Uitgeput', 'Moe', 'Oké', 'Goed', 'Uitstekend'];
-            
-            // Update circular progress (simplified for demo)
-            const progressElement = document.querySelector('[style*="conic-gradient"]');
-            if (progressElement) {
-                const degrees = (percentage / 100) * 360;
-                progressElement.style.background = `conic-gradient(${colors[level-1]} 0deg ${degrees}deg, var(--border-light) ${degrees}deg 360deg)`;
-            }
-            
-            // Update percentage text
-            const percentageElement = progressElement?.querySelector('div div');
-            if (percentageElement) {
-                percentageElement.textContent = `${percentage}%`;
-                percentageElement.style.color = colors[level-1];
-            }
-            
-            // Update label
-            const labelElement = percentageElement?.parentElement?.nextElementSibling;
-            if (labelElement) {
-                labelElement.textContent = labels[level-1];
-                labelElement.style.color = colors[level-1];
-            }
-        }
-        
-        function showLowEnergyAlert(level) {
-            const alertMessages = {
-                1: "⚠️ Zeer laag energieniveau gedetecteerd. Overweeg een pauze en informeer je ondersteuningsnetwerk.",
-                2: "💛 Laag energieniveau. Tijd voor een rustpauze. Je thuisfront wordt geïnformeerd."
-            };
-            
-            // Show alert
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'message error';
-            alertDiv.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <div>${alertMessages[level]}</div>
-                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.2rem;">×</button>
-                </div>
-            `;
-            
-            const container = document.querySelector('#energy .container, #energy');
-            if (container) {
-                container.insertBefore(alertDiv, container.firstChild);
-                
-                // Auto-remove after 10 seconds
-                setTimeout(() => {
-                    if (alertDiv.parentNode) {
-                        alertDiv.parentNode.removeChild(alertDiv);
-                    }
-                }, 10000);
-            }
-        }
-
-        // Support Network functions
-        function addSupportContact() {
-            const contactModal = document.createElement('div');
-            contactModal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.5); z-index: 1000; 
-                display: flex; align-items: center; justify-content: center; padding: 1rem;
-            `;
-            
-            contactModal.innerHTML = `
-                <div style="background: var(--white); border-radius: 16px; padding: 2rem; max-width: 400px; width: 100%;">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--text-dark);">Contactpersoon Toevoegen</h3>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Naam</label>
-                        <input type="text" class="form-input" placeholder="Voer naam in" id="contactName">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Relatie</label>
-                        <select class="form-input" id="contactRelation">
-                            <option>Familie</option>
-                            <option>Partner</option>
-                            <option>Vriend</option>
-                            <option>Zorgverlener</option>
-                            <option>Anders</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">E-mail</label>
-                        <input type="email" class="form-input" placeholder="email@voorbeeld.nl" id="contactEmail">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Wat delen?</label>
-                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
-                                <input type="checkbox" checked> Gesprek verslagen
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
-                                <input type="checkbox" checked> Energie updates
-                            </label>
-                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
-                                <input type="checkbox"> Agenda wijzigingen
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                        <button onclick="saveContact()" class="btn" style="flex: 1; background: var(--primary-green); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
-                            Opslaan
-                        </button>
-                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" class="btn" style="flex: 1; background: var(--border-light); color: var(--text-dark); border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
-                            Annuleren
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(contactModal);
-        }
-        
-        function saveContact() {
-            const name = document.getElementById('contactName').value;
-            const relation = document.getElementById('contactRelation').value;
-            const email = document.getElementById('contactEmail').value;
-            
-            if (name && email) {
-                // In real app, this would save to database
-                console.log('Contact saved:', { name, relation, email });
-                
-                // Show success message
-                const successDiv = document.createElement('div');
-                successDiv.className = 'message success';
-                successDiv.textContent = `✅ ${name} is toegevoegd aan je ondersteuningsnetwerk`;
-                
-                const supportSection = document.getElementById('support');
-                if (supportSection) {
-                    supportSection.insertBefore(successDiv, supportSection.firstChild);
-                    
-                    setTimeout(() => {
-                        if (successDiv.parentNode) {
-                            successDiv.parentNode.removeChild(successDiv);
-                        }
-                    }, 3000);
-                }
-                
-                // Close modal
-                document.querySelector('[style*="position: fixed"]').remove();
-            } else {
-                alert('Vul alle verplichte velden in');
-            }
-        }
-
-        // NAHpp functions
-        function startNewConversation() {
-            const conversationModal = document.createElement('div');
-            conversationModal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.5); z-index: 1000; 
-                display: flex; align-items: center; justify-content: center; padding: 1rem;
-                overflow-y: auto;
-            `;
-            
-            conversationModal.innerHTML = `
-                <div style="background: var(--white); border-radius: 16px; padding: 2rem; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto;">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--text-dark);">📝 Nieuw Gesprek Voorbereiden</h3>
-                    
-                    <div class="form-group">
-                        <label class="form-label">👤 Met wie heb je de afspraak?</label>
-                        <input type="text" class="form-input" placeholder="Bijv. Dr. Jansen (logopedist)" id="conversationWho">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">📍 Waar vindt het plaats?</label>
-                        <input type="text" class="form-input" placeholder="Bijv. Ziekenhuis Centrum, kamer 204" id="conversationWhere">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">🗓️ Wanneer?</label>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                            <input type="date" class="form-input" id="conversationDate">
-                            <input type="time" class="form-input" id="conversationTime">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">🎯 Wat is het doel van dit gesprek?</label>
-                        <textarea class="form-input form-textarea" placeholder="Bijv. Voortgang bespreken, nieuwe oefeningen krijgen, vragen over medicatie" id="conversationGoal"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">❓ Welke vragen wil je stellen?</label>
-                        <textarea class="form-input form-textarea" placeholder="Bijv. Hoe gaat het met mijn spraak? Kan ik de oefeningen aanpassen? Wanneer volgende controle?" id="conversationQuestions"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">📋 Wat wil je bespreken?</label>
-                        <textarea class="form-input form-textarea" placeholder="Bijv. Klachten deze week, vooruitgang, problemen thuis" id="conversationTopics"></textarea>
-                    </div>
-                    
-                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                        <button onclick="saveConversationPrep()" class="btn" style="flex: 1; background: var(--primary-green); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
-                            💾 Opslaan & Toevoegen aan Agenda
-                        </button>
-                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" class="btn" style="background: var(--border-light); color: var(--text-dark); border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
-                            Annuleren
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(conversationModal);
-        }
-        
-        function saveConversationPrep() {
-            const who = document.getElementById('conversationWho').value;
-            const where = document.getElementById('conversationWhere').value;
-            const date = document.getElementById('conversationDate').value;
-            const time = document.getElementById('conversationTime').value;
-            const goal = document.getElementById('conversationGoal').value;
-            const questions = document.getElementById('conversationQuestions').value;
-            const topics = document.getElementById('conversationTopics').value;
-            
-            if (who && where && date && time) {
-                // In real app, this would save to database and add to calendar
-                console.log('Conversation prep saved:', { who, where, date, time, goal, questions, topics });
-                
-                // Show success message
-                const successDiv = document.createElement('div');
-                successDiv.className = 'message success';
-                successDiv.innerHTML = `
-                    ✅ Gesprek voorbereid en toegevoegd aan agenda<br>
-                    <small>${who} op ${date} om ${time}</small>
-                `;
-                
-                const nahppSection = document.getElementById('nahpp');
-                if (nahppSection) {
-                    nahppSection.insertBefore(successDiv, nahppSection.firstChild);
-                    
-                    setTimeout(() => {
-                        if (successDiv.parentNode) {
-                            successDiv.parentNode.removeChild(successDiv);
-                        }
-                    }, 5000);
-                }
-                
-                // Close modal
-                document.querySelector('[style*="position: fixed"]').remove();
-            } else {
-                alert('Vul minimaal wie, waar, datum en tijd in');
-            }
-        }
-
-        function openConversation(id) {
-            const conversations = {
-                1: {
-                    title: "Logopedie - Voortgangsgesprek",
-                    date: "Gisteren, 14:30",
-                    who: "Dr. Jansen (Logopedist)",
-                    where: "Ziekenhuis Centrum, kamer 204",
-                    goal: "Voortgang spraak bespreken en nieuwe oefeningen",
-                    discussed: "Spraak is verbeterd, minder moeite met lange zinnen. Nieuwe oefeningen voor thuis gekregen.",
-                    actions: "Dagelijks 15 min oefenen, volgende afspraak over 2 weken",
-                    audio: "Opname beschikbaar (12:34 min)"
-                },
-                2: {
-                    title: "Neuroloog - Controle",
-                    date: "Vorige week dinsdag, 10:00",
-                    who: "Dr. Peters (Neuroloog)",
-                    where: "Academisch Ziekenhuis",
-                    goal: "Controle hersenfuncties en medicatie",
-                    discussed: "Hersenscan toont stabiele situatie. Medicatie werkt goed.",
-                    actions: "Medicatie voortzetten, volgende controle over 6 maanden",
-                    audio: "Opname beschikbaar (8:45 min)"
-                }
-            };
-            
-            const conversation = conversations[id];
-            if (!conversation) return;
-            
-            const detailModal = document.createElement('div');
-            detailModal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(0,0,0,0.5); z-index: 1000; 
-                display: flex; align-items: center; justify-content: center; padding: 1rem;
-                overflow-y: auto;
-            `;
-            
-            detailModal.innerHTML = `
-                <div style="background: var(--white); border-radius: 16px; padding: 2rem; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                        <h3 style="color: var(--text-dark); margin: 0;">${conversation.title}</h3>
-                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-medium);">×</button>
-                    </div>
-                    
-                    <div style="background: var(--light-blue); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                            <div>
-                                <div style="font-weight: 600; color: var(--primary-blue); margin-bottom: 0.25rem;">👤 Met wie</div>
-                                <div>${conversation.who}</div>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: var(--primary-blue); margin-bottom: 0.25rem;">📍 Waar</div>
-                                <div>${conversation.where}</div>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: var(--primary-blue); margin-bottom: 0.25rem;">🗓️ Wanneer</div>
-                                <div>${conversation.date}</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">🎯 Doel van gesprek</div>
-                        <div style="background: var(--soft-gray); padding: 1rem; border-radius: 8px;">${conversation.goal}</div>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">💬 Wat is besproken</div>
-                        <div style="background: var(--light-green); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--success);">${conversation.discussed}</div>
-                    </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">✅ Actiepunten</div>
-                        <div style="background: var(--light-blue); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary-blue);">${conversation.actions}</div>
-                    </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <div style="font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">🎵 Audio opname</div>
-                        <div style="background: var(--soft-gray); padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 1rem;">
-                            <button style="background: var(--primary-blue); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
-                                ▶️ Afspelen
-                            </button>
-                            <span>${conversation.audio}</span>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 1rem;">
-                        <button onclick="shareConversation(${id})" class="btn" style="flex: 1; background: var(--primary-green); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
-                            📤 Deel met Thuisfront
-                        </button>
-                        <button onclick="editConversation(${id})" class="btn" style="background: var(--primary-blue); color: white; border: none; padding: 0.75rem; border-radius: 8px; cursor: pointer;">
-                            ✏️ Bewerken
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(detailModal);
-        }
-        
-        function shareConversation(id) {
-            // In real app, this would send to selected contacts
-            const successDiv = document.createElement('div');
-            successDiv.className = 'message success';
-            successDiv.textContent = '✅ Gesprek verslag gedeeld met je ondersteuningsnetwerk';
-            
-            document.body.appendChild(successDiv);
-            
-            setTimeout(() => {
-                if (successDiv.parentNode) {
-                    successDiv.parentNode.removeChild(successDiv);
-                }
-            }, 3000);
-            
-            console.log(`Conversation ${id} shared with support network`);
-        }
-        
-        function editConversation(id) {
-            alert('Bewerk functie wordt geladen...\n\nHier zou je het gesprek verslag kunnen aanpassen en extra notities toevoegen.');
-        }
-
-        // Initialize app
+        // Initialize animations on load
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('NAHpp App initialized');
-            
-            // Set initial page
-            showPage('dashboard');
-            
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                // ESC to close menu
-                if (e.key === 'Escape') {
-                    closeMenu();
-                }
-                
-                // Space to toggle recording (when on recorder page)
-                if (e.key === ' ' && currentPage === 'recorder') {
-                    e.preventDefault();
-                    toggleRecording();
-                }
-            });
-            
-            // Add touch gestures for mobile
-            let touchStartX = 0;
-            let touchStartY = 0;
-            
-            document.addEventListener('touchstart', function(e) {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            });
-            
-            document.addEventListener('touchend', function(e) {
-                const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
-                
-                const deltaX = touchEndX - touchStartX;
-                const deltaY = touchEndY - touchStartY;
-                
-                // Swipe right to open menu (from left edge)
-                if (deltaX > 100 && Math.abs(deltaY) < 100 && touchStartX < 50) {
-                    toggleMenu();
-                }
-                
-                // Swipe left to close menu
-                if (deltaX < -100 && Math.abs(deltaY) < 100) {
-                    closeMenu();
-                }
-            });
-            
-            // Simulate notifications (in real app, these would be actual push notifications)
+            // Add loading animation
             setTimeout(() => {
-                if (currentPage === 'dashboard') {
-                    console.log('Notification: Afspraak morgen om 14:30 - Logopedie');
-                }
-            }, 5000);
-        });
-
-        // Accessibility improvements
-        function announcePageChange(pageName) {
-            // For screen readers
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', 'polite');
-            announcement.setAttribute('aria-atomic', 'true');
-            announcement.style.position = 'absolute';
-            announcement.style.left = '-10000px';
-            announcement.textContent = `Navigated to ${pageName} page`;
-            document.body.appendChild(announcement);
+                document.body.classList.add('loaded');
+            }, 500);
             
-            setTimeout(() => {
-                document.body.removeChild(announcement);
-            }, 1000);
-        }
-
-        // Error handling
-        window.addEventListener('error', function(e) {
-            console.error('App error:', e.error);
-            
-            // In a real app, this would send error reports to a logging service
-            const errorMessage = document.createElement('div');
-            errorMessage.className = 'message error';
-            errorMessage.textContent = 'Er is een fout opgetreden. Probeer de pagina te vernieuwen.';
-            
-            const container = document.querySelector('.container');
-            if (container) {
-                container.insertBefore(errorMessage, container.firstChild);
-                
+            // Animate revenue bars
+            const bars = document.querySelectorAll('.revenue-bar');
+            bars.forEach((bar, index) => {
                 setTimeout(() => {
-                    if (errorMessage.parentNode) {
-                        errorMessage.parentNode.removeChild(errorMessage);
-                    }
-                }, 5000);
-            }
-        });
-
-        // Performance monitoring
-        window.addEventListener('load', function() {
-            // Monitor app performance
-            if ('performance' in window) {
-                const loadTime = performance.now();
-                console.log(`App loaded in ${Math.round(loadTime)}ms`);
-                
-                // In a real app, this would be sent to analytics
-                if (loadTime > 3000) {
-                    console.warn('App loading slowly, consider optimization');
-                }
-            }
-        });
-
-        // Service Worker registration (for offline functionality)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed');
-                    });
+                    bar.style.opacity = '1';
+                }, index * 200);
             });
-        }
+        });
+
+        // Smooth scrolling for better UX
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetSection = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                const element = document.getElementById(targetSection);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add floating animation to header on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const header = document.querySelector('.header');
+            
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                header.style.transform = 'translateY(-10px)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Add pulse effect to CTA button periodically
+        setInterval(() => {
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.classList.add('pulse');
+                setTimeout(() => {
+                    ctaButton.classList.remove('pulse');
+                }, 2000);
+            }
+        }, 10000);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97156e7094ca670c',t:'MTc1NTU2MjI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9715b543f4415671',t:'MTc1NTU2NTE2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
