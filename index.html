@@ -1,2492 +1,392 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refshare Pro - TON Referral Platform</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>De Tuskense Triatlon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* Day Theme */
-            --day-bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
-            --day-bg-secondary: rgba(255, 255, 255, 0.95);
-            --day-text-primary: #1e293b;
-            --day-text-secondary: #475569;
-            --day-accent: #3b82f6;
-            --day-accent-hover: #2563eb;
-            --day-border: rgba(148, 163, 184, 0.3);
-            --day-shadow: rgba(0, 0, 0, 0.1);
-            
-            /* Classic Theme (Green) */
-            --classic-bg-primary: linear-gradient(135deg, #0a0f0a 0%, #1a2e1a 50%, #0f1f0f 100%);
-            --classic-bg-secondary: rgba(15, 25, 15, 0.95);
-            --classic-text-primary: #e8f5e8;
-            --classic-text-secondary: #b8d4b8;
-            --classic-accent: #32cd32;
-            --classic-accent-hover: #228b22;
-            --classic-border: rgba(34, 139, 34, 0.3);
-            --classic-shadow: rgba(0, 0, 0, 0.3);
-            
-            /* Night Theme */
-            --night-bg-primary: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            --night-bg-secondary: rgba(15, 15, 35, 0.95);
-            --night-text-primary: #e2e8f0;
-            --night-text-secondary: #94a3b8;
-            --night-accent: #8b5cf6;
-            --night-accent-hover: #7c3aed;
-            --night-border: rgba(139, 92, 246, 0.3);
-            --night-shadow: rgba(0, 0, 0, 0.4);
-        }
-        
-        [data-theme="day"] {
-            --bg-primary: var(--day-bg-primary);
-            --bg-secondary: var(--day-bg-secondary);
-            --text-primary: var(--day-text-primary);
-            --text-secondary: var(--day-text-secondary);
-            --accent: var(--day-accent);
-            --accent-hover: var(--day-accent-hover);
-            --border: var(--day-border);
-            --shadow: var(--day-shadow);
-        }
-        
-        [data-theme="classic"] {
-            --bg-primary: var(--classic-bg-primary);
-            --bg-secondary: var(--classic-bg-secondary);
-            --text-primary: var(--classic-text-primary);
-            --text-secondary: var(--classic-text-secondary);
-            --accent: var(--classic-accent);
-            --accent-hover: var(--classic-accent-hover);
-            --border: var(--classic-border);
-            --shadow: var(--classic-shadow);
-        }
-        
-        [data-theme="night"] {
-            --bg-primary: var(--night-bg-primary);
-            --bg-secondary: var(--night-bg-secondary);
-            --text-primary: var(--night-text-primary);
-            --text-secondary: var(--night-text-secondary);
-            --accent: var(--night-accent);
-            --accent-hover: var(--night-accent-hover);
-            --border: var(--night-border);
-            --shadow: var(--night-shadow);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Exo 2', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            min-height: 100vh;
-            color: var(--text-primary);
-            padding: 20px;
-            overflow-x: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        /* 3D Background Shapes */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, var(--accent) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, var(--accent) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, var(--accent) 0%, transparent 30%);
-            opacity: 0.05;
-            z-index: -2;
-            pointer-events: none;
-        }
-        
-        .bg-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            font-family: 'Poppins', sans-serif;
+            background-color: #111827; /* Donkergrijs/blauw */
+            color: #F3F4F6; /* Lichtgrijs */
             overflow: hidden;
+            background-image: radial-gradient(#374151 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        
-        .shape {
+        .screen {
+            display: none;
             position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent), transparent);
-            opacity: 0.03;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-        
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 30%;
-            animation-delay: 10s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(120deg); }
-            66% { transform: translateY(20px) rotate(240deg); }
-        }
-        
-        .container {
-            max-width: 100%;
-            margin: 0;
-            background: var(--bg-secondary);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 20px 20px 100px 20px;
-            min-height: 100vh;
-            box-shadow: 
-                0 25px 50px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--border);
-            position: relative;
-            transform-style: preserve-3d;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
-            border-radius: 24px;
-            z-index: -1;
-            opacity: 0.3;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .logo {
-            font-size: 48px;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, var(--accent), #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 4px 8px var(--shadow));
-            transform: translateZ(10px);
-        }
-        
-        h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: 28px;
-            font-weight: 900;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 
-                2px 2px 4px var(--shadow),
-                0 0 10px var(--accent);
-            transform: translateZ(5px);
-        }
-        
-        .subtitle {
-            opacity: 0.8;
-            font-size: 14px;
-            color: var(--text-secondary);
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        /* Settings Button */
-        .settings-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 
-                0 8px 16px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            transform: translateZ(20px);
-        }
-        
-        .settings-btn:hover {
-            transform: translateZ(25px) scale(1.1);
-            box-shadow: 0 12px 24px var(--shadow);
-        }
-        
-        /* Settings Modal */
-        .settings-modal {
-            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            flex-direction: column;
+            padding: 1rem;
+            overflow-y: auto;
         }
-        
-        .settings-content {
-            background: var(--bg-secondary);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--border);
-            transform: translateZ(30px);
-        }
-        
-        .settings-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-align: center;
-            color: var(--accent);
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .setting-group {
-            margin-bottom: 20px;
-        }
-        
-        .setting-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .setting-select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px var(--shadow);
-        }
-        
-        .setting-select:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 
-                inset 0 2px 4px var(--shadow),
-                0 0 0 3px rgba(var(--accent), 0.1);
-        }
-        
-        .theme-preview {
+        .screen.active {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            opacity: 1;
         }
-        
-        .theme-option {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .theme-option.day {
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            color: #1e293b;
-            border-color: #3b82f6;
-        }
-        
-        .theme-option.classic {
-            background: linear-gradient(135deg, #0a0f0a, #1a2e1a);
-            color: #e8f5e8;
-            border-color: #32cd32;
-        }
-        
-        .theme-option.night {
-            background: linear-gradient(135deg, #0f0f23, #1a1a2e);
-            color: #e2e8f0;
-            border-color: #8b5cf6;
-        }
-        
-        .theme-option.active {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px var(--shadow);
-        }
-        
-        .close-settings {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-        
-        .close-settings:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px var(--shadow);
-        }
-        
-        .owner-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 12px;
-            margin: 15px 0;
-            box-shadow: 
-                0 4px 12px rgba(255, 215, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transform: translateZ(5px);
-        }
-        
-        .app-description {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 
-                0 8px 16px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateZ(2px);
-        }
-        
-        .description-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 15px;
-            text-align: center;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .description-content p {
-            margin-bottom: 12px;
-            line-height: 1.5;
-            opacity: 0.9;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .description-content p:first-child {
-            text-align: center;
-            font-size: 16px;
-            color: #ffd700;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .how-it-works {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-            gap: 10px;
-        }
-        
-        .work-step {
-            text-align: center;
-            flex: 1;
-            padding: 15px 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transform: translateZ(3px);
-        }
-        
-        .step-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 2px 4px var(--shadow));
-        }
-        
-        .step-text {
-            font-size: 12px;
-            font-weight: 600;
-            opacity: 0.9;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .benefits {
-            margin-top: 15px;
-        }
-        
-        .benefit {
-            font-size: 13px;
-            margin-bottom: 6px;
-            opacity: 0.9;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .wallet-required {
-            background: rgba(0, 136, 204, 0.2);
-            border: 2px solid #0088cc;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 8px 16px var(--shadow);
-            transform: translateZ(2px);
-        }
-        
-        .wallet-required h3 {
-            color: #0088cc;
-            margin-bottom: 10px;
-            font-size: 18px;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .wallet-required p {
-            margin-bottom: 15px;
-            opacity: 0.9;
-            line-height: 1.4;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .fairness-note {
-            background: rgba(46, 204, 113, 0.1);
-            border: 1px solid rgba(46, 204, 113, 0.3);
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 13px;
-            color: #2ecc71;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .account-section {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 
-                0 8px 16px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateZ(2px);
-        }
-        
-        .account-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .user-details h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            color: var(--accent);
-            margin-bottom: 4px;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .user-details p {
-            font-size: 14px;
-            opacity: 0.8;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .invite-section {
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.15), rgba(255, 193, 7, 0.1));
-            border: 2px solid rgba(255, 215, 0, 0.4);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 16px var(--shadow);
-            transform: translateZ(2px);
-        }
-        
-        .invite-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffd700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .invite-rewards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .reward-tier {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-            font-size: 12px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateZ(1px);
-        }
-        
-        .reward-tier .number {
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffd700;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .invite-link {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            border-radius: 8px;
-            margin: 10px 0;
-            word-break: break-all;
-            font-family: monospace;
-            font-size: 12px;
-            border: 1px solid var(--border);
-            box-shadow: inset 0 2px 4px var(--shadow);
-        }
-        
-        .usage-requirement {
-            background: rgba(241, 196, 15, 0.2);
-            border: 2px solid #f1c40f;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            color: #f1c40f;
-            box-shadow: 0 8px 16px var(--shadow);
-            transform: translateZ(2px);
-        }
-        
-        .usage-requirement h4 {
-            font-family: 'Orbitron', monospace;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            height: 8px;
-            margin: 8px 0;
-            overflow: hidden;
-            box-shadow: inset 0 2px 4px var(--shadow);
-        }
-        
-        .progress-fill {
-            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-            height: 100%;
-            border-radius: 6px;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px var(--accent);
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-        
-        .stat-card {
-            background: var(--bg-secondary);
-            padding: 15px 10px;
-            border-radius: 12px;
-            text-align: center;
-            border: 2px solid var(--border);
-            box-shadow: 
-                0 4px 8px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateZ(3px);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateZ(6px) scale(1.05);
-        }
-        
-        .stat-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--accent);
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .stat-label {
-            font-size: 11px;
-            opacity: 0.8;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .section {
-            margin-bottom: 20px;
-        }
-        
-        .section-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .input-group {
-            margin-bottom: 12px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--text-primary);
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-size: 14px;
-            font-family: 'Exo 2', sans-serif;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px var(--shadow);
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 
-                inset 0 2px 4px var(--shadow),
-                0 0 0 3px rgba(var(--accent), 0.1);
-        }
-        
-        input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.6;
-        }
-        
         .btn {
-            width: 100%;
-            padding: 16px 20px;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-            font-family: 'Exo 2', sans-serif;
-            position: relative;
-            overflow: hidden;
-            transform: translateZ(2px);
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: #ffffff;
-            box-shadow: 
-                0 6px 12px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-primary:hover {
-            transform: translateZ(5px) translateY(-2px);
-            box-shadow: 0 8px 16px var(--shadow);
-        }
-        
-        .btn-premium {
-            background: linear-gradient(135deg, #b8860b, #ffd700, #ffed4e);
-            color: #000;
-            font-weight: 700;
-            box-shadow: 
-                0 6px 12px rgba(255, 215, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-premium:hover {
-            transform: translateZ(5px) translateY(-2px);
-            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.4);
-        }
-        
-        .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateZ(3px) translateY(-1px);
-        }
-        
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .current-ref {
-            background: rgba(46, 204, 113, 0.2);
-            border: 2px solid #2ecc71;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 8px 16px var(--shadow);
-            transform: translateZ(2px);
-        }
-        
-        .ref-link {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            border-radius: 8px;
-            margin: 8px 0;
-            word-break: break-all;
-            font-family: monospace;
-            font-size: 12px;
-            border: 1px solid var(--border);
-            box-shadow: inset 0 2px 4px var(--shadow);
-        }
-        
-        .ref-queue {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 15px;
-            border: 2px solid var(--border);
-            box-shadow: 
-                0 8px 16px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: translateZ(2px);
-        }
-        
-        .ref-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        .ref-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 12px 8px;
-        }
-        
-        .ref-item:last-child {
-            border-bottom: none;
-        }
-        
-        .ref-info {
-            flex: 1;
-        }
-        
-        .ref-app {
-            font-weight: 600;
-            margin-bottom: 2px;
-            font-size: 14px;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .ref-owner {
-            font-size: 12px;
-            opacity: 0.7;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .owner-tag {
-            background: #ffd700;
-            color: #000;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            box-shadow: 0 2px 4px var(--shadow);
-        }
-        
-        .premium-tag {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-size: 10px;
-            font-weight: 700;
-            margin-left: 6px;
-            box-shadow: 0 2px 4px var(--shadow);
-        }
-        
-        .ref-status {
-            padding: 6px 10px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: 600;
-            box-shadow: 0 2px 4px var(--shadow);
-        }
-        
-        .status-active {
-            background: #2ecc71;
-            color: white;
-        }
-        
-        .status-used {
-            background: rgba(255, 255, 255, 0.2);
-            color: var(--text-primary);
-        }
-        
-        .leaderboard-tabs {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 4px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: inset 0 2px 4px var(--shadow);
-        }
-        
-        .tab-btn {
-            flex: 1;
-            padding: 10px 12px;
-            border: none;
-            border-radius: 8px;
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Exo 2', sans-serif;
-        }
-        
-        .tab-btn.active {
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: #ffffff;
-            box-shadow: 0 2px 4px var(--shadow);
-            transform: translateZ(2px);
-        }
-        
-        .leaderboard-content {
-            display: none;
-        }
-        
-        .leaderboard-content.active {
-            display: block;
-        }
-        
-        .leaderboard-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            box-shadow: 
-                0 4px 8px var(--shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            transform: translateZ(1px);
-        }
-        
-        .leaderboard-item:hover {
-            transform: translateZ(3px) scale(1.02);
-        }
-        
-        .leaderboard-item.rank-1 {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 193, 7, 0.1));
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: 
-                0 8px 16px rgba(255, 215, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-        
-        .rank-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            width: 35px;
-            text-align: center;
-            margin-right: 12px;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .rank-1 .rank-number {
-            color: #ffd700;
-        }
-        
-        .leaderboard-info {
-            flex: 1;
-            margin-right: 10px;
-        }
-        
-        .leaderboard-name {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 2px;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .leaderboard-details {
-            font-size: 12px;
-            opacity: 0.7;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .leaderboard-stats {
-            text-align: right;
-            min-width: 60px;
-        }
-        
-        .stat-main {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent);
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .rank-1 .stat-main {
-            color: #ffd700;
-        }
-        
-        .alert {
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            border: 2px solid;
-            box-shadow: 0 4px 8px var(--shadow);
-            text-shadow: 1px 1px 2px var(--shadow);
-            transform: translateZ(5px);
-        }
-        
-        .alert-success {
-            background: rgba(46, 204, 113, 0.2);
-            border-color: #2ecc71;
-            color: #2ecc71;
-        }
-        
-        .alert-warning {
-            background: rgba(241, 196, 15, 0.2);
-            border-color: #f1c40f;
-            color: #f1c40f;
-        }
-        
-        .alert-error {
-            background: rgba(231, 76, 60, 0.2);
-            border-color: #e74c3c;
-            color: #e74c3c;
-        }
-        
-        .alert-info {
-            background: rgba(0, 136, 204, 0.2);
-            border-color: #0088cc;
-            color: #0088cc;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .mobile-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            backdrop-filter: blur(20px);
-            border-top: 2px solid var(--border);
-            padding: 12px 20px 20px 20px;
-            z-index: 1000;
-            box-shadow: 0 -8px 16px var(--shadow);
-        }
-        
-        .nav-buttons {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .nav-btn {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 10px 6px;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 10px;
-            font-family: 'Exo 2', sans-serif;
-        }
-        
-        .nav-btn.active {
-            color: var(--accent);
-            background: rgba(var(--accent), 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-        
-        .nav-icon {
-            font-size: 20px;
-            filter: drop-shadow(0 1px 2px var(--shadow));
-        }
-        
-        .page-content {
-            display: none;
-        }
-        
-        .page-content.active {
-            display: block;
-        }
-        
-        .mobile-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 10px 0;
-        }
-        
-        .page-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent);
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .premium-section {
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.15), rgba(255, 193, 7, 0.1));
-            border: 2px solid rgba(255, 215, 0, 0.4);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 16px var(--shadow);
-            transform: translateZ(2px);
-        }
-        
-        .premium-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffd700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-shadow: 2px 2px 4px var(--shadow);
-        }
-        
-        .premium-tier {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-        
-        .premium-tier:hover {
-            border-color: rgba(255, 215, 0, 0.6);
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px var(--shadow);
-        }
-        
-        .tier-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-        
-        .tier-price {
-            font-family: 'Orbitron', monospace;
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffd700;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        .tier-badge {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 8px;
-            font-size: 10px;
-            font-weight: 700;
-            box-shadow: 0 2px 4px var(--shadow);
-        }
-        
-        .tier-description {
-            font-size: 12px;
-            opacity: 0.8;
-            text-shadow: 1px 1px 2px var(--shadow);
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px 15px 90px 15px;
-                border-radius: 0;
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .invite-rewards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .settings-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-            
-            .settings-content {
-                padding: 20px;
-                margin: 10px;
-            }
+            @apply px-8 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg transform transition-all duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400;
+        }
+        .card {
+            @apply bg-gray-800 bg-opacity-80 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 md:p-8;
+        }
+        .input-field {
+            @apply w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+        }
+        /* Animatie voor de timer */
+        @keyframes pulse-timer {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .timer-critical {
+            animation: pulse-timer 1s infinite;
+            color: #EF4444; /* Rood */
+        }
+        /* Kleuren voor N@tnek Reflex Knoppen */
+        .reflex-wait { background-color: #BE123C; } /* Rood */
+        .reflex-go { background-color: #16A34A; } /* Groen */
+        .reflex-pressed { background-color: #4B5563; } /* Grijs */
+
+        /* Checklist styling */
+        .challenge-item {
+            @apply p-4 bg-gray-900 rounded-lg flex items-center transition-colors duration-300;
+        }
+        .challenge-item input:checked + span {
+            @apply line-through text-gray-500;
+        }
+        .challenge-item input {
+            @apply w-6 h-6 bg-gray-700 rounded border-gray-600 text-blue-500 focus:ring-blue-600 mr-4;
         }
     </style>
 </head>
-<body data-theme="classic">
-    <!-- Background Shapes -->
-    <div class="bg-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    
-    <!-- Settings Button -->
-    <button class="settings-btn" onclick="openSettings()">⚙️</button>
-    
-    <!-- Settings Modal -->
-    <div class="settings-modal" id="settingsModal">
-        <div class="settings-content">
-            <div class="settings-title">Настройки</div>
-            
-            <div class="setting-group">
-                <label class="setting-label">Язык</label>
-                <select class="setting-select" id="languageSelect" onchange="changeLanguage(this.value)">
-                    <option value="en">🇺🇸 English</option>
-                    <option value="zh">🇨🇳 中文</option>
-                    <option value="hi">🇮🇳 हिंदी</option>
-                    <option value="es">🇪🇸 Español</option>
-                    <option value="ar">🇸🇦 العربية</option>
-                    <option value="ru">🇷🇺 Русский</option>
-                    <option value="nl" selected>🇳🇱 Nederlands</option>
-                </select>
-            </div>
-            
-            <div class="setting-group">
-                <label class="setting-label">Тема</label>
-                <div class="theme-preview">
-                    <div class="theme-option day" onclick="changeTheme('day')">
-                        <div>☀️</div>
-                        <div>День</div>
-                    </div>
-                    <div class="theme-option classic active" onclick="changeTheme('classic')">
-                        <div>🌿</div>
-                        <div>Классическая</div>
-                    </div>
-                    <div class="theme-option night" onclick="changeTheme('night')">
-                        <div>🌙</div>
-                        <div>Ночь</div>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="close-settings" onclick="closeSettings()">Закрыть</button>
-        </div>
-    </div>
+<body class="antialiased">
 
-    <div class="container">
-        <!-- Home Page -->
-        <div id="homePage" class="page-content active">
-            <div class="header">
-                <div class="logo">💎</div>
-                <h1>Refshare Pro</h1>
-                <div class="subtitle">Честный обмен рефералами TON</div>
-            </div>
-            
-            <!-- App Description -->
-            <div class="app-description">
-                <div class="description-title">🚀 Первое H2E приложение на TON</div>
-                <div class="description-content">
-                    <p><strong>Помогай чтобы зарабатывать, расти вместе</strong></p>
-                    <p>RefShare революционизирует обмен рефералами в The Open Network. Вместо потери реферальных ссылок, мы создаем честный обмен, где выигрывают все.</p>
-                    
-                    <div class="how-it-works">
-                        <div class="work-step">
-                            <div class="step-icon">🔄</div>
-                            <div class="step-text">Делитесь своими реферальными ссылками</div>
-                        </div>
-                        <div class="work-step">
-                            <div class="step-icon">🎯</div>
-                            <div class="step-text">Честно используйте рефералы других</div>
-                        </div>
-                        <div class="work-step">
-                            <div class="step-icon">💰</div>
-                            <div class="step-text">Все зарабатывают вместе</div>
-                        </div>
-                    </div>
-                    
-                    <div class="benefits">
-                        <div class="benefit">✅ 100% честная система ротации</div>
-                        <div class="benefit">✅ Прозрачность, защищенная кошельком</div>
-                        <div class="benefit">✅ Приглашайте друзей для бонусных слотов</div>
-                        <div class="benefit">✅ Построено на The Open Network</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="ownerBadge" class="owner-badge hidden">
-                👑 <span>Владелец платформы</span>
-            </div>
-            
-            <!-- Wallet Connection Required -->
-            <div id="walletRequired" class="wallet-required">
-                <h3>🔐 Требуется подключение кошелька</h3>
-                <p>Подключите ваш TON кошелек для обеспечения 100% честного обмена рефералами</p>
-                <div id="tonConnectContainer"></div>
-                <div class="fairness-note">
-                    ℹ️ Подключение кошелька предотвращает злоупотребления и обеспечивает честное отслеживание использования
-                </div>
-            </div>
-            
-            <!-- Account Section -->
-            <div id="accountSection" class="account-section hidden">
-                <div class="account-info">
-                    <div class="user-details">
-                        <h3 id="displayUsername">Загрузка...</h3>
-                        <p id="walletAddress">Кошелек: Загрузка...</p>
-                    </div>
-                </div>
-                
-                <!-- Invite Section -->
-                <div class="invite-section">
-                    <div class="invite-title">
-                        🎁 <span>Приглашайте друзей и зарабатывайте бесплатные слоты</span>
-                    </div>
-                    <div class="invite-rewards">
-                        <div class="reward-tier">
-                            <div class="number">1</div>
-                            <div>Друг = +1 слот</div>
-                        </div>
-                        <div class="reward-tier">
-                            <div class="number">5</div>
-                            <div>Друзей = +1 слот</div>
-                        </div>
-                        <div class="reward-tier">
-                            <div class="number">10</div>
-                            <div>Друзей = +2 слота</div>
-                        </div>
-                        <div class="reward-tier">
-                            <div class="number">25</div>
-                            <div>Друзей = +3 слота</div>
-                        </div>
-                    </div>
-                    <div class="invite-link" id="inviteLink">
-                        https://t.me/RefShareProBot?start=ref_<span id="userRefCode">loading</span>
-                    </div>
-                    <button class="btn btn-secondary" onclick="copyInviteLink()">
-                        📋 <span>Копировать ссылку приглашения</span>
-                    </button>
-                </div>
-                
-                <div class="stats">
-                    <div class="stat-card">
-                        <div class="stat-number" id="totalUsed">0</div>
-                        <div class="stat-label">Использовано</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="totalShared">0</div>
-                        <div class="stat-label">Поделились</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="inviteCount">0</div>
-                        <div class="stat-label">Приглашено</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="bonusSlots">0</div>
-                        <div class="stat-label">Бонусные слоты</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="alertContainer"></div>
-            
-            <!-- Current Referral -->
-            <div id="currentRefSection" class="hidden">
-                <div class="section-title">🎯 <span>Текущий реферал</span></div>
-                <div class="current-ref">
-                    <div><strong id="currentApp">-</strong></div>
-                    <div class="ref-link" id="currentLink">-</div>
-                    <div style="margin: 8px 0; opacity: 0.8;">
-                        <span>От:</span> <span id="currentOwner">-</span>
-                    </div>
-                    <button class="btn btn-primary" onclick="markAsUsed()">
-                        ✅ <span>Отметить как использованный</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="openReferralLink()">
-                        🔗 <span>Открыть ссылку</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Add Page -->
-        <div id="addPage" class="page-content">
-            <div class="mobile-header">
-                <div class="page-title">➕ <span>Добавить рефералы</span></div>
-            </div>
-            
-            <!-- Usage Requirements -->
-            <div id="usageRequirement" class="usage-requirement">
-                <h4>📊 <span>Требования</span></h4>
-                <div id="usageRequirementText">Загрузка...</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="usageProgressBar" style="width: 0%"></div>
-                </div>
-            </div>
-            
-            <!-- Premium Section -->
-            <div class="premium-section">
-                <div class="premium-title">⭐ <span>Премиум размещение</span></div>
-                <div id="premiumTiers">
-                    <div class="premium-tier" onclick="showPremiumForm()">
-                        <div class="tier-header">
-                            <div class="tier-price" id="nextPremiumCost">100 ⭐</div>
-                            <div class="tier-badge">ПРОПУСТИТЬ ОЧЕРЕДЬ</div>
-                        </div>
-                        <div class="tier-description">
-                            Мгновенное приоритетное размещение с Telegram Stars
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="premiumForm" class="hidden">
-                    <div class="input-group">
-                        <label>Название приложения</label>
-                        <input type="text" id="premiumAppName" placeholder="например: Boinkers, Cattea, Blum">
-                    </div>
-                    <div class="input-group">
-                        <label>Реферальная ссылка</label>
-                        <input type="url" id="premiumRefLink" placeholder="https://...">
-                    </div>
-                    <button class="btn btn-premium" onclick="addPremiumReferral()" id="premiumSubmitBtn">
-                        ⭐ <span>Оплатить и добавить премиум</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="hidePremiumForm()">
-                        <span>Отмена</span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Free Referral -->
-            <div class="section">
-                <div class="section-title">🆓 <span>Добавить бесплатный реферал</span></div>
-                
-                <div class="alert alert-info" style="margin-bottom: 15px;">
-                    <span>⚠️ Принимаются только легитимные TON мини-приложения<br>
-                    🚫 3 фейковых приложения = постоянный бан<br>
-                    ✅ Примеры: Boinkers, Cattea, Blum, Notcoin, Pixelverse</span>
-                </div>
-                
-                <div class="input-group">
-                    <label>Название приложения</label>
-                    <input type="text" id="appName" placeholder="например: Boinkers, Cattea, Blum">
-                </div>
-                <div class="input-group">
-                    <label>Реферальная ссылка</label>
-                    <input type="url" id="refLink" placeholder="https://...">
-                </div>
-                <button class="btn btn-primary" onclick="addReferral()" id="freeSubmitBtn">
-                    <span>Добавить бесплатный реферал</span>
-                </button>
-            </div>
-            
-            <!-- Owner Section -->
-            <div id="ownerSection" class="section hidden">
-                <div class="section-title">👑 <span>Рефералы владельца</span></div>
-                <div class="input-group">
-                    <label>Название приложения</label>
-                    <input type="text" id="ownerAppName" placeholder="Название приложения">
-                </div>
-                <div class="input-group">
-                    <label>Реферальная ссылка</label>
-                    <input type="url" id="ownerRefLink" placeholder="https://...">
-                </div>
-                <button class="btn btn-premium" onclick="addOwnerReferral()" id="ownerSubmitBtn">
-                    👑 <span>Добавить реферал владельца</span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Queue Page -->
-        <div id="queuePage" class="page-content">
-            <div class="mobile-header">
-                <div class="page-title">📋 <span>Очередь и статистика</span></div>
-            </div>
-            
-            <!-- Queue -->
-            <div class="section">
-                <div class="section-title">📋 <span>Очередь рефералов</span></div>
-                <div class="ref-queue" id="refQueue">
-                    <div style="text-align: center; opacity: 0.6; padding: 20px;">
-                        Нет рефералов в очереди
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Leaderboard -->
-            <div class="section">
-                <div class="section-title">🏆 <span>Таблица лидеров</span></div>
-                <div class="leaderboard-tabs">
-                    <button class="tab-btn active" onclick="switchLeaderboard('usage')">
-                        📈 <span>Больше всего использований</span>
-                    </button>
-                    <button class="tab-btn" onclick="switchLeaderboard('shared')">
-                        🔗 <span>Больше всего поделились</span>
-                    </button>
-                    <button class="tab-btn" onclick="switchLeaderboard('invites')">
-                        👥 <span>Больше всего приглашений</span>
-                    </button>
-                </div>
-                
-                <div id="usageLeaderboard" class="leaderboard-content active">
-                    <div id="usageLeaderboardList" class="leaderboard-list">
-                        <!-- Dynamically filled -->
-                    </div>
-                </div>
-                
-                <div id="sharedLeaderboard" class="leaderboard-content">
-                    <div id="sharedLeaderboardList" class="leaderboard-list">
-                        <!-- Dynamically filled -->
-                    </div>
-                </div>
-                
-                <div id="invitesLeaderboard" class="leaderboard-content">
-                    <div id="invitesLeaderboardList" class="leaderboard-list">
-                        <!-- Dynamically filled -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Navigation -->
-        <div class="mobile-nav">
-            <div class="nav-buttons">
-                <button class="nav-btn active" onclick="switchPage('home')">
-                    <div class="nav-icon">🏠</div>
-                    <div>Главная</div>
-                </button>
-                <button class="nav-btn" onclick="switchPage('add')">
-                    <div class="nav-icon">➕</div>
-                    <div>Добавить</div>
-                </button>
-                <button class="nav-btn" onclick="switchPage('queue')">
-                    <div class="nav-icon">📋</div>
-                    <div>Очередь</div>
-                </button>
+    <!-- Hoofdscherm -->
+    <div id="home-screen" class="screen active">
+        <div class="text-center">
+            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-wider text-white mb-4" style="text-shadow: 0 0 15px rgba(255,255,255,0.3);">
+                Tuskense <span class="text-blue-500">Triatlon</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-12">Hét digitale spelletjespakket voor het weekendje weg!</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <button onclick="showScreen('tijdknaller-setup')" class="btn text-2xl">De Tijdknaller</button>
+                <button onclick="showScreen('natnek-setup')" class="btn text-2xl">N@tnek-Reflex</button>
+                <button onclick="showScreen('vlegel-setup')" class="btn text-2xl">Friese Foto-Vlegels</button>
             </div>
         </div>
     </div>
 
-    <script>
-        // Configuration
-        const BOT_TOKEN = '7845511628:AAHYehHmxQlSiHiEONegLjTKwN5uzCmEKy0';
-        const OWNER_USER_ID = 123456789; // Replace with your actual Telegram user ID
-        
-        // Global state
-        let currentUser = null;
-        let tonConnectUI = null;
-        let currentReferral = null;
-        let referralQueue = [];
-        let userStats = {
-            totalUsed: 0,
-            totalShared: 0,
-            inviteCount: 0,
-            bonusSlots: 0
-        };
-        
-        // Fair rotation system - Owner gets 50% of referrals (except premium)
-        class FairRotationSystem {
-            constructor() {
-                this.userReferrals = new Map(); // userId -> {referrals: [], usageCount: 0}
-                this.currentIndex = 0;
-                this.ownerUserId = OWNER_USER_ID;
-                this.ownerTurnCounter = 0; // Track when to give owner a turn
-            }
-            
-            addReferral(userId, referral) {
-                if (!this.userReferrals.has(userId)) {
-                    this.userReferrals.set(userId, {
-                        referrals: [],
-                        usageCount: 0
-                    });
-                }
-                
-                const userData = this.userReferrals.get(userId);
-                userData.referrals.push({
-                    ...referral,
-                    addedAt: Date.now(),
-                    usageCount: 0
-                });
-                
-                this.sortReferralsByUsage();
-            }
-            
-            sortReferralsByUsage() {
-                // Sort all referrals by usage count (least used first)
-                const allReferrals = [];
-                
-                for (const [userId, userData] of this.userReferrals) {
-                    for (const ref of userData.referrals) {
-                        allReferrals.push({
-                            ...ref,
-                            userId: userId,
-                            isOwner: userId === this.ownerUserId
-                        });
-                    }
-                }
-                
-                // Sort by usage count (ascending), then by addedAt (oldest first)
-                allReferrals.sort((a, b) => {
-                    if (a.usageCount !== b.usageCount) {
-                        return a.usageCount - b.usageCount;
-                    }
-                    return a.addedAt - b.addedAt;
-                });
-                
-                referralQueue = allReferrals;
-            }
-            
-            getNextReferral() {
-                if (referralQueue.length === 0) return null;
-                
-                // Premium referrals always go first
-                const premiumRef = referralQueue.find(ref => ref.isPremium);
-                if (premiumRef) {
-                    return premiumRef;
-                }
-                
-                // Owner gets every 2nd referral (50% chance)
-                const ownerRefs = referralQueue.filter(ref => ref.isOwner);
-                const userRefs = referralQueue.filter(ref => !ref.isOwner);
-                
-                if (ownerRefs.length > 0 && this.ownerTurnCounter % 2 === 0) {
-                    this.ownerTurnCounter++;
-                    return ownerRefs[0]; // Least used owner referral
-                }
-                
-                this.ownerTurnCounter++;
-                
-                // Return least used user referral
-                return userRefs.length > 0 ? userRefs[0] : ownerRefs[0];
-            }
-            
-            markAsUsed(referralId) {
-                for (const [userId, userData] of this.userReferrals) {
-                    const refIndex = userData.referrals.findIndex(ref => ref.id === referralId);
-                    if (refIndex !== -1) {
-                        userData.referrals[refIndex].usageCount++;
-                        userData.usageCount++;
-                        this.sortReferralsByUsage();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-        
-        const rotationSystem = new FairRotationSystem();
-        
-        // Initialize Telegram WebApp
-        function initTelegramWebApp() {
-            if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-                Telegram.WebApp.ready();
-                Telegram.WebApp.expand();
-                
-                const user = Telegram.WebApp.initDataUnsafe?.user;
-                if (user) {
-                    currentUser = user;
-                    document.getElementById('displayUsername').textContent = user.first_name || user.username || 'User';
-                    document.getElementById('userRefCode').textContent = user.id;
-                    
-                    // Check if user is owner
-                    if (user.id === OWNER_USER_ID) {
-                        document.getElementById('ownerBadge').classList.remove('hidden');
-                        document.getElementById('ownerSection').classList.remove('hidden');
-                    }
-                }
-            }
-        }
-        
-        // Initialize TON Connect
-        function initTonConnect() {
-            tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-                manifestUrl: 'https://aileer.nl/tonconnect-manifest.json',
-                buttonRootId: 'tonConnectContainer'
-            });
-            
-            tonConnectUI.onStatusChange(wallet => {
-                if (wallet) {
-                    handleWalletConnected(wallet);
-                } else {
-                    handleWalletDisconnected();
-                }
-            });
-        }
-        
-        function handleWalletConnected(wallet) {
-            const address = wallet.account.address;
-            document.getElementById('walletAddress').textContent = `Кошелек: ${address.slice(0, 6)}...${address.slice(-4)}`;
-            document.getElementById('walletRequired').classList.add('hidden');
-            document.getElementById('accountSection').classList.remove('hidden');
-            
-            loadUserData();
-            loadCurrentReferral();
-            loadReferralQueue();
-        }
-        
-        function handleWalletDisconnected() {
-            document.getElementById('walletRequired').classList.remove('hidden');
-            document.getElementById('accountSection').classList.add('hidden');
-            document.getElementById('currentRefSection').classList.add('hidden');
-        }
-        
-        // Load user data
-        function loadUserData() {
-            // Simulate loading user stats
-            setTimeout(() => {
-                userStats = {
-                    totalUsed: Math.floor(Math.random() * 50),
-                    totalShared: Math.floor(Math.random() * 30),
-                    inviteCount: Math.floor(Math.random() * 10),
-                    bonusSlots: Math.floor(Math.random() * 5)
-                };
-                
-                updateStatsDisplay();
-                updateUsageRequirement();
-            }, 1000);
-        }
-        
-        function updateStatsDisplay() {
-            document.getElementById('totalUsed').textContent = userStats.totalUsed;
-            document.getElementById('totalShared').textContent = userStats.totalShared;
-            document.getElementById('inviteCount').textContent = userStats.inviteCount;
-            document.getElementById('bonusSlots').textContent = userStats.bonusSlots;
-        }
-        
-        function updateUsageRequirement() {
-            const required = Math.max(1, userStats.totalShared * 2);
-            const progress = Math.min(100, (userStats.totalUsed / required) * 100);
-            
-            const t = translations[currentLanguage];
-            const requirementText = {
-                en: `Use ${userStats.totalUsed}/${required} referrals to add new ones`,
-                ru: `Используйте ${userStats.totalUsed}/${required} рефералов для добавления новых`,
-                nl: `Gebruik ${userStats.totalUsed}/${required} referrals om nieuwe toe te voegen`
-            };
-            
-            document.getElementById('usageRequirementText').innerHTML = requirementText[currentLanguage];
-            document.getElementById('usageProgressBar').style.width = `${progress}%`;
-            
-            const canAdd = userStats.totalUsed >= required;
-            document.getElementById('freeSubmitBtn').disabled = !canAdd;
-        }
-        
-        // Load current referral
-        function loadCurrentReferral() {
-            currentReferral = rotationSystem.getNextReferral();
-            
-            if (currentReferral) {
-                document.getElementById('currentRefSection').classList.remove('hidden');
-                document.getElementById('currentApp').textContent = currentReferral.appName;
-                document.getElementById('currentLink').textContent = currentReferral.link;
-                document.getElementById('currentOwner').textContent = 
-                    currentReferral.isOwner ? 'Владелец платформы' : `Пользователь ${currentReferral.userId}`;
-            } else {
-                document.getElementById('currentRefSection').classList.add('hidden');
-            }
-        }
-        
-        // Load referral queue
-        function loadReferralQueue() {
-            const queueContainer = document.getElementById('refQueue');
-            
-            if (referralQueue.length === 0) {
-                queueContainer.innerHTML = '<div style="text-align: center; opacity: 0.6; padding: 20px;">Нет рефералов в очереди</div>';
-                return;
-            }
-            
-            queueContainer.innerHTML = referralQueue.map((ref, index) => `
-                <div class="ref-item">
-                    <div class="ref-info">
-                        <div class="ref-app">${ref.appName}
-                            ${ref.isOwner ? '<span class="owner-tag">ВЛАДЕЛЕЦ</span>' : ''}
-                            ${ref.isPremium ? '<span class="premium-tag">ПРЕМИУМ</span>' : ''}
-                        </div>
-                        <div class="ref-owner">Использований: ${ref.usageCount}</div>
-                    </div>
-                    <div class="ref-status ${index === 0 ? 'status-active' : 'status-used'}">
-                        ${index === 0 ? 'Активный' : `#${index + 1}`}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        // Add referral functions
-        function addReferral() {
-            const appName = document.getElementById('appName').value.trim();
-            const refLink = document.getElementById('refLink').value.trim();
-            
-            if (!appName || !refLink) {
-                showAlert(getAlertMessage('fillFields', currentLanguage), 'error');
-                return;
-            }
-            
-            if (!isValidUrl(refLink)) {
-                showAlert(getAlertMessage('validUrl', currentLanguage), 'error');
-                return;
-            }
-            
-            const referral = {
-                id: Date.now(),
-                appName: appName,
-                link: refLink,
-                isPremium: false,
-                addedBy: currentUser.id
-            };
-            
-            rotationSystem.addReferral(currentUser.id, referral);
-            userStats.totalShared++;
-            
-            updateStatsDisplay();
-            updateUsageRequirement();
-            loadReferralQueue();
-            
-            document.getElementById('appName').value = '';
-            document.getElementById('refLink').value = '';
-            
-            showAlert(getAlertMessage('referralAdded', currentLanguage), 'success');
-        }
-        
-        function addOwnerReferral() {
-            const appName = document.getElementById('ownerAppName').value.trim();
-            const refLink = document.getElementById('ownerRefLink').value.trim();
-            
-            if (!appName || !refLink) {
-                showAlert('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            const referral = {
-                id: Date.now(),
-                appName: appName,
-                link: refLink,
-                isPremium: false,
-                addedBy: OWNER_USER_ID
-            };
-            
-            rotationSystem.addReferral(OWNER_USER_ID, referral);
-            
-            loadReferralQueue();
-            
-            document.getElementById('ownerAppName').value = '';
-            document.getElementById('ownerRefLink').value = '';
-            
-            showAlert('Реферал владельца добавлен!', 'success');
-        }
-        
-        function showPremiumForm() {
-            document.getElementById('premiumForm').classList.remove('hidden');
-        }
-        
-        function hidePremiumForm() {
-            document.getElementById('premiumForm').classList.add('hidden');
-        }
-        
-        function addPremiumReferral() {
-            const appName = document.getElementById('premiumAppName').value.trim();
-            const refLink = document.getElementById('premiumRefLink').value.trim();
-            
-            if (!appName || !refLink) {
-                showAlert('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            // Simulate Telegram Stars payment
-            showAlert('Функция оплаты Telegram Stars будет доступна в ближайшее время', 'info');
-        }
-        
-        // Mark referral as used
-        function markAsUsed() {
-            if (!currentReferral) return;
-            
-            rotationSystem.markAsUsed(currentReferral.id);
-            userStats.totalUsed++;
-            
-            updateStatsDisplay();
-            updateUsageRequirement();
-            loadCurrentReferral();
-            loadReferralQueue();
-            
-            showAlert(getAlertMessage('referralUsed', currentLanguage), 'success');
-        }
-        
-        function openReferralLink() {
-            if (currentReferral) {
-                window.open(currentReferral.link, '_blank');
-            }
-        }
-        
-        // Navigation functions
-        function switchPage(page) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(page + 'Page').classList.add('active');
-            event.target.closest('.nav-btn').classList.add('active');
-        }
-        
-        function switchLeaderboard(type) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.leaderboard-content').forEach(c => c.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(type + 'Leaderboard').classList.add('active');
-            
-            loadLeaderboard(type);
-        }
-        
-        function loadLeaderboard(type) {
-            // Simulate leaderboard data
-            const mockData = [
-                { name: 'Пользователь 1', value: 45, isOwner: false },
-                { name: 'Владелец платформы', value: 38, isOwner: true },
-                { name: 'Пользователь 2', value: 32, isOwner: false },
-                { name: 'Пользователь 3', value: 28, isOwner: false },
-                { name: 'Пользователь 4', value: 24, isOwner: false }
-            ];
-            
-            const container = document.getElementById(type + 'LeaderboardList');
-            container.innerHTML = mockData.map((item, index) => `
-                <div class="leaderboard-item ${index === 0 ? 'rank-1' : ''}">
-                    <div class="rank-number">${index + 1}</div>
-                    <div class="leaderboard-info">
-                        <div class="leaderboard-name">${item.name}
-                            ${item.isOwner ? '<span class="owner-tag">ВЛАДЕЛЕЦ</span>' : ''}
-                        </div>
-                        <div class="leaderboard-details">Активный пользователь</div>
-                    </div>
-                    <div class="leaderboard-stats">
-                        <div class="stat-main">${item.value}</div>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        // Settings functions
-        function openSettings() {
-            document.getElementById('settingsModal').style.display = 'flex';
-        }
-        
-        function closeSettings() {
-            document.getElementById('settingsModal').style.display = 'none';
-        }
-        
-        // Language translations
-        const translations = {
-            en: {
-                title: "Refshare Pro",
-                subtitle: "Fair TON Referral Exchange",
-                appTitle: "🚀 First H2E App on TON",
-                helpToEarn: "Help to Earn, Grow Together",
-                description: "RefShare revolutionizes referral sharing in The Open Network. Instead of losing referral links, we create fair exchange where everyone wins.",
-                shareRefs: "Share your referral links",
-                useRefs: "Fairly use others' referrals",
-                earnTogether: "Everyone earns together",
-                benefit1: "✅ 100% fair rotation system",
-                benefit2: "✅ Transparency protected by wallet",
-                benefit3: "✅ Invite friends for bonus slots",
-                benefit4: "✅ Built on The Open Network",
-                walletRequired: "🔐 Wallet Connection Required",
-                walletText: "Connect your TON wallet to ensure 100% fair referral exchange",
-                fairnessNote: "ℹ️ Wallet connection prevents abuse and ensures fair usage tracking",
-                ownerPlatform: "Platform Owner",
-                inviteTitle: "🎁 Invite Friends & Earn Free Slots",
-                reward1: "Friend = +1 slot",
-                reward5: "Friends = +1 slot",
-                reward10: "Friends = +2 slots",
-                reward25: "Friends = +3 slots",
-                used: "Used",
-                shared: "Shared",
-                invited: "Invited",
-                bonusSlots: "Bonus Slots",
-                currentRef: "🎯 Current Referral",
-                markUsed: "✅ Mark as Used",
-                openLink: "🔗 Open Link",
-                copyInvite: "📋 Copy Invite Link",
-                addRef: "➕ Add Referrals",
-                queue: "📋 Queue & Stats",
-                requirements: "📊 Requirements",
-                premiumPlacement: "⭐ Premium Placement",
-                skipQueue: "SKIP QUEUE",
-                instantPriority: "Instant priority placement with Telegram Stars",
-                addFreeRef: "🆓 Add Free Referral",
-                alertInfo: "⚠️ Only legitimate TON mini-apps accepted<br>🚫 3 fake apps = permanent ban<br>✅ Examples: Boinkers, Cattea, Blum, Notcoin, Pixelverse",
-                appName: "App Name",
-                refLink: "Referral Link",
-                payAndAdd: "⭐ Pay and Add Premium",
-                cancel: "Cancel",
-                ownerRefs: "👑 Owner Referrals",
-                addOwnerRef: "👑 Add Owner Referral",
-                refQueue: "📋 Referral Queue",
-                leaderboard: "🏆 Leaderboard",
-                mostUsed: "📈 Most Usage",
-                mostShared: "🔗 Most Shared",
-                mostInvites: "👥 Most Invites",
-                home: "Home",
-                add: "Add",
-                settings: "Settings",
-                language: "Language",
-                theme: "Theme",
-                day: "Day",
-                classic: "Classic",
-                night: "Night",
-                close: "Close"
-            },
-            ru: {
-                title: "Refshare Pro",
-                subtitle: "Честный обмен рефералами TON",
-                appTitle: "🚀 Первое H2E приложение на TON",
-                helpToEarn: "Помогай чтобы зарабатывать, расти вместе",
-                description: "RefShare революционизирует обмен рефералами в The Open Network. Вместо потери реферальных ссылок, мы создаем честный обмен, где выигрывают все.",
-                shareRefs: "Делитесь своими реферальными ссылками",
-                useRefs: "Честно используйте рефералы других",
-                earnTogether: "Все зарабатывают вместе",
-                benefit1: "✅ 100% честная система ротации",
-                benefit2: "✅ Прозрачность, защищенная кошельком",
-                benefit3: "✅ Приглашайте друзей для бонусных слотов",
-                benefit4: "✅ Построено на The Open Network",
-                walletRequired: "🔐 Требуется подключение кошелька",
-                walletText: "Подключите ваш TON кошелек для обеспечения 100% честного обмена рефералами",
-                fairnessNote: "ℹ️ Подключение кошелька предотвращает злоупотребления и обеспечивает честное отслеживание использования",
-                ownerPlatform: "Владелец платформы",
-                inviteTitle: "🎁 Приглашайте друзей и зарабатывайте бесплатные слоты",
-                reward1: "Друг = +1 слот",
-                reward5: "Друзей = +1 слот",
-                reward10: "Друзей = +2 слота",
-                reward25: "Друзей = +3 слота",
-                used: "Использовано",
-                shared: "Поделились",
-                invited: "Приглашено",
-                bonusSlots: "Бонусные слоты",
-                currentRef: "🎯 Текущий реферал",
-                markUsed: "✅ Отметить как использованный",
-                openLink: "🔗 Открыть ссылку",
-                copyInvite: "📋 Копировать ссылку приглашения",
-                addRef: "➕ Добавить рефералы",
-                queue: "📋 Очередь и статистика",
-                requirements: "📊 Требования",
-                premiumPlacement: "⭐ Премиум размещение",
-                skipQueue: "ПРОПУСТИТЬ ОЧЕРЕДЬ",
-                instantPriority: "Мгновенное приоритетное размещение с Telegram Stars",
-                addFreeRef: "🆓 Добавить бесплатный реферал",
-                alertInfo: "⚠️ Принимаются только легитимные TON мини-приложения<br>🚫 3 фейковых приложения = постоянный бан<br>✅ Примеры: Boinkers, Cattea, Blum, Notcoin, Pixelverse",
-                appName: "Название приложения",
-                refLink: "Реферальная ссылка",
-                payAndAdd: "⭐ Оплатить и добавить премиум",
-                cancel: "Отмена",
-                ownerRefs: "👑 Рефералы владельца",
-                addOwnerRef: "👑 Добавить реферал владельца",
-                refQueue: "📋 Очередь рефералов",
-                leaderboard: "🏆 Таблица лидеров",
-                mostUsed: "📈 Больше всего использований",
-                mostShared: "🔗 Больше всего поделились",
-                mostInvites: "👥 Больше всего приглашений",
-                home: "Главная",
-                add: "Добавить",
-                settings: "Настройки",
-                language: "Язык",
-                theme: "Тема",
-                day: "День",
-                classic: "Классическая",
-                night: "Ночь",
-                close: "Закрыть"
-            },
-            nl: {
-                title: "Refshare Pro",
-                subtitle: "Eerlijke TON Referral Uitwisseling",
-                appTitle: "🚀 Eerste H2E App op TON",
-                helpToEarn: "Help om te verdienen, groei samen",
-                description: "RefShare revolutioneert het delen van referrals in The Open Network. In plaats van referral links te verliezen, creëren we eerlijke uitwisseling waar iedereen wint.",
-                shareRefs: "Deel je referral links",
-                useRefs: "Gebruik eerlijk andermans referrals",
-                earnTogether: "Iedereen verdient samen",
-                benefit1: "✅ 100% eerlijk rotatiesysteem",
-                benefit2: "✅ Transparantie beschermd door wallet",
-                benefit3: "✅ Nodig vrienden uit voor bonus slots",
-                benefit4: "✅ Gebouwd op The Open Network",
-                walletRequired: "🔐 Wallet Verbinding Vereist",
-                walletText: "Verbind je TON wallet om 100% eerlijke referral uitwisseling te garanderen",
-                fairnessNote: "ℹ️ Wallet verbinding voorkomt misbruik en zorgt voor eerlijke gebruiksregistratie",
-                ownerPlatform: "Platform Eigenaar",
-                inviteTitle: "🎁 Nodig vrienden uit & verdien gratis slots",
-                reward1: "Vriend = +1 slot",
-                reward5: "Vrienden = +1 slot",
-                reward10: "Vrienden = +2 slots",
-                reward25: "Vrienden = +3 slots",
-                used: "Gebruikt",
-                shared: "Gedeeld",
-                invited: "Uitgenodigd",
-                bonusSlots: "Bonus Slots",
-                currentRef: "🎯 Huidige Referral",
-                markUsed: "✅ Markeer als Gebruikt",
-                openLink: "🔗 Open Link",
-                copyInvite: "📋 Kopieer Uitnodigingslink",
-                addRef: "➕ Referrals Toevoegen",
-                queue: "📋 Wachtrij & Statistieken",
-                requirements: "📊 Vereisten",
-                premiumPlacement: "⭐ Premium Plaatsing",
-                skipQueue: "SNEL VOORUIT",
-                instantPriority: "Directe prioriteitsplaatsing met Telegram Stars",
-                addFreeRef: "🆓 Voeg Gratis Referral Toe",
-                alertInfo: "⚠️ Alleen legitieme TON mini-apps geaccepteerd<br>🚫 3 nep apps = permanente ban<br>✅ Voorbeelden: Boinkers, Cattea, Blum, Notcoin, Pixelverse",
-                appName: "App Naam",
-                refLink: "Referral Link",
-                payAndAdd: "⭐ Betaal en Voeg Premium Toe",
-                cancel: "Annuleren",
-                ownerRefs: "👑 Eigenaar Referrals",
-                addOwnerRef: "👑 Voeg Eigenaar Referral Toe",
-                refQueue: "📋 Referral Wachtrij",
-                leaderboard: "🏆 Ranglijst",
-                mostUsed: "📈 Meest Gebruikt",
-                mostShared: "🔗 Meest Gedeeld",
-                mostInvites: "👥 Meeste Uitnodigingen",
-                home: "Home",
-                add: "Toevoegen",
-                settings: "Instellingen",
-                language: "Taal",
-                theme: "Thema",
-                day: "Dag",
-                classic: "Klassiek",
-                night: "Nacht",
-                close: "Sluiten"
-            }
-        };
+    <!-- ===== SPEL 1: DE TIJDKNALLER ===== -->
+    <div id="tijdknaller-setup" class="screen">
+        <div class="card w-full max-w-2xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-blue-400">De Tijdknaller: Teams</h2>
+            <p class="mb-8 text-gray-300">Voer de namen van de teams in. Laat leeg als een team niet meedoet.</p>
+            <div id="tijdknaller-teams" class="space-y-4 mb-8">
+                <input type="text" class="input-field" placeholder="Naam Team 1">
+                <input type="text" class="input-field" placeholder="Naam Team 2">
+                <input type="text" class="input-field" placeholder="Naam Team 3 (optioneel)">
+                <input type="text" class="input-field" placeholder="Naam Team 4 (optioneel)">
+            </div>
+            <div class="flex justify-between">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700">Terug</button>
+                <button onclick="startTijdknaller()" class="btn">Spel Starten!</button>
+            </div>
+        </div>
+    </div>
 
-        let currentLanguage = 'nl'; // Default to Dutch
+    <div id="tijdknaller-play" class="screen">
+        <div class="w-full max-w-4xl text-center">
+            <div class="grid grid-cols-3 items-center mb-6">
+                <div id="tijdknaller-scoreboard-mini" class="text-left text-lg"></div>
+                <h2 id="tijdknaller-current-team" class="text-4xl font-bold text-blue-400">Team is aan de beurt</h2>
+                <div id="tijdknaller-timer" class="text-6xl font-black text-right">30</div>
+            </div>
+            
+            <div id="tijdknaller-start-round-view" class="card">
+                <h3 id="tijdknaller-next-team" class="text-3xl font-bold mb-4"></h3>
+                <p class="text-xl mb-8">Kies wie de woorden omschrijft. Druk op start als jullie er klaar voor zijn!</p>
+                <button id="start-round-btn" class="btn text-3xl px-16 py-8">START RONDE</button>
+            </div>
 
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('language', lang);
-            
-            // Update language select
-            document.getElementById('languageSelect').value = lang;
-            
-            // Update all translatable elements
-            const t = translations[lang];
-            
-            // Header
-            document.querySelector('h1').textContent = t.title;
-            document.querySelector('.subtitle').textContent = t.subtitle;
-            
-            // App description
-            document.querySelector('.description-title').textContent = t.appTitle;
-            document.querySelector('.description-content p:first-child strong').textContent = t.helpToEarn;
-            document.querySelector('.description-content p:nth-child(2)').textContent = t.description;
-            
-            // Work steps
-            const workSteps = document.querySelectorAll('.step-text');
-            if (workSteps.length >= 3) {
-                workSteps[0].textContent = t.shareRefs;
-                workSteps[1].textContent = t.useRefs;
-                workSteps[2].textContent = t.earnTogether;
-            }
-            
-            // Benefits
-            const benefits = document.querySelectorAll('.benefit');
-            if (benefits.length >= 4) {
-                benefits[0].textContent = t.benefit1;
-                benefits[1].textContent = t.benefit2;
-                benefits[2].textContent = t.benefit3;
-                benefits[3].textContent = t.benefit4;
-            }
-            
-            // Wallet section
-            document.querySelector('.wallet-required h3').textContent = t.walletRequired;
-            document.querySelector('.wallet-required p').textContent = t.walletText;
-            document.querySelector('.fairness-note').textContent = t.fairnessNote;
-            
-            // Owner badge
-            const ownerBadgeSpan = document.querySelector('.owner-badge span');
-            if (ownerBadgeSpan) ownerBadgeSpan.textContent = t.ownerPlatform;
-            
-            // Invite section
-            document.querySelector('.invite-title span').textContent = t.inviteTitle;
-            const rewardTiers = document.querySelectorAll('.reward-tier div:last-child');
-            if (rewardTiers.length >= 4) {
-                rewardTiers[0].textContent = t.reward1;
-                rewardTiers[1].textContent = t.reward5;
-                rewardTiers[2].textContent = t.reward10;
-                rewardTiers[3].textContent = t.reward25;
-            }
-            
-            // Stats labels
-            const statLabels = document.querySelectorAll('.stat-label');
-            if (statLabels.length >= 4) {
-                statLabels[0].textContent = t.used;
-                statLabels[1].textContent = t.shared;
-                statLabels[2].textContent = t.invited;
-                statLabels[3].textContent = t.bonusSlots;
-            }
-            
-            // Current referral
-            const currentRefTitle = document.querySelector('#currentRefSection .section-title span');
-            if (currentRefTitle) currentRefTitle.textContent = t.currentRef;
-            
-            const markUsedBtn = document.querySelector('button[onclick="markAsUsed()"] span');
-            if (markUsedBtn) markUsedBtn.textContent = t.markUsed;
-            
-            const openLinkBtn = document.querySelector('button[onclick="openReferralLink()"] span');
-            if (openLinkBtn) openLinkBtn.textContent = t.openLink;
-            
-            const copyInviteBtn = document.querySelector('button[onclick="copyInviteLink()"] span');
-            if (copyInviteBtn) copyInviteBtn.textContent = t.copyInvite;
-            
-            // Page titles
-            const addPageTitle = document.querySelector('#addPage .page-title span');
-            if (addPageTitle) addPageTitle.textContent = t.addRef;
-            
-            const queuePageTitle = document.querySelector('#queuePage .page-title span');
-            if (queuePageTitle) queuePageTitle.textContent = t.queue;
-            
-            // Usage requirement
-            const usageReqTitle = document.querySelector('.usage-requirement h4 span');
-            if (usageReqTitle) usageReqTitle.textContent = t.requirements;
-            
-            // Premium section
-            const premiumTitle = document.querySelector('.premium-title span');
-            if (premiumTitle) premiumTitle.textContent = t.premiumPlacement;
-            
-            const tierBadge = document.querySelector('.tier-badge');
-            if (tierBadge) tierBadge.textContent = t.skipQueue;
-            
-            const tierDesc = document.querySelector('.tier-description');
-            if (tierDesc) tierDesc.textContent = t.instantPriority;
-            
-            // Free referral section
-            const freeRefTitle = document.querySelector('#addPage .section-title span');
-            if (freeRefTitle) freeRefTitle.textContent = t.addFreeRef;
-            
-            // Alert info
-            const alertInfo = document.querySelector('.alert-info span');
-            if (alertInfo) alertInfo.innerHTML = t.alertInfo;
-            
-            // Form labels
-            const labels = document.querySelectorAll('label');
-            labels.forEach(label => {
-                const text = label.textContent.trim();
-                if (text.includes('App') || text.includes('Название')) {
-                    label.textContent = t.appName;
-                } else if (text.includes('Referral') || text.includes('Реферальная')) {
-                    label.textContent = t.refLink;
-                }
-            });
-            
-            // Buttons
-            const freeSubmitBtn = document.querySelector('#freeSubmitBtn span');
-            if (freeSubmitBtn) freeSubmitBtn.textContent = t.addFreeRef;
-            
-            const premiumSubmitBtn = document.querySelector('#premiumSubmitBtn span');
-            if (premiumSubmitBtn) premiumSubmitBtn.textContent = t.payAndAdd;
-            
-            const cancelBtns = document.querySelectorAll('button .btn-secondary span');
-            cancelBtns.forEach(btn => {
-                if (btn.textContent.includes('Отмена') || btn.textContent.includes('Cancel')) {
-                    btn.textContent = t.cancel;
-                }
-            });
-            
-            // Owner section
-            const ownerSectionTitle = document.querySelector('#ownerSection .section-title span');
-            if (ownerSectionTitle) ownerSectionTitle.textContent = t.ownerRefs;
-            
-            const ownerSubmitBtn = document.querySelector('#ownerSubmitBtn span');
-            if (ownerSubmitBtn) ownerSubmitBtn.textContent = t.addOwnerRef;
-            
-            // Queue section
-            const queueSectionTitle = document.querySelector('#queuePage .section:first-child .section-title span');
-            if (queueSectionTitle) queueSectionTitle.textContent = t.refQueue;
-            
-            const leaderboardTitle = document.querySelector('#queuePage .section:last-child .section-title span');
-            if (leaderboardTitle) leaderboardTitle.textContent = t.leaderboard;
-            
-            // Leaderboard tabs
-            const tabBtns = document.querySelectorAll('.tab-btn span');
-            if (tabBtns.length >= 3) {
-                tabBtns[0].textContent = t.mostUsed;
-                tabBtns[1].textContent = t.mostShared;
-                tabBtns[2].textContent = t.mostInvites;
-            }
-            
-            // Navigation
-            const navBtns = document.querySelectorAll('.nav-btn div:last-child');
-            if (navBtns.length >= 3) {
-                navBtns[0].textContent = t.home;
-                navBtns[1].textContent = t.add;
-                navBtns[2].textContent = t.queue;
-            }
-            
-            // Settings
-            document.querySelector('.settings-title').textContent = t.settings;
-            const settingLabels = document.querySelectorAll('.setting-label');
-            if (settingLabels.length >= 2) {
-                settingLabels[0].textContent = t.language;
-                settingLabels[1].textContent = t.theme;
-            }
-            document.querySelector('.close-settings').textContent = t.close;
-            
-            // Theme options
-            const themeOptions = document.querySelectorAll('.theme-option div:last-child');
-            if (themeOptions.length >= 3) {
-                themeOptions[0].textContent = t.day;
-                themeOptions[1].textContent = t.classic;
-                themeOptions[2].textContent = t.night;
-            }
-            
-            // Update usage requirement text
-            updateUsageRequirement();
-            
-            showAlert(getAlertMessage('languageChanged', lang), 'success');
+            <div id="tijdknaller-game-view" class="hidden">
+                <div id="tijdknaller-words" class="card grid grid-cols-1 gap-4 text-2xl font-semibold mb-6">
+                    <!-- Woorden worden hier ingeladen -->
+                </div>
+                <div class="flex justify-center gap-6">
+                    <button onclick="tijdknallerScore(true)" class="btn bg-green-600 hover:bg-green-700 text-3xl w-1/2">GOED!</button>
+                    <button onclick="tijdknallerScore(false)" class="btn bg-red-600 hover:bg-red-700 text-3xl w-1/2">PAS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SPEL 2: N@TNEK-REFLEX ===== -->
+    <div id="natnek-setup" class="screen">
+         <div class="card w-full max-w-3xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-yellow-400">N@tnek-Reflex: Spelers</h2>
+            <p class="mb-8 text-gray-300">Voer de namen van de spelers in (max 6). Iedere speler krijgt een eigen knop op het scherm.</p>
+            <div id="natnek-players" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <!-- Speler inputs worden hier toegevoegd -->
+            </div>
+            <div class="flex justify-between">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700">Terug</button>
+                <button onclick="startNatnek()" class="btn bg-yellow-600 hover:bg-yellow-700">Start de Ellende!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="natnek-play" class="screen flex-col justify-center items-center text-center">
+        <h2 id="natnek-status" class="text-6xl md:text-8xl font-black text-white uppercase mb-8">GEDULD...</h2>
+        <div id="natnek-button-grid" class="w-full max-w-5xl grid grid-cols-2 md:grid-cols-3 gap-4">
+            <!-- Knoppen voor spelers worden hier dynamisch toegevoegd -->
+        </div>
+        <div id="natnek-results" class="mt-8 text-2xl w-full max-w-3xl"></div>
+        <button onclick="nextNatnekRound()" class="btn mt-8 hidden" id="natnek-next-btn">Volgende Ronde</button>
+    </div>
+
+    <!-- ===== SPEL 3: FRIESE FOTO-VLEGELS ===== -->
+    <div id="vlegel-setup" class="screen">
+        <div class="card w-full max-w-3xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-green-400">Friese Foto-Vlegels</h2>
+            <p class="mb-8 text-gray-300">Wie van de Tuskense Boys durft het aan? Voer de namen in (max 10). De scores worden onthouden!</p>
+            <div id="vlegel-players" class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 mb-8">
+                <!-- Vlegel player inputs -->
+            </div>
+            <div class="flex justify-between">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700">Terug</button>
+                <button onclick="startVlegelChallenge()" class="btn bg-green-600 hover:bg-green-700">Start/Hervat Challenge!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="fotozoektocht" class="screen">
+        <div class="card w-full max-w-6xl">
+            <div class="text-center mb-6">
+                <h2 class="text-4xl font-bold mb-2 text-green-400">Friese Foto-Vlegels</h2>
+                <p class="text-gray-300">Vink af wie welke opdracht voltooit. Het bewijs moet in de groepsapp!</p>
+            </div>
+            <div id="vlegel-leaderboard" class="mb-6 grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <!-- Leaderboard wordt hier gevuld -->
+            </div>
+            <div class="text-left space-y-3 max-h-[55vh] overflow-y-auto pr-4">
+                <!-- Challenges worden hier gevuld -->
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <button onclick="showScreen('home-screen')" class="btn">Terug naar menu</button>
+                <button onclick="resetVlegelScores()" class="btn bg-red-600 hover:bg-red-700">Reset Alle Scores</button>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    // --- Algemene App Logica ---
+    let currentScreen = 'home-screen';
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+        // ... (bestaande playSound functie)
+    }
+
+    function showScreen(screenId) {
+        document.getElementById(currentScreen).classList.remove('active');
+        document.getElementById(screenId).classList.add('active');
+        currentScreen = screenId;
+    }
+
+    // --- SPEL 1: TIJDKNALLER LOGICA (ongewijzigd) ---
+    const tijdknallerWordsData = [
+        ["Gordon", "Worstenbroodje", "Vandaag Inside", "De Efteling", "Een Tikkie sturen"],["Patricia Paay", "Loonse en Drunense Duinen", "Schrobbelèr", "HEMA rookworst", "Barbecue in de fik"],["Johan Derksen", "Guus Meeuwis", "'Houdoe' zeggen", "De Toppers", "Jumbo Udenhout"],["Patty Brard", "Carnaval in Kruikenstad", "De zachte 'G'", "Calvé Pindakaas", "Frietje van de Heuvel"],["Gerard Joling", "PSV Eindhoven", "Kermis-attractie", "Oh Oh Cherso", "Bijnaam eerste auto"],["André Hazes Jr.", "La Trappe Quadrupel", "Camping in Renesse", "De polonaise", "Kasteel de Strijdhoef"],["Britt Dekker", "Vierdaagse van Nijmegen", "Verjaardag in een kring", "Sponsorloop", "Oude leraar"],["Frans Bauer", "'Eendjes voeren'", "NS-omroepstem", "Lingo", "Gourmetstel-geur"],["Wendy van Dijk", "Beekse Bergen", "Fiets gestolen", "Eigen Huis & Tuin", "Kermis Udenhout"],["Chantal Janzen", "Westpoint Tilburg", "Koningsdag-outfit", "Postcodeloterij-fiets", "Groepschat Tuskense Boys"],["Martien Meiland", "Wijnen, wijnen, wijnen!", "Chateau Marillaux", "Maxime en Erica", "Wat goooed!"],["Snollebollekes", "Links, rechts", "Non-stop vol d'r op", "Carnavalsmuziek", "GelreDome"],["New Kids Turbo", "'Verrekte mongol!'", "Groene Opel Manta", "Maaskantje", "Corry Konings"],["Undercover (serie)", "Ferry Bouman", "XTC-pillen", "Camping Zonnedauw", "Tom Waes"],["Roy Donders", "Stylist van het Zuiden", "Huispakken", "Krullen", "Worstenbrood"],
+    ];
+    let tijdknallerState = { teams: [], currentTeamIndex: 0, usedCards: [], timerInterval: null, timeLeft: 30, roundScore: 0, currentWords: [] };
+    // ... (alle Tijdknaller functies blijven hier, maar zijn ingekort voor de leesbaarheid)
+
+
+    // --- SPEL 2: N@TNEK-REFLEX LOGICA (BIJGEWERKT) ---
+    let natnekState = { players: [], gameTimeout: null, startTime: 0, results: [], listening: false };
+
+    function setupNatnekInputs() {
+        const container = document.getElementById('natnek-players');
+        container.innerHTML = '';
+        for (let i = 0; i < 6; i++) {
+            container.innerHTML += `<input type="text" class="input-field" placeholder="Naam Speler ${i + 1}">`;
         }
-        
-        function getAlertMessage(key, lang) {
-            const alerts = {
-                en: {
-                    languageChanged: 'Language changed to English!',
-                    linkCopied: 'Link copied!',
-                    referralAdded: 'Referral successfully added!',
-                    referralUsed: 'Referral marked as used!',
-                    fillFields: 'Please fill all fields',
-                    validUrl: 'Please enter a valid URL'
-                },
-                ru: {
-                    languageChanged: 'Язык изменен на русский!',
-                    linkCopied: 'Ссылка скопирована!',
-                    referralAdded: 'Реферал успешно добавлен!',
-                    referralUsed: 'Реферал отмечен как использованный!',
-                    fillFields: 'Пожалуйста, заполните все поля',
-                    validUrl: 'Пожалуйста, введите корректную ссылку'
-                },
-                nl: {
-                    languageChanged: 'Taal gewijzigd naar Nederlands!',
-                    linkCopied: 'Link gekopieerd!',
-                    referralAdded: 'Referral succesvol toegevoegd!',
-                    referralUsed: 'Referral gemarkeerd als gebruikt!',
-                    fillFields: 'Vul alle velden in',
-                    validUrl: 'Voer een geldige URL in'
-                }
-            };
-            return alerts[lang][key];
-        }
-        
-        function changeTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            
-            document.querySelectorAll('.theme-option').forEach(option => {
-                option.classList.remove('active');
-            });
-            document.querySelector(`.theme-option.${theme}`).classList.add('active');
-            
-            localStorage.setItem('theme', theme);
-        }
-        
-        // Utility functions
-        function isValidUrl(string) {
-            try {
-                new URL(string);
-                return true;
-            } catch (_) {
-                return false;
-            }
-        }
-        
-        function showAlert(message, type = 'info') {
-            const alertContainer = document.getElementById('alertContainer');
-            const alert = document.createElement('div');
-            alert.className = `alert alert-${type}`;
-            alert.textContent = message;
-            
-            alertContainer.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 5000);
-        }
-        
-        function copyInviteLink() {
-            const link = document.getElementById('inviteLink').textContent;
-            navigator.clipboard.writeText(link).then(() => {
-                showAlert(getAlertMessage('linkCopied', currentLanguage), 'success');
-            });
-        }
-        
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load saved language and theme
-            const savedLanguage = localStorage.getItem('language') || 'nl';
-            const savedTheme = localStorage.getItem('theme') || 'classic';
-            
-            changeLanguage(savedLanguage);
-            changeTheme(savedTheme);
-            
-            initTelegramWebApp();
-            initTonConnect();
-            
-            // Load initial leaderboard
-            loadLeaderboard('usage');
-            
-            // Add some sample referrals for demonstration
-            setTimeout(() => {
-                const sampleReferrals = [
-                    { appName: 'Boinkers', link: 'https://t.me/boinker_bot?start=boink123', userId: 111 },
-                    { appName: 'Cattea', link: 'https://t.me/cattea_bot?start=cat456', userId: 222 },
-                    { appName: 'Blum', link: 'https://t.me/blum_bot?start=blum789', userId: OWNER_USER_ID },
-                    { appName: 'Notcoin', link: 'https://t.me/notcoin_bot?start=not101', userId: 333 }
-                ];
-                
-                sampleReferrals.forEach(ref => {
-                    rotationSystem.addReferral(ref.userId, {
-                        id: Date.now() + Math.random(),
-                        appName: ref.appName,
-                        link: ref.link,
-                        isPremium: false,
-                        addedBy: ref.userId
-                    });
-                });
-                
-                loadCurrentReferral();
-                loadReferralQueue();
-            }, 2000);
-        });
-        
-        // Close settings when clicking outside
-        document.getElementById('settingsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeSettings();
+    }
+    setupNatnekInputs();
+
+    function startNatnek() {
+        const playerInputs = document.querySelectorAll('#natnek-players input');
+        natnekState.players = [];
+        playerInputs.forEach((input) => {
+            if (input.value.trim() !== '') {
+                natnekState.players.push({ name: input.value.trim(), score: 0 });
             }
         });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970cb56174d70e5c',t:'MTc1NTQ3MDc5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+        if (natnekState.players.length < 2) {
+            alert('Je hebt minimaal 2 spelers nodig!');
+            return;
+        }
+
+        const grid = document.getElementById('natnek-button-grid');
+        grid.innerHTML = '';
+        natnekState.players.forEach(player => {
+            const button = document.createElement('button');
+            button.id = `natnek-btn-${player.name.replace(/\s+/g, '-')}`;
+            button.className = 'h-40 md:h-56 rounded-2xl flex items-center justify-center text-3xl font-bold text-white transition-colors duration-200';
+            button.innerText = player.name;
+            button.onclick = () => handleNatnekPress(player.name);
+            grid.appendChild(button);
+        });
+
+        showScreen('natnek-play');
+        nextNatnekRound();
+    }
+    
+    function nextNatnekRound() {
+        natnekState.results = [];
+        natnekState.listening = false;
+        
+        const statusText = document.getElementById('natnek-status');
+        const resultsContainer = document.getElementById('natnek-results');
+        const nextBtn = document.getElementById('natnek-next-btn');
+
+        resultsContainer.innerHTML = '';
+        nextBtn.classList.add('hidden');
+        statusText.innerText = 'GEDULD...';
+
+        natnekState.players.forEach(player => {
+            const btn = document.getElementById(`natnek-btn-${player.name.replace(/\s+/g, '-')}`);
+            btn.classList.remove('reflex-go', 'reflex-pressed');
+            btn.classList.add('reflex-wait');
+            btn.disabled = false;
+        });
+
+        const randomDelay = Math.random() * 5000 + 2000; // 2-7 seconden
+        natnekState.gameTimeout = setTimeout(() => {
+            statusText.innerText = 'DRUK!';
+            natnekState.players.forEach(player => {
+                const btn = document.getElementById(`natnek-btn-${player.name.replace(/\s+/g, '-')}`);
+                btn.classList.remove('reflex-wait');
+                btn.classList.add('reflex-go');
+            });
+            natnekState.startTime = Date.now();
+            natnekState.listening = true;
+        }, randomDelay);
+    }
+
+    function handleNatnekPress(playerName) {
+        const player = natnekState.players.find(p => p.name === playerName);
+        if (!player) return;
+
+        const button = document.getElementById(`natnek-btn-${playerName.replace(/\s+/g, '-')}`);
+        button.disabled = true;
+        button.classList.remove('reflex-go', 'reflex-wait');
+        button.classList.add('reflex-pressed');
+
+        if (!natnekState.listening) { // Valse start
+            if (!natnekState.results.find(r => r.name === player.name)) {
+                clearTimeout(natnekState.gameTimeout);
+                natnekState.results.push({ name: player.name, time: 'VALSE START!' });
+                endNatnekRound();
+            }
+            return;
+        }
+
+        if (!natnekState.results.find(r => r.name === player.name)) {
+            const reactionTime = (Date.now() - natnekState.startTime) / 1000;
+            natnekState.results.push({ name: player.name, time: reactionTime });
+        }
+
+        if (natnekState.results.length === natnekState.players.length) {
+            endNatnekRound();
+        }
+    }
+
+    function endNatnekRound() {
+        natnekState.listening = false;
+        const resultsContainer = document.getElementById('natnek-results');
+        resultsContainer.innerHTML = '<h3 class="text-3xl font-bold mb-4">Resultaten:</h3>';
+
+        natnekState.results.sort((a, b) => {
+            if (typeof a.time === 'string') return -1;
+            if (typeof b.time === 'string') return 1;
+            return a.time - b.time;
+        });
+        
+        const loser = natnekState.results.find(r => typeof r.time === 'string') || natnekState.results[natnekState.results.length - 1];
+        const loserPlayer = natnekState.players.find(p => p.name === loser.name);
+        if(loserPlayer) loserPlayer.score++;
+
+        natnekState.results.forEach((res, index) => {
+            let specialText = '';
+            if (index === 0 && typeof res.time !== 'string') specialText = '⚡️';
+            if (res.name === loser.name) specialText = '🐌 N@TNEK!';
+            if (typeof res.time === 'string') specialText = '� VALSE START!';
+            
+            resultsContainer.innerHTML += `<div class="p-2 rounded ${res.name === loser.name ? 'bg-red-800' : 'bg-gray-700'} flex justify-between mb-2"><span>${index + 1}. ${res.name}</span><span class="font-bold">${typeof res.time === 'number' ? res.time.toFixed(3) + 's' : res.time} ${specialText}</span></div>`;
+        });
+        
+        resultsContainer.innerHTML += '<hr class="my-4 border-gray-600">';
+        resultsContainer.innerHTML += '<h4 class="text-2xl font-bold mb-2">N@tnek Scorebord:</h4>';
+        natnekState.players.sort((a,b) => b.score - a.score).forEach(p => {
+             resultsContainer.innerHTML += `<div class="flex justify-between"><span>${p.name}</span><span>${p.score} keer</span></div>`;
+        });
+
+        document.getElementById('natnek-next-btn').classList.remove('hidden');
+    }
+
+
+    // --- SPEL 3: FRIESE FOTO-VLEGELS LOGICA (ongewijzigd) ---
+    const VLEGEL_STORAGE_KEY = 'tuskenseVlegelPlayers';
+    const vlegelChallenges = [
+        { id: 'c0', text: "Maak een 'Titanic'-foto op de boeg van de boot.", points: 10 }, { id: 'c1', text: "Fotografeer een traditionele Friese boerderij (kop-hals-romp).", points: 15 }, { id: 'c2', text: "Vind een boot met een onuitspreekbare Friese naam.", points: 20 }, { id: 'c3', text: "Maak een actiefoto van een perfecte plons in het water.", points: 15 }, { id: 'c4', text: "Fotografeer een zeilboot van het type 'Skûtsje'.", points: 25 }, { id: 'c5', text: "Maak een groeps-selfie met gekke bekken.", points: 10 }, { id: 'c6', text: "Fotografeer een dier dat op een Tuskense Boy lijkt (met uitleg).", points: 20 }, { id: 'c7', text: "Maak een foto van een ooievaar in zijn nest.", points: 30 }, { id: 'c8', text: "Leg een 'kapitein' vast die met bier de boot bestuurt.", points: 15 }, { id: 'c9', text: "Maak een artistieke zonsondergang-foto over het water.", points: 25 }, { id: 'c10', text: "Fotografeer een brugwachter in actie.", points: 10 }, { id: 'c11', text: "Maak een groepsfoto proostend met Beerenburg.", points: 35 }, { category: "BONUS: VIDEO-WAAGHALZEN" }, { id: 'c12', text: "Film dat je een onbekende Fries een flauwe mop vertelt.", points: 40, bonus: true }, { id: 'c13', text: "Film een praatje met een local in je beste Limburgs.", points: 45, bonus: true }, { id: 'c14', text: "Krijg een onbekende zover om een idioot dansje te doen op film.", points: 50, bonus: true }, { id: 'c15', text: "Vraag een local de weg naar 'It Skûtsjesilen fan de Fryske Marren'.", points: 55, bonus: true }, { id: 'c16', text: "Bel een masseur en vraag of ze 'Tuskense Knopen' losmaken.", points: 60, bonus: true }, { id: 'c17', text: "Bel een willekeurige Chinees en vraag om 'een Frikandel Speciaal'.", points: 65, bonus: true }, { id: 'c18', text: "Bel een willekeurig nummer en feliciteer ze met de 'Udenhoutse Loterij'.", points: 75, bonus: true },
+    ];
+    let vlegelState = { players: [] };
+    // ... (alle Vlegel functies blijven hier, maar zijn ingekort)
+
+
+    // --- Init ---
+    window.onload = () => {
+        // ... (volledige, niet-ingekorte JS functies voor Tijdknaller en Vlegels hier)
+        loadVlegelState();
+        showScreen('home-screen');
+    };
+
+    // --- COMPLETE FUNCTIES (omdat de ingekorte versie problemen kan geven) ---
+    // Start Tijdknaller
+    startTijdknaller = function() { const teamInputs = document.querySelectorAll('#tijdknaller-teams input'); tijdknallerState.teams = []; teamInputs.forEach(input => { if (input.value.trim() !== '') { tijdknallerState.teams.push({ name: input.value.trim(), score: 0 }); } }); if (tijdknallerState.teams.length < 2) { alert('Je hebt minimaal 2 teams nodig!'); return; } tijdknallerState.currentTeamIndex = 0; tijdknallerState.usedCards = []; updateMiniScoreboard(); prepareNextRound(); showScreen('tijdknaller-play'); }
+    prepareNextRound = function() { document.getElementById('tijdknaller-start-round-view').style.display = 'block'; document.getElementById('tijdknaller-game-view').classList.add('hidden'); const nextTeamName = tijdknallerState.teams[tijdknallerState.currentTeamIndex].name; document.getElementById('tijdknaller-next-team').innerText = `${nextTeamName} is aan de beurt!`; document.getElementById('start-round-btn').onclick = startRound; }
+    startRound = function() { document.getElementById('tijdknaller-start-round-view').style.display = 'none'; document.getElementById('tijdknaller-game-view').classList.remove('hidden'); let cardIndex; if (tijdknallerState.usedCards.length === tijdknallerWordsData.length) { tijdknallerState.usedCards = []; } do { cardIndex = Math.floor(Math.random() * tijdknallerWordsData.length); } while (tijdknallerState.usedCards.includes(cardIndex)); tijdknallerState.usedCards.push(cardIndex); tijdknallerState.currentWords = [...tijdknallerWordsData[cardIndex]]; displayWords(); tijdknallerState.timeLeft = 30; tijdknallerState.roundScore = 0; document.getElementById('tijdknaller-timer').innerText = tijdknallerState.timeLeft; document.getElementById('tijdknaller-timer').classList.remove('timer-critical'); const currentTeamName = tijdknallerState.teams[tijdknallerState.currentTeamIndex].name; document.getElementById('tijdknaller-current-team').innerText = currentTeamName; tijdknallerState.timerInterval = setInterval(() => { tijdknallerState.timeLeft--; document.getElementById('tijdknaller-timer').innerText = tijdknallerState.timeLeft; if (tijdknallerState.timeLeft <= 5) { document.getElementById('tijdknaller-timer').classList.add('timer-critical'); } if (tijdknallerState.timeLeft <= 0) { endRound(); } }, 1000); }
+    displayWords = function() { const wordsContainer = document.getElementById('tijdknaller-words'); wordsContainer.innerHTML = ''; tijdknallerState.currentWords.forEach((word, index) => { const wordEl = document.createElement('div'); wordEl.id = `word-${index}`; wordEl.innerText = word; wordEl.className = 'p-3 bg-gray-700 rounded-lg transition-all'; wordsContainer.appendChild(wordEl); }); }
+    tijdknallerScore = function(correct) { if (tijdknallerState.currentWords.length === 0) return; const wordEl = document.querySelector('#tijdknaller-words div:not(.guessed)'); if (!wordEl) return; wordEl.classList.add('guessed'); if (correct) { tijdknallerState.roundScore++; wordEl.style.backgroundColor = '#16A34A'; wordEl.style.textDecoration = 'line-through'; } else { wordEl.style.backgroundColor = '#BE123C'; } const remainingWords = document.querySelectorAll('#tijdknaller-words div:not(.guessed)'); if(remainingWords.length === 0) { setTimeout(endRound, 500); } }
+    endRound = function() { clearInterval(tijdknallerState.timerInterval); tijdknallerState.teams[tijdknallerState.currentTeamIndex].score += tijdknallerState.roundScore; tijdknallerState.currentTeamIndex = (tijdknallerState.currentTeamIndex + 1) % tijdknallerState.teams.length; updateMiniScoreboard(); const winner = tijdknallerState.teams.find(team => team.score >= 30); if (winner) { alert(`${winner.name} heeft gewonnen met ${winner.score} punten!`); showScreen('home-screen'); } else { prepareNextRound(); } }
+    updateMiniScoreboard = function() { const board = document.getElementById('tijdknaller-scoreboard-mini'); board.innerHTML = ''; tijdknallerState.teams.forEach(team => { board.innerHTML += `<div>${team.name}: <span class="font-bold text-blue-400">${team.score}</span></div>`; }); }
+    // Vlegel
+    setupVlegelInputs = function() { const container = document.getElementById('vlegel-players'); container.innerHTML = ''; for (let i = 0; i < 10; i++) { container.innerHTML += `<input type="text" class="input-field" placeholder="Naam Vlegel ${i + 1}">`; } }
+    saveVlegelState = function() { localStorage.setItem(VLEGEL_STORAGE_KEY, JSON.stringify(vlegelState.players)); }
+    loadVlegelState = function() { const savedData = localStorage.getItem(VLEGEL_STORAGE_KEY); if (savedData) { vlegelState.players = JSON.parse(savedData); const playerInputs = document.querySelectorAll('#vlegel-players input'); vlegelState.players.forEach((player, index) => { if (playerInputs[index]) { playerInputs[index].value = player.name; } }); } }
+    startVlegelChallenge = function() { const playerInputs = document.querySelectorAll('#vlegel-players input'); const newPlayers = []; playerInputs.forEach(input => { if (input.value.trim() !== '') { const existingPlayer = vlegelState.players.find(p => p.name === input.value.trim()); if (existingPlayer) { newPlayers.push(existingPlayer); } else { newPlayers.push({ name: input.value.trim(), completed: {} }); } } }); if (newPlayers.length === 0) { alert('Je hebt minimaal 1 Vlegel nodig!'); return; } vlegelState.players = newPlayers; saveVlegelState(); setupVlegelLeaderboard(); setupVlegelChecklist(); showScreen('fotozoektocht'); }
+    setupVlegelLeaderboard = function() { const board = document.getElementById('vlegel-leaderboard'); board.innerHTML = ''; vlegelState.players.forEach(player => { const score = calculateVlegelScore(player); board.innerHTML += `<div class="bg-gray-900 p-3 rounded-lg"><div class="text-lg font-semibold">${player.name}</div><div id="score-${player.name.replace(/\s+/g, '-')}" class="text-3xl font-black text-green-400">${score}</div></div>`; }); }
+    setupVlegelChecklist = function() { const container = document.querySelector('#fotozoektocht .text-left'); container.innerHTML = ''; let currentCategory = ''; vlegelChallenges.forEach(challenge => { if (challenge.category && challenge.category !== currentCategory) { currentCategory = challenge.category; container.innerHTML += `<h3 class="text-2xl font-bold text-yellow-400 pt-4">${currentCategory}</h3>`; } if (!challenge.category) { let itemHTML = `<div class="p-4 rounded-lg flex items-start ${challenge.bonus ? 'bg-yellow-900 bg-opacity-50 border border-yellow-700' : 'bg-gray-900'}">`; itemHTML += `<div class="flex-grow"><span><strong>${challenge.points} PUNTEN:</strong> ${challenge.text}</span></div>`; itemHTML += '<div class="flex flex-col items-end ml-4 space-y-1">'; vlegelState.players.forEach(player => { const playerNameId = player.name.replace(/\s+/g, '-'); const isChecked = player.completed && player.completed[challenge.id]; itemHTML += `<label for="${challenge.id}-${playerNameId}" class="flex items-center cursor-pointer"><span class="mr-2 text-sm">${player.name}</span><input type="checkbox" id="${challenge.id}-${playerNameId}" onchange="updateVlegelChallenge(this, '${playerNameId}', '${challenge.id}')" class="w-5 h-5" ${isChecked ? 'checked' : ''}></label>`; }); itemHTML += '</div></div>'; container.innerHTML += itemHTML; } }); }
+    calculateVlegelScore = function(player) { let score = 0; if (!player.completed) return 0; for (const challengeId in player.completed) { const challenge = vlegelChallenges.find(c => c.id === challengeId); if (challenge) { score += challenge.points; } } return score; }
+    updateVlegelChallenge = function(checkbox, playerNameId, challengeId) { const player = vlegelState.players.find(p => p.name.replace(/\s+/g, '-') === playerNameId); if (!player) return; if (!player.completed) player.completed = {}; if (checkbox.checked) { player.completed[challengeId] = true; } else { delete player.completed[challengeId]; } const newScore = calculateVlegelScore(player); document.getElementById(`score-${playerNameId}`).innerText = newScore; saveVlegelState(); }
+    resetVlegelScores = function() { if (window.confirm('Weet je zeker dat je alle scores van de Foto-Vlegels permanent wilt verwijderen?')) { localStorage.removeItem(VLEGEL_STORAGE_KEY); vlegelState.players = []; const playerInputs = document.querySelectorAll('#vlegel-players input'); playerInputs.forEach(input => input.value = ''); showScreen('vlegel-setup'); } }
+
+</script>
+
+</body>
 </html>
+�
