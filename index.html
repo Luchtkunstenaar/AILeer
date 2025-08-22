@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De Tuskense Triatlon</title>
+    <title>De Tuskense Tetrathlon</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +11,10 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #111827; /* Donkergrijs/blauw */
-            color: #F3F4F6; /* Lichtgrijs */
+            background-color: #111827;
+            color: #F3F4F6;
             overflow: hidden;
-            background-image: radial-gradient(#374151 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-image: radial-gradient(circle at top right, #1f2937, #111827);
         }
         .screen {
             display: none;
@@ -37,29 +36,24 @@
             opacity: 1;
         }
         .btn {
-            @apply px-8 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg transform transition-all duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400;
+            @apply px-8 py-4 text-white font-bold rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4;
         }
         .card {
-            @apply bg-gray-800 bg-opacity-80 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 md:p-8;
+            @apply bg-gray-800 bg-opacity-80 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 md:p-8 w-full;
         }
         .input-field {
-            @apply w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+            @apply w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all;
         }
-        /* Animatie voor de timer */
         @keyframes pulse-timer { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         .timer-critical { animation: pulse-timer 1s infinite; color: #EF4444; }
-        /* Kleuren voor N@tnek Reflex Knoppen */
         .reflex-wait { background-color: #BE123C; } .reflex-go { background-color: #16A34A; } .reflex-pressed { background-color: #4B5563; }
-        /* Checklist styling */
-        .challenge-item { @apply p-4 bg-gray-900 rounded-lg flex items-center transition-colors duration-300; }
-        .challenge-item input:checked + span { @apply line-through text-gray-500; }
-        .challenge-item input { @apply w-6 h-6 bg-gray-700 rounded border-gray-600 text-blue-500 focus:ring-blue-600 mr-4; }
-        /* Rad styling */
         .wheel-container { @apply h-24 w-full bg-gray-900 rounded-lg overflow-hidden relative border-2 border-gray-700 flex items-center justify-center; }
         .wheel-result { @apply text-4xl font-bold text-center transition-all duration-100; }
         .wheel-container::after { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 100%; height: 4px; background: #3B82F6; box-shadow: 0 0 15px #3B82F6; z-index: 10;}
         .spinning { animation: wheel-text-blur 0.05s linear infinite; }
         @keyframes wheel-text-blur { 0% { filter: blur(0px); transform: scale(1); } 50% { filter: blur(2px); transform: scale(0.95); } 100% { filter: blur(0px); transform: scale(1); } }
+        @keyframes title-glow { 0%, 100% { text-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 0 30px rgba(59, 130, 246, 0.3); } 50% { text-shadow: 0 0 25px rgba(59, 130, 246, 0.7), 0 0 50px rgba(59, 130, 246, 0.5); } }
+        .title-glow { animation: title-glow 4s ease-in-out infinite; }
     </style>
 </head>
 <body class="antialiased">
@@ -67,94 +61,136 @@
     <!-- Hoofdscherm -->
     <div id="home-screen" class="screen active">
         <div class="text-center">
-            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-wider text-white mb-4" style="text-shadow: 0 0 15px rgba(255,255,255,0.3);">
-                Tuskense <span class="text-blue-500">Tetrathlon</span>
+            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-wider text-white mb-4">
+                Tuskense <span class="text-blue-500 title-glow">Tetrathlon</span>
             </h1>
             <p class="text-xl text-gray-300 mb-12">Hét digitale spelletjespakket voor het weekendje weg!</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <button onclick="showScreen('tijdknaller-setup')" class="btn text-2xl">De Tijdknaller</button>
-                <button onclick="showScreen('natnek-setup')" class="btn text-2xl">N@tnek-Reflex</button>
-                <button onclick="showScreen('vlegel-setup')" class="btn text-2xl">Friese Foto-Vlegels</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <button onclick="showScreen('tijdknaller-setup')" class="btn text-2xl bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">De Tijdknaller</button>
+                <button onclick="showScreen('natnek-setup')" class="btn text-2xl bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400">N@tnek-Reflex</button>
+                <button onclick="showScreen('vlegel-setup')" class="btn text-2xl bg-green-600 hover:bg-green-700 focus:ring-green-400">Friese Foto-Vlegels</button>
                 <button onclick="showScreen('belspel-setup')" class="btn text-2xl bg-purple-600 hover:bg-purple-700 focus:ring-purple-400">Het Bel-Bordeel</button>
             </div>
         </div>
     </div>
 
-    <!-- ===== SPEL 1: DE TIJDKNALLER (ongewijzigd) ===== -->
+    <!-- ===== SPEL 1: DE TIJDKNALLER ===== -->
     <div id="tijdknaller-setup" class="screen">
-        <!-- Tijdknaller setup HTML -->
+        <div class="card max-w-2xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-blue-400">De Tijdknaller: Teams</h2>
+            <p class="mb-8 text-gray-300">Voer de namen van de teams in.</p>
+            <div id="tijdknaller-teams" class="space-y-4 mb-8">
+                <input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 1"><input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 2"><input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 3 (optioneel)"><input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 4 (optioneel)">
+            </div>
+            <div class="flex justify-between">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button><button onclick="startTijdknaller()" class="btn bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">Spel Starten!</button>
+            </div>
+        </div>
     </div>
     <div id="tijdknaller-play" class="screen">
-        <!-- Tijdknaller speelscherm HTML -->
+        <div class="w-full max-w-4xl text-center">
+            <div class="grid grid-cols-3 items-center mb-6">
+                <div id="tijdknaller-scoreboard-mini" class="text-left text-lg"></div>
+                <h2 id="tijdknaller-current-team" class="text-4xl font-bold text-blue-400">Team is aan de beurt</h2>
+                <div id="tijdknaller-timer" class="text-6xl font-black text-right">30</div>
+            </div>
+            <div id="tijdknaller-start-round-view" class="card">
+                <h3 id="tijdknaller-next-team" class="text-3xl font-bold mb-4"></h3>
+                <p class="text-xl mb-8">Kies wie de woorden omschrijft. Druk op start als jullie er klaar voor zijn!</p>
+                <button id="start-round-btn" class="btn text-3xl px-16 py-8 bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">START RONDE</button>
+            </div>
+            <div id="tijdknaller-game-view" class="hidden">
+                <div id="tijdknaller-words" class="card grid grid-cols-1 gap-4 text-2xl font-semibold mb-6"></div>
+                <div class="flex justify-center gap-6">
+                    <button onclick="tijdknallerScore(true)" class="btn bg-green-600 hover:bg-green-700 focus:ring-green-400 text-3xl w-1/2">GOED!</button>
+                    <button onclick="tijdknallerScore(false)" class="btn bg-red-600 hover:bg-red-700 focus:ring-red-400 text-3xl w-1/2">PAS</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== SPEL 2: N@TNEK-REFLEX (ongewijzigd) ===== -->
+    <!-- ===== SPEL 2: N@TNEK-REFLEX ===== -->
     <div id="natnek-setup" class="screen">
-        <!-- N@tnek setup HTML -->
+         <div class="card max-w-3xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-yellow-400">N@tnek-Reflex: Spelers</h2>
+            <p class="mb-8 text-gray-300">Voer de namen van de spelers in (max 6).</p>
+            <div id="natnek-players" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
+            <div class="flex justify-between">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button><button onclick="startNatnek()" class="btn bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400">Start de Ellende!</button>
+            </div>
+        </div>
     </div>
     <div id="natnek-play" class="screen flex-col justify-center items-center text-center">
-        <!-- N@tnek speelscherm HTML -->
+        <h2 id="natnek-status" class="text-6xl md:text-8xl font-black text-white uppercase mb-8">GEDULD...</h2>
+        <div id="natnek-button-grid" class="w-full max-w-5xl grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+        <div id="natnek-results" class="mt-8 text-2xl w-full max-w-3xl"></div>
+        <button onclick="nextNatnekRound()" class="btn mt-8 hidden bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400" id="natnek-next-btn">Volgende Ronde</button>
     </div>
 
-    <!-- ===== SPEL 3: FRIESE FOTO-VLEGELS (ongewijzigd) ===== -->
+    <!-- ===== SPEL 3: FRIESE FOTO-VLEGELS ===== -->
     <div id="vlegel-setup" class="screen">
-        <!-- Vlegel setup HTML -->
+        <div class="card max-w-3xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-green-400">Friese Foto-Vlegels</h2>
+            <p class="mb-8 text-gray-300">Voer de namen in (max 10). Scores worden onthouden!</p>
+            <div id="vlegel-players" class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 mb-8"></div>
+            <div class="flex justify-between">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button><button onclick="startVlegelChallenge()" class="btn bg-green-600 hover:bg-green-700 focus:ring-green-400">Start/Hervat Challenge!</button>
+            </div>
+        </div>
     </div>
     <div id="fotozoektocht" class="screen">
-        <!-- Fotozoektocht speelscherm HTML -->
+        <div class="card max-w-6xl">
+            <div class="text-center mb-6">
+                <h2 class="text-4xl font-bold mb-2 text-green-400">Friese Foto-Vlegels</h2>
+                <p class="text-gray-300">Vink af wie welke opdracht voltooit. Het bewijs moet in de groepsapp!</p>
+            </div>
+            <div id="vlegel-leaderboard" class="mb-6 grid grid-cols-2 md:grid-cols-5 gap-4 text-center"></div>
+            <div id="vlegel-checklist" class="text-left space-y-3 max-h-[55vh] overflow-y-auto pr-4"></div>
+            <div class="flex justify-between items-center mt-8">
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug naar menu</button>
+                <button onclick="resetVlegelScores()" class="btn bg-red-600 hover:bg-red-700 focus:ring-red-400">Reset Alle Scores</button>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== SPEL 4: HET BEL-BORDEEL (BIJGEWERKT) ===== -->
+    <!-- ===== SPEL 4: HET BEL-BORDEEL ===== -->
     <div id="belspel-setup" class="screen">
-        <div class="card w-full max-w-3xl text-center">
+        <div class="card max-w-3xl text-center">
             <h2 class="text-4xl font-bold mb-6 text-purple-400">Het Bel-Bordeel</h2>
-            <p class="mb-8 text-gray-300">Voer de namen in van iedereen die meedoet met Steen, Papier, Schaar. Het rad kiest wie de baas is!</p>
+            <p class="mb-8 text-gray-300">Voer de namen in van iedereen die meedoet met Steen, Papier, Schaar.</p>
             <div id="belspel-players" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
             <div class="flex justify-between">
-                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700">Terug</button>
-                <button onclick="startBelspel()" class="btn bg-purple-600 hover:bg-purple-700">Naar de Raden!</button>
+                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button>
+                <button onclick="startBelspel()" class="btn bg-purple-600 hover:bg-purple-700 focus:ring-purple-400">Naar de Raden!</button>
             </div>
         </div>
     </div>
     <div id="belspel-play" class="screen">
-        <div class="card w-full max-w-3xl text-center">
+        <div class="card max-w-3xl text-center">
             <h2 class="text-4xl font-bold mb-8 text-purple-400">Het Bel-Bordeel</h2>
-            
             <div class="space-y-8">
-                <!-- Rad 1: De Sjaak Kiezer -->
                 <div id="chooser-wheel-section">
                     <h3 class="text-2xl font-bold mb-2">Stap 1: Wie is de Baas?</h3>
                     <p class="mb-4 text-gray-400 text-sm">Draai het rad om te bepalen wie de baas is. De baas kiest wie van de verliezers van Steen, Papier, Schaar moet bellen.</p>
-                    <div class="wheel-container mb-4">
-                        <div id="chooser-wheel-result" class="wheel-result">Draai het rad...</div>
-                    </div>
-                    <button id="spin-chooser-btn" onclick="spinChooserWheel()" class="btn text-xl">Draai het Rad van de Sjaak!</button>
+                    <div class="wheel-container mb-4"><div id="chooser-wheel-result" class="wheel-result">Draai het rad...</div></div>
+                    <button id="spin-chooser-btn" onclick="spinChooserWheel()" class="btn text-xl bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">Draai het Rad van de Sjaak!</button>
                 </div>
-
-                <!-- Rad 2: Het Slachtoffer Kiezer -->
                 <div id="target-wheel-section" class="hidden">
                     <h3 class="text-2xl font-bold mb-2">Stap 2: Wie is het Slachtoffer?</h3>
                     <p class="mb-4 text-gray-400 text-sm">Draai het rad om te bepalen wie er gebeld moet worden.</p>
-                    <div class="wheel-container mb-4">
-                        <div id="target-wheel-result" class="wheel-result text-2xl p-2">Draai het rad...</div>
-                    </div>
+                    <div class="wheel-container mb-4"><div id="target-wheel-result" class="wheel-result text-2xl p-2">Draai het rad...</div></div>
                     <button id="spin-target-btn" onclick="spinTargetWheel()" class="btn text-xl bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400">Draai het Slachtoffer-Rad!</button>
                 </div>
-
-                <!-- Rad 3: De Smoes Kiezer -->
                 <div id="topic-wheel-section" class="hidden">
                     <h3 class="text-2xl font-bold mb-2">Stap 3: Wat is de Smoes?</h3>
                     <p class="mb-4 text-gray-400 text-sm">De beller is gekozen. Draai nu het rad om het bel-onderwerp te bepalen.</p>
-                    <div class="wheel-container mb-4">
-                        <div id="topic-wheel-result" class="wheel-result text-2xl p-2">Draai het rad...</div>
-                    </div>
+                    <div class="wheel-container mb-4"><div id="topic-wheel-result" class="wheel-result text-2xl p-2">Draai het rad...</div></div>
                     <button id="spin-topic-btn" onclick="spinTopicWheel()" class="btn text-xl bg-green-600 hover:bg-green-700 focus:ring-green-400">Draai het Rad van de Lul-smoes!</button>
                 </div>
             </div>
-            
             <div class="flex justify-between items-center mt-12">
-                 <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700">Terug naar menu</button>
-                 <button onclick="resetBelspel()" class="btn bg-red-600 hover:bg-red-700">Nieuwe Ronde</button>
+                 <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug naar menu</button>
+                 <button onclick="resetBelspel()" class="btn bg-red-600 hover:bg-red-700 focus:ring-red-400">Nieuwe Ronde</button>
             </div>
         </div>
     </div>
@@ -167,115 +203,54 @@
         document.getElementById(screenId).classList.add('active');
         currentScreen = screenId;
     }
-    // --- SPEL 1: TIJDKNALLER (volledige, ongewijzigde code) ---
-    // ... (volledige Tijdknaller JS)
 
-    // --- SPEL 2: N@TNEK-REFLEX (volledige, ongewijzigde code) ---
-    // ... (volledige N@tnek JS)
+    // --- SPEL 1: TIJDKNALLER ---
+    const tijdknallerWordsData=[["Gordon","Worstenbroodje","Vandaag Inside","De Efteling","Een Tikkie sturen"],["Patricia Paay","Loonse en Drunense Duinen","Schrobbelèr","HEMA rookworst","Barbecue in de fik"],["Johan Derksen","Guus Meeuwis","'Houdoe' zeggen","De Toppers","Jumbo Udenhout"],["Patty Brard","Carnaval in Kruikenstad","De zachte 'G'","Calvé Pindakaas","Frietje van de Heuvel"],["Gerard Joling","PSV Eindhoven","Kermis-attractie","Oh Oh Cherso","Bijnaam eerste auto"],["André Hazes Jr.","La Trappe Quadrupel","Camping in Renesse","De polonaise","Kasteel de Strijdhoef"],["Britt Dekker","Vierdaagse van Nijmegen","Verjaardag in een kring","Sponsorloop","Oude leraar"],["Frans Bauer","'Eendjes voeren'","NS-omroepstem","Lingo","Gourmetstel-geur"],["Wendy van Dijk","Beekse Bergen","Fiets gestolen","Eigen Huis & Tuin","Kermis Udenhout"],["Chantal Janzen","Westpoint Tilburg","Koningsdag-outfit","Postcodeloterij-fiets","Groepschat Tuskense Boys"],["Martien Meiland","Wijnen, wijnen, wijnen!","Chateau Marillaux","Maxime en Erica","Wat goooed!"],["Snollebollekes","Links, rechts","Non-stop vol d'r op","Carnavalsmuziek","GelreDome"],["New Kids Turbo","'Verrekte mongol!'","Groene Opel Manta","Maaskantje","Corry Konings"],["Undercover (serie)","Ferry Bouman","XTC-pillen","Camping Zonnedauw","Tom Waes"],["Roy Donders","Stylist van het Zuiden","Huispakken","Krullen","Worstenbrood"]];
+    let tijdknallerState={teams:[],currentTeamIndex:0,usedCards:[],timerInterval:null,timeLeft:30,roundScore:0,currentWords:[]};
+    function startTijdknaller(){const teamInputs=document.querySelectorAll('#tijdknaller-teams input');tijdknallerState.teams=[];teamInputs.forEach(input=>{if(input.value.trim()!==''){tijdknallerState.teams.push({name:input.value.trim(),score:0})}});if(tijdknallerState.teams.length<2){alert('Je hebt minimaal 2 teams nodig!');return}tijdknallerState.currentTeamIndex=0;tijdknallerState.usedCards=[];updateMiniScoreboard();prepareNextRound();showScreen('tijdknaller-play')}
+    function prepareNextRound(){document.getElementById('tijdknaller-start-round-view').style.display='block';document.getElementById('tijdknaller-game-view').classList.add('hidden');const nextTeamName=tijdknallerState.teams[tijdknallerState.currentTeamIndex].name;document.getElementById('tijdknaller-next-team').innerText=`${nextTeamName} is aan de beurt!`;document.getElementById('start-round-btn').onclick=startRound}
+    function startRound(){document.getElementById('tijdknaller-start-round-view').style.display='none';document.getElementById('tijdknaller-game-view').classList.remove('hidden');let cardIndex;if(tijdknallerState.usedCards.length===tijdknallerWordsData.length){tijdknallerState.usedCards=[]}do{cardIndex=Math.floor(Math.random()*tijdknallerWordsData.length)}while(tijdknallerState.usedCards.includes(cardIndex));tijdknallerState.usedCards.push(cardIndex);tijdknallerState.currentWords=[...tijdknallerWordsData[cardIndex]];displayWords();tijdknallerState.timeLeft=30;tijdknallerState.roundScore=0;document.getElementById('tijdknaller-timer').innerText=tijdknallerState.timeLeft;document.getElementById('tijdknaller-timer').classList.remove('timer-critical');const currentTeamName=tijdknallerState.teams[tijdknallerState.currentTeamIndex].name;document.getElementById('tijdknaller-current-team').innerText=currentTeamName;tijdknallerState.timerInterval=setInterval(()=>{tijdknallerState.timeLeft--;document.getElementById('tijdknaller-timer').innerText=tijdknallerState.timeLeft;if(tijdknallerState.timeLeft<=5){document.getElementById('tijdknaller-timer').classList.add('timer-critical')}if(tijdknallerState.timeLeft<=0){endRound()}},1000)}
+    function displayWords(){const wordsContainer=document.getElementById('tijdknaller-words');wordsContainer.innerHTML='';tijdknallerState.currentWords.forEach((word,index)=>{const wordEl=document.createElement('div');wordEl.id=`word-${index}`;wordEl.innerText=word;wordEl.className='p-3 bg-gray-700 rounded-lg transition-all';wordsContainer.appendChild(wordEl)})}
+    function tijdknallerScore(correct){if(tijdknallerState.currentWords.length===0)return;const wordEl=document.querySelector('#tijdknaller-words div:not(.guessed)');if(!wordEl)return;wordEl.classList.add('guessed');if(correct){tijdknallerState.roundScore++;wordEl.style.backgroundColor='#16A34A';wordEl.style.textDecoration='line-through'}else{wordEl.style.backgroundColor='#BE123C'}const remainingWords=document.querySelectorAll('#tijdknaller-words div:not(.guessed)');if(remainingWords.length===0){setTimeout(endRound,500)}}
+    function endRound(){clearInterval(tijdknallerState.timerInterval);tijdknallerState.teams[tijdknallerState.currentTeamIndex].score+=tijdknallerState.roundScore;tijdknallerState.currentTeamIndex=(tijdknallerState.currentTeamIndex+1)%tijdknallerState.teams.length;updateMiniScoreboard();const winner=tijdknallerState.teams.find(team=>team.score>=30);if(winner){alert(`${winner.name} heeft gewonnen met ${winner.score} punten!`);showScreen('home-screen')}else{prepareNextRound()}}
+    function updateMiniScoreboard(){const board=document.getElementById('tijdknaller-scoreboard-mini');board.innerHTML='';tijdknallerState.teams.forEach(team=>{board.innerHTML+=`<div>${team.name}: <span class="font-bold text-blue-400">${team.score}</span></div>`})}
 
-    // --- SPEL 3: FRIESE FOTO-VLEGELS (volledige, ongewijzigde code) ---
-    // ... (volledige Vlegel JS)
+    // --- SPEL 2: N@TNEK-REFLEX ---
+    let natnekState={players:[],gameTimeout:null,startTime:0,results:[],listening:false};
+    function setupNatnekInputs(){const container=document.getElementById('natnek-players');container.innerHTML='';for(let i=0;i<6;i++){container.innerHTML+=`<input type="text" class="input-field focus:ring-yellow-500" placeholder="Naam Speler ${i+1}">`}}
+    function startNatnek(){const playerInputs=document.querySelectorAll('#natnek-players input');natnekState.players=[];playerInputs.forEach((input)=>{if(input.value.trim()!==''){natnekState.players.push({name:input.value.trim(),score:0})}});if(natnekState.players.length<2){alert('Je hebt minimaal 2 spelers nodig!');return}const grid=document.getElementById('natnek-button-grid');grid.innerHTML='';natnekState.players.forEach(player=>{const button=document.createElement('button');button.id=`natnek-btn-${player.name.replace(/\s+/g,'-')}`;button.className='h-40 md:h-56 rounded-2xl flex items-center justify-center text-3xl font-bold text-white transition-colors duration-200';button.innerText=player.name;button.onclick=()=>handleNatnekPress(player.name);grid.appendChild(button)});showScreen('natnek-play');nextNatnekRound()}
+    function nextNatnekRound(){natnekState.results=[];natnekState.listening=false;const statusText=document.getElementById('natnek-status');const resultsContainer=document.getElementById('natnek-results');const nextBtn=document.getElementById('natnek-next-btn');resultsContainer.innerHTML='';nextBtn.classList.add('hidden');statusText.innerText='GEDULD...';natnekState.players.forEach(player=>{const btn=document.getElementById(`natnek-btn-${player.name.replace(/\s+/g,'-')}`);btn.classList.remove('reflex-go','reflex-pressed');btn.classList.add('reflex-wait');btn.disabled=false});const randomDelay=Math.random()*5000+2000;natnekState.gameTimeout=setTimeout(()=>{statusText.innerText='DRUK!';natnekState.players.forEach(player=>{const btn=document.getElementById(`natnek-btn-${player.name.replace(/\s+/g,'-')}`);btn.classList.remove('reflex-wait');btn.classList.add('reflex-go')});natnekState.startTime=Date.now();natnekState.listening=true},randomDelay)}
+    function handleNatnekPress(playerName){const player=natnekState.players.find(p=>p.name===playerName);if(!player)return;const button=document.getElementById(`natnek-btn-${playerName.replace(/\s+/g,'-')}`);button.disabled=true;button.classList.remove('reflex-go','reflex-wait');button.classList.add('reflex-pressed');if(!natnekState.listening){if(!natnekState.results.find(r=>r.name===player.name)){clearTimeout(natnekState.gameTimeout);natnekState.results.push({name:player.name,time:'VALSE START!'});endNatnekRound()}return}if(!natnekState.results.find(r=>r.name===player.name)){const reactionTime=(Date.now()-natnekState.startTime)/1000;natnekState.results.push({name:player.name,time:reactionTime})}if(natnekState.results.length===natnekState.players.length){endNatnekRound()}}
+    function endNatnekRound(){natnekState.listening=false;const resultsContainer=document.getElementById('natnek-results');resultsContainer.innerHTML='<h3 class="text-3xl font-bold mb-4">Resultaten:</h3>';natnekState.results.sort((a,b)=>{if(typeof a.time==='string')return-1;if(typeof b.time==='string')return 1;return a.time-b.time});const loser=natnekState.results.find(r=>typeof r.time==='string')||natnekState.results[natnekState.results.length-1];const loserPlayer=natnekState.players.find(p=>p.name===loser.name);if(loserPlayer)loserPlayer.score++;natnekState.results.forEach((res,index)=>{let specialText='';if(index===0&&typeof res.time!=='string')specialText='⚡️';if(res.name===loser.name)specialText='🐌 N@TNEK!';if(typeof res.time==='string')specialText='🚫 VALSE START!';resultsContainer.innerHTML+=`<div class="p-2 rounded ${res.name===loser.name?'bg-red-800':'bg-gray-700'} flex justify-between mb-2"><span>${index+1}. ${res.name}</span><span class="font-bold">${typeof res.time==='number'?res.time.toFixed(3)+'s':res.time} ${specialText}</span></div>`});resultsContainer.innerHTML+='<hr class="my-4 border-gray-600">';resultsContainer.innerHTML+='<h4 class="text-2xl font-bold mb-2">N@tnek Scorebord:</h4>';natnekState.players.sort((a,b)=>b.score-a.score).forEach(p=>{resultsContainer.innerHTML+=`<div class="flex justify-between"><span>${p.name}</span><span>${p.score} keer</span></div>`});document.getElementById('natnek-next-btn').classList.remove('hidden')}
 
-    // --- SPEL 4: HET BEL-BORDEEL (BIJGEWERKT) ---
+    // --- SPEL 3: FRIESE FOTO-VLEGELS ---
+    const VLEGEL_STORAGE_KEY='tuskenseVlegelPlayers';
+    const vlegelChallenges=[{id:'c0',text:"Maak een 'Titanic'-foto op de boeg van de boot.",points:10},{id:'c1',text:"Fotografeer een traditionele Friese boerderij (kop-hals-romp).",points:15},{id:'c2',text:"Vind een boot met een onuitspreekbare Friese naam.",points:20},{id:'c3',text:"Maak een actiefoto van een perfecte plons in het water.",points:15},{id:'c4',text:"Fotografeer een zeilboot van het type 'Skûtsje'.",points:25},{id:'c5',text:"Maak een groeps-selfie met gekke bekken.",points:10},{id:'c6',text:"Fotografeer een dier dat op een Tuskense Boy lijkt (met uitleg).",points:20},{id:'c7',text:"Maak een foto van een ooievaar in zijn nest.",points:30},{id:'c8',text:"Leg een 'kapitein' vast die met bier de boot bestuurt.",points:15},{id:'c9',text:"Maak een artistieke zonsondergang-foto over het water.",points:25},{id:'c10',text:"Fotografeer een brugwachter in actie.",points:10},{id:'c11',text:"Maak een groepsfoto proostend met Beerenburg.",points:35},{category:"BONUS: VIDEO-WAAGHALZEN"},{id:'c12',text:"Film dat je een onbekende Fries een flauwe mop vertelt.",points:40,bonus:true},{id:'c13',text:"Film een praatje met een local in je beste Limburgs.",points:45,bonus:true},{id:'c14',text:"Krijg een onbekende zover om een idioot dansje te doen op film.",points:50,bonus:true},{id:'c15',text:"Vraag een local de weg naar 'It Skûtsjesilen fan de Fryske Marren'.",points:55,bonus:true},{id:'c16',text:"Bel een masseur en vraag of ze 'Tuskense Knopen' losmaken.",points:60,bonus:true},{id:'c17',text:"Bel een willekeurige Chinees en vraag om 'een Frikandel Speciaal'.",points:65,bonus:true},{id:'c18',text:"Bel een willekeurig nummer en feliciteer ze met de 'Udenhoutse Loterij'.",points:75,bonus:true},];
+    let vlegelState={players:[]};
+    function setupVlegelInputs(){const container=document.getElementById('vlegel-players');container.innerHTML='';for(let i=0;i<10;i++){container.innerHTML+=`<input type="text" class="input-field focus:ring-green-500" placeholder="Naam Vlegel ${i+1}">`}}
+    function saveVlegelState(){localStorage.setItem(VLEGEL_STORAGE_KEY,JSON.stringify(vlegelState.players))}
+    function loadVlegelState(){const savedData=localStorage.getItem(VLEGEL_STORAGE_KEY);if(savedData){vlegelState.players=JSON.parse(savedData);const playerInputs=document.querySelectorAll('#vlegel-players input');vlegelState.players.forEach((player,index)=>{if(playerInputs[index]){playerInputs[index].value=player.name}})}}
+    function startVlegelChallenge(){const playerInputs=document.querySelectorAll('#vlegel-players input');const newPlayers=[];playerInputs.forEach(input=>{if(input.value.trim()!==''){const existingPlayer=vlegelState.players.find(p=>p.name===input.value.trim());if(existingPlayer){newPlayers.push(existingPlayer)}else{newPlayers.push({name:input.value.trim(),completed:{}})}}});if(newPlayers.length===0){alert('Je hebt minimaal 1 Vlegel nodig!');return}vlegelState.players=newPlayers;saveVlegelState();setupVlegelLeaderboard();setupVlegelChecklist();showScreen('fotozoektocht')}
+    function setupVlegelLeaderboard(){const board=document.getElementById('vlegel-leaderboard');board.innerHTML='';vlegelState.players.forEach(player=>{const score=calculateVlegelScore(player);board.innerHTML+=`<div class="bg-gray-900 p-3 rounded-lg"><div class="text-lg font-semibold">${player.name}</div><div id="score-${player.name.replace(/\s+/g,'-')}" class="text-3xl font-black text-green-400">${score}</div></div>`})}
+    function setupVlegelChecklist(){const container=document.getElementById('vlegel-checklist');container.innerHTML='';let currentCategory='';vlegelChallenges.forEach(challenge=>{if(challenge.category&&challenge.category!==currentCategory){currentCategory=challenge.category;container.innerHTML+=`<h3 class="text-2xl font-bold text-yellow-400 pt-4">${currentCategory}</h3>`}if(!challenge.category){let itemHTML=`<div class="p-4 rounded-lg flex items-start ${challenge.bonus?'bg-yellow-900 bg-opacity-50 border border-yellow-700':'bg-gray-900'}">`;itemHTML+=`<div class="flex-grow"><span><strong>${challenge.points} PUNTEN:</strong> ${challenge.text}</span></div>`;itemHTML+='<div class="flex flex-col items-end ml-4 space-y-1">';vlegelState.players.forEach(player=>{const playerNameId=player.name.replace(/\s+/g,'-');const isChecked=player.completed&&player.completed[challenge.id];itemHTML+=`<label for="${challenge.id}-${playerNameId}" class="flex items-center cursor-pointer"><span class="mr-2 text-sm">${player.name}</span><input type="checkbox" id="${challenge.id}-${playerNameId}" onchange="updateVlegelChallenge(this, '${playerNameId}', '${challenge.id}')" class="w-5 h-5" ${isChecked?'checked':''}></label>`});itemHTML+='</div></div>';container.innerHTML+=itemHTML}})}
+    function calculateVlegelScore(player){let score=0;if(!player.completed)return 0;for(const challengeId in player.completed){const challenge=vlegelChallenges.find(c=>c.id===challengeId);if(challenge){score+=challenge.points}}return score}
+    function updateVlegelChallenge(checkbox,playerNameId,challengeId){const player=vlegelState.players.find(p=>p.name.replace(/\s+/g,'-')===playerNameId);if(!player)return;if(!player.completed)player.completed={};if(checkbox.checked){player.completed[challengeId]=true}else{delete player.completed[challengeId]}const newScore=calculateVlegelScore(player);document.getElementById(`score-${playerNameId}`).innerText=newScore;saveVlegelState()}
+    function resetVlegelScores(){if(window.confirm('Weet je zeker dat je alle scores van de Foto-Vlegels permanent wilt verwijderen?')){localStorage.removeItem(VLEGEL_STORAGE_KEY);vlegelState.players=[];const playerInputs=document.querySelectorAll('#vlegel-players input');playerInputs.forEach(input=>input.value='');showScreen('vlegel-setup')}}
+
+    // --- SPEL 4: HET BEL-BORDEEL ---
     let belspelState = { players: [] };
-    const belspelTargets = [
-        "Een willekeurige Marktplaats adverteerder.",
-        "De dichtstbijzijnde Kebabzaak.",
-        "Een willekeurige kapper in de buurt.",
-        "Een Chinees restaurant (vraag naar dagschotel).",
-        "Een dierenarts (vraag over je 'zieke goudvis').",
-        "Een fietsenmaker (klaag over een piepje).",
-        "Een willekeurige bloemist.",
-        "Het VVV-kantoor van een nabijgelegen dorp.",
-        "Een onbekend nummer uit iemands contactenlijst.",
-        "De lokale supermarkt (vraag of ze Schrobbelèr hebben)."
-    ];
-    const belspelTopics = [
-        "Praat met een overdreven Limburgs accent.", "Doe alsof je belt vanaf een luidruchtige gay pride parade.", "Probeer een abonnement te verkopen op 'De Udenhoutse Gazet'.", "Bel als een overbezorgde moeder die vraagt of haar 'zoontje' wel goed eet.", "Doe alsof je van de GGD belt voor een 'verplicht knuffelonderzoek'.", "Klaag als boze buurman over geluidsoverlast van hun grasmaaier.", "Overtuig ze dat ze een opblaaskrokodil hebben gewonnen.", "Meld als dierentuinmedewerker dat hun ontsnapte aap in de buurt is.", "Praat alleen in songteksten van Guus Meeuwis.", "Bel als de Belastingdienst over een schuld van €3,50 voor 'luchtbelasting'.", "Laat na elke zin die zij zeggen een ongemakkelijke stilte van 5 seconden vallen.", "Praat extreem binnensmonds en word boos als ze je niet verstaan.", "Begin het gesprek met zwaar gehijg en vraag dan heel kalm: 'Met wie spreek ik?'", "Blijf volhouden dat je 'Sjef' moet spreken, ook al zeggen ze 10 keer dat hij er niet woont.", "Fluister het hele gesprek en zeg 'ssst, ze luisteren mee' als ze vragen waarom.", "Doe een hele slechte imitatie van Johan Derksen en ontken dat je hem nadoet.", "Zing elke zin die je zegt op de melodie van 'Vader Jacob'.", "Doe een enquête met vragen als: 'Hoeveel bitterballen is uw geluk waard?'", "Bel in paniek omdat je je huisdier (een steen genaamd Kees) kwijt bent.", "Waarschuw ze voor 5G-straling die de smaak van Schrobbelèr aantast.", "Herhaal de laatste 3 woorden van elke zin die de ander zegt.", "Bel als 'Technische Dienst' en zeg dat hun broodrooster een virus heeft.", "Deel een veel te persoonlijk en ongemakkelijk medisch probleem.", "Spreek in extreem formele, ouderwetse taal ('Weledele heer/vrouwe...').", "Vraag of je hun wifi-wachtwoord mag omdat je 'even voor de deur staat'."
-    ];
-    function setupBelspelInputs() { const container = document.getElementById('belspel-players'); container.innerHTML = ''; for (let i = 0; i < 10; i++) { container.innerHTML += `<input type="text" class="input-field" placeholder="Naam Speler ${i + 1}">`; } }
+    const belspelTargets = ["Een willekeurige Marktplaats adverteerder.","De dichtstbijzijnde Kebabzaak.","Een willekeurige kapper in de buurt.","Een Chinees restaurant (vraag naar dagschotel).","Een dierenarts (vraag over je 'zieke goudvis').","Een fietsenmaker (klaag over een piepje).","Een willekeurige bloemist.","Het VVV-kantoor van een nabijgelegen dorp.","Een onbekend nummer uit iemands contactenlijst.","De lokale supermarkt (vraag of ze Schrobbelèr hebben)."];
+    const belspelTopics = ["Praat met een overdreven Limburgs accent.","Doe alsof je belt vanaf een luidruchtige gay pride parade.","Probeer een abonnement te verkopen op 'De Udenhoutse Gazet'.","Bel als een overbezorgde moeder die vraagt of haar 'zoontje' wel goed eet.","Doe alsof je van de GGD belt voor een 'verplicht knuffelonderzoek'.","Klaag als boze buurman over geluidsoverlast van hun grasmaaier.","Overtuig ze dat ze een opblaaskrokodil hebben gewonnen.","Meld als dierentuinmedewerker dat hun ontsnapte aap in de buurt is.","Praat alleen in songteksten van Guus Meeuwis.","Bel als de Belastingdienst over een schuld van €3,50 voor 'luchtbelasting'.","Laat na elke zin die zij zeggen een ongemakkelijke stilte van 5 seconden vallen.","Praat extreem binnensmonds en word boos als ze je niet verstaan.","Begin het gesprek met zwaar gehijg en vraag dan heel kalm: 'Met wie spreek ik?'","Blijf volhouden dat je 'Sjef' moet spreken, ook al zeggen ze 10 keer dat hij er niet woont.","Fluister het hele gesprek en zeg 'ssst, ze luisteren mee' als ze vragen waarom.","Doe een hele slechte imitatie van Johan Derksen en ontken dat je hem nadoet.","Zing elke zin die je zegt op de melodie van 'Vader Jacob'.","Doe een enquête met vragen als: 'Hoeveel bitterballen is uw geluk waard?'","Bel in paniek omdat je je huisdier (een steen genaamd Kees) kwijt bent.","Waarschuw ze voor 5G-straling die de smaak van Schrobbelèr aantast.","Herhaal de laatste 3 woorden van elke zin die de ander zegt.","Bel als 'Technische Dienst' en zeg dat hun broodrooster een virus heeft.","Deel een veel te persoonlijk en ongemakkelijk medisch probleem.","Spreek in extreem formele, ouderwetse taal ('Weledele heer/vrouwe...').","Vraag of je hun wifi-wachtwoord mag omdat je 'even voor de deur staat'."];
+    function setupBelspelInputs() { const container = document.getElementById('belspel-players'); container.innerHTML = ''; for (let i = 0; i < 10; i++) { container.innerHTML += `<input type="text" class="input-field focus:ring-purple-500" placeholder="Naam Speler ${i + 1}">`; } }
     function startBelspel() { const playerInputs = document.querySelectorAll('#belspel-players input'); belspelState.players = []; playerInputs.forEach(input => { if (input.value.trim() !== '') { belspelState.players.push(input.value.trim()); } }); if (belspelState.players.length < 2) { alert('Je hebt minimaal 2 spelers nodig!'); return; } resetBelspel(); showScreen('belspel-play'); }
-    function spinWheel(resultElement, items, duration = 3000) {
-        return new Promise(resolve => {
-            resultElement.classList.remove('text-2xl');
-            resultElement.classList.add('spinning');
-            let startTime = Date.now();
-            function spin() {
-                const randomItem = items[Math.floor(Math.random() * items.length)];
-                resultElement.textContent = randomItem;
-                if (Date.now() - startTime < duration) {
-                    requestAnimationFrame(spin);
-                } else {
-                    resultElement.classList.remove('spinning');
-                    const finalItem = items[Math.floor(Math.random() * items.length)];
-                    resultElement.textContent = finalItem;
-                    if (finalItem.length > 20) resultElement.classList.add('text-2xl');
-                    resolve(finalItem);
-                }
-            }
-            spin();
-        });
-    }
-    async function spinChooserWheel() {
-        const btn = document.getElementById('spin-chooser-btn');
-        const resultElement = document.getElementById('chooser-wheel-result');
-        btn.disabled = true;
-        await spinWheel(resultElement, belspelState.players);
-        document.getElementById('target-wheel-section').classList.remove('hidden');
-    }
-    async function spinTargetWheel() {
-        const btn = document.getElementById('spin-target-btn');
-        const resultElement = document.getElementById('target-wheel-result');
-        btn.disabled = true;
-        await spinWheel(resultElement, belspelTargets);
-        document.getElementById('topic-wheel-section').classList.remove('hidden');
-    }
-    async function spinTopicWheel() {
-        const btn = document.getElementById('spin-topic-btn');
-        const resultElement = document.getElementById('topic-wheel-result');
-        btn.disabled = true;
-        await spinWheel(resultElement, belspelTopics);
-    }
-    function resetBelspel() {
-        document.getElementById('chooser-wheel-result').textContent = 'Draai het rad...';
-        document.getElementById('target-wheel-result').textContent = 'Draai het rad...';
-        document.getElementById('topic-wheel-result').textContent = 'Draai het rad...';
-        document.getElementById('spin-chooser-btn').disabled = false;
-        document.getElementById('spin-target-btn').disabled = false;
-        document.getElementById('spin-topic-btn').disabled = false;
-        document.getElementById('target-wheel-section').classList.add('hidden');
-        document.getElementById('topic-wheel-section').classList.add('hidden');
-    }
+    function spinWheel(resultElement, items, duration = 3000) { return new Promise(resolve => { resultElement.classList.remove('text-2xl'); resultElement.classList.add('spinning'); let startTime = Date.now(); function spin() { const randomItem = items[Math.floor(Math.random() * items.length)]; resultElement.textContent = randomItem; if (Date.now() - startTime < duration) { requestAnimationFrame(spin); } else { resultElement.classList.remove('spinning'); const finalItem = items[Math.floor(Math.random() * items.length)]; resultElement.textContent = finalItem; if (finalItem.length > 20) resultElement.classList.add('text-2xl'); resolve(finalItem); } } spin(); }); }
+    async function spinChooserWheel() { const btn = document.getElementById('spin-chooser-btn'); const resultElement = document.getElementById('chooser-wheel-result'); btn.disabled = true; await spinWheel(resultElement, belspelState.players); document.getElementById('target-wheel-section').classList.remove('hidden'); }
+    async function spinTargetWheel() { const btn = document.getElementById('spin-target-btn'); const resultElement = document.getElementById('target-wheel-result'); btn.disabled = true; await spinWheel(resultElement, belspelTargets); document.getElementById('topic-wheel-section').classList.remove('hidden'); }
+    async function spinTopicWheel() { const btn = document.getElementById('spin-topic-btn'); const resultElement = document.getElementById('topic-wheel-result'); btn.disabled = true; await spinWheel(resultElement, belspelTopics); }
+    function resetBelspel() { document.getElementById('chooser-wheel-result').textContent = 'Draai het rad...'; document.getElementById('target-wheel-result').textContent = 'Draai het rad...'; document.getElementById('topic-wheel-result').textContent = 'Draai het rad...'; document.getElementById('spin-chooser-btn').disabled = false; document.getElementById('spin-target-btn').disabled = false; document.getElementById('spin-topic-btn').disabled = false; document.getElementById('target-wheel-section').classList.add('hidden'); document.getElementById('topic-wheel-section').classList.add('hidden'); }
     
     // --- Init ---
     window.onload = () => {
-        // Volledige, niet-ingekorte JS functies hieronder
-        // ... (alle functies van alle spellen, niet ingekort, om de app werkend te houden)
-        // Dit is een placeholder voor de volledige code die in de uiteindelijke HTML staat.
-        // De code hieronder is de daadwerkelijke implementatie die nodig is.
-        showScreen = function(screenId){document.getElementById(currentScreen).classList.remove('active');document.getElementById(screenId).classList.add('active');currentScreen=screenId}
-        startTijdknaller=function(){const teamInputs=document.querySelectorAll('#tijdknaller-teams input');tijdknallerState.teams=[];teamInputs.forEach(input=>{if(input.value.trim()!==''){tijdknallerState.teams.push({name:input.value.trim(),score:0})}});if(tijdknallerState.teams.length<2){alert('Je hebt minimaal 2 teams nodig!');return}tijdknallerState.currentTeamIndex=0;tijdknallerState.usedCards=[];updateMiniScoreboard();prepareNextRound();showScreen('tijdknaller-play')}
-        prepareNextRound=function(){document.getElementById('tijdknaller-start-round-view').style.display='block';document.getElementById('tijdknaller-game-view').classList.add('hidden');const nextTeamName=tijdknallerState.teams[tijdknallerState.currentTeamIndex].name;document.getElementById('tijdknaller-next-team').innerText=`${nextTeamName} is aan de beurt!`;document.getElementById('start-round-btn').onclick=startRound}
-        startRound=function(){document.getElementById('tijdknaller-start-round-view').style.display='none';document.getElementById('tijdknaller-game-view').classList.remove('hidden');let cardIndex;if(tijdknallerState.usedCards.length===tijdknallerWordsData.length){tijdknallerState.usedCards=[]}do{cardIndex=Math.floor(Math.random()*tijdknallerWordsData.length)}while(tijdknallerState.usedCards.includes(cardIndex));tijdknallerState.usedCards.push(cardIndex);tijdknallerState.currentWords=[...tijdknallerWordsData[cardIndex]];displayWords();tijdknallerState.timeLeft=30;tijdknallerState.roundScore=0;document.getElementById('tijdknaller-timer').innerText=tijdknallerState.timeLeft;document.getElementById('tijdknaller-timer').classList.remove('timer-critical');const currentTeamName=tijdknallerState.teams[tijdknallerState.currentTeamIndex].name;document.getElementById('tijdknaller-current-team').innerText=currentTeamName;tijdknallerState.timerInterval=setInterval(()=>{tijdknallerState.timeLeft--;document.getElementById('tijdknaller-timer').innerText=tijdknallerState.timeLeft;if(tijdknallerState.timeLeft<=5){document.getElementById('tijdknaller-timer').classList.add('timer-critical')}if(tijdknallerState.timeLeft<=0){endRound()}},1000)}
-        displayWords=function(){const wordsContainer=document.getElementById('tijdknaller-words');wordsContainer.innerHTML='';tijdknallerState.currentWords.forEach((word,index)=>{const wordEl=document.createElement('div');wordEl.id=`word-${index}`;wordEl.innerText=word;wordEl.className='p-3 bg-gray-700 rounded-lg transition-all';wordsContainer.appendChild(wordEl)})}
-        tijdknallerScore=function(correct){if(tijdknallerState.currentWords.length===0)return;const wordEl=document.querySelector('#tijdknaller-words div:not(.guessed)');if(!wordEl)return;wordEl.classList.add('guessed');if(correct){tijdknallerState.roundScore++;wordEl.style.backgroundColor='#16A34A';wordEl.style.textDecoration='line-through'}else{wordEl.style.backgroundColor='#BE123C'}const remainingWords=document.querySelectorAll('#tijdknaller-words div:not(.guessed)');if(remainingWords.length===0){setTimeout(endRound,500)}}
-        endRound=function(){clearInterval(tijdknallerState.timerInterval);tijdknallerState.teams[tijdknallerState.currentTeamIndex].score+=tijdknallerState.roundScore;tijdknallerState.currentTeamIndex=(tijdknallerState.currentTeamIndex+1)%tijdknallerState.teams.length;updateMiniScoreboard();const winner=tijdknallerState.teams.find(team=>team.score>=30);if(winner){alert(`${winner.name} heeft gewonnen met ${winner.score} punten!`);showScreen('home-screen')}else{prepareNextRound()}}
-        updateMiniScoreboard=function(){const board=document.getElementById('tijdknaller-scoreboard-mini');board.innerHTML='';tijdknallerState.teams.forEach(team=>{board.innerHTML+=`<div>${team.name}: <span class="font-bold text-blue-400">${team.score}</span></div>`})}
-        setupNatnekInputs=function(){const container=document.getElementById('natnek-players');container.innerHTML='';for(let i=0;i<6;i++){container.innerHTML+=`<input type="text" class="input-field" placeholder="Naam Speler ${i+1}">`}}
-        startNatnek=function(){const playerInputs=document.querySelectorAll('#natnek-players input');natnekState.players=[];playerInputs.forEach((input)=>{if(input.value.trim()!==''){natnekState.players.push({name:input.value.trim(),score:0})}});if(natnekState.players.length<2){alert('Je hebt minimaal 2 spelers nodig!');return}const grid=document.getElementById('natnek-button-grid');grid.innerHTML='';natnekState.players.forEach(player=>{const button=document.createElement('button');button.id=`natnek-btn-${player.name.replace(/\s+/g,'-')}`;button.className='h-40 md:h-56 rounded-2xl flex items-center justify-center text-3xl font-bold text-white transition-colors duration-200';button.innerText=player.name;button.onclick=()=>handleNatnekPress(player.name);grid.appendChild(button)});showScreen('natnek-play');nextNatnekRound()}
-        nextNatnekRound=function(){natnekState.results=[];natnekState.listening=false;const statusText=document.getElementById('natnek-status');const resultsContainer=document.getElementById('natnek-results');const nextBtn=document.getElementById('natnek-next-btn');resultsContainer.innerHTML='';nextBtn.classList.add('hidden');statusText.innerText='GEDULD...';natnekState.players.forEach(player=>{const btn=document.getElementById(`natnek-btn-${player.name.replace(/\s+/g,'-')}`);btn.classList.remove('reflex-go','reflex-pressed');btn.classList.add('reflex-wait');btn.disabled=false});const randomDelay=Math.random()*5000+2000;natnekState.gameTimeout=setTimeout(()=>{statusText.innerText='DRUK!';natnekState.players.forEach(player=>{const btn=document.getElementById(`natnek-btn-${player.name.replace(/\s+/g,'-')}`);btn.classList.remove('reflex-wait');btn.classList.add('reflex-go')});natnekState.startTime=Date.now();natnekState.listening=true},randomDelay)}
-        handleNatnekPress=function(playerName){const player=natnekState.players.find(p=>p.name===playerName);if(!player)return;const button=document.getElementById(`natnek-btn-${playerName.replace(/\s+/g,'-')}`);button.disabled=true;button.classList.remove('reflex-go','reflex-wait');button.classList.add('reflex-pressed');if(!natnekState.listening){if(!natnekState.results.find(r=>r.name===player.name)){clearTimeout(natnekState.gameTimeout);natnekState.results.push({name:player.name,time:'VALSE START!'});endNatnekRound()}return}if(!natnekState.results.find(r=>r.name===player.name)){const reactionTime=(Date.now()-natnekState.startTime)/1000;natnekState.results.push({name:player.name,time:reactionTime})}if(natnekState.results.length===natnekState.players.length){endNatnekRound()}}
-        endNatnekRound=function(){natnekState.listening=false;const resultsContainer=document.getElementById('natnek-results');resultsContainer.innerHTML='<h3 class="text-3xl font-bold mb-4">Resultaten:</h3>';natnekState.results.sort((a,b)=>{if(typeof a.time==='string')return-1;if(typeof b.time==='string')return 1;return a.time-b.time});const loser=natnekState.results.find(r=>typeof r.time==='string')||natnekState.results[natnekState.results.length-1];const loserPlayer=natnekState.players.find(p=>p.name===loser.name);if(loserPlayer)loserPlayer.score++;natnekState.results.forEach((res,index)=>{let specialText='';if(index===0&&typeof res.time!=='string')specialText='⚡️';if(res.name===loser.name)specialText='🐌 N@TNEK!';if(typeof res.time==='string')specialText='🚫 VALSE START!';resultsContainer.innerHTML+=`<div class="p-2 rounded ${res.name===loser.name?'bg-red-800':'bg-gray-700'} flex justify-between mb-2"><span>${index+1}. ${res.name}</span><span class="font-bold">${typeof res.time==='number'?res.time.toFixed(3)+'s':res.time} ${specialText}</span></div>`});resultsContainer.innerHTML+='<hr class="my-4 border-gray-600">';resultsContainer.innerHTML+='<h4 class="text-2xl font-bold mb-2">N@tnek Scorebord:</h4>';natnekState.players.sort((a,b)=>b.score-a.score).forEach(p=>{resultsContainer.innerHTML+=`<div class="flex justify-between"><span>${p.name}</span><span>${p.score} keer</span></div>`});document.getElementById('natnek-next-btn').classList.remove('hidden')}
-        setupVlegelInputs=function(){const container=document.getElementById('vlegel-players');container.innerHTML='';for(let i=0;i<10;i++){container.innerHTML+=`<input type="text" class="input-field" placeholder="Naam Vlegel ${i+1}">`}}
-        saveVlegelState=function(){localStorage.setItem(VLEGEL_STORAGE_KEY,JSON.stringify(vlegelState.players))}
-        loadVlegelState=function(){const savedData=localStorage.getItem(VLEGEL_STORAGE_KEY);if(savedData){vlegelState.players=JSON.parse(savedData);const playerInputs=document.querySelectorAll('#vlegel-players input');vlegelState.players.forEach((player,index)=>{if(playerInputs[index]){playerInputs[index].value=player.name}})}}
-        startVlegelChallenge=function(){const playerInputs=document.querySelectorAll('#vlegel-players input');const newPlayers=[];playerInputs.forEach(input=>{if(input.value.trim()!==''){const existingPlayer=vlegelState.players.find(p=>p.name===input.value.trim());if(existingPlayer){newPlayers.push(existingPlayer)}else{newPlayers.push({name:input.value.trim(),completed:{}})}}});if(newPlayers.length===0){alert('Je hebt minimaal 1 Vlegel nodig!');return}vlegelState.players=newPlayers;saveVlegelState();setupVlegelLeaderboard();setupVlegelChecklist();showScreen('fotozoektocht')}
-        setupVlegelLeaderboard=function(){const board=document.getElementById('vlegel-leaderboard');board.innerHTML='';vlegelState.players.forEach(player=>{const score=calculateVlegelScore(player);board.innerHTML+=`<div class="bg-gray-900 p-3 rounded-lg"><div class="text-lg font-semibold">${player.name}</div><div id="score-${player.name.replace(/\s+/g,'-')}" class="text-3xl font-black text-green-400">${score}</div></div>`})}
-        setupVlegelChecklist=function(){const container=document.querySelector('#fotozoektocht .text-left');container.innerHTML='';let currentCategory='';vlegelChallenges.forEach(challenge=>{if(challenge.category&&challenge.category!==currentCategory){currentCategory=challenge.category;container.innerHTML+=`<h3 class="text-2xl font-bold text-yellow-400 pt-4">${currentCategory}</h3>`}if(!challenge.category){let itemHTML=`<div class="p-4 rounded-lg flex items-start ${challenge.bonus?'bg-yellow-900 bg-opacity-50 border border-yellow-700':'bg-gray-900'}">`;itemHTML+=`<div class="flex-grow"><span><strong>${challenge.points} PUNTEN:</strong> ${challenge.text}</span></div>`;itemHTML+='<div class="flex flex-col items-end ml-4 space-y-1">';vlegelState.players.forEach(player=>{const playerNameId=player.name.replace(/\s+/g,'-');const isChecked=player.completed&&player.completed[challenge.id];itemHTML+=`<label for="${challenge.id}-${playerNameId}" class="flex items-center cursor-pointer"><span class="mr-2 text-sm">${player.name}</span><input type="checkbox" id="${challenge.id}-${playerNameId}" onchange="updateVlegelChallenge(this, '${playerNameId}', '${challenge.id}')" class="w-5 h-5" ${isChecked?'checked':''}></label>`});itemHTML+='</div></div>';container.innerHTML+=itemHTML}})}
-        calculateVlegelScore=function(player){let score=0;if(!player.completed)return 0;for(const challengeId in player.completed){const challenge=vlegelChallenges.find(c=>c.id===challengeId);if(challenge){score+=challenge.points}}return score}
-        updateVlegelChallenge=function(checkbox,playerNameId,challengeId){const player=vlegelState.players.find(p=>p.name.replace(/\s+/g,'-')===playerNameId);if(!player)return;if(!player.completed)player.completed={};if(checkbox.checked){player.completed[challengeId]=true}else{delete player.completed[challengeId]}const newScore=calculateVlegelScore(player);document.getElementById(`score-${playerNameId}`).innerText=newScore;saveVlegelState()}
-        resetVlegelScores=function(){if(window.confirm('Weet je zeker dat je alle scores van de Foto-Vlegels permanent wilt verwijderen?')){localStorage.removeItem(VLEGEL_STORAGE_KEY);vlegelState.players=[];const playerInputs=document.querySelectorAll('#vlegel-players input');playerInputs.forEach(input=>input.value='');showScreen('vlegel-setup')}}
-        
         setupNatnekInputs();
         setupVlegelInputs();
         setupBelspelInputs();
