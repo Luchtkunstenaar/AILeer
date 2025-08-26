@@ -3,261 +3,771 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De Tuskense Tetrathlon</title>
+    <title>NAHpp - Geïntegreerd Zorgplatform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #111827;
-            color: #F3F4F6;
-            overflow: hidden;
-            background-image: radial-gradient(circle at top right, #1f2937, #111827);
+        :root {
+            --primary-dark: #0a2e28;
+            --primary-light: #f0f5f4;
+            --accent-gold: #D4AF37;
+            --text-light: #e8f0ee;
+            --text-dark: #051a16;
         }
-        .screen {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-        .screen.active {
-            display: flex;
-            opacity: 1;
-        }
-        .btn {
-            @apply px-8 py-4 text-white font-bold rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4;
-        }
-        .card {
-            @apply bg-gray-800 bg-opacity-80 backdrop-blur-sm border border-gray-700 rounded-2xl shadow-2xl p-6 md:p-8 w-full;
-        }
-        .input-field {
-            @apply w-full bg-gray-700 border-2 border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all;
-        }
-        @keyframes pulse-timer { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        .timer-critical { animation: pulse-timer 1s infinite; color: #EF4444; }
-        .reflex-wait { background-color: #BE123C; } .reflex-go { background-color: #16A34A; } .reflex-pressed { background-color: #4B5563; }
-        .wheel-container { @apply h-24 w-full bg-gray-900 rounded-lg overflow-hidden relative border-2 border-gray-700 flex items-center justify-center; }
-        .wheel-result { @apply text-4xl font-bold text-center transition-all duration-100; }
-        .wheel-container::after { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 100%; height: 4px; background: #3B82F6; box-shadow: 0 0 15px #3B82F6; z-index: 10;}
-        .spinning { animation: wheel-text-blur 0.05s linear infinite; }
-        @keyframes wheel-text-blur { 0% { filter: blur(0px); transform: scale(1); } 50% { filter: blur(2px); transform: scale(0.95); } 100% { filter: blur(0px); transform: scale(1); } }
-        @keyframes title-glow { 0%, 100% { text-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 0 30px rgba(59, 130, 246, 0.3); } 50% { text-shadow: 0 0 25px rgba(59, 130, 246, 0.7), 0 0 50px rgba(59, 130, 246, 0.5); } }
-        .title-glow { animation: title-glow 4s ease-in-out infinite; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--primary-dark); color: var(--text-light); }
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        .modal-content { background-color: var(--primary-light); color: var(--text-dark); margin: auto; padding: 24px; border: 1px solid var(--accent-gold); width: 90%; max-width: 500px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .pitch-section { border-left: 3px solid var(--accent-gold); padding-left: 1.5rem; margin-bottom: 2.5rem; }
+        .logo-3d { text-shadow: 1px 1px 0px #000, 2px 2px 0px rgba(212, 175, 55, 0.3); }
+        .title-gold { color: var(--accent-gold); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .btn-3d { position: relative; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.1s ease-out; border-radius: 0.75rem; font-weight: 600; }
+        .btn-3d:active { transform: translateY(2px); }
+        .btn-emerald { background: linear-gradient(145deg, #10b981, #0e9a6e); box-shadow: 0 4px 0 #047857; }
+        .btn-emerald:active { box-shadow: 0 2px 0 #047857; }
+        .btn-sky { background: linear-gradient(145deg, #38bdf8, #0ea5e9); box-shadow: 0 4px 0 #0369a1; }
+        .btn-sky:active { box-shadow: 0 2px 0 #0369a1; }
+        .btn-indigo { background: linear-gradient(145deg, #818cf8, #6366f1); box-shadow: 0 4px 0 #4338ca; }
+        .btn-indigo:active { box-shadow: 0 2px 0 #4338ca; }
+        .btn-gray { background: linear-gradient(145deg, #4b5563, #374151); box-shadow: 0 4px 0 #1f2937; }
+        .btn-gray:active { box-shadow: 0 2px 0 #1f2937; }
+        .progress-bar { background-color: rgba(255,255,255,0.2); border-radius: 9999px; overflow: hidden; }
+        .progress-bar-fill { background-color: var(--accent-gold); height: 100%; transition: width 0.5s ease-in-out; }
+        .suggestion-chip { cursor: pointer; transition: background-color 0.2s; border: 1px solid rgba(0,0,0,0.1); }
+        .card { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-primary-dark text-text-light">
 
-    <!-- Hoofdscherm -->
-    <div id="home-screen" class="screen active">
-        <div class="text-center">
-            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-wider text-white mb-4">
-                Tuskense <span class="text-blue-500 title-glow">Tetrathlon</span>
-            </h1>
-            <p class="text-xl text-gray-300 mb-12">Hét digitale spelletjespakket voor het weekendje weg!</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <button onclick="showScreen('tijdknaller-setup')" class="btn text-2xl bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">De Tijdknaller</button>
-                <button onclick="showScreen('natnek-setup')" class="btn text-2xl bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400">N@tnek-Reflex</button>
-                <button onclick="showScreen('vlegel-setup')" class="btn text-2xl bg-green-600 hover:bg-green-700 focus:ring-green-400">Friese Foto-Vlegels</button>
-                <button onclick="showScreen('belspel-setup')" class="btn text-2xl bg-purple-600 hover:bg-purple-700 focus:ring-purple-400">Het Bel-Bordeel</button>
+    <!-- Inlogscherm -->
+    <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="w-full max-w-md text-center">
+            <svg class="w-20 h-20 mx-auto mb-4 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            <h1 class="text-5xl font-bold text-accent-gold mb-2 logo-3d">NAHpp</h1>
+            <p class="text-gray-300 mb-10">Jouw persoonlijke zorg-ecosysteem.</p>
+            <div class="space-y-4">
+                <h2 class="text-lg font-semibold text-gray-200">Wie gebruikt de app?</h2>
+                <button onclick="loginAs('gebruiker')" class="w-full flex items-center justify-center p-4 bg-emerald-500 text-white hover:bg-emerald-600 btn-3d btn-emerald"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span>Ik (met NAH)</span></button>
+                <button onclick="loginAs('thuisfront')" class="w-full flex items-center justify-center p-4 bg-sky-500 text-white hover:bg-sky-600 btn-3d btn-sky"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.126-1.283-.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span>Ik ben familie / naaste</span></button>
+                <button onclick="loginAs('zorgprofessional')" class="w-full flex items-center justify-center p-4 bg-indigo-500 text-white hover:bg-indigo-600 btn-3d btn-indigo"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg><span>Ik ben zorgprofessional</span></button>
             </div>
-        </div>
-    </div>
-
-    <!-- ===== SPEL 1: DE TIJDKNALLER ===== -->
-    <div id="tijdknaller-setup" class="screen">
-        <div class="card max-w-2xl text-center">
-            <h2 class="text-4xl font-bold mb-6 text-blue-400">De Tijdknaller: Teams</h2>
-            <p class="mb-8 text-gray-300">Voer de namen van de teams in.</p>
-            <div id="tijdknaller-teams" class="space-y-4 mb-8">
-                <input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 1"><input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 2"><input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 3 (optioneel)"><input type="text" class="input-field focus:ring-blue-500" placeholder="Naam Team 4 (optioneel)">
-            </div>
-            <div class="flex justify-between">
-                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button><button onclick="startTijdknaller()" class="btn bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">Spel Starten!</button>
-            </div>
-        </div>
-    </div>
-    <div id="tijdknaller-play" class="screen">
-        <div class="w-full max-w-4xl text-center">
-            <div class="grid grid-cols-3 items-center mb-6">
-                <div id="tijdknaller-scoreboard-mini" class="text-left text-lg"></div>
-                <h2 id="tijdknaller-current-team" class="text-4xl font-bold text-blue-400">Team is aan de beurt</h2>
-                <div id="tijdknaller-timer" class="text-6xl font-black text-right">30</div>
-            </div>
-            <div id="tijdknaller-start-round-view" class="card">
-                <h3 id="tijdknaller-next-team" class="text-3xl font-bold mb-4"></h3>
-                <p class="text-xl mb-8">Kies wie de woorden omschrijft. Druk op start als jullie er klaar voor zijn!</p>
-                <button id="start-round-btn" class="btn text-3xl px-16 py-8 bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">START RONDE</button>
-            </div>
-            <div id="tijdknaller-game-view" class="hidden">
-                <div id="tijdknaller-words" class="card grid grid-cols-1 gap-4 text-2xl font-semibold mb-6"></div>
-                <div class="flex justify-center gap-6">
-                    <button onclick="tijdknallerScore(true)" class="btn bg-green-600 hover:bg-green-700 focus:ring-green-400 text-3xl w-1/2">GOED!</button>
-                    <button onclick="tijdknallerScore(false)" class="btn bg-red-600 hover:bg-red-700 focus:ring-red-400 text-3xl w-1/2">PAS</button>
-                </div>
+            <div class="mt-8 border-t border-gray-700 pt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                 <button onclick="showInvestorPitch()" class="w-full p-3 bg-gray-700 text-white hover:bg-gray-800 btn-3d btn-gray text-sm">Voor Investeerders</button>
+                 <button onclick="showInsurerPitch()" class="w-full p-3 bg-gray-700 text-white hover:bg-gray-800 btn-3d btn-gray text-sm">Voor Zorgverzekeraars</button>
             </div>
         </div>
     </div>
 
-    <!-- ===== SPEL 2: N@TNEK-REFLEX ===== -->
-    <div id="natnek-setup" class="screen">
-         <div class="card max-w-3xl text-center">
-            <h2 class="text-4xl font-bold mb-6 text-yellow-400">N@tnek-Reflex: Spelers</h2>
-            <p class="mb-8 text-gray-300">Voer de namen van de spelers in (max 6).</p>
-            <div id="natnek-players" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
-            <div class="flex justify-between">
-                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button><button onclick="startNatnek()" class="btn bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400">Start de Ellende!</button>
+    <!-- Schermen voor Pitch Decks -->
+    <div id="investor-pitch-screen" class="hidden"></div>
+    <div id="insurer-pitch-screen" class="hidden"></div>
+
+    <!-- Hoofd App Scherm -->
+    <div id="app-screen" class="hidden">
+        <header class="bg-primary-dark/80 backdrop-blur-sm shadow-lg p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
+            <h1 class="text-2xl font-bold text-accent-gold logo-3d">NAHpp</h1>
+            <div>
+                <span id="role-indicator" class="text-sm font-semibold px-3 py-1 rounded-full"></span>
+                <button onclick="logout()" class="ml-2 text-sm text-gray-400 hover:text-white">Uitloggen</button>
             </div>
-        </div>
-    </div>
-    <div id="natnek-play" class="screen flex-col justify-center items-center text-center">
-        <h2 id="natnek-status" class="text-6xl md:text-8xl font-black text-white uppercase mb-8">GEDULD...</h2>
-        <div id="natnek-button-grid" class="w-full max-w-5xl grid grid-cols-2 md:grid-cols-3 gap-4"></div>
-        <div id="natnek-results" class="mt-8 text-2xl w-full max-w-3xl"></div>
-        <button onclick="nextNatnekRound()" class="btn mt-8 hidden bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400" id="natnek-next-btn">Volgende Ronde</button>
+        </header>
+        <main id="main-content" class="p-4 md:p-6 space-y-6"></main>
     </div>
 
-    <!-- ===== SPEL 3: FRIESE FOTO-VLEGELS ===== -->
-    <div id="vlegel-setup" class="screen">
-        <div class="card max-w-3xl text-center">
-            <h2 class="text-4xl font-bold mb-6 text-green-400">Friese Foto-Vlegels</h2>
-            <p class="mb-8 text-gray-300">Voer de namen in (max 10). Scores worden onthouden!</p>
-            <div id="vlegel-players" class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 mb-8"></div>
-            <div class="flex justify-between">
-                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button><button onclick="startVlegelChallenge()" class="btn bg-green-600 hover:bg-green-700 focus:ring-green-400">Start/Hervat Challenge!</button>
-            </div>
-        </div>
-    </div>
-    <div id="fotozoektocht" class="screen">
-        <div class="card max-w-6xl">
-            <div class="text-center mb-6">
-                <h2 class="text-4xl font-bold mb-2 text-green-400">Friese Foto-Vlegels</h2>
-                <p class="text-gray-300">Vink af wie welke opdracht voltooit. Het bewijs moet in de groepsapp!</p>
-            </div>
-            <div id="vlegel-leaderboard" class="mb-6 grid grid-cols-2 md:grid-cols-5 gap-4 text-center"></div>
-            <div id="vlegel-checklist" class="text-left space-y-3 max-h-[55vh] overflow-y-auto pr-4"></div>
-            <div class="flex justify-between items-center mt-8">
-                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug naar menu</button>
-                <button onclick="resetVlegelScores()" class="btn bg-red-600 hover:bg-red-700 focus:ring-red-400">Reset Alle Scores</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== SPEL 4: HET BEL-BORDEEL ===== -->
-    <div id="belspel-setup" class="screen">
-        <div class="card max-w-3xl text-center">
-            <h2 class="text-4xl font-bold mb-6 text-purple-400">Het Bel-Bordeel</h2>
-            <p class="mb-8 text-gray-300">Voer de namen in van iedereen die meedoet met Steen, Papier, Schaar.</p>
-            <div id="belspel-players" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
-            <div class="flex justify-between">
-                <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug</button>
-                <button onclick="startBelspel()" class="btn bg-purple-600 hover:bg-purple-700 focus:ring-purple-400">Naar de Raden!</button>
-            </div>
-        </div>
-    </div>
-    <div id="belspel-play" class="screen">
-        <div class="card max-w-3xl text-center">
-            <h2 class="text-4xl font-bold mb-8 text-purple-400">Het Bel-Bordeel</h2>
-            <div class="space-y-8">
-                <div id="chooser-wheel-section">
-                    <h3 class="text-2xl font-bold mb-2">Stap 1: Wie is de Baas?</h3>
-                    <p class="mb-4 text-gray-400 text-sm">Draai het rad om te bepalen wie de baas is. De baas kiest wie van de verliezers van Steen, Papier, Schaar moet bellen.</p>
-                    <div class="wheel-container mb-4"><div id="chooser-wheel-result" class="wheel-result">Draai het rad...</div></div>
-                    <button id="spin-chooser-btn" onclick="spinChooserWheel()" class="btn text-xl bg-blue-600 hover:bg-blue-700 focus:ring-blue-400">Draai het Rad van de Sjaak!</button>
-                </div>
-                <div id="target-wheel-section" class="hidden">
-                    <h3 class="text-2xl font-bold mb-2">Stap 2: Wie is het Slachtoffer?</h3>
-                    <p class="mb-4 text-gray-400 text-sm">Draai het rad om te bepalen wie er gebeld moet worden.</p>
-                    <div class="wheel-container mb-4"><div id="target-wheel-result" class="wheel-result text-2xl p-2">Draai het rad...</div></div>
-                    <button id="spin-target-btn" onclick="spinTargetWheel()" class="btn text-xl bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-400">Draai het Slachtoffer-Rad!</button>
-                </div>
-                <div id="topic-wheel-section" class="hidden">
-                    <h3 class="text-2xl font-bold mb-2">Stap 3: Wat is de Smoes?</h3>
-                    <p class="mb-4 text-gray-400 text-sm">De beller is gekozen. Draai nu het rad om het bel-onderwerp te bepalen.</p>
-                    <div class="wheel-container mb-4"><div id="topic-wheel-result" class="wheel-result text-2xl p-2">Draai het rad...</div></div>
-                    <button id="spin-topic-btn" onclick="spinTopicWheel()" class="btn text-xl bg-green-600 hover:bg-green-700 focus:ring-green-400">Draai het Rad van de Lul-smoes!</button>
-                </div>
-            </div>
-            <div class="flex justify-between items-center mt-12">
-                 <button onclick="showScreen('home-screen')" class="btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-400">Terug naar menu</button>
-                 <button onclick="resetBelspel()" class="btn bg-red-600 hover:bg-red-700 focus:ring-red-400">Nieuwe Ronde</button>
-            </div>
-        </div>
-    </div>
+    <!-- Modals -->
+    <div id="ai-summary-modal" class="modal"></div>
+    <div id="action-plan-modal" class="modal"></div>
+    <div id="ai-logopedist-modal" class="modal"></div>
+    <div id="ai-tip-modal" class="modal"></div>
+    <div id="ai-kennis-modal" class="modal"></div>
 
 <script>
-    // --- Algemene App Logica ---
-    let currentScreen = 'home-screen';
-    function showScreen(screenId) {
-        document.getElementById(currentScreen).classList.remove('active');
-        document.getElementById(screenId).classList.add('active');
-        currentScreen = screenId;
+// --- Globale Staat & Data ---
+let appState = {};
+
+function resetState() {
+    appState = {
+        currentUserRole: null,
+        behandelplan: {
+            hoofddoel: "Zelfstandig boodschappen kunnen doen binnen 3 maanden.",
+            acties: [
+                { id: 1, text: "Maak wekelijks een boodschappenlijst met de app.", completed: true },
+                { id: 2, text: "Ga 1x per week met begeleiding naar de supermarkt.", completed: true },
+                { id: 3, text: "Ga 1x per week alleen naar een kleine winkel (bakker).", completed: false },
+                { id: 4, text: "Evalueer wekelijks de prikkels en vermoeidheid na het winkelen.", completed: false },
+            ]
+        },
+        logboek: [
+            { auteur: "Paul (zelf)", tekst: "Vandaag voor het eerst alleen naar de bakker geweest. Was spannend maar het is gelukt!", tijd: "Vandaag 10:30" },
+            { auteur: "Anna (thuisfront)", tekst: "Paul was erg moe na het bezoek aan de bakker, heeft 's middags 2 uur geslapen.", tijd: "Vandaag 15:00" },
+        ],
+        patienten: [
+            { id: 1, naam: "Paul Evers", laatsteUpdate: "Vandaag 15:00", voortgang: 50 },
+            { id: 2, naam: "Janine de Wit", laatsteUpdate: "Gisteren 11:20", voortgang: 75 },
+        ],
+        oorzakenEnWensen: [
+            { trigger: "Na een drukke afspraak", wens: "Graag een uur complete rust, zonder vragen." },
+            { trigger: "Als ik hoofdpijn krijg", wens: "Help me herinneren mijn medicatie te nemen en dim de lichten." }
+        ],
+        rapportages: [],
+        currentSummary: ''
+    };
+}
+
+// --- Gemini API Helper ---
+async function callGemini(prompt, retries = 3, delay = 1000) {
+    const apiKey = ""; // Left empty as per instructions
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+    const payload = { contents: [{ parts: [{ text: prompt }] }] };
+
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const result = await response.json();
+            
+            if (result.candidates && result.candidates.length > 0 &&
+                result.candidates[0].content && result.candidates[0].content.parts &&
+                result.candidates[0].content.parts.length > 0 &&
+                result.candidates[0].content.parts[0].text) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                 console.error("Invalid response structure from Gemini API. Full response:", result);
+                 throw new Error("Invalid response structure from Gemini API");
+            }
+        } catch (error) {
+            console.error(`Attempt ${i + 1} failed:`, error);
+            if (i < retries - 1) {
+                await new Promise(res => setTimeout(res, delay));
+                delay *= 2;
+            } else {
+                return "Sorry, de AI-assistent is momenteel niet beschikbaar.";
+            }
+        }
+    }
+}
+
+// --- HTML Templates ---
+const templates = {
+    investorPitch: `
+        <header class="bg-primary-dark/80 backdrop-blur-sm shadow-lg p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
+            <h1 class="text-2xl font-bold text-accent-gold">NAHpp: De Investering</h1>
+            <button onclick="showLoginScreen()" class="text-sm text-gray-300 hover:text-white">&larr; Terug</button>
+        </header>
+        <main class="p-4 md:p-8 max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold title-gold">Een Revolutie in de Zorg voor Niet-Aangeboren Hersenletsel</h2>
+                <p class="text-lg text-gray-300 mt-2">Gedreven door ervaring, gevalideerd door analyse, gebouwd voor impact.</p>
+            </div>
+            <div class="pitch-section">
+                <h3 class="text-2xl font-bold mb-4 title-gold">Het Verhaal Achter NAHpp</h3>
+                <div class="card p-6">
+                    <p class="mb-4">Mijn naam is Paul Evers. Op <strong>21-02-2012</strong>, toen ik 21 was, veranderde een aanrijding met een vrachtwagen mijn leven. Na een maand coma was de diagnose Niet-Aangeboren Hersenletsel (NAH). De eerste 12 jaar leefde ik met een masker op, gedreven door de gedachte: 'Ik leef nog, als ik doe wat ik altijd deed, komt alles goed'. Ik overbelastte mijn hersenen constant, in een poging mijn oude leven vast te houden.</p>
+                    <p class="mb-4">Maar na 12 jaar kwam de onvermijdelijke klap van de realiteit. Er ontstond kortsluiting. Ik kon niets meer, geen mens meer zien, niet meer werken. Toen pas begon de echte, diepgaande analyse. Met 16 jaar werkervaring in de zorg en een brein dat alles overdenkt, heb ik elk knelpunt in het zorgsysteem ontleed.</p>
+                    <p class="font-semibold text-emerald-300">Mijn conclusie: het beschadigde deel in het brein herstelt misschien niet, maar met de technologie van nu kunnen we een leven creëren met minder stress, minder conflicten en meer begrip. Die oplossing is NAHpp.</p>
+                </div>
+            </div>
+            <div class="pitch-section">
+                <h3 class="text-2xl font-bold mb-4 title-gold">Gewenste Fundamentele Partners</h3>
+                <div class="card p-6 mb-6">
+                    <h4 class="text-xl font-bold text-gray-100 mb-2">Dr. Peter Nouwens - De Strategische Visionair</h4>
+                    <p class="mb-4 text-gray-300">Als vader van mijn beste vriend en mijn voetbaltrainer op jonge leeftijd, was Dr. Peter Nouwens de persoon die mijn passie voor de zorg aanwakkerde. Zijn carrière is de belichaming van de strategische en wetenschappelijke ruggengraat die NAHpp nodig heeft. Hij combineert diepgaande kennis met bewezen leiderschap in het transformeren van de zorg, wat essentieel is om NAHpp op nationaal niveau te implementeren.</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-gray-300">
+                        <li><strong>Directe NAH-Expertise:</strong> Als initiatiefnemer van <strong>Support4Life</strong> begrijpt hij de cruciale fase na revalidatie.</li>
+                        <li><strong>Wetenschappelijke Onderbouwing:</strong> Zijn promotieonderzoek aan <strong>Universiteit van Tilburg (Tranzo)</strong> levert de analytische diepgang.</li>
+                        <li><strong>Bewezen Systeemveranderaar:</strong> Als voormalig bestuursvoorzitter van <strong>Prisma</strong> weet hij hoe je innovatie succesvol verankert in het zorgstelsel.</li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h4 class="text-xl font-bold text-gray-100 mb-2">Marc van Bekhoven - De Praktische Implementator</h4>
+                    <p class="mb-4 text-gray-300">Waar Dr. Nouwens de strategische lijnen uitzet, is Marc van Bekhoven de meester van de praktische uitvoering. Met zijn initiatief <strong>Het Houvast</strong> heeft hij een revolutionair model gecreëerd dat perfect aansluit op de kernfilosofie van NAHpp: de zorg komt naar de cliënt, niet andersom. Hij levert het bewijs dat complexe zorg in de eigen, vertrouwde omgeving kan leiden tot een hogere kwaliteit van leven en meer zelfstandigheid.</p>
+                     <ul class="list-disc list-inside space-y-1 text-sm text-gray-300">
+                        <li><strong>Expert in Thuis-ondersteuning:</strong> Hij heeft bewezen dat zelfs cliënten met een hoge zorgzwaarte succesvol zelfstandig kunnen wonen.</li>
+                        <li><strong>Cliënt-regie als Kern:</strong> Zijn model is gebouwd op de principes van eigen regie en maatwerk, wat NAHpp digitaal faciliteert.</li>
+                        <li><strong>Focus op "Gewoon Leven":</strong> Marc's werk is gericht op het normaliseren van het leven, een cruciaal doel voor elke NAHpp-gebruiker.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pitch-section">
+                <h3 class="text-2xl font-bold mb-4 title-gold">Oprichter & Contact</h3>
+                 <div class="card p-6">
+                    <p class="mb-4 text-gray-300">Momenteel ben ik, <strong>Paul Evers</strong>, de enige die aan NAHpp werkt. Ik ben nu op zoek naar de juiste partners om deze visie te realiseren.</p>
+                    <p class="font-semibold text-gray-200">Neem contact op om deze kans te bespreken:</p>
+                    <ul class="mt-2 space-y-2">
+                        <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg><a href="mailto:phmevers91@gmail.com" class="text-sky-400 hover:underline">phmevers91@gmail.com</a></li>
+                        <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg><a href="tel:+31622754034" class="text-sky-400 hover:underline">06-22754034</a></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    `,
+    insurerPitch: `
+        <header class="bg-primary-dark/80 backdrop-blur-sm shadow-lg p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
+            <h1 class="text-2xl font-bold text-accent-gold">NAHpp: De Zorgtransitie</h1>
+            <button onclick="showLoginScreen()" class="text-sm text-gray-300 hover:text-white">&larr; Terug</button>
+        </header>
+        <main class="p-4 md:p-8 max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold title-gold">Van Zorgkosten naar Zorginvestering</h2>
+                <p class="text-lg text-gray-300 mt-2">Hoe NAHpp verspilling elimineert en waarde maximaliseert.</p>
+            </div>
+            <div class="pitch-section">
+                <h3 class="text-2xl font-bold mb-4 title-gold">De Oplossing: Transparantie met Smart Contracts</h3>
+                <p class="mb-6 text-gray-300">NAHpp gebruikt blockchain-technologie om het declaratieproces te revolutioneren. Dit elimineert de 'zwarte doos' van zorguitgaven en zorgt ervoor dat elke geïnvesteerde euro direct gekoppeld is aan een meetbaar resultaat.</p>
+                <div class="space-y-4">
+                    <!-- Stap 1 -->
+                    <div class="flex items-center card p-4">
+                        <div class="flex-shrink-0 bg-sky-500/20 text-sky-300 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl">1</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Doel Vastleggen</h4>
+                            <p class="text-sm text-gray-400">Patiënt en zorgverlener stellen een meetbaar doel vast in de app, bv. "zelfstandig boodschappen doen".</p>
+                        </div>
+                    </div>
+                    <!-- Stap 2 -->
+                    <div class="flex items-center card p-4">
+                        <div class="flex-shrink-0 bg-sky-500/20 text-sky-300 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl">2</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Automatische Verificatie</h4>
+                            <p class="text-sm text-gray-400">NAHpp registreert de voortgang via voltooide actiepunten. Bij het behalen van het doel wordt dit onveranderlijk vastgelegd.</p>
+                        </div>
+                    </div>
+                    <!-- Stap 3 -->
+                    <div class="flex items-center card p-4">
+                        <div class="flex-shrink-0 bg-sky-500/20 text-sky-300 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl">3</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Gegarandeerde Uitbetaling</h4>
+                            <p class="text-sm text-gray-400">Het Smart Contract activeert automatisch de betaling aan de zorgverlener. Geen administratie, geen fraude, 100% transparant.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pitch-section">
+                <h3 class="text-2xl font-bold mb-4 title-gold">De Voordelen voor U</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="card p-4"><strong>Resultaatgerichte Zorg</strong><p class="text-sm text-gray-400">Betaal voor een 'bereikt resultaat', niet voor 'een uur zorg'.</p></div>
+                    <div class="card p-4"><strong>Drastisch Lagere Overhead</strong><p class="text-sm text-gray-400">Bespaar 20-30% op administratieve kosten door automatisering.</p></div>
+                    <div class="card p-4"><strong>Fraudepreventie</strong><p class="text-sm text-gray-400">De blockchain maakt fraude onmogelijk.</p></div>
+                    <div class="card p-4"><strong>Data-gedreven Inzicht</strong><p class="text-sm text-gray-400">Krijg real-time inzicht in effectieve behandelingen voor beter inkoopbeleid.</p></div>
+                </div>
+            </div>
+        </main>
+    `,
+    aiSummaryModal: `
+        <div class="modal-content">
+             <h2 class="text-2xl font-bold title-gold mb-4">✨ AI Samenvatting</h2>
+             <div id="ai-summary-loader" class="text-center hidden">
+                <p>AI analyseert het gesprek...</p>
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
+             </div>
+             <div id="ai-summary-content" class="space-y-3"></div>
+             <button onclick="closeModal('ai-summary-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
+        </div>
+    `,
+    actionPlanModal: `
+        <div class="modal-content">
+            <h2 class="text-2xl font-bold title-gold mb-4">Behandelplan Opstellen</h2>
+            <p class="text-sm mb-4">Gebruik de AI-samenvatting om een concreet actieplan voor de patiënt te maken.</p>
+            <div>
+                <label class="font-semibold">Hoofddoel:</label>
+                <input type="text" id="hoofddoel-input" class="w-full border p-2 rounded-md mt-1 bg-white text-black">
+            </div>
+            <div class="mt-4">
+                <label class="font-semibold">Actiepunten:</label>
+                <div id="actiepunten-container" class="space-y-2 mt-1"></div>
+                <button onclick="addActiepuntInput('')" class="text-sm text-sky-600 mt-2">+ Nieuw actiepunt</button>
+            </div>
+            <div id="ai-plan-suggestions" class="mt-4"></div>
+            <button onclick="saveBehandelplan()" class="mt-6 w-full bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg">Opslaan en Toewijzen</button>
+        </div>
+    `,
+    aiLogopedistModal: `
+        <div class="modal-content text-center">
+            <h2 class="text-2xl font-bold title-gold mb-4">🗣️ AI Logopedist</h2>
+            <div id="logopedist-oefening-container">
+                <p class="text-gray-600">Je oefening van vandaag:</p>
+                <p id="logopedist-oefenzin" class="text-xl font-semibold my-4 p-4 bg-gray-100 rounded-lg"></p>
+                <button id="logopedist-record-btn" onclick="recordAndGetFeedback()" class="w-full bg-purple-500 text-white font-bold py-3 px-4 rounded-lg">Neem antwoord op</button>
+            </div>
+            <div id="logopedist-feedback-container" class="hidden">
+                 <div id="logopedist-loader" class="text-center">
+                    <p>AI analyseert je uitspraak...</p>
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mt-4"></div>
+                 </div>
+                 <div id="logopedist-feedback-content" class="hidden text-left bg-purple-50 p-4 rounded-lg"></div>
+            </div>
+            <button onclick="closeModal('ai-logopedist-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
+        </div>
+    `,
+    aiTipModal: `
+        <div class="modal-content">
+             <h2 class="text-2xl font-bold title-gold mb-4">✨ Een tip van de AI</h2>
+             <div id="ai-tip-loader" class="text-center">
+                <p>AI denkt met je mee...</p>
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
+             </div>
+             <div id="ai-tip-content" class="hidden"></div>
+             <button onclick="closeModal('ai-tip-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
+        </div>
+    `,
+    aiKennisModal: `
+        <div class="modal-content">
+             <h2 class="text-2xl font-bold title-gold mb-4">✨ AI Kennisbank</h2>
+             <div id="ai-kennis-loader" class="text-center hidden">
+                <p>AI zoekt naar een antwoord...</p>
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
+             </div>
+             <div id="ai-kennis-content"></div>
+             <button onclick="closeModal('ai-kennis-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
+        </div>
+    `
+};
+
+const modules = {
+    gebruiker: `
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">Hoe voel je je vandaag?</h2>
+            <div class="flex justify-around text-4xl my-4">
+                <button onclick="logMood('Blij', '😊')" class="transform hover:scale-125 transition-transform">😊</button>
+                <button onclick="logMood('Neutraal', '🙂')" class="transform hover:scale-125 transition-transform">🙂</button>
+                <button onclick="logMood('Moe', '😐')" class="transform hover:scale-125 transition-transform">😐</button>
+                <button onclick="logMood('Verdrietig', '😕')" class="transform hover:scale-125 transition-transform">😕</button>
+                <button onclick="logMood('Overprikkeld', '😞')" class="transform hover:scale-125 transition-transform">😞</button>
+            </div>
+            <div id="mood-feedback" class="text-center"></div>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">🗣️ AI Logopedist</h2>
+            <p class="text-sm text-gray-300 mb-4">Oefen je uitspraak met directe, persoonlijke feedback.</p>
+            <button onclick="startSpeechTherapy()" class="w-full bg-purple-500 text-white font-bold py-3 px-4 rounded-lg">✨ Start Oefening</button>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">🎯 Mijn Behandelplan</h2>
+            <p class="text-sm text-gray-300 mb-2"><strong>Hoofddoel:</strong> <span id="plan-hoofddoel"></span></p>
+            <div class="w-full progress-bar h-4 mb-4"><div id="plan-progress" class="progress-bar-fill"></div></div>
+            <div id="plan-acties" class="space-y-2"></div>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">💡 Mijn Wensen & Grenzen</h2>
+            <div id="wensen-lijst" class="space-y-3 mb-4"></div>
+            <div class="border-t border-white/10 pt-4">
+                <input type="text" id="wens-trigger-input" class="w-full border p-2 rounded-md mb-2 bg-primary-dark border-gray-600" placeholder="Wanneer? (bv. Na een drukke dag)">
+                <div id="wens-suggestion-container" class="mb-2"></div>
+                <input type="text" id="wens-wens-input" class="w-full border p-2 rounded-md mb-2 bg-primary-dark border-gray-600" placeholder="Wat heb ik dan nodig?">
+                <button onclick="addOorzaakEnWens()" class="w-full bg-emerald-500 text-white font-semibold py-2 rounded-md">Toevoegen</button>
+            </div>
+        </div>
+    `,
+    zorgprofessional: `
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">👥 Patiënten Dashboard</h2>
+            <div id="patienten-lijst" class="space-y-2"></div>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">📚 AI Kennisbank</h2>
+            <p class="text-sm text-gray-300 mb-4">Stel een vraag en krijg een helder antwoord, geformuleerd voor patiënten en naasten.</p>
+            <div class="flex gap-2">
+                <input type="text" id="kennis-input" class="w-full border p-2 rounded-md bg-primary-dark border-gray-600" placeholder="bv. Wat is overprikkeling?">
+                <button onclick="getAIKnowledgeAnswer()" class="bg-sky-500 text-white font-semibold px-4 py-2 rounded-md">✨ Vraag</button>
+            </div>
+        </div>
+         <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">🗣️ Start Gesprek Simulatie</h2>
+            <p class="text-sm text-gray-300 mb-4">Simuleer een gesprek en gebruik de AI om direct een behandelplan op te stellen.</p>
+            <button onclick="generateAiSummary()" class="w-full bg-indigo-500 text-white font-bold py-3 px-4 rounded-lg">✨ Start Gesprek & Maak Plan</button>
+        </div>
+    `,
+    thuisfront: `
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">📋 Rapportages van Afspraken</h2>
+            <div id="rapportages-lijst" class="space-y-2"></div>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">💡 Wensen & Grenzen van Paul</h2>
+            <p class="text-sm text-gray-300 mb-3">Dit helpt om Paul beter te begrijpen en te ondersteunen.</p>
+            <div id="wensen-lijst-read-only" class="space-y-3"></div>
+        </div>
+        <div class="card p-4">
+            <h2 class="text-xl font-bold mb-3 title-gold">📚 AI Kennisbank</h2>
+            <p class="text-sm text-gray-300 mb-4">Stel een vraag en krijg een helder antwoord, geformuleerd voor patiënten en naasten.</p>
+            <div class="flex gap-2">
+                <input type="text" id="kennis-input" class="w-full border p-2 rounded-md bg-primary-dark border-gray-600" placeholder="bv. Wat is overprikkeling?">
+                <button onclick="getAIKnowledgeAnswer()" class="bg-sky-500 text-white font-semibold px-4 py-2 rounded-md">✨ Vraag</button>
+            </div>
+        </div>
+    `
+};
+
+// --- Initialisatie ---
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('investor-pitch-screen').innerHTML = templates.investorPitch;
+    document.getElementById('insurer-pitch-screen').innerHTML = templates.insurerPitch;
+    document.getElementById('ai-summary-modal').innerHTML = templates.aiSummaryModal;
+    document.getElementById('action-plan-modal').innerHTML = templates.actionPlanModal;
+    document.getElementById('ai-logopedist-modal').innerHTML = templates.aiLogopedistModal;
+    document.getElementById('ai-tip-modal').innerHTML = templates.aiTipModal;
+    document.getElementById('ai-kennis-modal').innerHTML = templates.aiKennisModal;
+    resetState();
+});
+
+
+// --- Scherm Navigatie ---
+function showScreen(screenId) {
+    ['login-screen', 'app-screen', 'investor-pitch-screen', 'insurer-pitch-screen'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+    });
+    document.getElementById(screenId).classList.remove('hidden');
+}
+function showLoginScreen() { showScreen('login-screen'); }
+function showInvestorPitch() { showScreen('investor-pitch-screen'); }
+function showInsurerPitch() { showScreen('insurer-pitch-screen'); }
+
+// --- Authenticatie & UI Rendering ---
+function loginAs(role) {
+    resetState();
+    appState.currentUserRole = role;
+    showScreen('app-screen');
+    const indicator = document.getElementById('role-indicator');
+    indicator.textContent = role.charAt(0).toUpperCase() + role.slice(1);
+    const roleColors = { 'gebruiker': 'bg-emerald-900 text-emerald-200', 'thuisfront': 'bg-sky-900 text-sky-200', 'zorgprofessional': 'bg-indigo-900 text-indigo-200' };
+    indicator.className = `text-sm font-semibold px-3 py-1 rounded-full ${roleColors[role]}`;
+    renderModules();
+}
+
+function logout() {
+    appState.currentUserRole = null;
+    showLoginScreen();
+}
+
+function renderModules() {
+    const mainContent = document.getElementById('main-content');
+    mainContent.innerHTML = modules[appState.currentUserRole] || '<p>Geen weergave voor deze rol.</p>';
+    updateUI();
+}
+
+function updateUI() {
+    const role = appState.currentUserRole;
+    if (role === 'gebruiker') {
+        renderBehandelplan('plan-hoofddoel', 'plan-progress', 'plan-acties');
+        renderOorzakenEnWensen();
+        const triggerInput = document.getElementById('wens-trigger-input');
+        if (triggerInput) {
+            triggerInput.addEventListener('input', (e) => generateWensSuggestion(e.target.value));
+        }
+    } else if (role === 'thuisfront') {
+        renderRapportages();
+        renderWensenReadOnly();
+    } else if (role === 'zorgprofessional') {
+        renderPatientenDashboard();
+    }
+}
+
+// --- Specifieke UI Render Functies ---
+function renderBehandelplan(hoofddoelId, progressId, actiesId) {
+    const hoofddoelEl = document.getElementById(hoofddoelId);
+    const progressEl = document.getElementById(progressId);
+    const actiesContainer = document.getElementById(actiesId);
+    if (!hoofddoelEl || !progressEl || !actiesContainer) return;
+
+    hoofddoelEl.textContent = appState.behandelplan.hoofddoel;
+    const completed = appState.behandelplan.acties.filter(a => a.completed).length;
+    const total = appState.behandelplan.acties.length;
+    const percentage = total > 0 ? (completed / total) * 100 : 0;
+    progressEl.style.width = `${percentage}%`;
+
+    actiesContainer.innerHTML = appState.behandelplan.acties.map(actie => `
+        <div class="flex items-center bg-white/5 p-2 rounded-md">
+            <input type="checkbox" id="actie-${actie.id}" ${actie.completed ? 'checked' : ''} onchange="toggleActie(${actie.id})" class="mr-3 h-5 w-5 rounded text-emerald-400 bg-transparent border-gray-500 focus:ring-emerald-500">
+            <label for="actie-${actie.id}" class="${actie.completed ? 'line-through text-gray-500' : 'text-text-light'}">${actie.text}</label>
+        </div>
+    `).join('');
+}
+
+function renderPatientenDashboard() {
+    const container = document.getElementById('patienten-lijst');
+    if (!container) return;
+    container.innerHTML = appState.patienten.map(p => `
+        <div class="bg-white/5 p-3 rounded-md shadow-sm hover:bg-white/10 transition-all cursor-pointer" onclick="alert('Patiëntdossier voor ${p.naam} openen (simulatie)')">
+            <div class="flex justify-between items-center">
+                <p class="font-bold text-text-light">${p.naam}</p>
+                <span class="text-xs text-gray-400">${p.laatsteUpdate}</span>
+            </div>
+            <div class="w-full progress-bar h-2 mt-2"><div class="progress-bar-fill" style="width: ${p.voortgang}%"></div></div>
+        </div>
+    `).join('');
+}
+
+function renderOorzakenEnWensen() {
+    const container = document.getElementById('wensen-lijst');
+    if (!container) return;
+    container.innerHTML = appState.oorzakenEnWensen.map(item => `
+        <div class="bg-white/5 p-3 rounded-lg">
+            <p class="text-sm font-semibold">Wanneer: <span class="font-normal text-gray-300">${item.trigger}</span></p>
+            <p class="text-sm font-semibold mt-1">Dan heb ik nodig: <span class="font-normal text-gray-300">${item.wens}</span></p>
+        </div>
+    `).join('');
+}
+
+function renderRapportages() {
+    const container = document.getElementById('rapportages-lijst');
+    if (!container) return;
+    if (appState.rapportages.length === 0) {
+        container.innerHTML = `<p class="text-sm text-gray-400">Er zijn nog geen rapportages gedeeld.</p>`;
+        return;
+    }
+    container.innerHTML = appState.rapportages.map(rapport => `
+        <div class="bg-white/5 p-3 rounded-lg">
+            <p class="text-xs text-gray-400 mb-1">Gedeeld op ${rapport.datum}</p>
+            <div class="text-sm text-text-light">${rapport.samenvatting}</div>
+        </div>
+    `).join('');
+}
+
+function renderWensenReadOnly() {
+    const container = document.getElementById('wensen-lijst-read-only');
+    if (!container) return;
+    container.innerHTML = appState.oorzakenEnWensen.map(item => `
+        <div class="bg-yellow-500/10 p-3 rounded-lg border-l-4 border-yellow-400">
+            <p class="text-sm font-semibold">Wanneer: <span class="font-normal text-gray-300">${item.trigger}</span></p>
+            <p class="text-sm font-semibold mt-1">Dan is de wens: <span class="font-normal text-gray-300">${item.wens}</span></p>
+        </div>
+    `).join('');
+}
+
+
+// --- Acties & Interacties ---
+function toggleActie(id) {
+    const actie = appState.behandelplan.acties.find(a => a.id === id);
+    if (actie) {
+        actie.completed = !actie.completed;
+        updateUI();
+    }
+}
+
+function addOorzaakEnWens() {
+    const triggerInput = document.getElementById('wens-trigger-input');
+    const wensInput = document.getElementById('wens-wens-input');
+    const trigger = triggerInput.value.trim();
+    const wens = wensInput.value.trim();
+    if (trigger === '' || wens === '') return;
+    appState.oorzakenEnWensen.unshift({ trigger, wens });
+    triggerInput.value = '';
+    wensInput.value = '';
+    document.getElementById('wens-suggestion-container').innerHTML = '';
+    updateUI();
+}
+
+function shareSummary() {
+    const now = new Date();
+    const formattedDate = `${now.getDate()}-${now.getMonth()+1}-${now.getFullYear()}`;
+    const formattedSummary = appState.currentSummary
+        .replace(/<h3[^>]*>/g, '<strong>').replace(/<\/h3> /g, '</strong><br>')
+        .replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '<br>');
+
+    appState.rapportages.unshift({
+        datum: formattedDate,
+        samenvatting: formattedSummary
+    });
+    alert('Rapportage gedeeld met thuisfront!');
+    closeModal('ai-summary-modal');
+}
+
+
+// --- Gemini-Powered Functies ---
+async function generateAiSummary() {
+    openModal('ai-summary-modal');
+    const loader = document.getElementById('ai-summary-loader');
+    const content = document.getElementById('ai-summary-content');
+    
+    if (!loader || !content) {
+        console.error("Modal elements for AI Summary not found in DOM.");
+        closeModal('ai-summary-modal');
+        return;
     }
 
-    // --- SPEL 1: TIJDKNALLER ---
-    const tijdknallerWordsData=[["Gordon","Worstenbroodje","Vandaag Inside","De Efteling","Een Tikkie sturen"],["Patricia Paay","Loonse en Drunense Duinen","Schrobbelèr","HEMA rookworst","Barbecue in de fik"],["Johan Derksen","Guus Meeuwis","'Houdoe' zeggen","De Toppers","Jumbo Udenhout"],["Patty Brard","Carnaval in Kruikenstad","De zachte 'G'","Calvé Pindakaas","Frietje van de Heuvel"],["Gerard Joling","PSV Eindhoven","Kermis-attractie","Oh Oh Cherso","Bijnaam eerste auto"],["André Hazes Jr.","La Trappe Quadrupel","Camping in Renesse","De polonaise","Kasteel de Strijdhoef"],["Britt Dekker","Vierdaagse van Nijmegen","Verjaardag in een kring","Sponsorloop","Oude leraar"],["Frans Bauer","'Eendjes voeren'","NS-omroepstem","Lingo","Gourmetstel-geur"],["Wendy van Dijk","Beekse Bergen","Fiets gestolen","Eigen Huis & Tuin","Kermis Udenhout"],["Chantal Janzen","Westpoint Tilburg","Koningsdag-outfit","Postcodeloterij-fiets","Groepschat Tuskense Boys"],["Martien Meiland","Wijnen, wijnen, wijnen!","Chateau Marillaux","Maxime en Erica","Wat goooed!"],["Snollebollekes","Links, rechts","Non-stop vol d'r op","Carnavalsmuziek","GelreDome"],["New Kids Turbo","'Verrekte mongol!'","Groene Opel Manta","Maaskantje","Corry Konings"],["Undercover (serie)","Ferry Bouman","XTC-pillen","Camping Zonnedauw","Tom Waes"],["Roy Donders","Stylist van het Zuiden","Huispakken","Krullen","Worstenbrood"]];
-    let tijdknallerState={teams:[],currentTeamIndex:0,usedCards:[],timerInterval:null,timeLeft:30,roundScore:0,currentWords:[]};
-    function startTijdknaller(){const teamInputs=document.querySelectorAll('#tijdknaller-teams input');tijdknallerState.teams=[];teamInputs.forEach(input=>{if(input.value.trim()!==''){tijdknallerState.teams.push({name:input.value.trim(),score:0})}});if(tijdknallerState.teams.length<2){alert('Je hebt minimaal 2 teams nodig!');return}tijdknallerState.currentTeamIndex=0;tijdknallerState.usedCards=[];updateMiniScoreboard();prepareNextRound();showScreen('tijdknaller-play')}
-    function prepareNextRound(){document.getElementById('tijdknaller-start-round-view').style.display='block';document.getElementById('tijdknaller-game-view').classList.add('hidden');const nextTeamName=tijdknallerState.teams[tijdknallerState.currentTeamIndex].name;document.getElementById('tijdknaller-next-team').innerText=`${nextTeamName} is aan de beurt!`;document.getElementById('start-round-btn').onclick=startRound}
-    function startRound(){document.getElementById('tijdknaller-start-round-view').style.display='none';document.getElementById('tijdknaller-game-view').classList.remove('hidden');let cardIndex;if(tijdknallerState.usedCards.length===tijdknallerWordsData.length){tijdknallerState.usedCards=[]}do{cardIndex=Math.floor(Math.random()*tijdknallerWordsData.length)}while(tijdknallerState.usedCards.includes(cardIndex));tijdknallerState.usedCards.push(cardIndex);tijdknallerState.currentWords=[...tijdknallerWordsData[cardIndex]];displayWords();tijdknallerState.timeLeft=30;tijdknallerState.roundScore=0;document.getElementById('tijdknaller-timer').innerText=tijdknallerState.timeLeft;document.getElementById('tijdknaller-timer').classList.remove('timer-critical');const currentTeamName=tijdknallerState.teams[tijdknallerState.currentTeamIndex].name;document.getElementById('tijdknaller-current-team').innerText=currentTeamName;tijdknallerState.timerInterval=setInterval(()=>{tijdknallerState.timeLeft--;document.getElementById('tijdknaller-timer').innerText=tijdknallerState.timeLeft;if(tijdknallerState.timeLeft<=5){document.getElementById('tijdknaller-timer').classList.add('timer-critical')}if(tijdknallerState.timeLeft<=0){endRound()}},1000)}
-    function displayWords(){const wordsContainer=document.getElementById('tijdknaller-words');wordsContainer.innerHTML='';tijdknallerState.currentWords.forEach((word,index)=>{const wordEl=document.createElement('div');wordEl.id=`word-${index}`;wordEl.innerText=word;wordEl.className='p-3 bg-gray-700 rounded-lg transition-all';wordsContainer.appendChild(wordEl)})}
-    function tijdknallerScore(correct){if(tijdknallerState.currentWords.length===0)return;const wordEl=document.querySelector('#tijdknaller-words div:not(.guessed)');if(!wordEl)return;wordEl.classList.add('guessed');if(correct){tijdknallerState.roundScore++;wordEl.style.backgroundColor='#16A34A';wordEl.style.textDecoration='line-through'}else{wordEl.style.backgroundColor='#BE123C'}const remainingWords=document.querySelectorAll('#tijdknaller-words div:not(.guessed)');if(remainingWords.length===0){setTimeout(endRound,500)}}
-    function endRound(){clearInterval(tijdknallerState.timerInterval);tijdknallerState.teams[tijdknallerState.currentTeamIndex].score+=tijdknallerState.roundScore;tijdknallerState.currentTeamIndex=(tijdknallerState.currentTeamIndex+1)%tijdknallerState.teams.length;updateMiniScoreboard();const winner=tijdknallerState.teams.find(team=>team.score>=30);if(winner){alert(`${winner.name} heeft gewonnen met ${winner.score} punten!`);showScreen('home-screen')}else{prepareNextRound()}}
-    function updateMiniScoreboard(){const board=document.getElementById('tijdknaller-scoreboard-mini');board.innerHTML='';tijdknallerState.teams.forEach(team=>{board.innerHTML+=`<div>${team.name}: <span class="font-bold text-blue-400">${team.score}</span></div>`})}
+    loader.classList.remove('hidden');
+    content.innerHTML = '';
 
-    // --- SPEL 2: N@TNEK-REFLEX ---
-    let natnekState={players:[],gameTimeout:null,startTime:0,results:[],listening:false};
-    function setupNatnekInputs(){const container=document.getElementById('natnek-players');container.innerHTML='';for(let i=0;i<6;i++){container.innerHTML+=`<input type="text" class="input-field focus:ring-yellow-500" placeholder="Naam Speler ${i+1}">`}}
-    function startNatnek(){const playerInputs=document.querySelectorAll('#natnek-players input');natnekState.players=[];playerInputs.forEach((input)=>{if(input.value.trim()!==''){natnekState.players.push({name:input.value.trim(),score:0})}});if(natnekState.players.length<2){alert('Je hebt minimaal 2 spelers nodig!');return}const grid=document.getElementById('natnek-button-grid');grid.innerHTML='';natnekState.players.forEach(player=>{const button=document.createElement('button');button.id=`natnek-btn-${player.name.replace(/\s+/g,'-')}`;button.className='h-40 md:h-56 rounded-2xl flex items-center justify-center text-3xl font-bold text-white transition-colors duration-200';button.innerText=player.name;button.onclick=()=>handleNatnekPress(player.name);grid.appendChild(button)});showScreen('natnek-play');nextNatnekRound()}
-    function nextNatnekRound(){natnekState.results=[];natnekState.listening=false;const statusText=document.getElementById('natnek-status');const resultsContainer=document.getElementById('natnek-results');const nextBtn=document.getElementById('natnek-next-btn');resultsContainer.innerHTML='';nextBtn.classList.add('hidden');statusText.innerText='GEDULD...';natnekState.players.forEach(player=>{const btn=document.getElementById(`natnek-btn-${player.name.replace(/\s+/g,'-')}`);btn.classList.remove('reflex-go','reflex-pressed');btn.classList.add('reflex-wait');btn.disabled=false});const randomDelay=Math.random()*5000+2000;natnekState.gameTimeout=setTimeout(()=>{statusText.innerText='DRUK!';natnekState.players.forEach(player=>{const btn=document.getElementById(`natnek-btn-${player.name.replace(/\s+/g,'-')}`);btn.classList.remove('reflex-wait');btn.classList.add('reflex-go')});natnekState.startTime=Date.now();natnekState.listening=true},randomDelay)}
-    function handleNatnekPress(playerName){const player=natnekState.players.find(p=>p.name===playerName);if(!player)return;const button=document.getElementById(`natnek-btn-${playerName.replace(/\s+/g,'-')}`);button.disabled=true;button.classList.remove('reflex-go','reflex-wait');button.classList.add('reflex-pressed');if(!natnekState.listening){if(!natnekState.results.find(r=>r.name===player.name)){clearTimeout(natnekState.gameTimeout);natnekState.results.push({name:player.name,time:'VALSE START!'});endNatnekRound()}return}if(!natnekState.results.find(r=>r.name===player.name)){const reactionTime=(Date.now()-natnekState.startTime)/1000;natnekState.results.push({name:player.name,time:reactionTime})}if(natnekState.results.length===natnekState.players.length){endNatnekRound()}}
-    function endNatnekRound(){natnekState.listening=false;const resultsContainer=document.getElementById('natnek-results');resultsContainer.innerHTML='<h3 class="text-3xl font-bold mb-4">Resultaten:</h3>';natnekState.results.sort((a,b)=>{if(typeof a.time==='string')return-1;if(typeof b.time==='string')return 1;return a.time-b.time});const loser=natnekState.results.find(r=>typeof r.time==='string')||natnekState.results[natnekState.results.length-1];const loserPlayer=natnekState.players.find(p=>p.name===loser.name);if(loserPlayer)loserPlayer.score++;natnekState.results.forEach((res,index)=>{let specialText='';if(index===0&&typeof res.time!=='string')specialText='⚡️';if(res.name===loser.name)specialText='🐌 N@TNEK!';if(typeof res.time==='string')specialText='🚫 VALSE START!';resultsContainer.innerHTML+=`<div class="p-2 rounded ${res.name===loser.name?'bg-red-800':'bg-gray-700'} flex justify-between mb-2"><span>${index+1}. ${res.name}</span><span class="font-bold">${typeof res.time==='number'?res.time.toFixed(3)+'s':res.time} ${specialText}</span></div>`});resultsContainer.innerHTML+='<hr class="my-4 border-gray-600">';resultsContainer.innerHTML+='<h4 class="text-2xl font-bold mb-2">N@tnek Scorebord:</h4>';natnekState.players.sort((a,b)=>b.score-a.score).forEach(p=>{resultsContainer.innerHTML+=`<div class="flex justify-between"><span>${p.name}</span><span>${p.score} keer</span></div>`});document.getElementById('natnek-next-btn').classList.remove('hidden')}
-
-    // --- SPEL 3: FRIESE FOTO-VLEGELS ---
-    const VLEGEL_STORAGE_KEY='tuskenseVlegelPlayers';
-    const vlegelChallenges=[{id:'c0',text:"Maak een 'Titanic'-foto op de boeg van de boot.",points:10},{id:'c1',text:"Fotografeer een traditionele Friese boerderij (kop-hals-romp).",points:15},{id:'c2',text:"Vind een boot met een onuitspreekbare Friese naam.",points:20},{id:'c3',text:"Maak een actiefoto van een perfecte plons in het water.",points:15},{id:'c4',text:"Fotografeer een zeilboot van het type 'Skûtsje'.",points:25},{id:'c5',text:"Maak een groeps-selfie met gekke bekken.",points:10},{id:'c6',text:"Fotografeer een dier dat op een Tuskense Boy lijkt (met uitleg).",points:20},{id:'c7',text:"Maak een foto van een ooievaar in zijn nest.",points:30},{id:'c8',text:"Leg een 'kapitein' vast die met bier de boot bestuurt.",points:15},{id:'c9',text:"Maak een artistieke zonsondergang-foto over het water.",points:25},{id:'c10',text:"Fotografeer een brugwachter in actie.",points:10},{id:'c11',text:"Maak een groepsfoto proostend met Beerenburg.",points:35},{category:"BONUS: VIDEO-WAAGHALZEN"},{id:'c12',text:"Film dat je een onbekende Fries een flauwe mop vertelt.",points:40,bonus:true},{id:'c13',text:"Film een praatje met een local in je beste Limburgs.",points:45,bonus:true},{id:'c14',text:"Krijg een onbekende zover om een idioot dansje te doen op film.",points:50,bonus:true},{id:'c15',text:"Vraag een local de weg naar 'It Skûtsjesilen fan de Fryske Marren'.",points:55,bonus:true},{id:'c16',text:"Bel een masseur en vraag of ze 'Tuskense Knopen' losmaken.",points:60,bonus:true},{id:'c17',text:"Bel een willekeurige Chinees en vraag om 'een Frikandel Speciaal'.",points:65,bonus:true},{id:'c18',text:"Bel een willekeurig nummer en feliciteer ze met de 'Udenhoutse Loterij'.",points:75,bonus:true},];
-    let vlegelState={players:[]};
-    function setupVlegelInputs(){const container=document.getElementById('vlegel-players');container.innerHTML='';for(let i=0;i<10;i++){container.innerHTML+=`<input type="text" class="input-field focus:ring-green-500" placeholder="Naam Vlegel ${i+1}">`}}
-    function saveVlegelState(){localStorage.setItem(VLEGEL_STORAGE_KEY,JSON.stringify(vlegelState.players))}
-    function loadVlegelState(){const savedData=localStorage.getItem(VLEGEL_STORAGE_KEY);if(savedData){vlegelState.players=JSON.parse(savedData);const playerInputs=document.querySelectorAll('#vlegel-players input');vlegelState.players.forEach((player,index)=>{if(playerInputs[index]){playerInputs[index].value=player.name}})}}
-    function startVlegelChallenge(){const playerInputs=document.querySelectorAll('#vlegel-players input');const newPlayers=[];playerInputs.forEach(input=>{if(input.value.trim()!==''){const existingPlayer=vlegelState.players.find(p=>p.name===input.value.trim());if(existingPlayer){newPlayers.push(existingPlayer)}else{newPlayers.push({name:input.value.trim(),completed:{}})}}});if(newPlayers.length===0){alert('Je hebt minimaal 1 Vlegel nodig!');return}vlegelState.players=newPlayers;saveVlegelState();setupVlegelLeaderboard();setupVlegelChecklist();showScreen('fotozoektocht')}
-    function setupVlegelLeaderboard(){const board=document.getElementById('vlegel-leaderboard');board.innerHTML='';vlegelState.players.forEach(player=>{const score=calculateVlegelScore(player);board.innerHTML+=`<div class="bg-gray-900 p-3 rounded-lg"><div class="text-lg font-semibold">${player.name}</div><div id="score-${player.name.replace(/\s+/g,'-')}" class="text-3xl font-black text-green-400">${score}</div></div>`})}
-    function setupVlegelChecklist(){const container=document.getElementById('vlegel-checklist');container.innerHTML='';let currentCategory='';vlegelChallenges.forEach(challenge=>{if(challenge.category&&challenge.category!==currentCategory){currentCategory=challenge.category;container.innerHTML+=`<h3 class="text-2xl font-bold text-yellow-400 pt-4">${currentCategory}</h3>`}if(!challenge.category){let itemHTML=`<div class="p-4 rounded-lg flex items-start ${challenge.bonus?'bg-yellow-900 bg-opacity-50 border border-yellow-700':'bg-gray-900'}">`;itemHTML+=`<div class="flex-grow"><span><strong>${challenge.points} PUNTEN:</strong> ${challenge.text}</span></div>`;itemHTML+='<div class="flex flex-col items-end ml-4 space-y-1">';vlegelState.players.forEach(player=>{const playerNameId=player.name.replace(/\s+/g,'-');const isChecked=player.completed&&player.completed[challenge.id];itemHTML+=`<label for="${challenge.id}-${playerNameId}" class="flex items-center cursor-pointer"><span class="mr-2 text-sm">${player.name}</span><input type="checkbox" id="${challenge.id}-${playerNameId}" onchange="updateVlegelChallenge(this, '${playerNameId}', '${challenge.id}')" class="w-5 h-5" ${isChecked?'checked':''}></label>`});itemHTML+='</div></div>';container.innerHTML+=itemHTML}})}
-    function calculateVlegelScore(player){let score=0;if(!player.completed)return 0;for(const challengeId in player.completed){const challenge=vlegelChallenges.find(c=>c.id===challengeId);if(challenge){score+=challenge.points}}return score}
-    function updateVlegelChallenge(checkbox,playerNameId,challengeId){const player=vlegelState.players.find(p=>p.name.replace(/\s+/g,'-')===playerNameId);if(!player)return;if(!player.completed)player.completed={};if(checkbox.checked){player.completed[challengeId]=true}else{delete player.completed[challengeId]}const newScore=calculateVlegelScore(player);document.getElementById(`score-${playerNameId}`).innerText=newScore;saveVlegelState()}
-    function resetVlegelScores(){if(window.confirm('Weet je zeker dat je alle scores van de Foto-Vlegels permanent wilt verwijderen?')){localStorage.removeItem(VLEGEL_STORAGE_KEY);vlegelState.players=[];const playerInputs=document.querySelectorAll('#vlegel-players input');playerInputs.forEach(input=>input.value='');showScreen('vlegel-setup')}}
-
-    // --- SPEL 4: HET BEL-BORDEEL ---
-    let belspelState = { players: [] };
-    const belspelTargets = ["Een willekeurige Marktplaats adverteerder.","De dichtstbijzijnde Kebabzaak.","Een willekeurige kapper in de buurt.","Een Chinees restaurant (vraag naar dagschotel).","Een dierenarts (vraag over je 'zieke goudvis').","Een fietsenmaker (klaag over een piepje).","Een willekeurige bloemist.","Het VVV-kantoor van een nabijgelegen dorp.","Een onbekend nummer uit iemands contactenlijst.","De lokale supermarkt (vraag of ze Schrobbelèr hebben)."];
-    const belspelTopics = ["Praat met een overdreven Limburgs accent.","Doe alsof je belt vanaf een luidruchtige gay pride parade.","Probeer een abonnement te verkopen op 'De Udenhoutse Gazet'.","Bel als een overbezorgde moeder die vraagt of haar 'zoontje' wel goed eet.","Doe alsof je van de GGD belt voor een 'verplicht knuffelonderzoek'.","Klaag als boze buurman over geluidsoverlast van hun grasmaaier.","Overtuig ze dat ze een opblaaskrokodil hebben gewonnen.","Meld als dierentuinmedewerker dat hun ontsnapte aap in de buurt is.","Praat alleen in songteksten van Guus Meeuwis.","Bel als de Belastingdienst over een schuld van €3,50 voor 'luchtbelasting'.","Laat na elke zin die zij zeggen een ongemakkelijke stilte van 5 seconden vallen.","Praat extreem binnensmonds en word boos als ze je niet verstaan.","Begin het gesprek met zwaar gehijg en vraag dan heel kalm: 'Met wie spreek ik?'","Blijf volhouden dat je 'Sjef' moet spreken, ook al zeggen ze 10 keer dat hij er niet woont.","Fluister het hele gesprek en zeg 'ssst, ze luisteren mee' als ze vragen waarom.","Doe een hele slechte imitatie van Johan Derksen en ontken dat je hem nadoet.","Zing elke zin die je zegt op de melodie van 'Vader Jacob'.","Doe een enquête met vragen als: 'Hoeveel bitterballen is uw geluk waard?'","Bel in paniek omdat je je huisdier (een steen genaamd Kees) kwijt bent.","Waarschuw ze voor 5G-straling die de smaak van Schrobbelèr aantast.","Herhaal de laatste 3 woorden van elke zin die de ander zegt.","Bel als 'Technische Dienst' en zeg dat hun broodrooster een virus heeft.","Deel een veel te persoonlijk en ongemakkelijk medisch probleem.","Spreek in extreem formele, ouderwetse taal ('Weledele heer/vrouwe...').","Vraag of je hun wifi-wachtwoord mag omdat je 'even voor de deur staat'."];
-    function setupBelspelInputs() { const container = document.getElementById('belspel-players'); container.innerHTML = ''; for (let i = 0; i < 10; i++) { container.innerHTML += `<input type="text" class="input-field focus:ring-purple-500" placeholder="Naam Speler ${i + 1}">`; } }
-    function startBelspel() { const playerInputs = document.querySelectorAll('#belspel-players input'); belspelState.players = []; playerInputs.forEach(input => { if (input.value.trim() !== '') { belspelState.players.push(input.value.trim()); } }); if (belspelState.players.length < 2) { alert('Je hebt minimaal 2 spelers nodig!'); return; } resetBelspel(); showScreen('belspel-play'); }
-    function spinWheel(resultElement, items, duration = 3000) { return new Promise(resolve => { resultElement.classList.remove('text-2xl'); resultElement.classList.add('spinning'); let startTime = Date.now(); function spin() { const randomItem = items[Math.floor(Math.random() * items.length)]; resultElement.textContent = randomItem; if (Date.now() - startTime < duration) { requestAnimationFrame(spin); } else { resultElement.classList.remove('spinning'); const finalItem = items[Math.floor(Math.random() * items.length)]; resultElement.textContent = finalItem; if (finalItem.length > 20) resultElement.classList.add('text-2xl'); resolve(finalItem); } } spin(); }); }
-    async function spinChooserWheel() { const btn = document.getElementById('spin-chooser-btn'); const resultElement = document.getElementById('chooser-wheel-result'); btn.disabled = true; await spinWheel(resultElement, belspelState.players); document.getElementById('target-wheel-section').classList.remove('hidden'); }
-    async function spinTargetWheel() { const btn = document.getElementById('spin-target-btn'); const resultElement = document.getElementById('target-wheel-result'); btn.disabled = true; await spinWheel(resultElement, belspelTargets); document.getElementById('topic-wheel-section').classList.remove('hidden'); }
-    async function spinTopicWheel() { const btn = document.getElementById('spin-topic-btn'); const resultElement = document.getElementById('topic-wheel-result'); btn.disabled = true; await spinWheel(resultElement, belspelTopics); }
-    function resetBelspel() { document.getElementById('chooser-wheel-result').textContent = 'Draai het rad...'; document.getElementById('target-wheel-result').textContent = 'Draai het rad...'; document.getElementById('topic-wheel-result').textContent = 'Draai het rad...'; document.getElementById('spin-chooser-btn').disabled = false; document.getElementById('spin-target-btn').disabled = false; document.getElementById('spin-topic-btn').disabled = false; document.getElementById('target-wheel-section').classList.add('hidden'); document.getElementById('topic-wheel-section').classList.add('hidden'); }
+    const mockTranscript = "Arts: Goedemorgen Paul, hoe gaat het met de vermoeidheid en de hoofdpijn waar we het vorige keer over hadden? Patiënt: Het gaat wisselend. Soms heb ik een goede dag, maar na een drukke ochtend ben ik 's middags helemaal op en krijg ik snel hoofdpijn. Vooral in de supermarkt is het lastig. Arts: Dat klinkt inderdaad als overprikkeling. Het is belangrijk om je energie beter te verdelen. We moeten concrete stappen zetten om te voorkomen dat je over je grenzen gaat. Laten we een paar actiepunten afspreken. We zien elkaar over drie weken weer om te kijken hoe het gaat.";
+    const prompt = `Vat het volgende gesprek tussen een arts en een patiënt met NAH kort en bondig samen. Structureer de output in de volgende secties: 'Belangrijkste Klacht', 'Conclusie Arts', en 'Voorgesteld Actiepunt'. Gebruik duidelijke en eenvoudige taal. Gesprek: "${mockTranscript}"`;
     
-    // --- Init ---
-    window.onload = () => {
-        setupNatnekInputs();
-        setupVlegelInputs();
-        setupBelspelInputs();
-        loadVlegelState();
-        showScreen('home-screen');
-    };
-</script>
+    const summary = await callGemini(prompt);
+    appState.currentSummary = summary;
+    loader.classList.add('hidden');
+    
+    const formattedSummary = summary
+        .replace(/Belangrijkste Klacht:/g, '<h3 class="font-semibold text-gray-800">Belangrijkste Klacht:</h3><p class="mb-2 text-gray-600">')
+        .replace(/Conclusie Arts:/g, '</p><h3 class="font-semibold text-gray-800">Conclusie Arts:</h3><p class="mb-2 text-gray-600">')
+        .replace(/Voorgesteld Actiepunt:/g, '</p><h3 class="font-semibold text-gray-800">Voorgesteld Actiepunt:</h3><p class="text-gray-600">') + '</p>';
+    content.innerHTML = formattedSummary;
 
+    const buttonsContainer = document.createElement('div');
+    if (appState.currentUserRole === 'zorgprofessional') {
+        buttonsContainer.innerHTML = `<button onclick="openActionPlanCreator()" class="w-full mt-4 bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg">✨ Maak Behandelplan met AI</button>`;
+    } else {
+        buttonsContainer.innerHTML = `<button onclick="shareSummary()" class="w-full mt-4 bg-sky-500 text-white font-bold py-2 px-4 rounded-lg">Deel met Thuisfront</button>`;
+    }
+    content.appendChild(buttonsContainer);
+}
+
+async function generateWensSuggestion(triggerText) {
+    const container = document.getElementById('wens-suggestion-container');
+    if (!triggerText || triggerText.length < 5) {
+        container.innerHTML = '';
+        return;
+    }
+    container.innerHTML = `<p class="text-xs text-gray-400">✨ AI denkt mee over een wens...</p>`;
+    const prompt = `Een persoon met NAH beschrijft een situatie die overprikkeling kan veroorzaken: "${triggerText}". Wat zou een goede, concrete wens of behoefte kunnen zijn in die situatie? Geef één korte, duidelijke suggestie in de 'ik'-vorm. Bijvoorbeeld: "Ik heb dan even rust nodig." of "Kun je me dan helpen met...?". Geef alleen de wens, zonder extra tekst.`;
+    const suggestion = await callGemini(prompt);
+    container.innerHTML = `
+        <div class="flex flex-wrap gap-2">
+            <button class="suggestion-chip bg-emerald-800 text-emerald-200 text-sm font-medium px-3 py-1 rounded-full hover:bg-emerald-700" onclick="useWensSuggestion('${suggestion}')">
+                Suggestie: ${suggestion}
+            </button>
+        </div>`;
+}
+
+function useWensSuggestion(suggestion) {
+    document.getElementById('wens-wens-input').value = suggestion;
+}
+
+async function openActionPlanCreator() {
+    closeModal('ai-summary-modal');
+    openModal('action-plan-modal');
+    const hoofddoelInput = document.getElementById('hoofddoel-input');
+    const actiepuntenContainer = document.getElementById('actiepunten-container');
+    const suggestionsContainer = document.getElementById('ai-plan-suggestions');
+    
+    hoofddoelInput.value = '';
+    actiepuntenContainer.innerHTML = '';
+    suggestionsContainer.innerHTML = `<p class="text-xs text-gray-500">✨ AI genereert suggesties voor actiepunten...</p>`;
+
+    const prompt = `Gebaseerd op de volgende samenvatting van een medisch gesprek: "${appState.currentSummary}", stel 3 concrete en haalbare actiepunten voor in een behandelplan voor een patiënt met NAH. Formuleer ze als taken die de patiënt kan uitvoeren. Geef alleen de taken, elk op een nieuwe regel, zonder nummering of aanhalingstekens.`;
+    const suggestionsText = await callGemini(prompt);
+    const suggestions = suggestionsText.split('\n').filter(s => s.trim() !== '');
+    
+    suggestions.forEach(s => addActiepuntInput(s)); // Add suggestions directly
+    hoofddoelInput.value = "Energie en prikkels beter leren managen."; // Suggest a main goal
+
+    suggestionsContainer.innerHTML = ``; // Clear suggestions as they are now in the list
+}
+
+function addActiepuntInput(value = '') {
+    const container = document.getElementById('actiepunten-container');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'w-full border p-2 rounded-md bg-white text-black';
+    input.placeholder = 'Nieuw actiepunt';
+    input.value = value;
+    container.appendChild(input);
+}
+
+function saveBehandelplan() {
+    const hoofddoel = document.getElementById('hoofddoel-input').value;
+    const actiepuntenInputs = document.querySelectorAll('#actiepunten-container input');
+    const acties = Array.from(actiepuntenInputs).map((input, index) => ({
+        id: Date.now() + index, // unique id
+        text: input.value,
+        completed: false
+    }));
+
+    appState.behandelplan = { hoofddoel, acties };
+    
+    alert('Behandelplan opgeslagen en toegewezen aan Paul Evers!');
+    closeModal('action-plan-modal');
+    updateUI(); // Update the UI immediately for all roles
+}
+
+// --- AI Logopedist Functies ---
+function startSpeechTherapy() {
+    openModal('ai-logopedist-modal');
+    document.getElementById('logopedist-oefening-container').classList.remove('hidden');
+    document.getElementById('logopedist-feedback-container').classList.add('hidden');
+    document.getElementById('logopedist-feedback-content').classList.add('hidden');
+    
+    const zinnen = ["De kat krabt de krullen van de trap.", "Achtentachtig prachtige grachten.", "Drie dikke draden."];
+    const oefenzin = zinnen[Math.floor(Math.random() * zinnen.length)];
+    document.getElementById('logopedist-oefenzin').textContent = oefenzin;
+}
+
+async function recordAndGetFeedback() {
+    document.getElementById('logopedist-oefening-container').classList.add('hidden');
+    const feedbackContainer = document.getElementById('logopedist-feedback-container');
+    feedbackContainer.classList.remove('hidden');
+    
+    const loader = document.getElementById('logopedist-loader');
+    const content = document.getElementById('logopedist-feedback-content');
+
+    if (!loader || !content) {
+        console.error("Modal elements for AI Logopedist not found in DOM.");
+        closeModal('ai-logopedist-modal');
+        return;
+    }
+
+    loader.classList.remove('hidden');
+    content.classList.add('hidden');
+
+    const oefenzin = document.getElementById('logopedist-oefenzin').textContent;
+    const mockAttempt = "De kat kabt de kullen van de tap."; // Gesimuleerde foute uitspraak
+
+    const prompt = `Je bent een vriendelijke en ondersteunende AI-logopedist. Een patiënt met NAH heeft de zin '${oefenzin}' proberen uit te spreken. Hun (gesimuleerde) poging klinkt als '${mockAttempt}'. Geef korte, positieve feedback en één concrete tip voor verbetering. Spreek direct tegen de patiënt. Formatteer de output met een <strong> voor de tip.`;
+
+    const feedback = await callGemini(prompt);
+    
+    loader.classList.add('hidden');
+    content.innerHTML = `<p>${feedback}</p>`;
+    content.classList.remove('hidden');
+}
+
+// --- Nieuwe AI Functies ---
+function logMood(mood, emoji) {
+    const feedbackDiv = document.getElementById('mood-feedback');
+    feedbackDiv.innerHTML = `<p class="text-sm text-gray-300 mt-4">Je voelt je ${mood.toLowerCase()} ${emoji}.</p>
+                             <button onclick="generateMoodTip('${mood}')" class="mt-2 text-sm text-sky-400 hover:underline">✨ Krijg een tip van de AI</button>`;
+}
+
+async function generateMoodTip(mood) {
+    openModal('ai-tip-modal');
+    const loader = document.getElementById('ai-tip-loader');
+    const content = document.getElementById('ai-tip-content');
+    loader.style.display = 'block';
+    content.style.display = 'none';
+
+    const prompt = `Ik voel me '${mood}'. Ik heb niet-aangeboren hersenletsel (NAH). Geef me één simpele, zachte en direct uitvoerbare tip om mijn welzijn te verbeteren. Houd het laagdrempelig en prikkelarm. Spreek me direct aan.`;
+    const tip = await callGemini(prompt);
+
+    content.innerHTML = `<p class="text-center text-gray-700">${tip}</p>`;
+    loader.style.display = 'none';
+    content.style.display = 'block';
+}
+
+async function getAIKnowledgeAnswer() {
+    const input = document.getElementById('kennis-input');
+    const question = input.value.trim();
+    if (question === '') return;
+
+    openModal('ai-kennis-modal');
+    const loader = document.getElementById('ai-kennis-loader');
+    const content = document.getElementById('ai-kennis-content');
+    loader.classList.remove('hidden');
+    content.innerHTML = '';
+
+    const prompt = `Je bent een behulpzame assistent voor mensen met niet-aangeboren hersenletsel (NAH) en hun families. Beantwoord de volgende vraag in eenvoudige, duidelijke en geruststellende taal. Houd het antwoord kort en gebruik, indien mogelijk, opsommingstekens. Vraag: "${question}"`;
+    const answer = await callGemini(prompt);
+
+    loader.classList.add('hidden');
+    content.innerHTML = `<p class="text-gray-700">${answer.replace(/\n/g, '<br>')}</p>`;
+}
+
+
+// --- Modal Functies ---
+function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+
+</script>
 </body>
 </html>
