@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAHpp - Geïntegreerd Zorgplatform</title>
+    <title>PMP - Geïntegreerd Zorgplatform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,11 +40,10 @@
 </head>
 <body class="bg-primary-dark text-text-light">
 
-    <!-- Inlogscherm -->
     <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center p-4">
         <div class="w-full max-w-md text-center">
             <svg class="w-20 h-20 mx-auto mb-4 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-            <h1 class="text-5xl font-bold text-accent-gold mb-2 logo-3d">NAHpp</h1>
+            <h1 class="text-5xl font-bold text-accent-gold mb-2 logo-3d">PMP</h1>
             <p class="text-gray-300 mb-10">Jouw persoonlijke zorg-ecosysteem.</p>
             <div class="space-y-4">
                 <h2 class="text-lg font-semibold text-gray-200">Wie gebruikt de app?</h2>
@@ -59,14 +58,12 @@
         </div>
     </div>
 
-    <!-- Schermen voor Pitch Decks -->
     <div id="investor-pitch-screen" class="hidden"></div>
     <div id="insurer-pitch-screen" class="hidden"></div>
 
-    <!-- Hoofd App Scherm -->
     <div id="app-screen" class="hidden">
         <header class="bg-primary-dark/80 backdrop-blur-sm shadow-lg p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
-            <h1 class="text-2xl font-bold text-accent-gold logo-3d">NAHpp</h1>
+            <h1 class="text-2xl font-bold text-accent-gold logo-3d">PMP</h1>
             <div>
                 <span id="role-indicator" class="text-sm font-semibold px-3 py-1 rounded-full"></span>
                 <button onclick="logout()" class="ml-2 text-sm text-gray-400 hover:text-white">Uitloggen</button>
@@ -75,7 +72,6 @@
         <main id="main-content" class="p-4 md:p-6 space-y-6"></main>
     </div>
 
-    <!-- Modals -->
     <div id="ai-summary-modal" class="modal"></div>
     <div id="action-plan-modal" class="modal"></div>
     <div id="ai-logopedist-modal" class="modal"></div>
@@ -118,7 +114,7 @@ function resetState() {
 // --- Gemini API Helper ---
 async function callGemini(prompt, retries = 3, delay = 1000) {
     const apiKey = ""; // Left empty as per instructions
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
     const payload = { contents: [{ parts: [{ text: prompt }] }] };
 
     for (let i = 0; i < retries; i++) {
@@ -156,7 +152,7 @@ async function callGemini(prompt, retries = 3, delay = 1000) {
 const templates = {
     investorPitch: `
         <header class="bg-primary-dark/80 backdrop-blur-sm shadow-lg p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
-            <h1 class="text-2xl font-bold text-accent-gold">NAHpp: De Investering</h1>
+            <h1 class="text-2xl font-bold text-accent-gold">PMP: De Investering</h1>
             <button onclick="showLoginScreen()" class="text-sm text-gray-300 hover:text-white">&larr; Terug</button>
         </header>
         <main class="p-4 md:p-8 max-w-4xl mx-auto">
@@ -165,18 +161,18 @@ const templates = {
                 <p class="text-lg text-gray-300 mt-2">Gedreven door ervaring, gevalideerd door analyse, gebouwd voor impact.</p>
             </div>
             <div class="pitch-section">
-                <h3 class="text-2xl font-bold mb-4 title-gold">Het Verhaal Achter NAHpp</h3>
+                <h3 class="text-2xl font-bold mb-4 title-gold">Het Verhaal Achter PMP</h3>
                 <div class="card p-6">
                     <p class="mb-4">Mijn naam is Paul Evers. Op <strong>21-02-2012</strong>, toen ik 21 was, veranderde een aanrijding met een vrachtwagen mijn leven. Na een maand coma was de diagnose Niet-Aangeboren Hersenletsel (NAH). De eerste 12 jaar leefde ik met een masker op, gedreven door de gedachte: 'Ik leef nog, als ik doe wat ik altijd deed, komt alles goed'. Ik overbelastte mijn hersenen constant, in een poging mijn oude leven vast te houden.</p>
                     <p class="mb-4">Maar na 12 jaar kwam de onvermijdelijke klap van de realiteit. Er ontstond kortsluiting. Ik kon niets meer, geen mens meer zien, niet meer werken. Toen pas begon de echte, diepgaande analyse. Met 16 jaar werkervaring in de zorg en een brein dat alles overdenkt, heb ik elk knelpunt in het zorgsysteem ontleed.</p>
-                    <p class="font-semibold text-emerald-300">Mijn conclusie: het beschadigde deel in het brein herstelt misschien niet, maar met de technologie van nu kunnen we een leven creëren met minder stress, minder conflicten en meer begrip. Die oplossing is NAHpp.</p>
+                    <p class="font-semibold text-emerald-300">Mijn conclusie: het beschadigde deel in het brein herstelt misschien niet, maar met de technologie van nu kunnen we een leven creëren met minder stress, minder conflicten en meer begrip. Die oplossing is PMP.</p>
                 </div>
             </div>
             <div class="pitch-section">
                 <h3 class="text-2xl font-bold mb-4 title-gold">Gewenste Fundamentele Partners</h3>
                 <div class="card p-6 mb-6">
                     <h4 class="text-xl font-bold text-gray-100 mb-2">Dr. Peter Nouwens - De Strategische Visionair</h4>
-                    <p class="mb-4 text-gray-300">Als vader van mijn beste vriend en mijn voetbaltrainer op jonge leeftijd, was Dr. Peter Nouwens de persoon die mijn passie voor de zorg aanwakkerde. Zijn carrière is de belichaming van de strategische en wetenschappelijke ruggengraat die NAHpp nodig heeft. Hij combineert diepgaande kennis met bewezen leiderschap in het transformeren van de zorg, wat essentieel is om NAHpp op nationaal niveau te implementeren.</p>
+                    <p class="mb-4 text-gray-300">Als vader van mijn beste vriend en mijn voetbaltrainer op jonge leeftijd, was Dr. Peter Nouwens de persoon die mijn passie voor de zorg aanwakkerde. Zijn carrière is de belichaming van de strategische en wetenschappelijke ruggengraat die PMP nodig heeft. Hij combineert diepgaande kennis met bewezen leiderschap in het transformeren van de zorg, wat essentieel is om PMP op nationaal niveau te implementeren.</p>
                     <ul class="list-disc list-inside space-y-1 text-sm text-gray-300">
                         <li><strong>Directe NAH-Expertise:</strong> Als initiatiefnemer van <strong>Support4Life</strong> begrijpt hij de cruciale fase na revalidatie.</li>
                         <li><strong>Wetenschappelijke Onderbouwing:</strong> Zijn promotieonderzoek aan <strong>Universiteit van Tilburg (Tranzo)</strong> levert de analytische diepgang.</li>
@@ -185,18 +181,18 @@ const templates = {
                 </div>
                 <div class="card p-6">
                     <h4 class="text-xl font-bold text-gray-100 mb-2">Marc van Bekhoven - De Praktische Implementator</h4>
-                    <p class="mb-4 text-gray-300">Waar Dr. Nouwens de strategische lijnen uitzet, is Marc van Bekhoven de meester van de praktische uitvoering. Met zijn initiatief <strong>Het Houvast</strong> heeft hij een revolutionair model gecreëerd dat perfect aansluit op de kernfilosofie van NAHpp: de zorg komt naar de cliënt, niet andersom. Hij levert het bewijs dat complexe zorg in de eigen, vertrouwde omgeving kan leiden tot een hogere kwaliteit van leven en meer zelfstandigheid.</p>
+                    <p class="mb-4 text-gray-300">Waar Dr. Nouwens de strategische lijnen uitzet, is Marc van Bekhoven de meester van de praktische uitvoering. Met zijn initiatief <strong>Het Houvast</strong> heeft hij een revolutionair model gecreëerd dat perfect aansluit op de kernfilosofie van PMP: de zorg komt naar de cliënt, niet andersom. Hij levert het bewijs dat complexe zorg in de eigen, vertrouwde omgeving kan leiden tot een hogere kwaliteit van leven en meer zelfstandigheid.</p>
                      <ul class="list-disc list-inside space-y-1 text-sm text-gray-300">
-                        <li><strong>Expert in Thuis-ondersteuning:</strong> Hij heeft bewezen dat zelfs cliënten met een hoge zorgzwaarte succesvol zelfstandig kunnen wonen.</li>
-                        <li><strong>Cliënt-regie als Kern:</strong> Zijn model is gebouwd op de principes van eigen regie en maatwerk, wat NAHpp digitaal faciliteert.</li>
-                        <li><strong>Focus op "Gewoon Leven":</strong> Marc's werk is gericht op het normaliseren van het leven, een cruciaal doel voor elke NAHpp-gebruiker.</li>
+                         <li><strong>Expert in Thuis-ondersteuning:</strong> Hij heeft bewezen dat zelfs cliënten met een hoge zorgzwaarte succesvol zelfstandig kunnen wonen.</li>
+                         <li><strong>Cliënt-regie als Kern:</strong> Zijn model is gebouwd op de principes van eigen regie en maatwerk, wat PMP digitaal faciliteert.</li>
+                         <li><strong>Focus op "Gewoon Leven":</strong> Marc's werk is gericht op het normaliseren van het leven, een cruciaal doel voor elke PMP-gebruiker.</li>
                     </ul>
                 </div>
             </div>
             <div class="pitch-section">
                 <h3 class="text-2xl font-bold mb-4 title-gold">Oprichter & Contact</h3>
                  <div class="card p-6">
-                    <p class="mb-4 text-gray-300">Momenteel ben ik, <strong>Paul Evers</strong>, de enige die aan NAHpp werkt. Ik ben nu op zoek naar de juiste partners om deze visie te realiseren.</p>
+                    <p class="mb-4 text-gray-300">Momenteel ben ik, <strong>Paul Evers</strong>, de enige die aan PMP werkt. Ik ben nu op zoek naar de juiste partners om deze visie te realiseren.</p>
                     <p class="font-semibold text-gray-200">Neem contact op om deze kans te bespreken:</p>
                     <ul class="mt-2 space-y-2">
                         <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg><a href="mailto:phmevers91@gmail.com" class="text-sky-400 hover:underline">phmevers91@gmail.com</a></li>
@@ -208,19 +204,18 @@ const templates = {
     `,
     insurerPitch: `
         <header class="bg-primary-dark/80 backdrop-blur-sm shadow-lg p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
-            <h1 class="text-2xl font-bold text-accent-gold">NAHpp: De Zorgtransitie</h1>
+            <h1 class="text-2xl font-bold text-accent-gold">PMP: De Zorgtransitie</h1>
             <button onclick="showLoginScreen()" class="text-sm text-gray-300 hover:text-white">&larr; Terug</button>
         </header>
         <main class="p-4 md:p-8 max-w-4xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold title-gold">Van Zorgkosten naar Zorginvestering</h2>
-                <p class="text-lg text-gray-300 mt-2">Hoe NAHpp verspilling elimineert en waarde maximaliseert.</p>
+                <p class="text-lg text-gray-300 mt-2">Hoe PMP verspilling elimineert en waarde maximaliseert.</p>
             </div>
             <div class="pitch-section">
                 <h3 class="text-2xl font-bold mb-4 title-gold">De Oplossing: Transparantie met Smart Contracts</h3>
-                <p class="mb-6 text-gray-300">NAHpp gebruikt blockchain-technologie om het declaratieproces te revolutioneren. Dit elimineert de 'zwarte doos' van zorguitgaven en zorgt ervoor dat elke geïnvesteerde euro direct gekoppeld is aan een meetbaar resultaat.</p>
+                <p class="mb-6 text-gray-300">PMP gebruikt blockchain-technologie om het declaratieproces te revolutioneren. Dit elimineert de 'zwarte doos' van zorguitgaven en zorgt ervoor dat elke geïnvesteerde euro direct gekoppeld is aan een meetbaar resultaat.</p>
                 <div class="space-y-4">
-                    <!-- Stap 1 -->
                     <div class="flex items-center card p-4">
                         <div class="flex-shrink-0 bg-sky-500/20 text-sky-300 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl">1</div>
                         <div class="ml-4">
@@ -228,15 +223,13 @@ const templates = {
                             <p class="text-sm text-gray-400">Patiënt en zorgverlener stellen een meetbaar doel vast in de app, bv. "zelfstandig boodschappen doen".</p>
                         </div>
                     </div>
-                    <!-- Stap 2 -->
                     <div class="flex items-center card p-4">
                         <div class="flex-shrink-0 bg-sky-500/20 text-sky-300 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl">2</div>
                         <div class="ml-4">
                             <h4 class="font-bold">Automatische Verificatie</h4>
-                            <p class="text-sm text-gray-400">NAHpp registreert de voortgang via voltooide actiepunten. Bij het behalen van het doel wordt dit onveranderlijk vastgelegd.</p>
+                            <p class="text-sm text-gray-400">PMP registreert de voortgang via voltooide actiepunten. Bij het behalen van het doel wordt dit onveranderlijk vastgelegd.</p>
                         </div>
                     </div>
-                    <!-- Stap 3 -->
                     <div class="flex items-center card p-4">
                         <div class="flex-shrink-0 bg-sky-500/20 text-sky-300 rounded-full h-12 w-12 flex items-center justify-center font-bold text-xl">3</div>
                         <div class="ml-4">
@@ -261,8 +254,8 @@ const templates = {
         <div class="modal-content">
              <h2 class="text-2xl font-bold title-gold mb-4">✨ AI Samenvatting</h2>
              <div id="ai-summary-loader" class="text-center hidden">
-                <p>AI analyseert het gesprek...</p>
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
+                 <p>AI analyseert het gesprek...</p>
+                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
              </div>
              <div id="ai-summary-content" class="space-y-3"></div>
              <button onclick="closeModal('ai-summary-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
@@ -295,8 +288,8 @@ const templates = {
             </div>
             <div id="logopedist-feedback-container" class="hidden">
                  <div id="logopedist-loader" class="text-center">
-                    <p>AI analyseert je uitspraak...</p>
-                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mt-4"></div>
+                     <p>AI analyseert je uitspraak...</p>
+                     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mt-4"></div>
                  </div>
                  <div id="logopedist-feedback-content" class="hidden text-left bg-purple-50 p-4 rounded-lg"></div>
             </div>
@@ -307,8 +300,8 @@ const templates = {
         <div class="modal-content">
              <h2 class="text-2xl font-bold title-gold mb-4">✨ Een tip van de AI</h2>
              <div id="ai-tip-loader" class="text-center">
-                <p>AI denkt met je mee...</p>
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
+                 <p>AI denkt met je mee...</p>
+                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
              </div>
              <div id="ai-tip-content" class="hidden"></div>
              <button onclick="closeModal('ai-tip-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
@@ -318,8 +311,8 @@ const templates = {
         <div class="modal-content">
              <h2 class="text-2xl font-bold title-gold mb-4">✨ AI Kennisbank</h2>
              <div id="ai-kennis-loader" class="text-center hidden">
-                <p>AI zoekt naar een antwoord...</p>
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
+                 <p>AI zoekt naar een antwoord...</p>
+                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-gold mx-auto mt-4"></div>
              </div>
              <div id="ai-kennis-content"></div>
              <button onclick="closeModal('ai-kennis-modal')" class="mt-4 w-full bg-gray-500 text-white font-bold py-2 px-4 rounded-lg">Sluiten</button>
@@ -727,7 +720,7 @@ async function recordAndGetFeedback() {
 function logMood(mood, emoji) {
     const feedbackDiv = document.getElementById('mood-feedback');
     feedbackDiv.innerHTML = `<p class="text-sm text-gray-300 mt-4">Je voelt je ${mood.toLowerCase()} ${emoji}.</p>
-                             <button onclick="generateMoodTip('${mood}')" class="mt-2 text-sm text-sky-400 hover:underline">✨ Krijg een tip van de AI</button>`;
+                                 <button onclick="generateMoodTip('${mood}')" class="mt-2 text-sm text-sky-400 hover:underline">✨ Krijg een tip van de AI</button>`;
 }
 
 async function generateMoodTip(mood) {
