@@ -6,15 +6,15 @@
     <title data-lang-key="site_title">AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer en test je kennis met de AI Quiz." data-lang-key="site_description">
-    <meta name="keywords" content="AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, Logo Generator, Avatar Maker" data-lang-key="site_keywords">
+    <meta name="description" content="AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis met de AI Quiz." data-lang-key="site_description">
+    <meta name="keywords" content="AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, Logo Generator, Avatar Maker, Verhaal Generator, Beeldgenerator, Gemini API" data-lang-key="site_keywords">
     <meta name="author" content="aileer.nl">
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.aileer.nl/">
     <meta property="og:title" content="AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie" data-lang-key="og_title">
-    <meta property="og:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer en test je kennis." data-lang-key="og_description">
+    <meta property="og:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis." data-lang-key="og_description">
     <meta property="og:image" content="https://placehold.co/1200x630/0f172a/7c3aed?text=AI-Leer.nl">
 
     <!-- Twitter Meta Tags -->
@@ -22,7 +22,7 @@
     <meta property="twitter:domain" content="aileer.nl">
     <meta property="twitter:url" content="https://www.aileer.nl/">
     <meta name="twitter:title" content="AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie" data-lang-key="twitter_title">
-    <meta name="twitter:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer en test je kennis." data-lang-key="twitter_description">
+    <meta name="twitter:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis." data-lang-key="twitter_description">
     <meta name="twitter:image" content="https://placehold.co/1200x630/0f172a/7c3aed?text=AI-Leer.nl">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,8 +61,8 @@
         .card { background-color: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(55, 65, 81, 0.5); }
         .card:hover { border-color: #4f46e5; }
         .label-text { display: block; margin-bottom: 0.75rem; font-weight: 500; color: #D1D5DB; }
-        .text-input { width: 100%; background-color: #1e293b; border: 1px solid #334155; color: #E5E7EB; border-radius: 0.5rem; padding: 0.75rem 1rem; }
-        .text-input:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px #3730a3; }
+        .text-input, .text-area { width: 100%; background-color: #1e293b; border: 1px solid #334155; color: #E5E7EB; border-radius: 0.5rem; padding: 0.75rem 1rem; }
+        .text-input:focus, .text-area:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px #3730a3; }
         .quiz-option { transition: all 0.2s ease-in-out; }
         .quiz-option.correct { background-color: #166534 !important; border-color: #22c55e !important; }
         .quiz-option.incorrect { background-color: #991b1b !important; border-color: #ef4444 !important; }
@@ -75,6 +75,27 @@
         .prompt-tool.active { display: block; }
         .magic-btn { transition: all 0.2s ease; border: 1px solid #4B5563; }
         .magic-btn.active { background-color: #4f46e5; border-color: #818cf8; color: white; }
+        .gemini-btn:disabled, .story-btn:disabled, .preview-btn:disabled { cursor: not-allowed; background-color: #334155; }
+        .prompt-output-box { box-shadow: 0 0 15px rgba(79, 70, 229, 0.3); }
+
+        /* Tooltip styles */
+        .tooltip-container { position: relative; display: inline-block; }
+        .tooltip-icon { cursor: pointer; }
+        .tooltip-text { visibility: hidden; width: 220px; background-color: #1f2937; color: #fff; text-align: center; border-radius: 6px; padding: 8px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -110px; opacity: 0; transition: opacity 0.3s; font-size: 0.875rem; line-height: 1.25rem; }
+        .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+        /* Advanced options toggle switch */
+        .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #374151; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #4f46e5; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Image Preview Modal */
+        #preview-modal.hidden { display: none; }
+        .loader { width: 48px; height: 48px; border: 5px solid #FFF; border-bottom-color: #4f46e5; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-slate-950 text-gray-200">
@@ -183,13 +204,14 @@
                     <button class="prompt-tab" data-target="tool-avatar" data-lang-key="tab_avatar">Avatar Maker</button>
                     <button class="prompt-tab" data-target="tool-coloring" data-lang-key="tab_coloring">Kleurplaat Creator</button>
                     <button class="prompt-tab" data-target="tool-photo" data-lang-key="tab_photo">Fotomaker</button>
+                    <button class="prompt-tab" data-target="tool-story" data-lang-key="tab_story">Verhaal Generator</button>
                 </div>
 
                 <!-- Shared Magic Panel -->
                 <div class="card mb-8 p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
                         <div>
-                             <label class="label-text" for="magic-subject" data-lang-key="magic_subject_label">Kies een Onderwerp voor Inspiratie</label>
+                             <label class="label-text" for="magic-subject" data-lang-key="magic_subject_label">1. Kies een Onderwerp voor Inspiratie</label>
                             <select id="magic-subject" class="text-input">
                                 <option value="animals" data-lang-key="subject_animals">Dieren</option>
                                 <option value="fantasy" data-lang-key="subject_fantasy">Fantasie</option>
@@ -197,145 +219,122 @@
                                 <option value="tech" data-lang-key="subject_tech">Technologie</option>
                             </select>
                         </div>
-                        <div class="grid grid-cols-3 gap-2">
-                             <button class="magic-btn auto-btn bg-slate-700 text-white p-3 rounded-lg font-semibold hover:bg-slate-600" data-type="auto" data-lang-key="btn_auto">Automatisch</button>
-                            <button class="magic-btn fun-btn bg-slate-700 text-white p-3 rounded-lg font-semibold hover:bg-slate-600" data-type="fun" data-lang-key="btn_fun">Fun</button>
-                            <button class="magic-btn brand-btn bg-slate-700 text-white p-3 rounded-lg font-semibold hover:bg-slate-600" data-lang-key="btn_brand">AILeer</button>
+                        <div class="grid grid-cols-2 gap-2">
+                             <div class="relative">
+                                 <button class="magic-btn auto-btn w-full bg-slate-700 text-white p-3 rounded-lg font-semibold hover:bg-slate-600 flex justify-center items-center gap-2" data-type="auto">
+                                     <span data-lang-key="btn_auto">Automatisch</span>
+                                     <div class="tooltip-container">
+                                        <svg class="tooltip-icon w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                        <span class="tooltip-text" data-lang-key="tooltip_auto">Vult de velden met een willekeurig, passend idee.</span>
+                                     </div>
+                                 </button>
+                             </div>
+                             <div class="relative">
+                                <button class="magic-btn fun-btn w-full bg-slate-700 text-white p-3 rounded-lg font-semibold hover:bg-slate-600 flex justify-center items-center gap-2" data-type="fun">
+                                    <span data-lang-key="btn_fun">Fun</span>
+                                    <div class="tooltip-container">
+                                        <svg class="tooltip-icon w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                        <span class="tooltip-text" data-lang-key="tooltip_fun">Vult de velden met een willekeurig, grappig idee.</span>
+                                     </div>
+                                </button>
+                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Logo Generator -->
-                <div id="tool-logo" class="prompt-tool active">
-                    <div class="card p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="logo-inputs">
-                            <div>
-                                <label class="label-text" for="logo-name" data-lang-key="logo_name">Bedrijfsnaam</label>
-                                <input type="text" id="logo-name" class="text-input" placeholder="bv. EcoBloom">
-                            </div>
-                            <div>
-                                <label class="label-text" for="logo-style" data-lang-key="logo_style">Stijl</label>
-                                <select id="logo-style" class="text-input">
-                                    <option value="minimalist vector" data-lang-key="style_minimalist">Minimalistisch</option>
-                                    <option value="vintage, emblem style" data-lang-key="style_vintage">Vintage</option>
-                                    <option value="modern, geometric" data-lang-key="style_modern">Modern</option>
-                                    <option value="cute mascot" data-lang-key="style_mascot">Mascotte</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="label-text" for="logo-object" data-lang-key="logo_object">Object / Symbool</label>
-                                <input type="text" id="logo-object" class="text-input" placeholder="bv. een blad, een leeuw">
-                            </div>
+                     <hr class="border-slate-700 my-6">
+                     <div>
+                        <label class="label-text" for="gemini-input" data-lang-key="gemini_label">2. Of vraag Gemini om inspiratie ✨</label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                           <input type="text" id="gemini-input" class="text-input flex-grow" placeholder="bv. een kat in de ruimte, een bos in de herfst" data-lang-key="gemini_placeholder">
+                           <button id="gemini-btn" class="gemini-btn bg-purple-600 text-white p-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full sm:w-auto">
+                                <span id="gemini-btn-text" data-lang-key="gemini_button">Inspireer Mij</span>
+                                <span id="gemini-btn-loading" class="hidden" data-lang-key="gemini_loading">Laden...</span>
+                           </button>
                         </div>
-                        <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                            <h3 class="font-semibold text-white" data-lang-key="generated_prompt">Jouw gegenereerde prompt:</h3>
-                            <p id="logo-prompt-output" class="mt-2 text-gray-300 min-h-[40px]"></p>
-                            <div class="mt-4 flex flex-wrap gap-4">
-                                <button class="copy-btn px-5 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition" data-target="logo-prompt-output" data-lang-key="btn_copy">Kopieer</button>
-                                <button class="copy-create-btn px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition" data-target="logo-prompt-output" data-lang-key="btn_copy_create">Kopieer + Maak</button>
-                                <span class="copy-feedback hidden text-green-400 items-center" data-lang-key="feedback_copied">Gekopieerd!</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Avatar Maker -->
-                <div id="tool-avatar" class="prompt-tool">
-                     <div class="card p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="avatar-inputs">
-                           <div>
-                                <label class="label-text" for="avatar-style" data-lang-key="avatar_style">Stijl</label>
-                                <select id="avatar-style" class="text-input">
-                                    <option value="cartoon style" data-lang-key="style_cartoon">Cartoon</option>
-                                    <option value="anime style" data-lang-key="style_anime">Anime</option>
-                                    <option value="fantasy art" data-lang-key="style_fantasy">Fantasy</option>
-                                    <option value="sci-fi character" data-lang-key="style_scifi">Sci-Fi</option>
-                                </select>
-                            </div>
-                             <div>
-                                <label class="label-text" for="avatar-subject" data-lang-key="avatar_subject">Onderwerp</label>
-                                <input type="text" id="avatar-subject" class="text-input" placeholder="bv. man met zilver haar">
-                            </div>
-                             <div>
-                                <label class="label-text" for="avatar-details" data-lang-key="avatar_details">Details</label>
-                                <input type="text" id="avatar-details" class="text-input" placeholder="bv. koptelefoon, bril">
-                            </div>
-                        </div>
-                         <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                            <h3 class="font-semibold text-white" data-lang-key="generated_prompt">Jouw gegenereerde prompt:</h3>
-                            <p id="avatar-prompt-output" class="mt-2 text-gray-300 min-h-[40px]"></p>
-                            <div class="mt-4 flex flex-wrap gap-4">
-                                <button class="copy-btn px-5 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition" data-target="avatar-prompt-output" data-lang-key="btn_copy">Kopieer</button>
-                                <button class="copy-create-btn px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition" data-target="avatar-prompt-output" data-lang-key="btn_copy_create">Kopieer + Maak</button>
-                                <span class="copy-feedback hidden text-green-400 items-center" data-lang-key="feedback_copied">Gekopieerd!</span>
-                            </div>
-                        </div>
+                        <p id="gemini-error" class="text-red-400 text-sm mt-2 hidden"></p>
                     </div>
                 </div>
                 
-                <!-- Kleurplaat Creator -->
-                 <div id="tool-coloring" class="prompt-tool">
-                     <div class="card p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="coloring-inputs">
-                           <div>
-                                <label class="label-text" for="coloring-subject" data-lang-key="coloring_subject">Onderwerp</label>
-                                <input type="text" id="coloring-subject" class="text-input" placeholder="bv. een kasteel, een draak">
+                <!-- Tools Container -->
+                <div id="tools-container">
+                    <!-- Base structure for a tool -->
+                    <div id="tool-base" class="hidden">
+                         <div class="card p-6">
+                            <!-- inputs will be injected here -->
+                            <div class="tool-inputs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                            
+                            <!-- Advanced options will be injected here for relevant tools -->
+                            <div class="advanced-options-wrapper mt-4"></div>
+
+                            <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4 prompt-output-box">
+                                <h3 class="font-semibold text-white" data-lang-key="generated_prompt">Jouw gegenereerde prompt:</h3>
+                                <p class="tool-prompt-output mt-2 text-gray-300 min-h-[40px]"></p>
+                                <div class="mt-4 flex flex-wrap gap-4 items-center">
+                                    <button class="copy-btn px-5 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition" data-lang-key="btn_copy">Kopieer</button>
+                                    <button class="copy-create-btn px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition flex items-center gap-2">
+                                        <span data-lang-key="btn_copy_create">Kopieer + Maak</span>
+                                        <div class="tooltip-container">
+                                            <svg class="tooltip-icon w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                            <span class="tooltip-text" data-lang-key="tooltip_copy_create">Kopieert de prompt en opent de tool om de afbeelding te maken in een nieuw venster.</span>
+                                        </div>
+                                    </button>
+                                     <button class="preview-btn px-5 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition" data-lang-key="btn_preview">Genereer Preview</button>
+                                    <span class="copy-feedback hidden text-green-400 items-center" data-lang-key="feedback_copied">Gekopieerd!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Verhaal Generator (Special Case) -->
+                <div id="tool-story" class="prompt-tool">
+                    <div class="card p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                            <div>
+                                <label class="label-text" for="story-character" data-lang-key="story_character">Hoofdpersoon</label>
+                                <input type="text" id="story-character" class="text-input" placeholder="bv. een dappere ridder">
                             </div>
                             <div>
-                                <label class="label-text" for="coloring-complexity" data-lang-key="coloring_complexity">Complexiteit</label>
-                                <select id="coloring-complexity" class="text-input">
-                                    <option value="simple, for children" data-lang-key="complexity_simple">Simpel (voor kinderen)</option>
-                                    <option value="detailed, for adults" data-lang-key="complexity_detailed">Gedetailleerd (voor volwassenen)</option>
-                                </select>
+                                <label class="label-text" for="story-setting" data-lang-key="story_setting">Setting</label>
+                                <input type="text" id="story-setting" class="text-input" placeholder="bv. in een betoverd bos">
                             </div>
-                             <div>
-                                <label class="label-text" for="coloring-lines" data-lang-key="coloring_lines">Lijnstijl</label>
-                                <select id="coloring-lines" class="text-input">
-                                    <option value="thick outlines" data-lang-key="lines_thick">Dikke lijnen</option>
-                                    <option value="thin clean lines" data-lang-key="lines_thin">Dunne lijnen</option>
+                            <div>
+                                <label class="label-text" for="story-plot" data-lang-key="story_plot">Plot</label>
+                                <input type="text" id="story-plot" class="text-input" placeholder="bv. zoekt een verloren schat">
+                            </div>
+                            <div>
+                                <label class="label-text" for="story-style" data-lang-key="story_style">Stijl</label>
+                                <select id="story-style" class="text-input">
+                                    <option value="sprookje" data-lang-key="style_fairy_tale">Sprookje</option>
+                                    <option value="sciencefiction" data-lang-key="style_scifi">Sciencefiction</option>
+                                    <option value="mysterie" data-lang-key="style_mystery">Mysterie</option>
+                                    <option value="avontuur" data-lang-key="style_adventure">Avontuur</option>
                                 </select>
                             </div>
                         </div>
-                         <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                            <h3 class="font-semibold text-white" data-lang-key="generated_prompt">Jouw gegenereerde prompt:</h3>
-                            <p id="coloring-prompt-output" class="mt-2 text-gray-300 min-h-[40px]"></p>
-                            <div class="mt-4 flex flex-wrap gap-4">
-                                <button class="copy-btn px-5 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition" data-target="coloring-prompt-output" data-lang-key="btn_copy">Kopieer</button>
-                                <button class="copy-create-btn px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition" data-target="coloring-prompt-output" data-lang-key="btn_copy_create">Kopieer + Maak</button>
+                        <button id="generate-story-btn" class="story-btn w-full bg-purple-600 text-white p-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            <span id="story-btn-text" data-lang-key="story_button">Genereer Verhaal</span>
+                            <span id="story-btn-loading" class="hidden" data-lang-key="story_loading">Verhaal wordt geschreven...</span>
+                        </button>
+                        <p id="story-error" class="text-red-400 text-sm mt-2 hidden"></p>
+
+                        <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4 prompt-output-box">
+                            <h3 class="font-semibold text-white" data-lang-key="generated_story">Jouw gegenereerde verhaal:</h3>
+                            <div id="story-output" class="mt-2 text-gray-300 min-h-[150px] whitespace-pre-wrap"></div>
+                            <div class="mt-4 flex flex-wrap gap-4 items-center">
+                                <button class="copy-btn px-5 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition" data-target="story-output" data-lang-key="btn_copy">Kopieer Verhaal</button>
+                                <button id="story-copy-create-btn" class="copy-create-btn px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition flex items-center gap-2" data-target="story-output">
+                                     <span data-lang-key="btn_copy_create_image">Maak Beeld-Prompt + Creëer</span>
+                                     <div class="tooltip-container">
+                                        <svg class="tooltip-icon w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                        <span class="tooltip-text" data-lang-key="tooltip_story_create">Gebruikt AI om een beeld-prompt van het verhaal te maken, kopieert deze en opent de tool.</span>
+                                     </div>
+                                </button>
                                 <span class="copy-feedback hidden text-green-400 items-center" data-lang-key="feedback_copied">Gekopieerd!</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Fotomaker -->
-                <div id="tool-photo" class="prompt-tool">
-                    <div class="card p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="photo-inputs">
-                           <div>
-                                <label class="label-text" for="photo-subject" data-lang-key="photo_subject">Onderwerp</label>
-                                <input type="text" id="photo-subject" class="text-input" placeholder="bv. gouden retriever">
-                            </div>
-                            <div>
-                                <label class="label-text" for="photo-action" data-lang-key="photo_action">Actie</label>
-                                <input type="text" id="photo-action" class="text-input" placeholder="bv. vangt een frisbee">
-                            </div>
-                             <div>
-                                <label class="label-text" for="photo-setting" data-lang-key="photo_setting">Setting</label>
-                                <input type="text" id="photo-setting" class="text-input" placeholder="bv. op een zonnig strand">
-                            </div>
-                        </div>
-                         <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-                            <h3 class="font-semibold text-white" data-lang-key="generated_prompt">Jouw gegenereerde prompt:</h3>
-                            <p id="photo-prompt-output" class="mt-2 text-gray-300 min-h-[40px]"></p>
-                            <div class="mt-4 flex flex-wrap gap-4">
-                                <button class="copy-btn px-5 py-2 bg-slate-600 text-white font-semibold rounded-lg hover:bg-slate-700 transition" data-target="photo-prompt-output" data-lang-key="btn_copy">Kopieer</button>
-                                <button class="copy-create-btn px-5 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition" data-target="photo-prompt-output" data-lang-key="btn_copy_create">Kopieer + Maak</button>
-                                <span class="copy-feedback hidden text-green-400 items-center" data-lang-key="feedback_copied">Gekopieerd!</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -388,10 +387,14 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="news_title">Laatste AI Nieuws</h2>
-                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="news_subtitle">Blijf op de hoogte van de snel veranderende wereld van AI met de laatste updates.</p>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="news_subtitle">Blijf op de hoogte van de snel veranderende wereld van AI met de laatste updates van Bright.nl.</p>
                 </div>
-                <div id="rss-feed-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <p class="col-span-full text-center" data-lang-key="news_loading">Nieuws wordt geladen...</p>
+                <div class="card p-2 md:p-4">
+                    <!-- Feed.mikle.com widget start -->
+                    <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" pre-loader="true"></script>
+                    <!-- Dit is een voorbeeld widget. Je kan je eigen widget aanmaken op feed.mikle.com om de feed aan te passen. -->
+                    <div id="fw-feed-widget-1719213567142" data-id="1719213567142" data-url="https://www.bright.nl/onderwerpen/ai/feed" data-widget-type="responsive" data-height="800" data-background-color="rgba(15, 23, 42, 0)" data-font-color="#CBD5E1" data-link-font-color="#818CF8" data-scroll="true" data-container-height="800" data-description-font-size="1rem" data-font="Inter, sans-serif" data-title-font-size="1.125rem"></div>
+                    <!-- Feed.mikle.com widget end -->
                 </div>
             </div>
         </section>
@@ -404,17 +407,36 @@
         </div>
     </footer>
 
+    <!-- Image Preview Modal -->
+    <div id="preview-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-800 rounded-lg max-w-2xl w-full p-6 text-center relative">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-xl font-bold text-white mb-4" data-lang-key="preview_title">Afbeelding Preview</h3>
+            <div id="preview-content" class="min-h-[256px] flex items-center justify-center">
+                 <!-- Loader or Image will be shown here -->
+            </div>
+             <p id="preview-error" class="text-red-400 text-sm mt-2 hidden"></p>
+             <button id="share-image-btn" class="hidden w-full mt-4 bg-blue-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 transition flex items-center justify-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                <span data-lang-key="btn_share_image">Post de Afbeelding</span>
+            </button>
+        </div>
+    </div>
+
+
     <script>
-        // --- TRANSLATION SCRIPT ---
+        // --- TRANSLation SCRIPT ---
         const translations = {
             'nl': {
                 site_title: "AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie",
-                site_description: "AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer en test je kennis met de AI Quiz.",
-                site_keywords: "AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, Logo Generator, Avatar Maker",
+                site_description: "AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis met de AI Quiz.",
+                site_keywords: "AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, Logo Generator, Avatar Maker, Verhaal Generator, Beeldgenerator, Gemini API",
                 og_title: "AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie",
-                og_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer en test je kennis.",
+                og_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis.",
                 twitter_title: "AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie",
-                twitter_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer en test je kennis.",
+                twitter_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis.",
                 nav_what_is_ai: "Wat is AI?",
                 nav_for_whom: "Voor Wie?",
                 nav_prompt_builder: "Prompt Bouwer",
@@ -449,6 +471,7 @@
                 tab_avatar: "Avatar Maker",
                 tab_coloring: "Kleurplaat Creator",
                 tab_photo: "Fotomaker",
+                tab_story: "Verhaal Generator",
                 logo_name: "Bedrijfsnaam",
                 logo_style: "Stijl",
                 logo_object: "Object / Symbool",
@@ -477,6 +500,17 @@
                 photo_subject: "Onderwerp",
                 photo_action: "Actie",
                 photo_setting: "Setting",
+                story_character: "Hoofdpersoon",
+                story_setting: "Setting",
+                story_plot: "Plot",
+                story_style: "Stijl",
+                style_fairy_tale: "Sprookje",
+                style_mystery: "Mysterie",
+                style_adventure: "Avontuur",
+                story_button: "Genereer Verhaal",
+                story_loading: "Verhaal wordt geschreven...",
+                generated_story: "Jouw gegenereerde verhaal:",
+                btn_copy_create_image: "Maak Beeld-Prompt + Creëer",
                 quiz_title: "Test je AI Kennis",
                 quiz_subtitle: "Hoeveel weet jij over de wereld van Artificiële Intelligentie? Start de quiz en kom erachter!",
                 quiz_welcome: "Welkom bij de AI Kennisquiz!",
@@ -494,28 +528,44 @@
                 btn_share_x: "Deel op X",
                 share_text: "Ik heb net de AI Kennisquiz op aileer.nl gedaan en scoorde SCORE%! 🧠 Een geweldige site om meer over AI te leren. Check it out! @mcdropke #AI #ArtificieleIntelligentie",
                 news_title: "Laatste AI Nieuws",
-                news_subtitle: "Blijf op de hoogte van de snel veranderende wereld van AI met de laatste updates.",
-                news_loading: "Nieuws wordt geladen...",
-                news_error: "Kon het nieuws niet laden. Probeer het later opnieuw.",
-                news_tag: "Live Nieuws",
+                news_subtitle: "Blijf op de hoogte van de snel veranderende wereld van AI met de laatste updates van Bright.nl.",
                 footer_text: "© 2024 aileer.nl - Gemaakt om AI voor iedereen toegankelijk te maken.",
-                magic_subject_label: "Kies een Onderwerp voor Inspiratie",
+                magic_subject_label: "1. Kies een Onderwerp voor Inspiratie",
                 subject_animals: "Dieren",
                 subject_fantasy: "Fantasie",
                 subject_nature: "Natuur",
                 subject_tech: "Technologie",
                 btn_auto: "Automatisch",
                 btn_fun: "Fun",
-                btn_brand: "AILeer"
+                gemini_label: "2. Of vraag Gemini om inspiratie ✨",
+                gemini_placeholder: "bv. een kat in de ruimte, een bos in de herfst",
+                gemini_button: "Inspireer Mij",
+                gemini_loading: "Laden...",
+                gemini_error_text: "Oeps, er ging iets mis. Probeer het opnieuw.",
+                tooltip_auto: "Vult de velden met een willekeurig, passend idee.",
+                tooltip_fun: "Vult de velden met een willekeurig, grappig idee.",
+                tooltip_copy_create: "Kopieert de prompt en opent de tool om de afbeelding te maken in een nieuw venster.",
+                tooltip_story_create: "Gebruikt AI om een beeld-prompt van het verhaal te maken, kopieert deze en opent de tool.",
+                advanced_options: "Geavanceerde Opties",
+                camera_angle: "Cameraperspectief",
+                lighting: "Belichting",
+                artist_style: "Artiest Stijl",
+                aspect_ratio: "Beeldverhouding",
+                btn_preview: "Genereer Preview",
+                preview_title: "Afbeelding Preview",
+                preview_generating: "Bezig met genereren...",
+                preview_error: "Kon de preview niet genereren. Probeer het opnieuw.",
+                btn_share_image: "Post de Afbeelding",
+                share_image_text: "Gemaakt met de AI Prompt Bouwer op aileer.nl! ✨ @mcdropke #AIArt #AI"
             },
             'en': {
                 site_title: "AI Learn - Your Guide to the World of Artificial Intelligence",
-                site_description: "AI Learn is your starting point to learn everything about Artificial Intelligence. Discover the possibilities, use our unique Prompt Builder, and test your knowledge with the AI Quiz.",
-                site_keywords: "AI, Artificial Intelligence, Learning, Prompt Builder, AI Quiz, English, AI for beginners, AI applications, Logo Generator, Avatar Maker",
+                site_description: "AI Learn is your starting point to learn everything about Artificial Intelligence. Discover the possibilities, use our unique Prompt Builder with live image previews, and test your knowledge with the AI Quiz.",
+                site_keywords: "AI, Artificial Intelligence, Learning, Prompt Builder, AI Quiz, English, AI for beginners, AI applications, Logo Generator, Avatar Maker, Story Generator, Image Generator, Gemini API",
                 og_title: "AI Learn - Your Guide to the World of Artificial Intelligence",
-                og_description: "Discover the possibilities of AI, use our unique Prompt Builder, and test your knowledge.",
+                og_description: "Discover the possibilities of AI, use our unique Prompt Builder with live image previews, and test your knowledge.",
                 twitter_title: "AI Learn - Your Guide to the World of Artificial Intelligence",
-                twitter_description: "Discover the possibilities of AI, use our unique Prompt Builder, and test your knowledge.",
+                twitter_description: "Discover the possibilities of AI, use our unique Prompt Builder with live image previews, and test your knowledge.",
                 nav_what_is_ai: "What is AI?",
                 nav_for_whom: "For Whom?",
                 nav_prompt_builder: "Prompt Builder",
@@ -550,6 +600,7 @@
                 tab_avatar: "Avatar Maker",
                 tab_coloring: "Coloring Page Creator",
                 tab_photo: "Photo Maker",
+                tab_story: "Story Generator",
                 logo_name: "Company Name",
                 logo_style: "Style",
                 logo_object: "Object / Symbol",
@@ -578,6 +629,17 @@
                 photo_subject: "Subject",
                 photo_action: "Action",
                 photo_setting: "Setting",
+                story_character: "Main Character",
+                story_setting: "Setting",
+                story_plot: "Plot",
+                story_style: "Style",
+                style_fairy_tale: "Fairy Tale",
+                style_mystery: "Mystery",
+                style_adventure: "Adventure",
+                story_button: "Generate Story",
+                story_loading: "Writing story...",
+                generated_story: "Your generated story:",
+                btn_copy_create_image: "Make Image-Prompt + Create",
                 quiz_title: "Test Your AI Knowledge",
                 quiz_subtitle: "How much do you know about the world of Artificial Intelligence? Start the quiz and find out!",
                 quiz_welcome: "Welcome to the AI Knowledge Quiz!",
@@ -595,28 +657,44 @@
                 btn_share_x: "Share on X",
                 share_text: "I just took the AI Knowledge Quiz on aileer.nl and scored SCORE%%! 🧠 A great site to learn more about AI. Check it out! @mcdropke #AI #ArtificialIntelligence",
                 news_title: "Latest AI News",
-                news_subtitle: "Stay up to date with the rapidly changing world of AI with the latest updates.",
-                news_loading: "Loading news...",
-                news_error: "Could not load the news. Please try again later.",
-                news_tag: "Live News",
+                news_subtitle: "Stay up to date with the rapidly changing world of AI with the latest updates from Bright.nl.",
                 footer_text: "© 2024 aileer.nl - Made to make AI accessible for everyone.",
-                magic_subject_label: "Choose a Subject for Inspiration",
+                magic_subject_label: "1. Choose a Subject for Inspiration",
                 subject_animals: "Animals",
                 subject_fantasy: "Fantasy",
                 subject_nature: "Nature",
                 subject_tech: "Technology",
                 btn_auto: "Automatic",
                 btn_fun: "Fun",
-                btn_brand: "AILeer"
+                gemini_label: "2. Or ask Gemini for inspiration ✨",
+                gemini_placeholder: "e.g., a cat in space, an autumn forest",
+                gemini_button: "Inspire Me",
+                gemini_loading: "Loading...",
+                gemini_error_text: "Oops, something went wrong. Please try again.",
+                tooltip_auto: "Fills the fields with a random, suitable idea.",
+                tooltip_fun: "Fills the fields with a random, funny idea.",
+                tooltip_copy_create: "Copies the prompt and opens the tool to create the image in a new window.",
+                tooltip_story_create: "Uses AI to create an image prompt from the story, copies it, and opens the tool.",
+                advanced_options: "Advanced Options",
+                camera_angle: "Camera Angle",
+                lighting: "Lighting",
+                artist_style: "Artist Style",
+                aspect_ratio: "Aspect Ratio",
+                btn_preview: "Generate Preview",
+                preview_title: "Image Preview",
+                preview_generating: "Generating...",
+                preview_error: "Could not generate preview. Please try again.",
+                btn_share_image: "Post the Picture",
+                share_image_text: "Created with the AI Prompt Builder on aileer.nl! ✨ @mcdropke #AIArt #AI"
             },
             'de': {
                 site_title: "KI Lernen - Ihr Leitfaden in die Welt der Künstlichen Intelligenz",
-                site_description: "KI Lernen ist Ihr Ausgangspunkt, um alles über Künstliche Intelligenz zu lernen. Entdecken Sie die Möglichkeiten, nutzen Sie unseren einzigartigen Prompt-Builder und testen Sie Ihr Wissen mit dem KI-Quiz.",
-                site_keywords: "KI, Künstliche Intelligenz, Lernen, Prompt Builder, KI Quiz, Deutsch, KI-Anwendungen, Logo Generator, Avatar Ersteller",
+                site_description: "KI Lernen ist Ihr Ausgangspunkt, um alles über Künstliche Intelligenz zu lernen. Entdecken Sie die Möglichkeiten, nutzen Sie unseren einzigartigen Prompt-Builder mit Live-Bildvorschauen und testen Sie Ihr Wissen mit dem KI-Quiz.",
+                site_keywords: "KI, Künstliche Intelligenz, Lernen, Prompt Builder, KI Quiz, Deutsch, KI-Anwendungen, Logo Generator, Avatar Ersteller, Story Generator, Bildgenerator, Gemini API",
                 og_title: "KI Lernen - Ihr Leitfaden in die Welt der Künstlichen Intelligenz",
-                og_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder und testen Sie Ihr Wissen.",
+                og_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder mit Live-Bildvorschauen und testen Sie Ihr Wissen.",
                 twitter_title: "KI Lernen - Ihr Leitfaden in die Welt der Künstlichen Intelligenz",
-                twitter_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder und testen Sie Ihr Wissen.",
+                twitter_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder mit Live-Bildvorschauen und testen Sie Ihr Wissen.",
                 nav_what_is_ai: "Was ist KI?",
                 nav_for_whom: "Für Wen?",
                 nav_prompt_builder: "Prompt-Builder",
@@ -651,6 +729,7 @@
                 tab_avatar: "Avatar-Ersteller",
                 tab_coloring: "Malvorlagen-Ersteller",
                 tab_photo: "Foto-Ersteller",
+                tab_story: "Geschichten-Generator",
                 logo_name: "Firmenname",
                 logo_style: "Stil",
                 logo_object: "Objekt / Symbol",
@@ -679,6 +758,17 @@
                 photo_subject: "Motiv",
                 photo_action: "Aktion",
                 photo_setting: "Szenerie",
+                story_character: "Hauptfigur",
+                story_setting: "Schauplatz",
+                story_plot: "Handlung",
+                story_style: "Stil",
+                style_fairy_tale: "Märchen",
+                style_mystery: "Krimi",
+                style_adventure: "Abenteuer",
+                story_button: "Geschichte generieren",
+                story_loading: "Geschichte wird geschrieben...",
+                generated_story: "Ihre generierte Geschichte:",
+                btn_copy_create_image: "Bild-Prompt erstellen + Erzeugen",
                 quiz_title: "Testen Sie Ihr KI-Wissen",
                 quiz_subtitle: "Wie viel wissen Sie über die Welt der Künstlichen Intelligenz? Starten Sie das Quiz und finden Sie es heraus!",
                 quiz_welcome: "Willkommen beim KI-Wissensquiz!",
@@ -696,19 +786,35 @@
                 btn_share_x: "Auf X teilen",
                 share_text: "Ich habe gerade das KI-Wissensquiz auf aileer.nl gemacht und SCORE%% erreicht! 🧠 Eine tolle Seite, um mehr über KI zu lernen. Schaut es euch an! @mcdropke #KI #KünstlicheIntelligenz",
                 news_title: "Neueste KI-Nachrichten",
-                news_subtitle: "Bleiben Sie mit den neuesten Updates über die sich schnell verändernde Welt der KI auf dem Laufenden.",
-                news_loading: "Nachrichten werden geladen...",
-                news_error: "Nachrichten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
-                news_tag: "Live-Nachrichten",
+                news_subtitle: "Bleiben Sie mit den neuesten Updates von Bright.nl über die sich schnell verändernde Welt der KI auf dem Laufenden.",
                 footer_text: "© 2024 aileer.nl - Gemacht, um KI für alle zugänglich zu machen.",
-                magic_subject_label: "Wählen Sie ein Thema für Inspiration",
+                magic_subject_label: "1. Wählen Sie ein Thema für Inspiration",
                 subject_animals: "Tiere",
                 subject_fantasy: "Fantasie",
                 subject_nature: "Natur",
                 subject_tech: "Technologie",
                 btn_auto: "Automatisch",
                 btn_fun: "Spaß",
-                btn_brand: "AILeer"
+                gemini_label: "2. Oder fragen Sie Gemini nach Inspiration ✨",
+                gemini_placeholder: "z.B. eine Katze im Weltraum, ein Herbstwald",
+                gemini_button: "Inspiriere mich",
+                gemini_loading: "Laden...",
+                gemini_error_text: "Hoppla, etwas ist schiefgegangen. Bitte versuchen Sie es erneut.",
+                tooltip_auto: "Füllt die Felder mit einer zufälligen, passenden Idee.",
+                tooltip_fun: "Füllt die Felder mit einer zufälligen, lustigen Idee.",
+                tooltip_copy_create: "Kopiert den Prompt und öffnet das Werkzeug, um das Bild in einem neuen Fenster zu erstellen.",
+                tooltip_story_create: "Verwendet KI, um aus der Geschichte einen Bild-Prompt zu erstellen, kopiert ihn und öffnet das Werkzeug.",
+                advanced_options: "Erweiterte Optionen",
+                camera_angle: "Kamerawinkel",
+                lighting: "Beleuchtung",
+                artist_style: "Künstlerstil",
+                aspect_ratio: "Seitenverhältnis",
+                btn_preview: "Vorschau generieren",
+                preview_title: "Bildvorschau",
+                preview_generating: "Wird generiert...",
+                preview_error: "Vorschau konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
+                btn_share_image: "Bild posten",
+                share_image_text: "Erstellt mit dem KI-Prompt-Builder auf aileer.nl! ✨ @mcdropke #AIArt #AI"
             }
         };
 
@@ -737,7 +843,7 @@
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
-            fetchNews(); 
+            // The Mikle widget will handle its own content, so we no longer need to call a news fetching function here.
         }
 
         document.getElementById('language-switcher').addEventListener('click', (e) => {
@@ -758,11 +864,9 @@
             pages.forEach(page => {
                 page.style.display = 'none';
             });
-            const activePage = document.getElementById(pageId);
+            const activePage = document.getElementById(pageId) || document.querySelector('.page');
             if (activePage) {
                 activePage.style.display = 'block';
-            } else {
-                document.getElementById('home').style.display = 'block';
             }
             
             navLinks.forEach(link => {
@@ -779,175 +883,344 @@
             });
         });
 
-        // --- LIVE RSS FEED SCRIPT ---
-        const rssFeeds = {
-            'nl': 'https://www.computable.nl/feeds/rss/ai.xml',
-            'en': 'https://www.technologyreview.com/feed/tag/artificial-intelligence/',
-            'de': 'https://www.heise.de/rss/ki-news-atom.xml'
+        // --- DYNAMIC TOOL BUILDER SCRIPT ---
+        const toolsData = {
+            'logo': {
+                inputs: [
+                    { id: 'logo-name', labelKey: 'logo_name', type: 'text', placeholder: 'bv. EcoBloom' },
+                    { id: 'logo-style', labelKey: 'logo_style', type: 'select', options: [
+                        { value: 'minimalist vector', key: 'style_minimalist' }, { value: 'vintage, emblem style', key: 'style_vintage' },
+                        { value: 'modern, geometric', key: 'style_modern' }, { value: 'cute mascot', key: 'style_mascot' }
+                    ]},
+                    { id: 'logo-object', labelKey: 'logo_object', type: 'text', placeholder: 'bv. een blad, een leeuw' }
+                ],
+                promptFn: function() {
+                    const name = document.getElementById('logo-name').value || 'EcoBloom';
+                    const style = document.getElementById('logo-style').value;
+                    const object = document.getElementById('logo-object').value || 'a leaf';
+                    return `${style} logo for a company named "${name}", featuring ${object}, clean vector lines, on a white background, professional design, high quality.`;
+                }
+            },
+            'avatar': {
+                 inputs: [
+                    { id: 'avatar-style', labelKey: 'avatar_style', type: 'select', options: [
+                        { value: 'cartoon style', key: 'style_cartoon' }, { value: 'anime style', key: 'style_anime' },
+                        { value: 'fantasy art', key: 'style_fantasy' }, { value: 'sci-fi character', key: 'style_scifi' }
+                    ]},
+                    { id: 'avatar-subject', labelKey: 'avatar_subject', type: 'text', placeholder: 'bv. man met zilver haar' },
+                    { id: 'avatar-details', labelKey: 'avatar_details', type: 'text', placeholder: 'bv. koptelefoon, bril' }
+                ],
+                advanced: true,
+                promptFn: function() {
+                    const style = document.getElementById('avatar-style').value;
+                    const subject = document.getElementById('avatar-subject').value || 'woman with silver hair';
+                    const details = document.getElementById('avatar-details').value || 'wearing headphones';
+                    let prompt = `${style} profile picture of a ${subject}, ${details}, vibrant colors, digital art, high detail, head and shoulders shot.`;
+                    return addAdvancedOptions(prompt, 'avatar');
+                }
+            },
+            'coloring': {
+                 inputs: [
+                    { id: 'coloring-subject', labelKey: 'coloring_subject', type: 'text', placeholder: 'bv. een kasteel, een draak' },
+                    { id: 'coloring-complexity', labelKey: 'coloring_complexity', type: 'select', options: [
+                        { value: 'simple, for children', key: 'complexity_simple' }, { value: 'detailed, for adults', key: 'complexity_detailed' }
+                    ]},
+                    { id: 'coloring-lines', labelKey: 'coloring_lines', type: 'select', options: [
+                        { value: 'thick outlines', key: 'lines_thick' }, { value: 'thin clean lines', key: 'lines_thin' }
+                    ]}
+                ],
+                promptFn: function() {
+                    const subject = document.getElementById('coloring-subject').value || 'a castle';
+                    const complexity = document.getElementById('coloring-complexity').value;
+                    const lines = document.getElementById('coloring-lines').value;
+                    return `Coloring book page, ${complexity}, featuring ${subject}, ${lines}, no shading, black and white only, clean vector art.`;
+                }
+            },
+            'photo': {
+                 inputs: [
+                    { id: 'photo-subject', labelKey: 'photo_subject', type: 'text', placeholder: 'bv. gouden retriever' },
+                    { id: 'photo-action', labelKey: 'photo_action', type: 'text', placeholder: 'bv. vangt een frisbee' },
+                    { id: 'photo-setting', labelKey: 'photo_setting', type: 'text', placeholder: 'bv. op een zonnig strand' }
+                ],
+                advanced: true,
+                promptFn: function() {
+                    const subject = document.getElementById('photo-subject').value || 'a golden retriever';
+                    const action = document.getElementById('photo-action').value || 'catching a frisbee';
+                    const setting = document.getElementById('photo-setting').value || 'on a sunny beach';
+                    let prompt = `Photorealistic image of ${subject} ${action}, ${setting}, action shot, DSLR camera, 85mm f/1.8 lens, shallow depth of field, golden hour lighting.`;
+                    return addAdvancedOptions(prompt, 'photo');
+                }
+            }
         };
 
-        async function fetchNews() {
-            const feedContainer = document.getElementById('rss-feed-container');
-            const rssUrl = rssFeeds[currentLang] || rssFeeds['en'];
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`;
-            
-            feedContainer.innerHTML = `<p class="col-span-full text-center">${translations[currentLang].news_loading}</p>`;
-            
-            try {
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-                const xmlString = data.contents;
-                
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlString, "application/xml");
-                const items = xmlDoc.querySelectorAll("item, entry");
-                
-                feedContainer.innerHTML = '';
-                
-                Array.from(items).slice(0, 6).forEach(item => {
-                    const title = item.querySelector("title").textContent;
-                    const linkEl = item.querySelector("link");
-                    const link = linkEl.href || linkEl.textContent;
-                    let description = (item.querySelector("description") || item.querySelector("summary") || item.querySelector("content")).textContent;
+        function buildTools() {
+            const container = document.getElementById('tools-container');
+            const base = document.getElementById('tool-base');
+
+            Object.keys(toolsData).forEach(toolKey => {
+                const toolInfo = toolsData[toolKey];
+                const toolClone = base.cloneNode(true);
+                toolClone.id = `tool-${toolKey}`;
+                toolClone.classList.add('prompt-tool');
+                toolClone.classList.remove('hidden');
+
+                const inputsContainer = toolClone.querySelector('.tool-inputs');
+                inputsContainer.id = `${toolKey}-inputs`;
+
+                toolInfo.inputs.forEach(inputInfo => {
+                    const div = document.createElement('div');
+                    const label = document.createElement('label');
+                    label.className = 'label-text';
+                    label.setAttribute('for', inputInfo.id);
+                    label.dataset.langKey = inputInfo.labelKey;
                     
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = description;
-                    description = (tempDiv.textContent || tempDiv.innerText || "").substring(0, 120) + '...';
-                    
-                    feedContainer.innerHTML += `
-                        <a href="${link}" target="_blank" rel="noopener noreferrer" class="block card p-6 rounded-xl overflow-hidden">
-                             <span class="text-sm text-indigo-400 font-semibold">${translations[currentLang].news_tag}</span>
-                             <h3 class="mt-2 text-lg font-bold text-white">${title}</h3>
-                             <p class="mt-3 text-gray-400 text-sm">${description}</p>
-                        </a>`;
+                    let inputEl;
+                    if (inputInfo.type === 'select') {
+                        inputEl = document.createElement('select');
+                        inputInfo.options.forEach(opt => {
+                            const option = document.createElement('option');
+                            option.value = opt.value;
+                            option.dataset.langKey = opt.key;
+                            inputEl.appendChild(option);
+                        });
+                    } else {
+                        inputEl = document.createElement('input');
+                        inputEl.type = 'text';
+                        inputEl.placeholder = inputInfo.placeholder;
+                    }
+                    inputEl.id = inputInfo.id;
+                    inputEl.className = 'text-input';
+
+                    div.appendChild(label);
+                    div.appendChild(inputEl);
+                    inputsContainer.appendChild(div);
                 });
 
-            } catch (error) {
-                console.error("Error fetching RSS feed:", error);
-                feedContainer.innerHTML = `<p class="col-span-full text-center text-red-400">${translations[currentLang].news_error}</p>`;
+                if (toolInfo.advanced) {
+                    const advWrapper = toolClone.querySelector('.advanced-options-wrapper');
+                    advWrapper.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <label class="label-text mb-0" data-lang-key="advanced_options">Geavanceerde Opties</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="${toolKey}-advanced-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div id="${toolKey}-advanced-fields" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+                            <div><label class="label-text" for="${toolKey}-camera" data-lang-key="camera_angle">Cameraperspectief</label><input type="text" id="${toolKey}-camera" class="text-input" placeholder="bv. close-up, drone shot"></div>
+                            <div><label class="label-text" for="${toolKey}-lighting" data-lang-key="lighting">Belichting</label><input type="text" id="${toolKey}-lighting" class="text-input" placeholder="bv. cinematic, neon"></div>
+                            <div><label class="label-text" for="${toolKey}-style" data-lang-key="artist_style">Artiest Stijl</label><input type="text" id="${toolKey}-style" class="text-input" placeholder="bv. in de stijl van Van Gogh"></div>
+                            <div><label class="label-text" for="${toolKey}-ar" data-lang-key="aspect_ratio">Beeldverhouding</label><input type="text" id="${toolKey}-ar" class="text-input" placeholder="bv. 16:9, 1:1"></div>
+                        </div>
+                    `;
+                }
+
+                const promptOutput = toolClone.querySelector('.tool-prompt-output');
+                promptOutput.id = `${toolKey}-prompt-output`;
+                toolClone.querySelector('.copy-btn').dataset.target = promptOutput.id;
+                toolClone.querySelector('.copy-create-btn').dataset.target = promptOutput.id;
+                toolClone.querySelector('.preview-btn').dataset.target = promptOutput.id;
+
+                container.appendChild(toolClone);
+            });
+            base.remove();
+        }
+        
+        function addAdvancedOptions(prompt, toolKey) {
+            if (document.getElementById(`${toolKey}-advanced-toggle`) && document.getElementById(`${toolKey}-advanced-toggle`).checked) {
+                const camera = document.getElementById(`${toolKey}-camera`).value;
+                const lighting = document.getElementById(`${toolKey}-lighting`).value;
+                const style = document.getElementById(`${toolKey}-style`).value;
+                const ar = document.getElementById(`${toolKey}-ar`).value;
+                if (camera) prompt += `, ${camera}`;
+                if (lighting) prompt += `, ${lighting} lighting`;
+                if (style) prompt += `, ${style}`;
+                if (ar) prompt += ` --ar ${ar}`;
             }
+            return prompt;
         }
 
-        // --- PROMPT BUILDER SCRIPT ---
-        const promptTabsContainer = document.getElementById('prompt-tabs');
-        const promptTabs = promptTabsContainer.querySelectorAll('.prompt-tab');
-        const promptTools = document.querySelectorAll('.prompt-tool');
+        function triggerActiveGenerator() {
+            const toolId = getCurrentToolId().replace('tool-', '');
+            if(toolsData[toolId]) {
+                let prompt = toolsData[toolId].promptFn();
+                document.getElementById(`${toolId}-prompt-output`).textContent = applyBranding(prompt);
+            }
+        }
+        
+        // --- PROMPT BUILDER SCRIPT (CONTINUED)---
         const affiliateLink = 'https://www.imagine.art/dashboard?a_aid=5b6db501';
-        let isBrandingActive = false;
-
+        
         const magicPrompts = {
             animals: {
-                auto: [
-                    { type: 'logo', name: 'Eagle Eye Inc.', object: 'een adelaar' }, { type: 'avatar', subject: 'een wijze vos', details: 'met een monokel' },
-                    { type: 'coloring', subject: 'een onderwaterwereld met dolfijnen en koraal' }, { type: 'photo', subject: 'een majestueuze leeuw', action: 'op een rots in de savanne', setting: 'tijdens zonsondergang' }
-                ],
-                fun: [
-                    { type: 'logo', name: 'Party Pigeons', object: 'een duif met een feesthoedje' }, { type: 'avatar', subject: 'een capibara', details: 'die relaxt in een heetwaterbron' },
-                    { type: 'coloring', subject: 'een groep eekhoorns die een theekransje houden' }, { type: 'photo', subject: 'een kat', action: 'die een DJ-set draait', setting: 'in een nachtclub' }
-                ]
+                auto: [ { type: 'logo', name: 'Eagle Eye Inc.', object: 'een adelaar' }, { type: 'avatar', subject: 'een wijze vos', details: 'met een monokel' }, { type: 'coloring', subject: 'een onderwaterwereld met dolfijnen en koraal' }, { type: 'photo', subject: 'een majestueuze leeuw', action: 'op een rots in de savanne', setting: 'tijdens zonsondergang' } ],
+                fun: [ { type: 'logo', name: 'Party Pigeons', object: 'een duif met een feesthoedje' }, { type: 'avatar', subject: 'een capibara', details: 'die relaxt in een heetwaterbron' }, { type: 'coloring', subject: 'een groep eekhoorns die een theekransje houden' }, { type: 'photo', subject: 'een kat', action: 'die een DJ-set draait', setting: 'in een nachtclub' } ]
             },
             fantasy: {
-                auto: [
-                    { type: 'logo', name: 'Dragon\'s Breath', object: 'een gestileerde draak' }, { type: 'avatar', subject: 'een elf-krijger', details: 'met lichtgevende pijlen' },
-                    { type: 'coloring', subject: 'een betoverd bos met een eenhoorn' }, { type: 'photo', subject: 'een tovenaar', action: 'die een spreuk uitspreekt', setting: 'in een oude bibliotheek' }
-                ],
-                fun: [
-                    { type: 'logo', name: 'Goblin Grub', object: 'een lachende goblin met een hamburger' }, { type: 'avatar', subject: 'een norse dwerg', details: 'die een rubberen eend vasthoudt' },
-                    { type: 'coloring', subject: 'een draak die probeert te breien' }, { type: 'photo', subject: 'een ridder', action: 'die ruzie maakt met een parkeerautomaat', setting: 'in een moderne stad' }
-                ]
+                auto: [ { type: 'logo', name: 'Dragon\'s Breath', object: 'een gestileerde draak' }, { type: 'avatar', subject: 'een elf-krijger', details: 'met lichtgevende pijlen' }, { type: 'coloring', subject: 'een betoverd bos met een eenhoorn' }, { type: 'photo', subject: 'een tovenaar', action: 'die een spreuk uitspreekt', setting: 'in een oude bibliotheek' } ],
+                fun: [ { type: 'logo', name: 'Goblin Grub', object: 'een lachende goblin met een hamburger' }, { type: 'avatar', subject: 'een norse dwerg', details: 'die een rubberen eend vasthoudt' }, { type: 'coloring', subject: 'een draak die probeert te breien' }, { type: 'photo', subject: 'een ridder', action: 'die ruzie maakt met een parkeerautomaat', setting: 'in een moderne stad' } ]
             },
             nature: {
-                auto: [
-                    { type: 'logo', name: 'Mountain Peak', object: 'een bergketen' }, { type: 'avatar', subject: 'Moeder Natuur', details: 'met bloemen in haar haar' },
-                    { type: 'coloring', subject: 'een landschap met watervallen en bergen' }, { type: 'photo', subject: 'een kolibrie', action: 'die nectar drinkt', setting: 'uit een hibiscusbloem' }
-                ],
-                fun: [
-                    { type: 'logo', name: 'Grumpy Cactus', object: 'een cactus met een boos gezicht' }, { type: 'avatar', subject: 'een pratende boom', details: 'met een hipster snor' },
-                    { type: 'coloring', subject: 'groenten die een rockconcert geven' }, { type: 'photo', subject: 'een rots', action: 'met opgeplakte wiebelogen', setting: 'in een bos' }
-                ]
+                auto: [ { type: 'logo', name: 'Mountain Peak', object: 'een bergketen' }, { type: 'avatar', subject: 'Moeder Natuur', details: 'met bloemen in haar haar' }, { type: 'coloring', subject: 'een landschap met watervallen en bergen' }, { type: 'photo', subject: 'een kolibrie', action: 'die nectar drinkt', setting: 'uit een hibiscusbloem' } ],
+                fun: [ { type: 'logo', name: 'Grumpy Cactus', object: 'een cactus met een boos gezicht' }, { type: 'avatar', subject: 'een pratende boom', details: 'met een hipster snor' }, { type: 'coloring', subject: 'groenten die een rockconcert geven' }, { type: 'photo', subject: 'een rots', action: 'met opgeplakte wiebelogen', setting: 'in een bos' } ]
             },
             tech: {
-                auto: [
-                    { type: 'logo', name: 'Circuit Core', object: 'een printplaat' }, { type: 'avatar', subject: 'een cyborg', details: 'met een neon vizier' },
-                    { type: 'coloring', subject: 'een futuristische stad met vliegende auto\'s' }, { type: 'photo', subject: 'een robot', action: 'die een schilderij maakt', setting: 'in een kunstatelier' }
-                ],
-                fun: [
-                    { type: 'logo', name: 'Virus Busters', object: 'een computerbug met een cowboyhoed' }, { type: 'avatar', subject: 'een vintage robot', details: 'die probeert te surfen op het internet' },
-                    { type: 'coloring', subject: 'een smartphone die een selfie neemt van andere telefoons' }, { type: 'photo', subject: 'een drone', action: 'die een pizza bezorgt', setting: 'aan een verbaasde eekhoorn' }
-                ]
+                auto: [ { type: 'logo', name: 'Circuit Core', object: 'een printplaat' }, { type: 'avatar', subject: 'een cyborg', details: 'met een neon vizier' }, { type: 'coloring', subject: 'een futuristische stad met vliegende auto\'s' }, { type: 'photo', subject: 'een robot', action: 'die een schilderij maakt', setting: 'in een kunstatelier' } ],
+                fun: [ { type: 'logo', name: 'Virus Busters', object: 'een computerbug met een cowboyhoed' }, { type: 'avatar', subject: 'een vintage robot', details: 'die probeert te surfen op het internet' }, { type: 'coloring', subject: 'een smartphone die een selfie neemt van andere telefoons' }, { type: 'photo', subject: 'een drone', action: 'die een pizza bezorgt', setting: 'aan een verbaasde eekhoorn' } ]
             }
         };
-        
-        promptTabsContainer.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('prompt-tab')) return;
-            promptTabs.forEach(tab => tab.classList.remove('active')); e.target.classList.add('active');
-            const targetToolId = e.target.dataset.target;
-            promptTools.forEach(tool => tool.classList.toggle('active', tool.id === targetToolId));
-        });
 
         function getCurrentToolId() { return document.querySelector('.prompt-tool.active').id; }
-        function triggerActiveGenerator() {
-            const toolId = getCurrentToolId();
-            if (toolId === 'tool-logo') generateLogoPrompt(); else if (toolId === 'tool-avatar') generateAvatarPrompt();
-            else if (toolId === 'tool-coloring') generateColoringPrompt(); else if (toolId === 'tool-photo') generatePhotoPrompt();
-        }
-
-        document.querySelector('.auto-btn').addEventListener('click', () => handleMagicClick('auto'));
-        document.querySelector('.fun-btn').addEventListener('click', () => handleMagicClick('fun'));
 
         function handleMagicClick(type) {
             const subject = document.getElementById('magic-subject').value;
             const toolId = getCurrentToolId().replace('tool-', '');
-            const possiblePrompts = magicPrompts[subject][type].filter(p => p.type === toolId || toolId === 'avatar' || toolId === 'photo');
+            if (toolId === 'story') return;
+            const possiblePrompts = magicPrompts[subject][type].filter(p => p.type === toolId);
             const randomPrompt = possiblePrompts[Math.floor(Math.random() * possiblePrompts.length)];
             if (!randomPrompt) return;
-            if (toolId === 'logo') {
-                document.getElementById('logo-name').value = randomPrompt.name || ''; document.getElementById('logo-object').value = randomPrompt.object || '';
-            } else if (toolId === 'avatar') {
-                document.getElementById('avatar-subject').value = randomPrompt.subject || ''; document.getElementById('avatar-details').value = randomPrompt.details || '';
-            } else if (toolId === 'coloring') {
-                document.getElementById('coloring-subject').value = randomPrompt.subject || '';
-            } else if (toolId === 'photo') {
-                document.getElementById('photo-subject').value = randomPrompt.subject || ''; document.getElementById('photo-action').value = randomPrompt.action || ''; document.getElementById('photo-setting').value = randomPrompt.setting || '';
-            }
+            Object.keys(randomPrompt).forEach(key => {
+                const el = document.getElementById(`${toolId}-${key}`);
+                if (el) el.value = randomPrompt[key];
+            });
             triggerActiveGenerator();
         }
+        
+        function applyBranding(prompt) {
+             return `${prompt}, watermark with the text "aileer.nl" in the bottom right corner`;
+        }
 
-        document.querySelector('.brand-btn').addEventListener('click', (e) => {
-            isBrandingActive = !isBrandingActive; e.target.classList.toggle('active', isBrandingActive); triggerActiveGenerator();
+        // --- GEMINI API SCRIPT ---
+        const geminiBtn = document.getElementById('gemini-btn');
+        const geminiInput = document.getElementById('gemini-input');
+        const geminiError = document.getElementById('gemini-error');
+        const geminiBtnText = document.getElementById('gemini-btn-text');
+        const geminiBtnLoading = document.getElementById('gemini-btn-loading');
+
+        const schemas = {
+            'logo': { type: "OBJECT", properties: { companyName: { type: "STRING" }, object: { type: "STRING" } } },
+            'avatar': { type: "OBJECT", properties: { subject: { type: "STRING" }, details: { type: "STRING" } } },
+            'coloring': { type: "OBJECT", properties: { subject: { type: "STRING" } } },
+            'photo': { type: "OBJECT", properties: { subject: { type: "STRING" }, action: { type: "STRING" }, setting: { type: "STRING" } } }
+        };
+
+        geminiBtn.addEventListener('click', async () => {
+            const userQuery = geminiInput.value.trim();
+            if (!userQuery) return;
+
+            geminiBtn.disabled = true;
+            geminiBtnText.classList.add('hidden');
+            geminiBtnLoading.classList.remove('hidden');
+            geminiError.classList.add('hidden');
+
+            const activeToolId = getCurrentToolId().replace('tool-', '');
+            const schema = schemas[activeToolId];
+            if (!schema) { /* Handle story tool or other non-schema tools */ return; }
+
+            const systemPrompt = `You are a creative assistant generating ideas for AI image prompts. Based on the user's input, return a single JSON object matching the provided schema. Be creative and descriptive. Respond in the user's language: ${currentLang}.`;
+
+            try {
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    generationConfig: { responseMimeType: "application/json", responseSchema: schema }
+                };
+
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API error: ${response.status}`);
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0) {
+                    const jsonResponse = JSON.parse(result.candidates[0].content.parts[0].text);
+                    Object.keys(jsonResponse).forEach(key => {
+                        const el = document.getElementById(`${activeToolId}-${key.replace('companyName', 'name')}`);
+                        if (el) el.value = jsonResponse[key];
+                    });
+                    triggerActiveGenerator();
+                } else { throw new Error("No response from Gemini."); }
+
+            } catch (error) {
+                console.error("Gemini API error:", error);
+                geminiError.textContent = translations[currentLang].gemini_error_text;
+                geminiError.classList.remove('hidden');
+            } finally {
+                geminiBtn.disabled = false;
+                geminiBtnText.classList.remove('hidden');
+                geminiBtnLoading.classList.add('hidden');
+            }
         });
 
-        function applyBranding(prompt) {
-            return isBrandingActive ? `${prompt}, watermark with the text "aileer.nl" in the bottom right corner` : prompt;
+        // --- Story Generator Script ---
+        const generateStoryBtn = document.getElementById('generate-story-btn');
+        const storyOutput = document.getElementById('story-output');
+        const storyError = document.getElementById('story-error');
+        const storyBtnText = document.getElementById('story-btn-text');
+        const storyBtnLoading = document.getElementById('story-btn-loading');
+        const storyCopyCreateBtn = document.getElementById('story-copy-create-btn');
+
+        generateStoryBtn.addEventListener('click', async () => {
+            const character = document.getElementById('story-character').value.trim();
+            const setting = document.getElementById('story-setting').value.trim();
+            const plot = document.getElementById('story-plot').value.trim();
+            const style = document.getElementById('story-style').value;
+            
+            if(!character || !setting || !plot) return;
+
+            generateStoryBtn.disabled = true;
+            storyBtnText.classList.add('hidden');
+            storyBtnLoading.classList.remove('hidden');
+            storyError.classList.add('hidden');
+            storyOutput.textContent = '';
+            
+            const userPrompt = `Write a creative, short story (around 150 words) in the style of a '${style}'. Main character: ${character}. Setting: ${setting}. Plot: ${plot}. Respond in the language: ${currentLang}.`;
+
+            try {
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: userPrompt }] }] };
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API error: ${response.status}`);
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
+                    storyOutput.textContent = result.candidates[0].content.parts[0].text;
+                } else { throw new Error("No story generated from Gemini."); }
+
+            } catch (error) {
+                console.error("Gemini Story API error:", error);
+                storyError.textContent = translations[currentLang].gemini_error_text;
+                storyError.classList.remove('hidden');
+            } finally {
+                generateStoryBtn.disabled = false;
+                storyBtnText.classList.remove('hidden');
+                storyBtnLoading.classList.add('hidden');
+            }
+        });
+        
+        async function getStoryImagePrompt() {
+            const storyText = storyOutput.textContent;
+            if (!storyText) return null;
+            const userPrompt = `Summarize the following story into a single, descriptive sentence perfect as a prompt for an AI image generator. The sentence should be visual and atmospheric. Story: "${storyText}". Respond in the language: ${currentLang}.`;
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: userPrompt }] }] };
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API error: ${response.status}`);
+                const result = await response.json();
+                if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
+                    return result.candidates[0].content.parts[0].text;
+                }
+                return storyText; // Fallback
+            } catch (error) {
+                 console.error("Gemini Summary API error:", error);
+                 return storyText; // Fallback
+            }
         }
 
-        function generateLogoPrompt() {
-            const name = document.getElementById('logo-name').value || 'EcoBloom', style = document.getElementById('logo-style').value, object = document.getElementById('logo-object').value || 'a leaf';
-            let prompt = `${style} logo for a company named "${name}", featuring ${object}, clean vector lines, on a white background, professional design, high quality.`;
-            document.getElementById('logo-prompt-output').textContent = applyBranding(prompt);
-        }
-
-        function generateAvatarPrompt() {
-            const style = document.getElementById('avatar-style').value, subject = document.getElementById('avatar-subject').value || 'woman with silver hair', details = document.getElementById('avatar-details').value || 'wearing headphones';
-            let prompt = `${style} profile picture of a ${subject}, ${details}, vibrant colors, digital art, high detail, head and shoulders shot.`;
-            document.getElementById('avatar-prompt-output').textContent = applyBranding(prompt);
-        }
-
-        function generateColoringPrompt() {
-            const subject = document.getElementById('coloring-subject').value || 'a castle', complexity = document.getElementById('coloring-complexity').value, lines = document.getElementById('coloring-lines').value;
-            let prompt = `Coloring book page, ${complexity}, featuring ${subject}, ${lines}, no shading, black and white only, clean vector art.`;
-            document.getElementById('coloring-prompt-output').textContent = applyBranding(prompt);
-        }
-
-        function generatePhotoPrompt() {
-            const subject = document.getElementById('photo-subject').value || 'a golden retriever', action = document.getElementById('photo-action').value || 'catching a frisbee', setting = document.getElementById('photo-setting').value || 'on a sunny beach';
-            let prompt = `Photorealistic image of ${subject} ${action}, ${setting}, action shot, DSLR camera, 85mm f/1.8 lens, shallow depth of field, golden hour lighting.`;
-            document.getElementById('photo-prompt-output').textContent = applyBranding(prompt);
-        }
-
-        document.getElementById('logo-inputs').addEventListener('input', generateLogoPrompt); document.getElementById('avatar-inputs').addEventListener('input', generateAvatarPrompt);
-        document.getElementById('coloring-inputs').addEventListener('input', generateColoringPrompt); document.getElementById('photo-inputs').addEventListener('input', generatePhotoPrompt);
-
+        // --- GENERAL HELPER FUNCTIONS ---
         function copyTextFallback(text) {
             const textArea = document.createElement("textarea"); textArea.value = text;
             textArea.style.position = "fixed"; textArea.style.left = "-9999px"; document.body.appendChild(textArea);
@@ -956,44 +1229,118 @@
             document.body.removeChild(textArea);
         }
 
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const targetId = e.target.dataset.target, text = document.getElementById(targetId).textContent; copyTextFallback(text);
-                const feedbackEl = e.target.nextElementSibling.nextElementSibling;
-                feedbackEl.classList.remove('hidden'); setTimeout(() => feedbackEl.classList.add('hidden'), 2000);
-            });
-        });
-        document.querySelectorAll('.copy-create-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const targetId = e.target.dataset.target, text = document.getElementById(targetId).textContent; copyTextFallback(text);
+        // --- EVENT LISTENERS ---
+        document.body.addEventListener('click', async (e) => {
+            // Copy Button
+            if (e.target.matches('.copy-btn')) {
+                const targetId = e.target.dataset.target;
+                const text = document.getElementById(targetId).textContent || document.getElementById(targetId).value;
+                copyTextFallback(text);
+                const feedbackEl = e.target.parentElement.querySelector('.copy-feedback');
+                feedbackEl.classList.remove('hidden'); 
+                setTimeout(() => feedbackEl.classList.add('hidden'), 2000);
+            }
+            // Copy + Create Button
+            if (e.target.matches('.copy-create-btn')) {
+                const targetId = e.target.dataset.target;
+                const text = document.getElementById(targetId).textContent;
+                copyTextFallback(text);
                 window.open(affiliateLink, '_blank');
-            });
+            }
+            // Story Copy + Create Button
+             if (e.target.closest('#story-copy-create-btn')) {
+                const btn = e.target.closest('#story-copy-create-btn');
+                const originalText = btn.querySelector('span').textContent;
+                btn.querySelector('span').textContent = translations[currentLang].gemini_loading;
+                btn.disabled = true;
+                const imagePrompt = await getStoryImagePrompt();
+                copyTextFallback(imagePrompt);
+                window.open(affiliateLink, '_blank');
+                btn.querySelector('span').textContent = originalText;
+                btn.disabled = false;
+            }
+             // Preview Button
+            if (e.target.matches('.preview-btn')) {
+                const targetId = e.target.dataset.target;
+                const prompt = document.getElementById(targetId).textContent;
+                if (prompt) {
+                    await generateImagePreview(prompt, e.target);
+                }
+            }
         });
+        document.body.addEventListener('input', (e) => {
+             if (e.target.closest('.tool-inputs') || e.target.closest('.advanced-options-wrapper')) {
+                triggerActiveGenerator();
+            }
+        });
+        
+        // --- IMAGE PREVIEW SCRIPT ---
+        const previewModal = document.getElementById('preview-modal');
+        const previewContent = document.getElementById('preview-content');
+        const previewError = document.getElementById('preview-error');
+        const shareImageBtn = document.getElementById('share-image-btn');
+
+        document.getElementById('close-modal-btn').addEventListener('click', () => {
+            previewModal.classList.add('hidden');
+        });
+        
+        shareImageBtn.addEventListener('click', () => {
+            const prompt = previewModal.dataset.currentPrompt || "";
+            const shortPrompt = prompt.length > 100 ? prompt.substring(0, 100) + '...' : prompt;
+            let text = translations[currentLang].share_image_text;
+            if(prompt) text += `\nPrompt: "${shortPrompt}"`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=https://www.aileer.nl`;
+            window.open(twitterUrl, '_blank');
+        });
+
+        async function generateImagePreview(prompt, btn) {
+            previewModal.classList.remove('hidden');
+            previewContent.innerHTML = `<div class="loader"></div><p class="mt-4 text-white">${translations[currentLang].preview_generating}</p>`;
+            previewError.classList.add('hidden');
+            shareImageBtn.classList.add('hidden');
+            
+            const originalText = btn.textContent;
+            btn.textContent = translations[currentLang].gemini_loading;
+            btn.disabled = true;
+
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+                const payload = { instances: [{ prompt: prompt }], parameters: { "sampleCount": 1 } };
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`API error: ${response.status}`);
+                const result = await response.json();
+                
+                if (result.predictions && result.predictions[0]?.bytesBase64Encoded) {
+                    const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                    previewContent.innerHTML = `<img src="${imageUrl}" alt="AI generated preview" class="max-w-full max-h-[70vh] rounded-lg">`;
+                    previewModal.dataset.currentPrompt = prompt;
+                    shareImageBtn.classList.remove('hidden');
+                } else {
+                    throw new Error("No image data in response.");
+                }
+            } catch(error) {
+                console.error("Image generation error:", error);
+                previewContent.innerHTML = '';
+                previewError.textContent = translations[currentLang].preview_error;
+                previewError.classList.remove('hidden');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
 
         // --- QUIZ SCRIPT ---
         let quizData = {};
         const quizTranslations = {
-            'nl': [
-                { question: "Wat betekent de 'G' in GPT (zoals in ChatGPT)?", options: ["Generatief", "Globaal", "Grafisch", "Gegarandeerd"], answer: "Generatief" },
-                { question: "Welke taak is een voorbeeld van 'Machine Learning'?", options: ["Een website bouwen", "Een spamfilter dat leert van e-mails", "Een video afspelen", "Tekst kopiëren en plakken"], answer: "Een spamfilter dat leert van e-mails" },
-                { question: "Wat is 'prompt engineering'?", options: ["AI-modellen programmeren", "De kunst van het stellen van de juiste vragen aan AI", "Het ontwerpen van computerchips voor AI", "Het trainen van een AI met data"], answer: "De kunst van het stellen van de juiste vragen aan AI" },
-                { question: "Welk bedrijf zit achter het AI-model 'Sora' voor video-generatie?", options: ["Google", "Meta", "Microsoft", "OpenAI"], answer: "OpenAI" },
-                { question: "Wat is de 'Turing Test'?", options: ["Een test voor de snelheid van een computer", "Een test om te zien of een computer menselijk kan overkomen", "Een test voor de grafische kwaliteit van een game", "Een test voor de batterijduur van een laptop"], answer: "Een test om te zien of een computer menselijk kan overkomen" }
-            ],
-            'en': [
-                { question: "What does the 'G' in GPT (as in ChatGPT) stand for?", options: ["Generative", "Global", "Graphical", "Guaranteed"], answer: "Generative" },
-                { question: "Which task is an example of 'Machine Learning'?", options: ["Building a website", "A spam filter that learns from emails", "Playing a video", "Copying and pasting text"], answer: "A spam filter that learns from emails" },
-                { question: "What is 'prompt engineering'?", options: ["Programming AI models", "The art of asking the right questions to an AI", "Designing computer chips for AI", "Training an AI with data"], answer: "The art of asking the right questions to an AI" },
-                { question: "Which company is behind the 'Sora' AI model for video generation?", options: ["Google", "Meta", "Microsoft", "OpenAI"], answer: "OpenAI" },
-                { question: "What is the 'Turing Test'?", options: ["A test for the speed of a computer", "A test to see if a computer can appear human", "A test for the graphics quality of a game", "A test for the battery life of a laptop"], answer: "A test to see if a computer can appear human" }
-            ],
-            'de': [
-                { question: "Wofür steht das 'G' in GPT (wie in ChatGPT)?", options: ["Generativ", "Global", "Grafisch", "Garantiert"], answer: "Generativ" },
-                { question: "Welche Aufgabe ist ein Beispiel für 'Maschinelles Lernen'?", options: ["Eine Website erstellen", "Ein Spamfilter, der aus E-Mails lernt", "Ein Video abspielen", "Text kopieren und einfügen"], answer: "Ein Spamfilter, der aus E-Mails lernt" },
-                { question: "Was ist 'Prompt Engineering'?", options: ["KI-Modelle programmieren", "Die Kunst, einer KI die richtigen Fragen zu stellen", "Das Entwerfen von Computerchips für KI", "Eine KI mit Daten trainieren"], answer: "Die Kunst, einer KI die richtigen Fragen zu stellen" },
-                { question: "Welches Unternehmen steckt hinter dem KI-Modell 'Sora' zur Videogenerierung?", options: ["Google", "Meta", "Microsoft", "OpenAI"], answer: "OpenAI" },
-                { question: "Was ist der 'Turing-Test'?", options: ["Ein Test für die Geschwindigkeit eines Computers", "Ein Test, um festzustellen, ob ein Computer menschlich wirken kann", "Ein Test für die Grafikqualität eines Spiels", "Ein Test für die Akkulaufzeit eines Laptops"], answer: "Ein Test, um festzustellen, ob ein Computer menschlich wirken kann" }
-            ]
+            'nl': [ { question: "Wat betekent de 'G' in GPT (zoals in ChatGPT)?", options: ["Generatief", "Globaal", "Grafisch", "Gegarandeerd"], answer: "Generatief" }, { question: "Welke taak is een voorbeeld van 'Machine Learning'?", options: ["Een website bouwen", "Een spamfilter dat leert van e-mails", "Een video afspelen", "Tekst kopiëren en plakken"], answer: "Een spamfilter dat leert van e-mails" }, { question: "Wat is 'prompt engineering'?", options: ["AI-modellen programmeren", "De kunst van het stellen van de juiste vragen aan AI", "Het ontwerpen van computerchips voor AI", "Het trainen van een AI met data"], answer: "De kunst van het stellen van de juiste vragen aan AI" }, { question: "Welk bedrijf zit achter het AI-model 'Sora' voor video-generatie?", options: ["Google", "Meta", "Microsoft", "OpenAI"], answer: "OpenAI" }, { question: "Wat is de 'Turing Test'?", options: ["Een test voor de snelheid van een computer", "Een test om te zien of een computer menselijk kan overkomen", "Een test voor de grafische kwaliteit van een game", "Een test voor de batterijduur van een laptop"], answer: "Een test om te zien of een computer menselijk kan overkomen" } ],
+            'en': [ { question: "What does the 'G' in GPT (as in ChatGPT) stand for?", options: ["Generative", "Global", "Graphical", "Guaranteed"], answer: "Generative" }, { question: "Which task is an example of 'Machine Learning'?", options: ["Building a website", "A spam filter that learns from emails", "Playing a video", "Copying and pasting text"], answer: "A spam filter that learns from emails" }, { question: "What is 'prompt engineering'?", options: ["Programming AI models", "The art of asking the right questions to an AI", "Designing computer chips for AI", "Training an AI with data"], answer: "The art of asking the right questions to an AI" }, { question: "Which company is behind the 'Sora' AI model for video generation?", options: ["Google", "Meta", "Microsoft", "OpenAI"], answer: "OpenAI" }, { question: "What is the 'Turing Test'?", options: ["A test for the speed of a computer", "A test to see if a computer can appear human", "A test for the graphics quality of a game", "A test for the battery life of a laptop"], answer: "A test to see if a computer can appear human" } ],
+            'de': [ { question: "Wofür steht das 'G' in GPT (wie in ChatGPT)?", options: ["Generativ", "Global", "Grafisch", "Garantiert"], answer: "Generativ" }, { question: "Welche Aufgabe ist ein Beispiel für 'Maschinelles Lernen'?", options: ["Eine Website erstellen", "Ein Spamfilter, der aus E-Mails lernt", "Ein Video abspielen", "Text kopieren und einfügen"], answer: "Ein Spamfilter, der aus E-Mails lernt" }, { question: "Was ist 'Prompt Engineering'?", options: ["KI-Modelle programmieren", "Die Kunst, einer KI die richtigen Fragen zu stellen", "Das Entwerfen von Computerchips für KI", "Eine KI mit Daten trainieren"], answer: "Die Kunst, einer KI die richtigen Fragen zu stellen" }, { question: "Welches Unternehmen steckt hinter dem KI-Modell 'Sora' zur Videogenerierung?", options: ["Google", "Meta", "Microsoft", "OpenAI"], answer: "OpenAI" }, { question: "Was ist der 'Turing-Test'?", options: ["Ein Test für die Geschwindigkeit eines Computers", "Ein Test, um festzustellen, ob ein Computer menschlich wirken kann", "Ein Test für die Grafikqualität eines Spiels", "Ein Test für die Akkulaufzeit eines Laptops"], answer: "Ein Test, um festzustellen, ob ein Computer menschlich wirken kann" } ]
         };
 
         let currentQuestionIndex = 0, score = 0, userName = "";
@@ -1046,9 +1393,33 @@
         
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
+             buildTools();
              handleRouting();
              setLanguage(currentLang);
+             document.querySelector('#tool-logo').classList.add('active');
              triggerActiveGenerator();
+
+             // Setup event listeners that need the tools to be built first
+             document.querySelector('.auto-btn').addEventListener('click', () => handleMagicClick('auto'));
+             document.querySelector('.fun-btn').addEventListener('click', () => handleMagicClick('fun'));
+
+             document.getElementById('prompt-tabs').addEventListener('click', (e) => {
+                if (!e.target.classList.contains('prompt-tab')) return;
+                document.querySelectorAll('.prompt-tab').forEach(tab => tab.classList.remove('active')); e.target.classList.add('active');
+                const targetToolId = e.target.dataset.target;
+                document.querySelectorAll('.prompt-tool').forEach(tool => tool.classList.toggle('active', tool.id === targetToolId));
+                // Only trigger generator for non-story tools on tab change
+                if(targetToolId !== 'tool-story') {
+                    triggerActiveGenerator();
+                }
+             });
+             document.querySelectorAll('[id$="-advanced-toggle"]').forEach(toggle => {
+                toggle.addEventListener('change', (e) => {
+                    const toolKey = e.target.id.replace('-advanced-toggle', '');
+                    document.getElementById(`${toolKey}-advanced-fields`).classList.toggle('hidden');
+                    triggerActiveGenerator();
+                });
+             });
         });
     </script>
 </body>
