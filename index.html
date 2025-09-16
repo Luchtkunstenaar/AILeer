@@ -6,15 +6,15 @@
     <title data-lang-key="site_title">AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis met de AI Quiz." data-lang-key="site_description">
-    <meta name="keywords" content="AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, Logo Generator, Avatar Maker, Verhaal Generator, Beeldgenerator, Gemini API" data-lang-key="site_keywords">
+    <meta name="description" content="AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer, en verken de toekomst van AI." data-lang-key="site_description">
+    <meta name="keywords" content="AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, AI Weetjes, AI Feiten, Logo Generator, Avatar Maker, Verhaal Generator, Beeldgenerator, Gemini API, AI Toekomst, AI Banen" data-lang-key="site_keywords">
     <meta name="author" content="aileer.nl">
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.aileer.nl/">
     <meta property="og:title" content="AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie" data-lang-key="og_title">
-    <meta property="og:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis." data-lang-key="og_description">
+    <meta property="og:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer, en verken de toekomst van AI." data-lang-key="og_description">
     <meta property="og:image" content="https://placehold.co/1200x630/0f172a/7c3aed?text=AI-Leer.nl">
 
     <!-- Twitter Meta Tags -->
@@ -22,7 +22,7 @@
     <meta property="twitter:domain" content="aileer.nl">
     <meta property="twitter:url" content="https://www.aileer.nl/">
     <meta name="twitter:title" content="AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie" data-lang-key="twitter_title">
-    <meta name="twitter:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis." data-lang-key="twitter_description">
+    <meta name="twitter:description" content="Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer, en verken de toekomst van AI." data-lang-key="twitter_description">
     <meta name="twitter:image" content="https://placehold.co/1200x630/0f172a/7c3aed?text=AI-Leer.nl">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,10 +31,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --aurora-color-1: rgba(59, 130, 246, 0.3);
-            --aurora-color-2: rgba(139, 92, 246, 0.3);
-            --aurora-color-3: rgba(236, 72, 153, 0.3);
+            --aurora-color-1: rgba(59, 130, 246, 0.2);
+            --aurora-color-2: rgba(139, 92, 246, 0.2);
+            --aurora-color-3: rgba(236, 72, 153, 0.2);
         }
+        html { scroll-behavior: smooth; }
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #020617;
@@ -50,33 +51,55 @@
                 radial-gradient(ellipse 50% 50% at 20% 40%, var(--aurora-color-1) 0%, transparent 100%),
                 radial-gradient(ellipse 50% 50% at 80% 60%, var(--aurora-color-2) 0%, transparent 100%),
                 radial-gradient(ellipse 50% 50% at 50% 90%, var(--aurora-color-3) 0%, transparent 100%);
-            animation: aurora-animation 20s infinite linear;
+            animation: aurora-animation 25s infinite linear alternate;
             z-index: -1;
         }
         @keyframes aurora-animation {
-            0% { background-position: 0% 50%, 50% 100%, 100% 0%; }
-            50% { background-position: 100% 50%, 0% 0%, 50% 100%; }
-            100% { background-position: 0% 50%, 50% 100%, 100% 0%; }
+            0% { transform: rotate(0deg) scale(1.5); }
+            100% { transform: rotate(360deg) scale(2); }
         }
-        .card { background-color: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(55, 65, 81, 0.5); }
-        .card:hover { border-color: #4f46e5; }
+        .card { 
+            background-color: rgba(15, 23, 42, 0.8); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(55, 65, 81, 0.5); 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
+        .card:hover { 
+            border-color: #4f46e5;
+            transform: perspective(1000px) rotateY(var(--rotate-y, 0)) rotateX(var(--rotate-x, 0)) scale3d(1.02, 1.02, 1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(79, 70, 229, 0.4);
+        }
         .label-text { display: block; margin-bottom: 0.75rem; font-weight: 500; color: #D1D5DB; }
-        .text-input, .text-area { width: 100%; background-color: #1e293b; border: 1px solid #334155; color: #E5E7EB; border-radius: 0.5rem; padding: 0.75rem 1rem; }
-        .text-input:focus, .text-area:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 2px #3730a3; }
+        .text-input, .text-area { width: 100%; background-color: #1e293b; border: 1px solid #334155; color: #E5E7EB; border-radius: 0.5rem; padding: 0.75rem 1rem; transition: all 0.2s; }
+        .text-input:focus, .text-area:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px #3730a3, 0 0 15px rgba(79, 70, 229, 0.5); }
         .quiz-option { transition: all 0.2s ease-in-out; }
-        .quiz-option.correct { background-color: #166534 !important; border-color: #22c55e !important; }
+        .quiz-option.correct { background-color: #166534 !important; border-color: #22c55e !important; transform: scale(1.02); }
         .quiz-option.incorrect { background-color: #991b1b !important; border-color: #ef4444 !important; }
         .nav-link.active { color: #818cf8; font-weight: 600; }
+        .nav-dropdown-btn.active { color: #818cf8; font-weight: 600; }
         .lang-btn { cursor: pointer; opacity: 0.6; transition: all 0.2s; }
         .lang-btn.active { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px rgba(255,255,255,0.5); border-radius: 50%;}
-        .prompt-tab { cursor: pointer; padding: 0.5rem 1rem; border-bottom: 2px solid transparent; }
+        .prompt-tab { cursor: pointer; padding: 0.5rem 1rem; border-bottom: 2px solid transparent; transition: all 0.2s; }
         .prompt-tab.active { color: #a5b4fc; border-color: #4f46e5; }
         .prompt-tool { display: none; }
-        .prompt-tool.active { display: block; }
+        .prompt-tool.active { display: block; animation: fadeIn 0.5s ease-in-out; }
         .magic-btn { transition: all 0.2s ease; border: 1px solid #4B5563; }
         .magic-btn.active { background-color: #4f46e5; border-color: #818cf8; color: white; }
-        .gemini-btn:disabled, .story-btn:disabled, .preview-btn:disabled { cursor: not-allowed; background-color: #334155; }
+        .gemini-btn:disabled, .story-btn:disabled { cursor: not-allowed; background-color: #334155; }
         .prompt-output-box { box-shadow: 0 0 15px rgba(79, 70, 229, 0.3); }
+
+        /* Timeline Styles */
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background-color: #334155; top: 0; bottom: 0; left: 50%; margin-left: -3px; }
+        .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-container.left { left: 0; }
+        .timeline-container.right { left: 50%; }
+        .timeline-container::after { content: ''; position: absolute; width: 25px; height: 25px; right: -12px; background-color: #020617; border: 4px solid #4f46e5; top: 15px; border-radius: 50%; z-index: 1; }
+        .timeline-container.right::after { left: -13px; }
+        .timeline-content { padding: 20px 30px; background-color: rgba(15, 23, 42, 0.8); position: relative; border-radius: 6px; border: 1px solid rgba(55, 65, 81, 0.5); cursor: pointer; transition: all 0.3s; }
+        .timeline-content:hover { transform: scale(1.03); border-color: #818cf8; }
+        .timeline-modal-content { max-height: 80vh; }
 
         /* Tooltip styles */
         .tooltip-container { position: relative; display: inline-block; }
@@ -92,32 +115,137 @@
         input:checked + .slider { background-color: #4f46e5; }
         input:checked + .slider:before { transform: translateX(20px); }
 
-        /* Image Preview Modal */
-        #preview-modal.hidden { display: none; }
-        .loader { width: 48px; height: 48px; border: 5px solid #FFF; border-bottom-color: #4f46e5; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
-        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #timeline-modal.hidden { display: none; }
+        
+        .fact-item { animation: fadeIn 0.5s ease-in-out; }
+
+        .next-page-btn {
+            background-color: #4f46e5;
+            transition-property: background-color, transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        .next-page-btn:hover {
+            background-color: #4338ca;
+            transform: scale(1.05);
+        }
+
+        /* Animation classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
+    
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AI Leer",
+      "url": "https://www.aileer.nl/",
+      "author": {
+        "@type": "Person",
+        "name": "mcdropke"
+      },
+      "description": "Jouw complete gids om AI te begrijpen, te gebruiken en te beheersen. Van de basisprincipes tot geavanceerde tools, wij maken AI toegankelijk voor iedereen.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.aileer.nl/#prompt-bouwer?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "De Ultieme Prompt Bouwer",
+        "operatingSystem": "Web",
+        "applicationCategory": "DesignApplication",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "210"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Wat is AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI, of Artificiële Intelligentie, is de wetenschap die machines leert om taken uit te voeren die normaal menselijke intelligentie vereisen, zoals leren, redeneren en creëren."
+        }
+      },{
+        "@type": "Question",
+        "name": "Pakt AI mijn baan af?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI transformeert banen door repetitieve taken te automatiseren, maar creëert tegelijkertijd ook nieuwe functies en rollen, zoals Prompt Engineer of AI Ethics Officer. De focus verschuift naar creativiteit, strategie en complex probleemoplossend vermogen."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is AI gevaarlijk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "De huidige AI (Narrow AI) is niet zelfbewust en vormt geen existentiële bedreiging. De risico's liggen voornamelijk in ethische kwesties zoals 'algorithmic bias' (vooroordelen in data) en misbruik. Verantwoorde ontwikkeling is cruciaal."
+        }
+      }]
+    }
+    </script>
+
 </head>
 <body class="bg-slate-950 text-gray-200">
 
     <!-- Header / Navigatie -->
     <header class="bg-slate-950/70 backdrop-blur-sm sticky top-0 z-50 border-b border-slate-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-white">
+            <a href="#home" class="text-2xl font-bold text-white" aria-label="AI Leer Homepage">
                 <span class="text-indigo-400">AI</span>Leer<span class="text-indigo-400">.</span>nl
             </a>
-            <div id="nav-links" class="hidden md:flex space-x-6 items-center text-gray-300">
-                <a href="#uitleg" class="nav-link hover:text-indigo-300 transition" data-lang-key="nav_what_is_ai">Wat is AI?</a>
-                <a href="#voor-wie" class="nav-link hover:text-indigo-300 transition" data-lang-key="nav_for_whom">Voor Wie?</a>
-                <a href="#prompt-bouwer" class="nav-link hover:text-indigo-300 transition" data-lang-key="nav_prompt_builder">Prompt Bouwer</a>
-                <a href="#quiz" class="nav-link hover:text-indigo-300 transition" data-lang-key="nav_quiz">AI Quiz</a>
-                <a href="#nieuws" class="nav-link hover:text-indigo-300 transition" data-lang-key="nav_news">Nieuws</a>
+            <div id="nav-links" class="hidden md:flex flex-wrap items-center space-x-8 text-gray-300">
+                <!-- Dropdown for Learning -->
+                <div class="relative group" data-dropdown-group="leren">
+                    <button class="nav-dropdown-btn font-medium hover:text-indigo-300 transition flex items-center gap-1" data-lang-key="nav_learn_ai">Leren over AI</button>
+                    <div class="absolute hidden group-hover:block bg-slate-800 p-2 rounded-md shadow-lg w-48 mt-2">
+                        <a href="#uitleg" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_what_is_ai">Wat is AI?</a>
+                        <a href="#voor-wie" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_for_whom">Voor Wie?</a>
+                        <a href="#feit-fabel" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_fact_fable">Feit of Fabel?</a>
+                        <a href="#toekomst" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_future">AI & Toekomst</a>
+                        <a href="#weetjes" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_facts">AI Weetjes</a>
+                    </div>
+                </div>
+                <!-- Dropdown for Tools -->
+                 <div class="relative group" data-dropdown-group="tools">
+                    <button class="nav-dropdown-btn font-medium hover:text-indigo-300 transition flex items-center gap-1" data-lang-key="nav_tools">Tools & Interactie</button>
+                    <div class="absolute hidden group-hover:block bg-slate-800 p-2 rounded-md shadow-lg w-48 mt-2">
+                        <a href="#prompt-bouwer" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_prompt_builder">Prompt Bouwer</a>
+                        <a href="#quiz" class="nav-link dropdown-item block px-4 py-2 text-sm hover:bg-slate-700 rounded-md transition" data-lang-key="nav_quiz">AI Quiz</a>
+                    </div>
+                </div>
+
+                <a href="#fotografie" class="nav-link font-medium hover:text-indigo-300 transition" data-lang-key="nav_photography">Fotografie</a>
             </div>
             <div class="flex items-center gap-4">
                  <div id="language-switcher" class="flex items-center gap-3">
-                    <img src="https://flagcdn.com/nl.svg" width="24" alt="Nederlands" class="lang-btn active" data-lang="nl">
-                    <img src="https://flagcdn.com/gb.svg" width="24" alt="English" class="lang-btn" data-lang="en">
-                    <img src="https://flagcdn.com/de.svg" width="24" alt="Deutsch" class="lang-btn" data-lang="de">
+                    <img src="https://flagcdn.com/nl.svg" width="24" alt="Nederlandse Vlag" class="lang-btn active" data-lang="nl" aria-label="Switch to Dutch">
+                    <img src="https://flagcdn.com/gb.svg" width="24" alt="Britse Vlag" class="lang-btn" data-lang="en" aria-label="Switch to English">
+                    <img src="https://flagcdn.com/de.svg" width="24" alt="Duitse Vlag" class="lang-btn" data-lang="de" aria-label="Switch to German">
                 </div>
                  <a href="#prompt-bouwer" class="md:hidden bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition font-semibold" data-lang-key="btn_start_now">Start nu</a>
             </div>
@@ -131,7 +259,7 @@
                 <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight" data-lang-key="hero_title">Ontgrendel de Kracht van <span class="text-indigo-400">Artificiële Intelligentie</span></h1>
                 <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto" data-lang-key="hero_subtitle">Jouw complete gids om AI te begrijpen, te gebruiken en te beheersen. Van de basisprincipes tot geavanceerde tools, wij maken AI toegankelijk voor iedereen.</p>
                 <div class="mt-10">
-                    <a href="#uitleg" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-transform transform hover:scale-105 inline-block" data-lang-key="hero_button">Begin je AI-Reis</a>
+                    <a href="#uitleg" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-transform transform hover:scale-105 inline-block next-page-btn" data-lang-key="hero_button">Begin je AI-Reis</a>
                 </div>
             </div>
         </section>
@@ -139,23 +267,26 @@
         <!-- Wat is AI? -->
         <section id="uitleg" class="page hidden py-20">
              <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
+                <div class="text-center mb-12 fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="what_is_ai_title">Wat is Artificiële Intelligentie?</h2>
                     <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="what_is_ai_subtitle">AI is de wetenschap die machines en computers leert om taken uit te voeren die normaal menselijke intelligentie vereisen, zoals leren, redeneren en creëren.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="card p-8 rounded-xl">
+                    <div class="card p-8 rounded-xl fade-in-up" style="--delay: 100ms">
                         <h3 class="text-xl font-semibold text-indigo-400" data-lang-key="what_is_ai_card1_title">Generatieve AI</h3>
                         <p class="mt-3 text-gray-300" data-lang-key="what_is_ai_card1_text">Creëert nieuwe, originele content zoals tekst, afbeeldingen, muziek en video's. Denk aan ChatGPT of Midjourney.</p>
                     </div>
-                    <div class="card p-8 rounded-xl">
+                    <div class="card p-8 rounded-xl fade-in-up" style="--delay: 200ms">
                         <h3 class="text-xl font-semibold text-indigo-400" data-lang-key="what_is_ai_card2_title">Machine Learning</h3>
                         <p class="mt-3 text-gray-300" data-lang-key="what_is_ai_card2_text">Stelt systemen in staat om te leren en te verbeteren van ervaringen, zonder expliciet geprogrammeerd te zijn. De basis van veel AI.</p>
                     </div>
-                    <div class="card p-8 rounded-xl">
+                    <div class="card p-8 rounded-xl fade-in-up" style="--delay: 300ms">
                         <h3 class="text-xl font-semibold text-indigo-400" data-lang-key="what_is_ai_card3_title">Toepassingen</h3>
                         <p class="mt-3 text-gray-300" data-lang-key="what_is_ai_card3_text">Van je gepersonaliseerde Netflix-aanbevelingen tot medische diagnoses, AI is al overal in ons dagelijks leven.</p>
                     </div>
+                </div>
+                <div class="text-center mt-16 fade-in-up">
+                    <a href="#voor-wie" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_for_whom">Verder naar 'Voor Wie?'</a>
                 </div>
             </div>
         </section>
@@ -163,43 +294,111 @@
         <!-- AI Voor Wie? -->
         <section id="voor-wie" class="page hidden py-20">
              <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
+                <div class="text-center mb-12 fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="for_whom_title">AI is voor Iedereen</h2>
                     <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="for_whom_subtitle">Ontdek hoe AI een revolutie kan teweegbrengen in jouw specifieke veld of dagelijks leven.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="card p-6">
+                    <div class="card p-6 fade-in-up" style="--delay: 100ms">
                         <h3 class="text-lg font-bold text-white" data-lang-key="for_whom_card1_title">Voor de Student</h3>
                         <p class="mt-2 text-gray-400" data-lang-key="for_whom_card1_text">Krijg hulp bij onderzoek, vat complexe teksten samen en laat AI je helpen bij het voorbereiden van presentaties.</p>
                     </div>
-                    <div class="card p-6">
+                    <div class="card p-6 fade-in-up" style="--delay: 200ms">
                         <h3 class="text-lg font-bold text-white" data-lang-key="for_whom_card2_title">Voor de Ondernemer</h3>
                         <p class="mt-2 text-gray-400" data-lang-key="for_whom_card2_text">Automatiseer klantenservice, analyseer marktdata en genereer marketingmateriaal in een fractie van de tijd.</p>
                     </div>
-                    <div class="card p-6">
+                    <div class="card p-6 fade-in-up" style="--delay: 300ms">
                         <h3 class="text-lg font-bold text-white" data-lang-key="for_whom_card3_title">Voor de Creatieveling</h3>
                         <p class="mt-2 text-gray-400" data-lang-key="for_whom_card3_text">Ontwerp unieke visuals, schrijf scripts, componeer muziek of vind inspiratie voor je volgende meesterwerk.</p>
                     </div>
-                    <div class="card p-6">
+                    <div class="card p-6 fade-in-up" style="--delay: 400ms">
                         <h3 class="text-lg font-bold text-white" data-lang-key="for_whom_card4_title">Voor in het Dagelijks Leven</h3>
                         <p class="mt-2 text-gray-400" data-lang-key="for_whom_card4_text">Plan reizen, krijg gezonde recepten, vertaal talen direct of laat AI je helpen je financiën te organiseren.</p>
                     </div>
                 </div>
-                <div class="text-center mt-12">
+                <div class="text-center mt-12 fade-in-up">
                      <p class="text-gray-300" data-lang-key="for_whom_coming_soon">Binnenkort lanceren we een sectie met de beste AI-apps en tools, compleet met handige links om direct te starten!</p>
                 </div>
+                <div class="text-center mt-16 fade-in-up">
+                    <a href="#feit-fabel" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_fact_fable">Verder naar 'Feit of Fabel?'</a>
+                </div>
              </div>
+        </section>
+        
+        <!-- Feit of Fabel? -->
+        <section id="feit-fabel" class="page hidden py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="fact_fable_title">AI: Feit of Fabel?</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="fact_fable_subtitle">We scheiden de hype van de realiteit. Ontdek de waarheid achter de meest hardnekkige mythes over Artificiële Intelligentie.</p>
+                </div>
+                <div class="space-y-12">
+                    <div class="card p-8 rounded-xl fade-in-up" style="--delay: 100ms">
+                        <h3 class="text-2xl font-bold text-red-400" data-lang-key="fable1_title">Fabel: "AI gaat al onze banen afpakken."</h3>
+                        <p class="mt-4 text-lg font-semibold text-green-400" data-lang-key="fact1_title">Feit: AI transformeert banen, maar creëert ook nieuwe functies.</p>
+                        <p class="mt-3 text-gray-300" data-lang-key="fact1_text">De geschiedenis leert ons dat technologische revoluties – van de stoommachine tot het internet – de arbeidsmarkt altijd hebben veranderd, niet vernietigd. AI is hierop geen uitzondering. Repetitieve en data-intensieve taken, zoals administratie, data-invoer en bepaalde analyses, zullen steeds vaker geautomatiseerd worden. Dit betekent echter niet dat de mensen die deze taken uitvoerden, overbodig worden. Het creëert juist een kans om hun vaardigheden te ontwikkelen en zich te richten op aspecten waar mensen in uitblinken: creativiteit, strategisch denken, emotionele intelligentie en complex probleemoplossend vermogen. Tegelijkertijd ontstaan er compleet nieuwe beroepen, zoals 'AI Ethics Officer', 'Prompt Engineer' en 'AI Trainer', functies die een paar jaar geleden nog ondenkbaar waren. De focus verschuift van 'doen' naar 'denken en creëren', waarbij AI een krachtig hulpmiddel wordt dat ons productiever en innovatiever maakt.</p>
+                    </div>
+                    <div class="card p-8 rounded-xl fade-in-up" style="--delay: 200ms">
+                        <h3 class="text-2xl font-bold text-red-400" data-lang-key="fable2_title">Fabel: "AI is volledig objectief en onbevooroordeeld."</h3>
+                        <p class="mt-4 text-lg font-semibold text-green-400" data-lang-key="fact2_title">Feit: Een AI is net zo bevooroordeeld als de data waarop het getraind is.</p>
+                        <p class="mt-3 text-gray-300" data-lang-key="fact2_text">Dit is een van de meest gevaarlijke misvattingen. Een AI-model heeft geen eigen bewustzijn, meningen of moraal; het is een complex wiskundig systeem dat patronen herkent in de data die wij het geven. Als die trainingsdata historische vooroordelen bevat – bijvoorbeeld data waaruit blijkt dat managers vaker man zijn, of dat bepaalde bevolkingsgroepen minder vaak een lening kregen – dan zal de AI deze patronen leren en reproduceren als objectieve waarheid. Dit kan leiden tot discriminerende uitkomsten in bijvoorbeeld sollicitatieprocedures, kredietaanvragen of zelfs medische diagnoses. Het 'opschonen' van data en het ontwikkelen van ethische richtlijnen is daarom een van de grootste uitdagingen binnen de AI-wereld. Bewustzijn van 'algorithmic bias' is cruciaal om te zorgen dat AI een eerlijke en rechtvaardige tool wordt voor iedereen.</p>
+                    </div>
+                    <div class="card p-8 rounded-xl fade-in-up" style="--delay: 300ms">
+                        <h3 class="text-2xl font-bold text-red-400" data-lang-key="fable3_title">Fabel: "Een superintelligente AI die de wereld overneemt, is nabij."</h3>
+                        <p class="mt-4 text-lg font-semibold text-green-400" data-lang-key="fact3_title">Feit: We zijn nog ver verwijderd van Algemene Artificiële Intelligentie (AGI).</p>
+                        <p class="mt-3 text-gray-300" data-lang-key="fact3_text">Hollywood-scenario's van kwaadaardige, zelfbewuste AI zijn voorlopig pure fictie. De AI die we vandaag de dag kennen, wordt 'Narrow AI' (Beperkte AI) genoemd. Deze systemen zijn extreem goed in één specifieke taak: een potje schaken winnen, een afbeelding genereren, of een tekst vertalen. Ze hebben echter geen begrip, bewustzijn of intentie. Een 'Algemene Artificiële Intelligentie' (AGI) – een AI die kan redeneren, leren en creatief zijn op een menselijk (of hoger) niveau over een breed scala aan onderwerpen – is de heilige graal van AI-onderzoek, maar de technologische en conceptuele hordes zijn immens. Hoewel de vooruitgang snel gaat, spreken de meeste experts over decennia, zo niet langer, voordat AGI een realistische mogelijkheid wordt. De huidige focus ligt op het verantwoord ontwikkelen van de krachtige 'Narrow AI' die we nu al hebben.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-16 fade-in-up">
+                    <a href="#toekomst" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_future">Verder naar 'AI & Toekomst'</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI & Toekomst -->
+        <section id="toekomst" class="page hidden py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="future_title">AI & de Toekomst van Werk</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="future_subtitle">Een interactieve tijdlijn met speculatieve voorspellingen over de impact van AI op de arbeidsmarkt. Klik op een periode voor meer details.</p>
+                </div>
+                <div class="timeline">
+                    <!-- Timeline items will be injected by JavaScript -->
+                </div>
+                <div class="text-center mt-16 fade-in-up">
+                    <a href="#weetjes" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_facts">Verder naar 'AI Weetjes'</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AI Weetjes -->
+        <section id="weetjes" class="page hidden py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12 fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="facts_title">Willekeurige AI Weetjes</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="facts_subtitle">Een verzameling van 100 feiten, fabels en verrassende inzichten in de wereld van AI. Klik op de knop voor meer!</p>
+                </div>
+                <div id="facts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Facts will be injected here by JavaScript -->
+                </div>
+                <div class="text-center mt-12 fade-in-up">
+                    <button id="new-facts-btn" class="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-transform transform hover:scale-105 inline-block" data-lang-key="facts_button">Laad 5 Nieuwe Weetjes</button>
+                </div>
+                 <div class="text-center mt-16 fade-in-up">
+                    <a href="#prompt-bouwer" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_prompt_builder">Probeer nu onze Tools!</a>
+                </div>
+            </div>
         </section>
 
         <!-- Prompt Bouwer -->
         <section id="prompt-bouwer" class="page hidden py-20">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
+                <div class="text-center mb-12 fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="prompt_builder_title">De Ultieme Prompt Bouwer</h2>
                     <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="prompt_builder_subtitle">Creëer de perfecte, gedetailleerde prompt voor beeld- en video-AI. Kies een tool en begin met creëren.</p>
                 </div>
                 
-                <div id="prompt-tabs" class="flex flex-wrap justify-center border-b border-slate-700 mb-8 text-sm sm:text-base">
+                <div id="prompt-tabs" class="flex flex-wrap justify-center border-b border-slate-700 mb-8 text-sm sm:text-base fade-in-up">
                     <button class="prompt-tab active" data-target="tool-logo" data-lang-key="tab_logo">Logo Generator</button>
                     <button class="prompt-tab" data-target="tool-avatar" data-lang-key="tab_avatar">Avatar Maker</button>
                     <button class="prompt-tab" data-target="tool-coloring" data-lang-key="tab_coloring">Kleurplaat Creator</button>
@@ -208,11 +407,11 @@
                 </div>
 
                 <!-- Shared Magic Panel -->
-                <div class="card mb-8 p-6">
+                <div class="card mb-8 p-6 fade-in-up">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
                         <div>
                              <label class="label-text" for="magic-subject" data-lang-key="magic_subject_label">1. Kies een Onderwerp voor Inspiratie</label>
-                            <select id="magic-subject" class="text-input">
+                            <select id="magic-subject" class="text-input" aria-label="Selecteer een inspiratieonderwerp">
                                 <option value="animals" data-lang-key="subject_animals">Dieren</option>
                                 <option value="fantasy" data-lang-key="subject_fantasy">Fantasie</option>
                                 <option value="nature" data-lang-key="subject_nature">Natuur</option>
@@ -244,11 +443,14 @@
                      <div>
                         <label class="label-text" for="gemini-input" data-lang-key="gemini_label">2. Of vraag Gemini om inspiratie ✨</label>
                         <div class="flex flex-col sm:flex-row gap-2">
-                           <input type="text" id="gemini-input" class="text-input flex-grow" placeholder="bv. een kat in de ruimte, een bos in de herfst" data-lang-key="gemini_placeholder">
+                           <input type="text" id="gemini-input" class="text-input flex-grow" placeholder="bv. een kat in de ruimte, een bos in de herfst" data-lang-key="gemini_placeholder" aria-label="Inspiratie input voor Gemini">
                            <button id="gemini-btn" class="gemini-btn bg-purple-600 text-white p-3 rounded-lg font-semibold hover:bg-purple-700 transition w-full sm:w-auto">
                                 <span id="gemini-btn-text" data-lang-key="gemini_button">Inspireer Mij</span>
                                 <span id="gemini-btn-loading" class="hidden" data-lang-key="gemini_loading">Laden...</span>
                            </button>
+                        </div>
+                        <div id="gemini-suggestions" class="flex flex-wrap gap-2 mt-3 text-sm">
+                            <!-- Suggestion buttons will be injected here by JavaScript -->
                         </div>
                         <p id="gemini-error" class="text-red-400 text-sm mt-2 hidden"></p>
                     </div>
@@ -265,7 +467,7 @@
                             <!-- Advanced options will be injected here for relevant tools -->
                             <div class="advanced-options-wrapper mt-4"></div>
 
-                            <div class="mt-6 bg-slate-800/50 border border-slate-700 rounded-xl p-4 prompt-output-box">
+                            <div class="mt-8 bg-slate-800/50 border border-slate-700 rounded-xl p-4 prompt-output-box">
                                 <h3 class="font-semibold text-white" data-lang-key="generated_prompt">Jouw gegenereerde prompt:</h3>
                                 <p class="tool-prompt-output mt-2 text-gray-300 min-h-[40px]"></p>
                                 <div class="mt-4 flex flex-wrap gap-4 items-center">
@@ -277,7 +479,6 @@
                                             <span class="tooltip-text" data-lang-key="tooltip_copy_create">Kopieert de prompt en opent de tool om de afbeelding te maken in een nieuw venster.</span>
                                         </div>
                                     </button>
-                                     <button class="preview-btn px-5 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition" data-lang-key="btn_preview">Genereer Preview</button>
                                     <span class="copy-feedback hidden text-green-400 items-center" data-lang-key="feedback_copied">Gekopieerd!</span>
                                 </div>
                             </div>
@@ -334,18 +535,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-center mt-16 fade-in-up">
+                    <a href="#quiz" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_quiz">Test je Kennis!</a>
+                </div>
+            </div>
+        </section>
 
+        <!-- Fotografie Sectie -->
+        <section id="fotografie" class="page hidden py-20">
+            <div class="container mx-auto px-6 text-center">
+                <div class="fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="photography_title">Mijn Fotografie Portfolio</h2>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="photography_subtitle">Naast de wereld van AI, heb ik een passie voor fotografie. Ontdek mijn werk, vastgelegd vanuit de lucht. Alle beelden zijn echt en zonder het gebruik van generatieve AI.</p>
+                    <div class="mt-10">
+                        <a href="https://wirestock.io/luchtkunstenaar" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-transform transform hover:scale-105 inline-block" data-lang-key="photography_button">Bekijk mijn Portfolio</a>
+                    </div>
+                </div>
+                <div class="text-center mt-16 fade-in-up">
+                    <a href="#home" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_home">Terug naar Home</a>
+                </div>
             </div>
         </section>
 
         <!-- AI Quiz Sectie -->
         <section id="quiz" class="page hidden py-20">
              <div class="container mx-auto px-6">
-                 <div class="text-center mb-12">
+                 <div class="text-center mb-12 fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="quiz_title">Test je AI Kennis</h2>
                     <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="quiz_subtitle">Hoeveel weet jij over de wereld van Artificiële Intelligentie? Start de quiz en kom erachter!</p>
                 </div>
-                <div id="quiz-container" class="max-w-3xl mx-auto card p-8 rounded-xl">
+                <div id="quiz-container" class="max-w-3xl mx-auto card p-8 rounded-xl fade-in-up">
                     <div id="quiz-start">
                         <h3 class="text-2xl font-bold text-white text-center" data-lang-key="quiz_welcome">Welkom bij de AI Kennisquiz!</h3>
                         <p class="text-center mt-4 text-gray-300" data-lang-key="quiz_intro">Je krijgt 5 vragen over AI. Aan het eind kun je een certificaat met je score delen.</p>
@@ -374,30 +593,17 @@
                             <p class="text-sm text-gray-400" data-lang-key="cert_verified">Geverifieerd door aileer.nl</p>
                          </div>
                          <button id="share-btn" class="w-full mt-6 bg-blue-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 transition flex items-center justify-center gap-2">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
                             <span data-lang-key="btn_share_x">Deel op X</span>
                          </button>
                     </div>
                 </div>
+                 <div class="text-center mt-16 fade-in-up">
+                    <a href="#fotografie" class="text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block next-page-btn" data-lang-key="next_page_photography">Bekijk ook mijn Fotografie</a>
+                </div>
             </div>
         </section>
 
-         <!-- AI Nieuws -->
-        <section id="nieuws" class="page hidden py-20">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white" data-lang-key="news_title">Laatste AI Nieuws</h2>
-                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto" data-lang-key="news_subtitle">Blijf op de hoogte van de snel veranderende wereld van AI met de laatste updates van Bright.nl.</p>
-                </div>
-                <div class="card p-2 md:p-4">
-                    <!-- Feed.mikle.com widget start -->
-                    <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" pre-loader="true"></script>
-                    <!-- Dit is een voorbeeld widget. Je kan je eigen widget aanmaken op feed.mikle.com om de feed aan te passen. -->
-                    <div id="fw-feed-widget-1719213567142" data-id="1719213567142" data-url="https://www.bright.nl/onderwerpen/ai/feed" data-widget-type="responsive" data-height="800" data-background-color="rgba(15, 23, 42, 0)" data-font-color="#CBD5E1" data-link-font-color="#818CF8" data-scroll="true" data-container-height="800" data-description-font-size="1rem" data-font="Inter, sans-serif" data-title-font-size="1.125rem"></div>
-                    <!-- Feed.mikle.com widget end -->
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
@@ -406,22 +612,19 @@
             <p data-lang-key="footer_text">&copy; 2024 aileer.nl - Gemaakt om AI voor iedereen toegankelijk te maken.</p>
         </div>
     </footer>
-
-    <!-- Image Preview Modal -->
-    <div id="preview-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-        <div class="bg-slate-800 rounded-lg max-w-2xl w-full p-6 text-center relative">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+    
+    <!-- Timeline Modal -->
+    <div id="timeline-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-800 rounded-lg max-w-2xl w-full p-6 relative card">
+             <button id="close-timeline-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white" aria-label="Sluit modal">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <h3 class="text-xl font-bold text-white mb-4" data-lang-key="preview_title">Afbeelding Preview</h3>
-            <div id="preview-content" class="min-h-[256px] flex items-center justify-center">
-                 <!-- Loader or Image will be shown here -->
+            <div id="timeline-modal-content" class="overflow-y-auto pr-4 timeline-modal-content">
+                <h3 id="timeline-modal-title" class="text-2xl font-bold text-indigo-400 mb-4"></h3>
+                <p id="timeline-modal-description" class="text-gray-300"></p>
+                <h4 id="timeline-modal-jobs-title" class="text-lg font-semibold text-white mt-6 mb-2"></h4>
+                <ul id="timeline-modal-jobs-list" class="list-disc list-inside text-gray-400 space-y-1"></ul>
             </div>
-             <p id="preview-error" class="text-red-400 text-sm mt-2 hidden"></p>
-             <button id="share-image-btn" class="hidden w-full mt-4 bg-blue-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 transition flex items-center justify-center gap-2">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-                <span data-lang-key="btn_share_image">Post de Afbeelding</span>
-            </button>
         </div>
     </div>
 
@@ -431,17 +634,22 @@
         const translations = {
             'nl': {
                 site_title: "AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie",
-                site_description: "AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis met de AI Quiz.",
-                site_keywords: "AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, Logo Generator, Avatar Maker, Verhaal Generator, Beeldgenerator, Gemini API",
+                site_description: "AI Leer is jouw startpunt om alles te leren over Artificiële Intelligentie. Ontdek de mogelijkheden, gebruik onze unieke Prompt Bouwer, en verken de toekomst van AI.",
+                site_keywords: "AI, Artificiële Intelligentie, Leren, Prompt Bouwer, AI Quiz, Nederlands, AI toepassingen, AI Weetjes, AI Feiten, Logo Generator, Avatar Maker, Verhaal Generator, Beeldgenerator, Gemini API, AI Toekomst, AI Banen",
                 og_title: "AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie",
-                og_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis.",
+                og_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer, en verken de toekomst van AI.",
                 twitter_title: "AI Leer - Jouw Gids in de Wereld van Artificiële Intelligentie",
-                twitter_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer met live beeld-previews en test je kennis.",
+                twitter_description: "Ontdek de mogelijkheden van AI, gebruik onze unieke Prompt Bouwer, en verken de toekomst van AI.",
+                nav_learn_ai: "Leren over AI",
+                nav_tools: "Tools & Interactie",
                 nav_what_is_ai: "Wat is AI?",
                 nav_for_whom: "Voor Wie?",
                 nav_prompt_builder: "Prompt Bouwer",
+                nav_photography: "Fotografie",
                 nav_quiz: "AI Quiz",
-                nav_news: "Nieuws",
+                nav_fact_fable: "Feit of Fabel?",
+                nav_future: "AI & Toekomst",
+                nav_facts: "AI Weetjes",
                 btn_start_now: "Start nu",
                 hero_title: 'Ontgrendel de Kracht van <span class="text-indigo-400">Artificiële Intelligentie</span>',
                 hero_subtitle: "Jouw complete gids om AI te begrijpen, te gebruiken en te beheersen. Van de basisprincipes tot geavanceerde tools, wij maken AI toegankelijk voor iedereen.",
@@ -465,6 +673,42 @@
                 for_whom_card4_title: "Voor in het Dagelijks Leven",
                 for_whom_card4_text: "Plan reizen, krijg gezonde recepten, vertaal talen direct of laat AI je helpen je financiën te organiseren.",
                 for_whom_coming_soon: "Binnenkort lanceren we een sectie met de beste AI-apps en tools, compleet met handige links om direct te starten!",
+                fact_fable_title: "AI: Feit of Fabel?",
+                fact_fable_subtitle: "We scheiden de hype van de realiteit. Ontdek de waarheid achter de meest hardnekkige mythes over Artificiële Intelligentie.",
+                fable1_title: "Fabel: \"AI gaat al onze banen afpakken.\"",
+                fact1_title: "Feit: AI transformeert banen, maar creëert ook nieuwe functies.",
+                fact1_text: "De geschiedenis leert ons dat technologische revoluties – van de stoommachine tot het internet – de arbeidsmarkt altijd hebben veranderd, niet vernietigd. AI is hierop geen uitzondering. Repetitieve en data-intensieve taken, zoals administratie, data-invoer en bepaalde analyses, zullen steeds vaker geautomatiseerd worden. Dit betekent echter niet dat de mensen die deze taken uitvoerden, overbodig worden. Het creëert juist een kans om hun vaardigheden te ontwikkelen en zich te richten op aspecten waar mensen in uitblinken: creativiteit, strategisch denken, emotionele intelligentie en complex probleemoplossend vermogen. Tegelijkertijd ontstaan er compleet nieuwe beroepen, zoals 'AI Ethics Officer', 'Prompt Engineer' en 'AI Trainer', functies die een paar jaar geleden nog ondenkbaar waren. De focus verschuift van 'doen' naar 'denken en creëren', waarbij AI een krachtig hulpmiddel wordt dat ons productiever en innovatiever maakt.",
+                fable2_title: "Fabel: \"AI is volledig objectief en onbevooroordeeld.\"",
+                fact2_title: "Feit: Een AI is net zo bevooroordeeld als de data waarop het getraind is.",
+                fact2_text: "Dit is een van de meest gevaarlijke misvattingen. Een AI-model heeft geen eigen bewustzijn, meningen of moraal; het is een complex wiskundig systeem dat patronen herkent in de data die wij het geven. Als die trainingsdata historische vooroordelen bevat – bijvoorbeeld data waaruit blijkt dat managers vaker man zijn, of dat bepaalde bevolkingsgroepen minder vaak een lening kregen – dan zal de AI deze patronen leren en reproduceren als objectieve waarheid. Dit kan leiden tot discriminerende uitkomsten in bijvoorbeeld sollicitatieprocedures, kredietaanvragen of zelfs medische diagnoses. Het 'opschonen' van data en het ontwikkelen van ethische richtlijnen is daarom een van de grootste uitdagingen binnen de AI-wereld. Bewustzijn van 'algorithmic bias' is cruciaal om te zorgen dat AI een eerlijke en rechtvaardige tool wordt voor iedereen.",
+                fable3_title: "Fabel: \"Een superintelligente AI die de wereld overneemt, is nabij.\"",
+                fact3_title: "Feit: We zijn nog ver verwijderd van Algemene Artificiële Intelligentie (AGI).",
+                fact3_text: "Hollywood-scenario's van kwaadaardige, zelfbewuste AI zijn voorlopig pure fictie. De AI die we vandaag de dag kennen, wordt 'Narrow AI' (Beperkte AI) genoemd. Deze systemen zijn extreem goed in één specifieke taak: een potje schaken winnen, een afbeelding genereren, of een tekst vertalen. Ze hebben echter geen begrip, bewustzijn of intentie. Een 'Algemene Artificiële Intelligentie' (AGI) – een AI die kan redeneren, leren en creatief zijn op een menselijk (of hoger) niveau over een breed scala aan onderwerpen – is de heilige graal van AI-onderzoek, maar de technologische en conceptuele hordes zijn immens. Hoewel de vooruitgang snel gaat, spreken de meeste experts over decennia, zo niet langer, voordat AGI een realistische mogelijkheid wordt. De huidige focus ligt op het verantwoord ontwikkelen van de krachtige 'Narrow AI' die we nu al hebben.",
+                future_title: "AI & de Toekomst van Werk",
+                future_subtitle: "Een interactieve tijdlijn met speculatieve voorspellingen over de impact van AI op de arbeidsmarkt. Klik op een periode voor meer details.",
+                timeline_title1: "2025-2028: De Eerste Golf",
+                timeline_desc1: "Automatisering van repetitieve taken",
+                timeline_detail_desc1: "In deze fase perfectioneren AI-systemen de automatisering van zeer voorspelbare, op regels gebaseerde taken. Dit leidt tot een aanzienlijke efficiëntieverbetering in veel backoffice-functies.",
+                timeline_jobs_title1: "Rollen met hoge impact:",
+                timeline_jobs1: ["Data-invoer medewerkers", "Administratief medewerkers", "Klantenservice (eenvoudige vragen)", "Content creatie (bulk social media posts)"],
+                timeline_title2: "2029-2032: Verfijning & Fysieke Wereld",
+                timeline_desc2: "AI wordt volwassener in complexe analyse en fysieke taken",
+                timeline_detail_desc2: "AI-modellen worden beter in het begrijpen van context en nuance. Tegelijkertijd maakt de vooruitgang in robotica en computer vision de automatisering van bepaalde fysieke taken mogelijk.",
+                timeline_jobs_title2: "Rollen met hoge impact:",
+                timeline_jobs2: ["Paralegals (documentanalyse)", "Junior accountants (audits)", "Vrachtwagen- en taxichauffeurs (autonoom rijden)", "Logistiek medewerkers (magazijnrobots)"],
+                timeline_title3: "2033-2037: Integratie in Expertise",
+                timeline_desc3: "AI wordt een co-piloot in specialistische beroepen",
+                timeline_detail_desc3: "AI is nu in staat om complexe patronen te herkennen die voor mensen moeilijk te zien zijn. Het wordt een onmisbare assistent voor experts, die diagnoses stelt, strategieën voorstelt en voorspellingen doet.",
+                timeline_jobs_title3: "Rollen met hoge impact:",
+                timeline_jobs3: ["Radiologen (beeldanalyse)", "Financieel analisten (marktvoorspelling)", "Softwareontwikkelaars (code-generatie en -optimalisatie)", "Marketeers (campagnestrategie)"],
+                timeline_title4: "2038+: Tijdperk van Augmentatie",
+                timeline_desc4: "Focus op mens-machine samenwerking",
+                timeline_detail_desc4: "De meeste beroepen zijn getransformeerd. De nadruk ligt niet langer op welke taken AI overneemt, maar op hoe mensen kunnen samenwerken met AI om resultaten te bereiken die voorheen onmogelijk waren. Menselijke vaardigheden zoals creativiteit, leiderschap en empathie worden belangrijker dan ooit.",
+                timeline_jobs_title4: "Getransformeerde velden:",
+                timeline_jobs4: ["Onderwijs (gepersonaliseerde leertrajecten)", "Gezondheidszorg (AI-ondersteunde chirurgie en diagnose)", "Wetenschappelijk onderzoek (hypothesegeneratie)", "Stedenbouw (simulatie en optimalisatie)"],
+                facts_title: "Willekeurige AI Weetjes",
+                facts_subtitle: "Een verzameling van 100 feiten, fabels en verrassende inzichten in de wereld van AI. Klik op de knop voor meer!",
+                facts_button: "Laad 5 Nieuwe Weetjes",
                 prompt_builder_title: "De Ultieme Prompt Bouwer",
                 prompt_builder_subtitle: "Creëer de perfecte, gedetailleerde prompt voor beeld- en video-AI. Kies een tool en begin met creëren.",
                 tab_logo: "Logo Generator",
@@ -527,8 +771,6 @@
                 cert_verified: "Geverifieerd door aileer.nl",
                 btn_share_x: "Deel op X",
                 share_text: "Ik heb net de AI Kennisquiz op aileer.nl gedaan en scoorde SCORE%! 🧠 Een geweldige site om meer over AI te leren. Check it out! @mcdropke #AI #ArtificieleIntelligentie",
-                news_title: "Laatste AI Nieuws",
-                news_subtitle: "Blijf op de hoogte van de snel veranderende wereld van AI met de laatste updates van Bright.nl.",
                 footer_text: "© 2024 aileer.nl - Gemaakt om AI voor iedereen toegankelijk te maken.",
                 magic_subject_label: "1. Kies een Onderwerp voor Inspiratie",
                 subject_animals: "Dieren",
@@ -542,6 +784,10 @@
                 gemini_button: "Inspireer Mij",
                 gemini_loading: "Laden...",
                 gemini_error_text: "Oeps, er ging iets mis. Probeer het opnieuw.",
+                gemini_suggestion1: "Zwevend eiland bij zonsondergang",
+                gemini_suggestion2: "Schattige robot geeft bloem water",
+                gemini_suggestion3: "Neon-verlichte straat in Tokio",
+                gemini_suggestion4: "Onderwaterstad van kristal",
                 tooltip_auto: "Vult de velden met een willekeurig, passend idee.",
                 tooltip_fun: "Vult de velden met een willekeurig, grappig idee.",
                 tooltip_copy_create: "Kopieert de prompt en opent de tool om de afbeelding te maken in een nieuw venster.",
@@ -551,26 +797,139 @@
                 lighting: "Belichting",
                 artist_style: "Artiest Stijl",
                 aspect_ratio: "Beeldverhouding",
-                btn_preview: "Genereer Preview",
-                preview_title: "Afbeelding Preview",
-                preview_generating: "Bezig met genereren...",
-                preview_error: "Kon de preview niet genereren. Probeer het opnieuw.",
-                btn_share_image: "Post de Afbeelding",
-                share_image_text: "Gemaakt met de AI Prompt Bouwer op aileer.nl! ✨ @mcdropke #AIArt #AI"
+                news_error: "Kon de nieuwsfeed niet laden. Probeer het later opnieuw.",
+                photography_title: "Mijn Fotografie Portfolio",
+                photography_subtitle: "Naast de wereld van AI, heb ik een passie voor fotografie. Ontdek mijn werk, vastgelegd vanuit de lucht. Alle beelden zijn echt en zonder het gebruik van generatieve AI.",
+                photography_button: "Bekijk mijn Portfolio",
+                next_page_for_whom: "Verder naar 'Voor Wie?'",
+                next_page_fact_fable: "Verder naar 'Feit of Fabel?'",
+                next_page_future: "Verder naar 'AI & Toekomst'",
+                next_page_facts: "Verder naar 'AI Weetjes'",
+                next_page_prompt_builder: "Probeer nu onze Tools!",
+                next_page_quiz: "Test je Kennis!",
+                next_page_photography: "Bekijk ook mijn Fotografie",
+                next_page_home: "Terug naar Home",
+                ai_facts: [
+                    "De term 'Artificiële Intelligentie' werd al in 1956 bedacht door computerwetenschapper John McCarthy.",
+                    "Fabel: AI kan emoties voelen. Feit: AI kan emoties herkennen en simuleren, maar voelt ze niet echt.",
+                    "Een AI-systeem genaamd Deep Blue versloeg in 1997 wereldkampioen schaken Garry Kasparov.",
+                    "Je smartphone-assistent (Siri, Google Assistant) is een vorm van 'Narrow AI', gespecialiseerd in één taak.",
+                    "AI wordt gebruikt om vervalsingen van beroemde schilderijen te identificeren door penseelstreken te analyseren.",
+                    "Er bestaat een AI die songteksten kan schrijven in de stijl van elke artiest.",
+                    "Fabel: AI is altijd neutraal. Feit: AI kan vooroordelen overnemen uit de data waarmee het is getraind.",
+                    "AI-algoritmes bepalen welke advertenties je online ziet, gebaseerd op je surfgedrag.",
+                    "Het menselijk brein bevat ongeveer 86 miljard neuronen. De krachtigste AI's hebben netwerken die hierbij in de buurt komen.",
+                    "In de landbouw wordt AI gebruikt om met drones de gezondheid van gewassen te monitoren.",
+                    "Een AI heeft een schilderij gemaakt ('Portret van Edmond de Belamy') dat voor meer dan €400.000 werd geveild.",
+                    "Fabel: Je hebt een supercomputer nodig voor AI. Feit: Veel AI-modellen kunnen op een gewone laptop draaien.",
+                    "AI kan helpen bij het sneller ontdekken van nieuwe medicijnen door moleculaire structuren te analyseren.",
+                    "Het 'zwarte doos'-probleem in AI verwijst naar het feit dat we soms niet precies weten hoe een AI tot een beslissing komt.",
+                    "AI kan dode talen helpen ontcijferen door patronen in oude teksten te herkennen.",
+                    "Generatieve AI kan volledig nieuwe, realistische menselijke gezichten creëren van mensen die nooit hebben bestaan.",
+                    "Fabel: AI zal de menselijke creativiteit volledig vervangen. Feit: AI is een krachtig hulpmiddel dat menselijke creativiteit kan versterken.",
+                    "Netflix gebruikt AI om je kijkgeschiedenis te analyseren en gepersonaliseerde aanbevelingen te doen.",
+                    "AI-modellen verbruiken enorme hoeveelheden energie tijdens het trainen, vergelijkbaar met het energieverbruik van een klein land.",
+                    "De Turing Test, voorgesteld door Alan Turing in 1950, test of een machine menselijke intelligentie kan vertonen.",
+                    "AI wordt ingezet om de ontbossing van het regenwoud te volgen via satellietbeelden.",
+                    "Er zijn AI-systemen die beter zijn in het herkennen van huidkanker dan menselijke dermatologen.",
+                    "Fabel: AI begrijpt wat het zegt. Feit: Taalmodellen zijn extreem goed in het voorspellen van het volgende woord, zonder echt begrip.",
+                    "De eerste chatbot, ELIZA, werd al in de jaren '60 ontwikkeld en simuleerde een psychotherapeut.",
+                    "AI kan helpen bij het voorspellen van aardbevingen door seismische data te analyseren.",
+                    "Zelfrijdende auto's gebruiken een combinatie van AI, sensoren en GPS om te navigeren.",
+                    "In Japan wordt AI gebruikt om te voorspellen welke ouderen een verhoogd risico hebben om te vallen.",
+                    "Fabel: AI leert op dezelfde manier als een mens. Feit: AI leert door wiskundige optimalisatie van enorme datasets.",
+                    "Een AI heeft geholpen bij het componeren van de 'onvoltooide' 10e symfonie van Beethoven.",
+                    "AI kan real-time vertalingen bieden tijdens een telefoongesprek.",
+                    "Spamfilters in je e-mail gebruiken AI om ongewenste berichten te identificeren.",
+                    "Sommige AI's kunnen kunst creëren door simpelweg een tekstbeschrijving te krijgen.",
+                    "Fabel: Alle robots gebruiken AI. Feit: Veel robots voeren alleen voorgeprogrammeerde taken uit zonder te leren.",
+                    "AI wordt gebruikt om de geluiden van walvissen te analyseren om hun migratiepatronen te begrijpen.",
+                    "De gaming-industrie gebruikt AI om niet-speelbare personages (NPC's) realistischer gedrag te geven.",
+                    "Er is een AI die juridische documenten kan doorzoeken en relevante informatie kan vinden sneller dan een team van advocaten.",
+                    "Fabel: AI is één enkele technologie. Feit: AI is een breed veld met vele subdisciplines zoals machine learning en deep learning.",
+                    "AI-algoritmes kunnen helpen bij het optimaliseren van verkeerslichten in een stad om files te verminderen.",
+                    "Deepfake-technologie, aangedreven door AI, kan iemands gezicht overtuigend op een andere video plaatsen.",
+                    "AI kan helpen bij het personaliseren van onderwijs door lesmateriaal aan te passen aan het niveau van de student.",
+                    "Een neuraal netwerk is een type AI dat is geïnspireerd op de structuur van het menselijk brein.",
+                    "Fabel: AI-beslissingen zijn altijd logisch. Feit: Soms komt een AI tot een correcte, maar voor mensen onlogische conclusie.",
+                    "AI wordt gebruikt in de mode-industrie om nieuwe kledingontwerpen te genereren.",
+                    "Google's zoekmachine gebruikt een AI genaamd RankBrain om de zoekresultaten te verbeteren.",
+                    "AI kan de emotie in iemands stem herkennen.",
+                    "De hoeveelheid data die nodig is om een groot taalmodel te trainen kan oplopen tot honderden terabytes.",
+                    "Fabel: AI kan zelfstandig nieuwe doelen voor zichzelf stellen. Feit: AI werkt binnen de doelen en beperkingen die door mensen zijn ingesteld.",
+                    "AI wordt gebruikt om de beste locaties voor nieuwe wind- of zonneparken te bepalen.",
+                    "Sommige boeren gebruiken AI-gestuurde tractoren die autonoom het land kunnen bewerken.",
+                    "AI-modellen kunnen 'hallucineren', wat betekent dat ze feitelijk onjuiste informatie met overtuiging presenteren.",
+                    "De programmeertaal Python is de meest populaire taal voor AI-ontwikkeling.",
+                    "Fabel: AI is onfeilbaar. Feit: AI maakt fouten, vooral als het geconfronteerd wordt met onverwachte situaties.",
+                    "AI-aangedreven camera's kunnen helpen bij het opsporen van bosbranden voordat ze groot worden.",
+                    "Er zijn AI's die kunnen 'dromen' door willekeurige patronen te genereren op basis van hun training.",
+                    "AI kan helpen bij het opsporen van online pestgedrag op sociale media.",
+                    "Reinforcement Learning is een type AI waarbij het model leert door beloningen en straffen, net als een dier.",
+                    "Fabel: AI heeft een bewustzijn. Feit: Er is geen wetenschappelijk bewijs dat enige vorm van AI bewustzijn heeft.",
+                    "AI wordt gebruikt om de luchtkwaliteit in steden te voorspellen.",
+                    "Sommige hedgefondsen gebruiken AI om aandelenkoersen te voorspellen en transacties uit te voeren.",
+                    "Een 'digitale tweeling' is een door AI aangedreven simulatie van een fysiek object, zoals een motor of een heel gebouw.",
+                    "AI kan songteksten analyseren om de emotionele lading van een nummer te bepalen.",
+                    "Fabel: AI-ontwikkeling is nieuw. Feit: De theoretische basis werd al in de jaren '40 en '50 gelegd.",
+                    "In de sport wordt AI gebruikt om de prestaties van atleten te analyseren en trainingsschema's te optimaliseren.",
+                    "AI kan helpen bij het ontwerpen van efficiëntere vliegtuigvleugels.",
+                    "Generative Adversarial Networks (GANs) bestaan uit twee AI's die tegen elkaar strijden om beter te worden.",
+                    "AI kan helpen bij het sneller diagnosticeren van ziekten zoals Alzheimer via hersenscans.",
+                    "Fabel: Je praat altijd met een mens bij de klantenservice. Feit: Veel chats worden (deels) afgehandeld door AI-chatbots.",
+                    "AI kan op basis van je boodschappenlijstje recepten voor de hele week voorstellen.",
+                    "De processor in je computer die speciaal is ontworpen voor AI-taken wordt een NPU (Neural Processing Unit) genoemd.",
+                    "AI wordt gebruikt om het gedrag van mierenkolonies te bestuderen om logistieke processen te verbeteren.",
+                    "Sommige AI's kunnen computercode schrijven op basis van een eenvoudige beschrijving in mensentaal.",
+                    "Fabel: AI kan de toekomst voorspellen. Feit: AI kan voorspellingen doen op basis van data, maar kan niet met zekerheid de toekomst kennen.",
+                    "AI kan helpen bij het creëren van ultra-gepersonaliseerde advertenties.",
+                    "Er zijn AI-systemen die de lipbewegingen van een persoon kunnen lezen met een hogere nauwkeurigheid dan mensen.",
+                    "AI kan helpen bij het identificeren van 'fake news' door de bron en de inhoud van artikelen te analyseren.",
+                    "Het trainen van één enkel groot AI-model kan meer dan 10 miljoen euro kosten.",
+                    "Fabel: AI is altijd complex. Feit: Een simpel 'if-then' statement kan technisch gezien als een zeer basale vorm van AI worden beschouwd.",
+                    "AI wordt gebruikt om de uitstoot van fabrieken te monitoren en te optimaliseren.",
+                    "AI kan helpen om verloren huisdieren terug te vinden via gezichtsherkenning op camerabeelden.",
+                    "De 'Uncanny Valley' is een term die het ongemakkelijke gevoel beschrijft als een robot of animatie bijna, maar niet helemaal, menselijk lijkt.",
+                    "AI-algoritmes kunnen de stijl van een schilderij (zoals Van Gogh) toepassen op een gewone foto.",
+                    "Fabel: AI kan creatief zijn zonder input. Feit: AI's 'creativiteit' is gebaseerd op het remixen en herinterpreteren van de data waarop het getraind is.",
+                    "AI wordt gebruikt om het risico op fraude bij creditcardtransacties in real-time te beoordelen.",
+                    "Er zijn AI-programma's die debatten kunnen voeren met menselijke experts.",
+                    "AI kan helpen bij het ontwerpen van gebouwen die beter bestand zijn tegen aardbevingen.",
+                    "De 'aandachtsmechanisme' in moderne AI's stelt ze in staat zich te 'focussen' op de belangrijkste delen van de input.",
+                    "Fabel: AI-systemen kunnen zichzelf oneindig verbeteren. Feit: Ze zijn beperkt door hun architectuur en de kwaliteit van de data.",
+                    "AI kan worden gebruikt om de authenticiteit van handtekeningen te verifiëren.",
+                    "AI-modellen die op tekst zijn getraind, kunnen vaak ook redeneren over computercode.",
+                    "Sommige restaurants gebruiken AI om de vraag naar ingrediënten te voorspellen en voedselverspilling te verminderen.",
+                    "Een AI was de eerste die een nieuwe, wiskundige stelling bewees zonder menselijke hulp.",
+                    "Fabel: AI is hetzelfde als data science. Feit: Data science is een breder veld; AI is een van de tools die data scientists gebruiken.",
+                    "AI wordt gebruikt om de optimale route voor bezorgdiensten te berekenen, wat tijd en brandstof bespaart.",
+                    "De 'Transformer'-architectuur, geïntroduceerd in 2017, was een grote doorbraak die moderne taalmodellen zoals GPT mogelijk maakte.",
+                    "AI kan helpen bij het herstellen van beschadigde of oude foto's.",
+                    "Een 'prompt' is de instructie die je aan een generatieve AI geeft.",
+                    "Fabel: AI begrijpt ironie en sarcasme perfect. Feit: Hoewel ze beter worden, is het begrijpen van subtiele menselijke communicatie nog steeds een grote uitdaging.",
+                    "AI wordt gebruikt om de slaappatronen van mensen te analyseren via smartwatches en fitness trackers.",
+                    "Het grootste deel van het 'werk' van een AI is het uitvoeren van miljarden simpele wiskundige berekeningen.",
+                    "AI kan helpen bij het voorspellen van stroomuitval door het analyseren van het elektriciteitsnet."
+                ]
             },
             'en': {
                 site_title: "AI Learn - Your Guide to the World of Artificial Intelligence",
-                site_description: "AI Learn is your starting point to learn everything about Artificial Intelligence. Discover the possibilities, use our unique Prompt Builder with live image previews, and test your knowledge with the AI Quiz.",
-                site_keywords: "AI, Artificial Intelligence, Learning, Prompt Builder, AI Quiz, English, AI for beginners, AI applications, Logo Generator, Avatar Maker, Story Generator, Image Generator, Gemini API",
+                site_description: "AI Learn is your starting point to learn everything about Artificial Intelligence. Discover the possibilities, use our unique Prompt Builder, and explore the future of AI.",
+                site_keywords: "AI, Artificial Intelligence, Learning, Prompt Builder, AI Quiz, English, AI for beginners, AI applications, AI Facts, Logo Generator, Avatar Maker, Story Generator, Image Generator, Gemini API, AI Future, AI Jobs",
                 og_title: "AI Learn - Your Guide to the World of Artificial Intelligence",
-                og_description: "Discover the possibilities of AI, use our unique Prompt Builder with live image previews, and test your knowledge.",
+                og_description: "Discover the possibilities of AI, use our unique Prompt Builder, and explore the future of AI.",
                 twitter_title: "AI Learn - Your Guide to the World of Artificial Intelligence",
-                twitter_description: "Discover the possibilities of AI, use our unique Prompt Builder with live image previews, and test your knowledge.",
+                twitter_description: "Discover the possibilities of AI, use our unique Prompt Builder, and explore the future of AI.",
+                nav_learn_ai: "Learn about AI",
+                nav_tools: "Tools & Interaction",
                 nav_what_is_ai: "What is AI?",
                 nav_for_whom: "For Whom?",
                 nav_prompt_builder: "Prompt Builder",
+                nav_photography: "Photography",
                 nav_quiz: "AI Quiz",
-                nav_news: "News",
+                nav_fact_fable: "Fact or Fable?",
+                nav_future: "AI & Future",
+                nav_facts: "AI Facts",
                 btn_start_now: "Start now",
                 hero_title: 'Unlock the Power of <span class="text-indigo-400">Artificial Intelligence</span>',
                 hero_subtitle: "Your complete guide to understand, use, and master AI. From basic principles to advanced tools, we make AI accessible to everyone.",
@@ -594,6 +953,42 @@
                 for_whom_card4_title: "For Everyday Life",
                 for_whom_card4_text: "Plan trips, get healthy recipes, translate languages instantly, or let AI help organize your finances.",
                 for_whom_coming_soon: "Soon we will launch a section with the best AI apps and tools, complete with useful links to get started right away!",
+                fact_fable_title: "AI: Fact or Fable?",
+                fact_fable_subtitle: "We separate the hype from reality. Discover the truth behind the most persistent myths about Artificial Intelligence.",
+                fable1_title: "Fable: \"AI will take all our jobs.\"",
+                fact1_title: "Fact: AI transforms jobs, but also creates new roles.",
+                fact1_text: "History teaches us that technological revolutions—from the steam engine to the internet—have always changed the labor market, not destroyed it. AI is no exception. Repetitive and data-intensive tasks, such as administration, data entry, and certain analyses, will be increasingly automated. However, this does not mean that the people performing these tasks become redundant. It creates an opportunity to develop their skills and focus on aspects where humans excel: creativity, strategic thinking, emotional intelligence, and complex problem-solving. At the same time, entirely new professions are emerging, such as 'AI Ethics Officer', 'Prompt Engineer', and 'AI Trainer'—jobs that were unimaginable a few years ago. The focus is shifting from 'doing' to 'thinking and creating', with AI becoming a powerful tool that makes us more productive and innovative.",
+                fable2_title: "Fable: \"AI is completely objective and unbiased.\"",
+                fact2_title: "Fact: An AI is just as biased as the data it was trained on.",
+                fact2_text: "This is one of the most dangerous misconceptions. An AI model has no consciousness, opinions, or morals; it is a complex mathematical system that recognizes patterns in the data we provide. If that training data contains historical biases—for example, data showing that managers are more often male, or that certain population groups were less likely to receive a loan—the AI will learn and reproduce these patterns as objective truth. This can lead to discriminatory outcomes in, for example, job applications, credit applications, or even medical diagnoses. 'Cleaning' data and developing ethical guidelines is therefore one of the biggest challenges in the AI world. Awareness of 'algorithmic bias' is crucial to ensure that AI becomes a fair and just tool for everyone.",
+                fable3_title: "Fable: \"A superintelligent AI that will take over the world is imminent.\"",
+                fact3_title: "Fact: We are still a long way from Artificial General Intelligence (AGI).",
+                fact3_text: "Hollywood scenarios of malevolent, self-aware AI are, for now, pure fiction. The AI we know today is called 'Narrow AI'. These systems are extremely good at one specific task: winning a game of chess, generating an image, or translating a text. However, they have no understanding, consciousness, or intention. 'Artificial General Intelligence' (AGI)—an AI that can reason, learn, and be creative at a human (or higher) level across a wide range of subjects—is the holy grail of AI research, but the technological and conceptual hurdles are immense. Although progress is rapid, most experts talk about decades, if not longer, before AGI becomes a realistic possibility. The current focus is on the responsible development of the powerful 'Narrow AI' we already have.",
+                future_title: "AI & the Future of Work",
+                future_subtitle: "An interactive timeline with speculative predictions about the impact of AI on the job market. Click on a period for more details.",
+                timeline_title1: "2025-2028: The First Wave",
+                timeline_desc1: "Automation of repetitive tasks",
+                timeline_detail_desc1: "In this phase, AI systems are perfecting the automation of highly predictable, rule-based tasks. This leads to significant efficiency improvements in many back-office functions.",
+                timeline_jobs_title1: "High-impact roles:",
+                timeline_jobs1: ["Data entry clerks", "Administrative assistants", "Customer service (simple inquiries)", "Content creation (bulk social media posts)"],
+                timeline_title2: "2029-2032: Refinement & Physical World",
+                timeline_desc2: "AI matures in complex analysis and physical tasks",
+                timeline_detail_desc2: "AI models become better at understanding context and nuance. Simultaneously, advances in robotics and computer vision enable the automation of certain physical tasks.",
+                timeline_jobs_title2: "High-impact roles:",
+                timeline_jobs2: ["Paralegals (document analysis)", "Junior accountants (audits)", "Truck and taxi drivers (autonomous driving)", "Logistics workers (warehouse robots)"],
+                timeline_title3: "2033-2037: Integration into Expertise",
+                timeline_desc3: "AI becomes a co-pilot in specialized professions",
+                timeline_detail_desc3: "AI is now able to recognize complex patterns that are difficult for humans to see. It becomes an indispensable assistant for experts, making diagnoses, proposing strategies, and making predictions.",
+                timeline_jobs_title3: "High-impact roles:",
+                timeline_jobs3: ["Radiologists (image analysis)", "Financial analysts (market forecasting)", "Software developers (code generation and optimization)", "Marketers (campaign strategy)"],
+                timeline_title4: "2038+: The Age of Augmentation",
+                timeline_desc4: "Focus on human-machine collaboration",
+                timeline_detail_desc4: "Most professions have been transformed. The emphasis is no longer on which tasks AI takes over, but on how humans can collaborate with AI to achieve results that were previously impossible. Human skills such as creativity, leadership, and empathy become more important than ever.",
+                timeline_jobs_title4: "Transformed fields:",
+                timeline_jobs4: ["Education (personalized learning paths)", "Healthcare (AI-assisted surgery and diagnosis)", "Scientific research (hypothesis generation)", "Urban planning (simulation and optimization)"],
+                facts_title: "Random AI Facts",
+                facts_subtitle: "A collection of 100 facts, fables, and surprising insights into the world of AI. Click the button for more!",
+                facts_button: "Load 5 New Facts",
                 prompt_builder_title: "The Ultimate Prompt Builder",
                 prompt_builder_subtitle: "Create the perfect, detailed prompt for image and video AI. Choose a tool and start creating.",
                 tab_logo: "Logo Generator",
@@ -656,8 +1051,6 @@
                 cert_verified: "Verified by aileer.nl",
                 btn_share_x: "Share on X",
                 share_text: "I just took the AI Knowledge Quiz on aileer.nl and scored SCORE%%! 🧠 A great site to learn more about AI. Check it out! @mcdropke #AI #ArtificialIntelligence",
-                news_title: "Latest AI News",
-                news_subtitle: "Stay up to date with the rapidly changing world of AI with the latest updates from Bright.nl.",
                 footer_text: "© 2024 aileer.nl - Made to make AI accessible for everyone.",
                 magic_subject_label: "1. Choose a Subject for Inspiration",
                 subject_animals: "Animals",
@@ -671,6 +1064,10 @@
                 gemini_button: "Inspire Me",
                 gemini_loading: "Loading...",
                 gemini_error_text: "Oops, something went wrong. Please try again.",
+                gemini_suggestion1: "Floating island at sunset",
+                gemini_suggestion2: "Cute robot watering a flower",
+                gemini_suggestion3: "Neon-lit street in Tokyo",
+                gemini_suggestion4: "Underwater city of crystal",
                 tooltip_auto: "Fills the fields with a random, suitable idea.",
                 tooltip_fun: "Fills the fields with a random, funny idea.",
                 tooltip_copy_create: "Copies the prompt and opens the tool to create the image in a new window.",
@@ -680,26 +1077,139 @@
                 lighting: "Lighting",
                 artist_style: "Artist Style",
                 aspect_ratio: "Aspect Ratio",
-                btn_preview: "Generate Preview",
-                preview_title: "Image Preview",
-                preview_generating: "Generating...",
-                preview_error: "Could not generate preview. Please try again.",
-                btn_share_image: "Post the Picture",
-                share_image_text: "Created with the AI Prompt Builder on aileer.nl! ✨ @mcdropke #AIArt #AI"
+                news_error: "Could not load the news feed. Please try again later.",
+                photography_title: "My Photography Portfolio",
+                photography_subtitle: "Besides the world of AI, I have a passion for photography. Discover my work, captured from the sky. All images are real and without the use of generative AI.",
+                photography_button: "View my Portfolio",
+                next_page_for_whom: "Next: 'For Whom?'",
+                next_page_fact_fable: "Next: 'Fact or Fable?'",
+                next_page_future: "Next: 'AI & Future'",
+                next_page_facts: "Next: 'AI Facts'",
+                next_page_prompt_builder: "Now try our Tools!",
+                next_page_quiz: "Test Your Knowledge!",
+                next_page_photography: "Also check out my Photography",
+                next_page_home: "Back to Home",
+                ai_facts: [
+                    "The term 'Artificial Intelligence' was coined by computer scientist John McCarthy in 1956.",
+                    "Fable: AI can feel emotions. Fact: AI can recognize and simulate emotions, but doesn't actually feel them.",
+                    "An AI system named Deep Blue defeated world chess champion Garry Kasparov in 1997.",
+                    "Your smartphone assistant (Siri, Google Assistant) is a form of 'Narrow AI', specialized in one task.",
+                    "AI is used to identify forgeries of famous paintings by analyzing brushstrokes.",
+                    "There's an AI that can write song lyrics in the style of any artist.",
+                    "Fable: AI is always neutral. Fact: AI can inherit biases from the data it's trained on.",
+                    "AI algorithms determine which ads you see online based on your browsing behavior.",
+                    "The human brain contains about 86 billion neurons. The most powerful AIs have networks that approach this scale.",
+                    "In agriculture, AI is used with drones to monitor crop health.",
+                    "An AI-created painting ('Portrait of Edmond de Belamy') was auctioned for over $400,000.",
+                    "Fable: You need a supercomputer for AI. Fact: Many AI models can run on a standard laptop.",
+                    "AI can help discover new drugs faster by analyzing molecular structures.",
+                    "The 'black box' problem in AI refers to the fact that we sometimes don't know exactly how an AI reaches a decision.",
+                    "AI can help decipher dead languages by recognizing patterns in ancient texts.",
+                    "Generative AI can create completely new, realistic human faces of people who have never existed.",
+                    "Fable: AI will completely replace human creativity. Fact: AI is a powerful tool that can augment human creativity.",
+                    "Netflix uses AI to analyze your viewing history and make personalized recommendations.",
+                    "AI models consume enormous amounts of energy during training, comparable to the energy consumption of a small country.",
+                    "The Turing Test, proposed by Alan Turing in 1950, tests if a machine can exhibit human-like intelligence.",
+                    "AI is used to track deforestation of the rainforest via satellite imagery.",
+                    "Some AI systems are better at identifying skin cancer than human dermatologists.",
+                    "Fable: AI understands what it's saying. Fact: Language models are extremely good at predicting the next word, without true comprehension.",
+                    "The first chatbot, ELIZA, was developed in the 1960s and simulated a psychotherapist.",
+                    "AI can help predict earthquakes by analyzing seismic data.",
+                    "Self-driving cars use a combination of AI, sensors, and GPS to navigate.",
+                    "In Japan, AI is used to predict which elderly people are at a higher risk of falling.",
+                    "Fable: AI learns the same way a human does. Fact: AI learns through mathematical optimization of huge datasets.",
+                    "An AI helped complete Beethoven's 'unfinished' 10th symphony.",
+                    "AI can provide real-time translation during a phone call.",
+                    "Spam filters in your email use AI to identify unwanted messages.",
+                    "Some AIs can create art simply from a text description.",
+                    "Fable: All robots use AI. Fact: Many robots only perform pre-programmed tasks without learning.",
+                    "AI is used to analyze the sounds of whales to understand their migration patterns.",
+                    "The gaming industry uses AI to give non-playable characters (NPCs) more realistic behavior.",
+                    "There's an AI that can search legal documents and find relevant information faster than a team of lawyers.",
+                    "Fable: AI is a single technology. Fact: AI is a broad field with many sub-disciplines like machine learning and deep learning.",
+                    "AI algorithms can help optimize traffic lights in a city to reduce congestion.",
+                    "Deepfake technology, powered by AI, can convincingly place someone's face onto another video.",
+                    "AI can help personalize education by adapting learning material to a student's level.",
+                    "A neural network is a type of AI inspired by the structure of the human brain.",
+                    "Fable: AI decisions are always logical. Fact: Sometimes an AI arrives at a correct, but to humans, illogical conclusion.",
+                    "AI is used in the fashion industry to generate new clothing designs.",
+                    "Google's search engine uses an AI called RankBrain to improve search results.",
+                    "AI can recognize the emotion in someone's voice.",
+                    "The amount of data needed to train a large language model can be hundreds of terabytes.",
+                    "Fable: AI can set new goals for itself. Fact: AI operates within the goals and constraints set by humans.",
+                    "AI is used to determine the best locations for new wind or solar farms.",
+                    "Some farmers use AI-driven tractors that can autonomously work the land.",
+                    "AI models can 'hallucinate', meaning they present factually incorrect information with conviction.",
+                    "The Python programming language is the most popular language for AI development.",
+                    "Fable: AI is infallible. Fact: AI makes mistakes, especially when faced with unexpected situations.",
+                    "AI-powered cameras can help detect forest fires before they grow large.",
+                    "Some AIs can 'dream' by generating random patterns based on their training.",
+                    "AI can help detect online bullying on social media.",
+                    "Reinforcement Learning is a type of AI where the model learns through rewards and punishments, much like an animal.",
+                    "Fable: AI has consciousness. Fact: There is no scientific evidence that any form of AI has consciousness.",
+                    "AI is used to predict air quality in cities.",
+                    "Some hedge funds use AI to predict stock prices and execute trades.",
+                    "A 'digital twin' is an AI-powered simulation of a physical object, like an engine or an entire building.",
+                    "AI can analyze song lyrics to determine the emotional tone of a song.",
+                    "Fable: AI development is new. Fact: The theoretical foundations were laid in the 1940s and 50s.",
+                    "In sports, AI is used to analyze athlete performance and optimize training schedules.",
+                    "AI can help design more efficient airplane wings.",
+                    "Generative Adversarial Networks (GANs) consist of two AIs competing against each other to improve.",
+                    "AI can help diagnose diseases like Alzheimer's faster through brain scans.",
+                    "Fable: You're always talking to a human in customer service. Fact: Many chats are (partially) handled by AI chatbots.",
+                    "AI can suggest recipes for the whole week based on your shopping list.",
+                    "The processor in your computer specially designed for AI tasks is called an NPU (Neural Processing Unit).",
+                    "AI is used to study the behavior of ant colonies to improve logistics processes.",
+                    "Some AIs can write computer code from a simple description in natural language.",
+                    "Fable: AI can predict the future. Fact: AI can make predictions based on data, but cannot know the future with certainty.",
+                    "AI can help create ultra-personalized advertisements.",
+                    "There are AI systems that can read a person's lip movements with higher accuracy than humans.",
+                    "AI can help identify 'fake news' by analyzing the source and content of articles.",
+                    "Training a single large AI model can cost more than 10 million euros.",
+                    "Fable: AI is always complex. Fact: A simple 'if-then' statement can technically be considered a very basic form of AI.",
+                    "AI is used to monitor and optimize factory emissions.",
+                    "AI can help find lost pets through facial recognition on camera footage.",
+                    "The 'Uncanny Valley' is a term describing the unsettling feeling when a robot or animation looks almost, but not quite, human.",
+                    "AI algorithms can apply the style of a painting (like Van Gogh) to an ordinary photo.",
+                    "Fable: AI can be creative without input. Fact: AI's 'creativity' is based on remixing and reinterpreting the data it was trained on.",
+                    "AI is used to assess the risk of fraud in credit card transactions in real-time.",
+                    "There are AI programs that can conduct debates with human experts.",
+                    "AI can help design buildings that are more resistant to earthquakes.",
+                    "The 'attention mechanism' in modern AIs allows them to 'focus' on the most important parts of the input.",
+                    "Fable: AI systems can improve themselves indefinitely. Fact: They are limited by their architecture and the quality of the data.",
+                    "AI can be used to verify the authenticity of signatures.",
+                    "AI models trained on text can often also reason about computer code.",
+                    "Some restaurants use AI to predict demand for ingredients and reduce food waste.",
+                    "An AI was the first to prove a new mathematical theorem without human assistance.",
+                    "Fable: AI is the same as data science. Fact: Data science is a broader field; AI is one of the tools data scientists use.",
+                    "AI is used to calculate the optimal route for delivery services, saving time and fuel.",
+                    "The 'Transformer' architecture, introduced in 2017, was a major breakthrough that enabled modern language models like GPT.",
+                    "AI can help restore damaged or old photos.",
+                    "A 'prompt' is the instruction you give to a generative AI.",
+                    "Fable: AI perfectly understands irony and sarcasm. Fact: Although they are improving, understanding subtle human communication is still a major challenge.",
+                    "AI is used to analyze people's sleep patterns via smartwatches and fitness trackers.",
+                    "The majority of an AI's 'work' is performing billions of simple mathematical calculations.",
+                    "AI can help predict power outages by analyzing the electricity grid."
+                ]
             },
             'de': {
                 site_title: "KI Lernen - Ihr Leitfaden in die Welt der Künstlichen Intelligenz",
-                site_description: "KI Lernen ist Ihr Ausgangspunkt, um alles über Künstliche Intelligenz zu lernen. Entdecken Sie die Möglichkeiten, nutzen Sie unseren einzigartigen Prompt-Builder mit Live-Bildvorschauen und testen Sie Ihr Wissen mit dem KI-Quiz.",
-                site_keywords: "KI, Künstliche Intelligenz, Lernen, Prompt Builder, KI Quiz, Deutsch, KI-Anwendungen, Logo Generator, Avatar Ersteller, Story Generator, Bildgenerator, Gemini API",
+                site_description: "KI Lernen ist Ihr Ausgangspunkt, um alles über Künstliche Intelligenz zu lernen. Entdecken Sie die Möglichkeiten, nutzen Sie unseren einzigartigen Prompt-Builder, und entdecken Sie die Zukunft der KI.",
+                site_keywords: "KI, Künstliche Intelligenz, Lernen, Prompt Builder, KI Quiz, Deutsch, KI-Anwendungen, KI Fakten, Logo Generator, Avatar Ersteller, Story Generator, Bildgenerator, Gemini API, KI Zukunft, KI Jobs",
                 og_title: "KI Lernen - Ihr Leitfaden in die Welt der Künstlichen Intelligenz",
-                og_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder mit Live-Bildvorschauen und testen Sie Ihr Wissen.",
+                og_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder, und entdecken Sie die Zukunft der KI.",
                 twitter_title: "KI Lernen - Ihr Leitfaden in die Welt der Künstlichen Intelligenz",
-                twitter_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder mit Live-Bildvorschauen und testen Sie Ihr Wissen.",
+                twitter_description: "Entdecken Sie die Möglichkeiten der KI, nutzen Sie unseren einzigartigen Prompt-Builder, und entdecken Sie die Zukunft der KI.",
+                nav_learn_ai: "Über KI lernen",
+                nav_tools: "Tools & Interaktion",
                 nav_what_is_ai: "Was ist KI?",
                 nav_for_whom: "Für Wen?",
                 nav_prompt_builder: "Prompt-Builder",
+                nav_photography: "Fotografie",
                 nav_quiz: "KI-Quiz",
-                nav_news: "Nachrichten",
+                nav_fact_fable: "Fakt oder Fabel?",
+                nav_future: "KI & Zukunft",
+                nav_facts: "KI-Fakten",
                 btn_start_now: "Jetzt starten",
                 hero_title: 'Entfesseln Sie die Kraft der <span class="text-indigo-400">Künstlichen Intelligenz</span>',
                 hero_subtitle: "Ihr vollständiger Leitfaden, um KI zu verstehen, zu nutzen und zu meistern. Von den Grundlagen bis zu fortgeschrittenen Werkzeugen machen wir KI für jeden zugänglich.",
@@ -723,6 +1233,42 @@
                 for_whom_card4_title: "Für den Alltag",
                 for_whom_card4_text: "Planen Sie Reisen, erhalten Sie gesunde Rezepte, übersetzen Sie Sprachen sofort oder lassen Sie sich von KI bei der Organisation Ihrer Finanzen helfen.",
                 for_whom_coming_soon: "In Kürze starten wir einen Bereich mit den besten KI-Apps und -Tools, komplett mit praktischen Links für den direkten Einstieg!",
+                fact_fable_title: "KI: Fakt oder Fabel?",
+                fact_fable_subtitle: "Wir trennen den Hype von der Realität. Entdecken Sie die Wahrheit hinter den hartnäckigsten Mythen über Künstliche Intelligenz.",
+                fable1_title: "Fabel: \"KI wird alle unsere Jobs übernehmen.\"",
+                fact1_title: "Fakt: KI transformiert Jobs, schafft aber auch neue Rollen.",
+                fact1_text: "Die Geschichte lehrt uns, dass technologische Revolutionen – von der Dampfmaschine bis zum Internet – den Arbeitsmarkt immer verändert, aber nicht zerstört haben. KI ist da keine Ausnahme. Repetitive und datenintensive Aufgaben wie Verwaltung, Dateneingabe und bestimmte Analysen werden zunehmend automatisiert. Das bedeutet jedoch nicht, dass die Menschen, die diese Aufgaben erledigen, überflüssig werden. Es schafft vielmehr die Möglichkeit, ihre Fähigkeiten weiterzuentwickeln und sich auf Aspekte zu konzentrieren, in denen Menschen überragen: Kreativität, strategisches Denken, emotionale Intelligenz und komplexe Problemlösung. Gleichzeitig entstehen völlig neue Berufe wie 'KI-Ethikbeauftragter', 'Prompt-Ingenieur' und 'KI-Trainer' – Berufe, die vor wenigen Jahren noch unvorstellbar waren. Der Fokus verschiebt sich vom 'Tun' zum 'Denken und Schaffen', wobei KI zu einem mächtigen Werkzeug wird, das uns produktiver und innovativer macht.",
+                fable2_title: "Fabel: \"KI ist völlig objektiv und unvoreingenommen.\"",
+                fact2_title: "Fakt: Eine KI ist nur so unvoreingenommen wie die Daten, mit denen sie trainiert wurde.",
+                fact2_text: "Dies ist eine der gefährlichsten Fehleinschätzungen. Ein KI-Modell hat kein eigenes Bewusstsein, keine Meinungen oder Moral; es ist ein komplexes mathematisches System, das Muster in den von uns bereitgestellten Daten erkennt. Wenn diese Trainingsdaten historische Vorurteile enthalten – zum Beispiel Daten, die zeigen, dass Manager häufiger männlich sind oder bestimmte Bevölkerungsgruppen seltener einen Kredit erhalten haben – wird die KI diese Muster als objektive Wahrheit lernen und reproduzieren. Dies kann zu diskriminierenden Ergebnissen führen, beispielsweise bei Bewerbungsverfahren, Kreditanträgen oder sogar medizinischen Diagnosen. Das 'Säubern' von Daten und die Entwicklung ethischer Richtlinien gehören daher zu den größten Herausforderungen in der KI-Welt. Das Bewusstsein für 'algorithmische Voreingenommenheit' ist entscheidend, um sicherzustellen, dass KI ein faires und gerechtes Werkzeug für alle wird.",
+                fable3_title: "Fabel: \"Eine superintelligente KI, die die Welt übernimmt, steht kurz bevor.\"",
+                fact3_title: "Fakt: Wir sind noch weit von einer Allgemeinen Künstlichen Intelligenz (AGI) entfernt.",
+                fact3_text: "Hollywood-Szenarien von bösartiger, selbstbewusster KI sind vorerst reine Fiktion. Die KI, die wir heute kennen, wird als 'Enge KI' (Narrow AI) bezeichnet. Diese Systeme sind extrem gut in einer bestimmten Aufgabe: eine Partie Schach gewinnen, ein Bild generieren oder einen Text übersetzen. Sie haben jedoch kein Verständnis, kein Bewusstsein und keine Absicht. Eine 'Allgemeine Künstliche Intelligenz' (AGI) – eine KI, die auf menschlichem (oder höherem) Niveau über ein breites Themenspektrum hinweg logisch denken, lernen und kreativ sein kann – ist der heilige Gral der KI-Forschung, aber die technologischen und konzeptionellen Hürden sind immens. Obwohl der Fortschritt schnell ist, sprechen die meisten Experten von Jahrzehnten, wenn nicht länger, bevor AGI eine realistische Möglichkeit wird. Der aktuelle Fokus liegt auf der verantwortungsvollen Entwicklung der leistungsstarken 'Engen KI', die wir bereits haben.",
+                future_title: "KI & die Zukunft der Arbeit",
+                future_subtitle: "Eine interaktive Zeitleiste mit spekulativen Vorhersagen über die Auswirkungen der KI auf den Arbeitsmarkt. Klicken Sie auf einen Zeitraum für weitere Details.",
+                timeline_title1: "2025-2028: Die erste Welle",
+                timeline_desc1: "Automatisierung von repetitiven Aufgaben",
+                timeline_detail_desc1: "In dieser Phase perfektionieren KI-Systeme die Automatisierung von sehr vorhersagbaren, regelbasierten Aufgaben. Dies führt zu einer erheblichen Effizienzsteigerung in vielen Backoffice-Funktionen.",
+                timeline_jobs_title1: "Rollen mit hohem Einfluss:",
+                timeline_jobs1: ["Dateneingabe-Mitarbeiter", "Verwaltungsassistenten", "Kundendienst (einfache Anfragen)", "Content-Erstellung (Massen-Social-Media-Beiträge)"],
+                timeline_title2: "2029-2032: Verfeinerung & Physische Welt",
+                timeline_desc2: "KI wird bei komplexen Analysen und physischen Aufgaben ausgereifter",
+                timeline_detail_desc2: "KI-Modelle werden besser darin, Kontext und Nuancen zu verstehen. Gleichzeitig ermöglichen Fortschritte in der Robotik und Computer Vision die Automatisierung bestimmter physischer Aufgaben.",
+                timeline_jobs_title2: "Rollen mit hohem Einfluss:",
+                timeline_jobs2: ["Rechtsanwaltsfachangestellte (Dokumentenanalyse)", "Junior-Buchhalter (Prüfungen)", "LKW- und Taxifahrer (autonomes Fahren)", "Logistikmitarbeiter (Lagerrroboter)"],
+                timeline_title3: "2033-2037: Integration in Fachwissen",
+                timeline_desc3: "KI wird zum Co-Piloten in spezialisierten Berufen",
+                timeline_detail_desc3: "KI ist nun in der Lage, komplexe Muster zu erkennen, die für Menschen schwer zu sehen sind. Sie wird zu einem unverzichtbaren Assistenten für Experten, der Diagnosen stellt, Strategien vorschlägt und Vorhersagen macht.",
+                timeline_jobs_title3: "Rollen mit hohem Einfluss:",
+                timeline_jobs3: ["Radiologen (Bildanalyse)", "Finanzanalysten (Marktprognose)", "Softwareentwickler (Codegenerierung und -optimierung)", "Marketingspezialisten (Kampagnenstrategie)"],
+                timeline_title4: "2038+: Das Zeitalter der Augmentierung",
+                timeline_desc4: "Fokus auf Mensch-Maschine-Kollaboration",
+                timeline_detail_desc4: "Die meisten Berufe haben sich gewandelt. Der Schwerpunkt liegt nicht mehr darauf, welche Aufgaben die KI übernimmt, sondern darauf, wie Menschen mit der KI zusammenarbeiten können, um bisher unmögliche Ergebnisse zu erzielen. Menschliche Fähigkeiten wie Kreativität, Führung und Empathie werden wichtiger denn je.",
+                timeline_jobs_title4: "Transformierte Bereiche:",
+                timeline_jobs4: ["Bildung (personalisierte Lernpfade)", "Gesundheitswesen (KI-gestützte Chirurgie und Diagnose)", "Wissenschaftliche Forschung (Hypothesengenerierung)", "Stadtplanung (Simulation und Optimierung)"],
+                facts_title: "Zufällige KI-Fakten",
+                facts_subtitle: "Eine Sammlung von 100 Fakten, Fabeln und überraschenden Einblicken in die Welt der KI. Klicken Sie auf die Schaltfläche für mehr!",
+                facts_button: "5 neue Fakten laden",
                 prompt_builder_title: "Der Ultimative Prompt-Builder",
                 prompt_builder_subtitle: "Erstellen Sie den perfekten, detaillierten Prompt für Bild- und Video-KI. Wählen Sie ein Werkzeug und beginnen Sie mit der Erstellung.",
                 tab_logo: "Logo-Generator",
@@ -785,8 +1331,6 @@
                 cert_verified: "Verifiziert von aileer.nl",
                 btn_share_x: "Auf X teilen",
                 share_text: "Ich habe gerade das KI-Wissensquiz auf aileer.nl gemacht und SCORE%% erreicht! 🧠 Eine tolle Seite, um mehr über KI zu lernen. Schaut es euch an! @mcdropke #KI #KünstlicheIntelligenz",
-                news_title: "Neueste KI-Nachrichten",
-                news_subtitle: "Bleiben Sie mit den neuesten Updates von Bright.nl über die sich schnell verändernde Welt der KI auf dem Laufenden.",
                 footer_text: "© 2024 aileer.nl - Gemacht, um KI für alle zugänglich zu machen.",
                 magic_subject_label: "1. Wählen Sie ein Thema für Inspiration",
                 subject_animals: "Tiere",
@@ -800,6 +1344,10 @@
                 gemini_button: "Inspiriere mich",
                 gemini_loading: "Laden...",
                 gemini_error_text: "Hoppla, etwas ist schiefgegangen. Bitte versuchen Sie es erneut.",
+                gemini_suggestion1: "Schwebende Insel bei Sonnenuntergang",
+                gemini_suggestion2: "Süßer Roboter gießt eine Blume",
+                gemini_suggestion3: "Neonbeleuchtete Straße in Tokio",
+                gemini_suggestion4: "Unterwasserstadt aus Kristall",
                 tooltip_auto: "Füllt die Felder mit einer zufälligen, passenden Idee.",
                 tooltip_fun: "Füllt die Felder mit einer zufälligen, lustigen Idee.",
                 tooltip_copy_create: "Kopiert den Prompt und öffnet das Werkzeug, um das Bild in einem neuen Fenster zu erstellen.",
@@ -809,12 +1357,120 @@
                 lighting: "Beleuchtung",
                 artist_style: "Künstlerstil",
                 aspect_ratio: "Seitenverhältnis",
-                btn_preview: "Vorschau generieren",
-                preview_title: "Bildvorschau",
-                preview_generating: "Wird generiert...",
-                preview_error: "Vorschau konnte nicht generiert werden. Bitte versuchen Sie es erneut.",
-                btn_share_image: "Bild posten",
-                share_image_text: "Erstellt mit dem KI-Prompt-Builder auf aileer.nl! ✨ @mcdropke #AIArt #AI"
+                news_error: "Nachrichten-Feed konnte nicht geladen werden. Bitte versuchen Sie es später erneut.",
+                photography_title: "Mein Fotografie-Portfolio",
+                photography_subtitle: "Neben der Welt der KI habe ich eine Leidenschaft für die Fotografie. Entdecken Sie meine Arbeit, aus der Luft aufgenommen. Alle Bilder sind echt und ohne den Einsatz von generativer KI.",
+                photography_button: "Mein Portfolio ansehen",
+                next_page_for_whom: "Weiter zu 'Für Wen?'",
+                next_page_fact_fable: "Weiter zu 'Fakt oder Fabel?'",
+                next_page_future: "Weiter zu 'KI & Zukunft'",
+                next_page_facts: "Weiter zu 'KI-Fakten'",
+                next_page_prompt_builder: "Probieren Sie jetzt unsere Tools!",
+                next_page_quiz: "Testen Sie Ihr Wissen!",
+                next_page_photography: "Schauen Sie sich auch meine Fotografie an",
+                next_page_home: "Zurück zur Startseite",
+                ai_facts: [
+                    "Der Begriff 'Künstliche Intelligenz' wurde 1956 vom Informatiker John McCarthy geprägt.",
+                    "Fabel: KI kann Emotionen fühlen. Fakt: KI kann Emotionen erkennen und simulieren, aber sie nicht wirklich fühlen.",
+                    "Ein KI-System namens Deep Blue besiegte 1997 den Schachweltmeister Garry Kasparov.",
+                    "Ihr Smartphone-Assistent (Siri, Google Assistant) ist eine Form der 'Engen KI', die auf eine Aufgabe spezialisiert ist.",
+                    "KI wird verwendet, um Fälschungen berühmter Gemälde durch die Analyse von Pinselstrichen zu identifizieren.",
+                    "Es gibt eine KI, die Liedtexte im Stil eines beliebigen Künstlers schreiben kann.",
+                    "Fabel: KI ist immer neutral. Fakt: KI kann Vorurteile aus den Daten übernehmen, mit denen sie trainiert wurde.",
+                    "KI-Algorithmen bestimmen, welche Anzeigen Sie online sehen, basierend auf Ihrem Surfverhalten.",
+                    "Das menschliche Gehirn enthält etwa 86 Milliarden Neuronen. Die leistungsfähigsten KIs haben Netzwerke, die dieser Größenordnung nahekommen.",
+                    "In der Landwirtschaft wird KI mit Drohnen eingesetzt, um die Gesundheit von Nutzpflanzen zu überwachen.",
+                    "Ein von KI erstelltes Gemälde ('Porträt von Edmond de Belamy') wurde für über 400.000 € versteigert.",
+                    "Fabel: Man braucht einen Supercomputer für KI. Fakt: Viele KI-Modelle können auf einem normalen Laptop ausgeführt werden.",
+                    "KI kann helfen, neue Medikamente schneller zu entdecken, indem sie molekulare Strukturen analysiert.",
+                    "Das 'Black-Box'-Problem in der KI bezieht sich auf die Tatsache, dass wir manchmal nicht genau wissen, wie eine KI zu einer Entscheidung kommt.",
+                    "KI kann helfen, tote Sprachen zu entziffern, indem sie Muster in alten Texten erkennt.",
+                    "Generative KI kann völlig neue, realistische menschliche Gesichter von Menschen erstellen, die nie existiert haben.",
+                    "Fabel: KI wird die menschliche Kreativität vollständig ersetzen. Fakt: KI ist ein mächtiges Werkzeug, das die menschliche Kreativität erweitern kann.",
+                    "Netflix verwendet KI, um Ihre Sehgewohnheiten zu analysieren und personalisierte Empfehlungen abzugeben.",
+                    "KI-Modelle verbrauchen beim Training enorme Mengen an Energie, vergleichbar mit dem Energieverbrauch eines kleinen Landes.",
+                    "Der Turing-Test, 1950 von Alan Turing vorgeschlagen, testet, ob eine Maschine menschenähnliche Intelligenz aufweisen kann.",
+                    "KI wird eingesetzt, um die Abholzung des Regenwaldes mittels Satellitenbildern zu verfolgen.",
+                    "Einige KI-Systeme sind bei der Erkennung von Hautkrebs besser als menschliche Dermatologen.",
+                    "Fabel: KI versteht, was sie sagt. Fakt: Sprachmodelle sind extrem gut darin, das nächste Wort vorherzusagen, ohne echtes Verständnis.",
+                    "Der erste Chatbot, ELIZA, wurde bereits in den 1960er Jahren entwickelt und simulierte einen Psychotherapeuten.",
+                    "KI kann bei der Vorhersage von Erdbeben helfen, indem sie seismische Daten analysiert.",
+                    "Selbstfahrende Autos nutzen eine Kombination aus KI, Sensoren und GPS zur Navigation.",
+                    "In Japan wird KI eingesetzt, um vorherzusagen, welche älteren Menschen ein erhöhtes Sturzrisiko haben.",
+                    "Fabel: KI lernt genauso wie ein Mensch. Fakt: KI lernt durch mathematische Optimierung riesiger Datenmengen.",
+                    "Eine KI half, Beethovens 'unvollendete' 10. Symphonie zu vollenden.",
+                    "KI kann während eines Telefongesprächs eine Echtzeit-Übersetzung bereitstellen.",
+                    "Spamfilter in Ihrer E-Mail verwenden KI, um unerwünschte Nachrichten zu identifizieren.",
+                    "Manche KIs können Kunstwerke allein aus einer Textbeschreibung erstellen.",
+                    "Fabel: Alle Roboter verwenden KI. Fakt: Viele Roboter führen nur vorprogrammierte Aufgaben ohne Lernfähigkeit aus.",
+                    "KI wird verwendet, um die Geräusche von Walen zu analysieren und ihre Migrationsmuster zu verstehen.",
+                    "Die Spielebranche nutzt KI, um nicht spielbaren Charakteren (NPCs) ein realistischeres Verhalten zu geben.",
+                    "Es gibt eine KI, die juristische Dokumente durchsuchen und relevante Informationen schneller finden kann als ein Team von Anwälten.",
+                    "Fabel: KI ist eine einzige Technologie. Fakt: KI ist ein breites Feld mit vielen Teildisziplinen wie maschinelles Lernen und Deep Learning.",
+                    "KI-Algorithmen können helfen, Ampeln in einer Stadt zu optimieren, um Staus zu reduzieren.",
+                    "Die Deepfake-Technologie, angetrieben von KI, kann das Gesicht einer Person überzeugend auf ein anderes Video platzieren.",
+                    "KI kann helfen, den Unterricht zu personalisieren, indem sie Lehrmaterial an das Niveau des Schülers anpasst.",
+                    "Ein neuronales Netz ist eine Art von KI, die von der Struktur des menschlichen Gehirns inspiriert ist.",
+                    "Fabel: KI-Entscheidungen sind immer logisch. Fakt: Manchmal kommt eine KI zu einer richtigen, aber für Menschen unlogischen Schlussfolgerung.",
+                    "KI wird in der Modebranche eingesetzt, um neue Kleidungsdesigns zu generieren.",
+                    "Die Google-Suchmaschine verwendet eine KI namens RankBrain, um die Suchergebnisse zu verbessern.",
+                    "KI kann die Emotion in der Stimme einer Person erkennen.",
+                    "Die Datenmenge, die zum Trainieren eines großen Sprachmodells benötigt wird, kann Hunderte von Terabytes betragen.",
+                    "Fabel: KI kann sich selbst neue Ziele setzen. Fakt: KI operiert innerhalb der von Menschen gesetzten Ziele und Grenzen.",
+                    "KI wird verwendet, um die besten Standorte für neue Wind- oder Solarparks zu bestimmen.",
+                    "Einige Landwirte verwenden KI-gesteuerte Traktoren, die das Land autonom bearbeiten können.",
+                    "KI-Modelle können 'halluzinieren', was bedeutet, dass sie sachlich falsche Informationen mit Überzeugung präsentieren.",
+                    "Die Programmiersprache Python ist die beliebteste Sprache für die KI-Entwicklung.",
+                    "Fabel: KI ist unfehlbar. Fakt: KI macht Fehler, besonders wenn sie mit unerwarteten Situationen konfrontiert wird.",
+                    "KI-gestützte Kameras können helfen, Waldbrände zu erkennen, bevor sie groß werden.",
+                    "Einige KIs können 'träumen', indem sie zufällige Muster basierend auf ihrem Training generieren.",
+                    "KI kann helfen, Online-Mobbing in sozialen Medien zu erkennen.",
+                    "Verstärkendes Lernen ist eine Art von KI, bei der das Modell durch Belohnungen und Bestrafungen lernt, ähnlich wie ein Tier.",
+                    "Fabel: KI hat ein Bewusstsein. Fakt: Es gibt keine wissenschaftlichen Beweise dafür, dass irgendeine Form von KI Bewusstsein hat.",
+                    "KI wird verwendet, um die Luftqualität in Städten vorherzusagen.",
+                    "Einige Hedgefonds nutzen KI, um Aktienkurse vorherzusagen und Transaktionen durchzuführen.",
+                    "Ein 'digitaler Zwilling' ist eine KI-gestützte Simulation eines physischen Objekts, wie eines Motors oder eines ganzen Gebäudes.",
+                    "KI kann Liedtexte analysieren, um den emotionalen Ton eines Liedes zu bestimmen.",
+                    "Fabel: Die KI-Entwicklung ist neu. Fakt: Die theoretischen Grundlagen wurden bereits in den 1940er und 50er Jahren gelegt.",
+                    "Im Sport wird KI eingesetzt, um die Leistungen von Athleten zu analysieren und Trainingspläne zu optimieren.",
+                    "KI kann helfen, effizientere Flugzeugflügel zu entwerfen.",
+                    "Generative Adversarial Networks (GANs) bestehen aus zwei KIs, die gegeneinander antreten, um besser zu werden.",
+                    "KI kann helfen, Krankheiten wie Alzheimer durch Gehirnscans schneller zu diagnostizieren.",
+                    "Fabel: Sie sprechen im Kundenservice immer mit einem Menschen. Fakt: Viele Chats werden (teilweise) von KI-Chatbots abgewickelt.",
+                    "KI kann basierend auf Ihrer Einkaufsliste Rezepte für die ganze Woche vorschlagen.",
+                    "Der Prozessor in Ihrem Computer, der speziell für KI-Aufgaben entwickelt wurde, wird als NPU (Neural Processing Unit) bezeichnet.",
+                    "KI wird verwendet, um das Verhalten von Ameisenkolonien zu untersuchen, um Logistikprozesse zu verbessern.",
+                    "Einige KIs können Computercode aus einer einfachen Beschreibung in natürlicher Sprache schreiben.",
+                    "Fabel: KI kann die Zukunft vorhersagen. Fakt: KI kann auf der Grundlage von Daten Vorhersagen treffen, aber die Zukunft nicht mit Sicherheit kennen.",
+                    "KI kann helfen, ultra-personalisierte Werbung zu erstellen.",
+                    "Es gibt KI-Systeme, die die Lippenbewegungen einer Person mit höherer Genauigkeit als Menschen lesen können.",
+                    "KI kann helfen, 'Fake News' zu identifizieren, indem sie die Quelle und den Inhalt von Artikeln analysiert.",
+                    "Das Training eines einzigen großen KI-Modells kann mehr als 10 Millionen Euro kosten.",
+                    "Fabel: KI ist immer komplex. Fakt: Eine einfache 'Wenn-Dann'-Anweisung kann technisch als eine sehr grundlegende Form von KI betrachtet werden.",
+                    "KI wird verwendet, um die Emissionen von Fabriken zu überwachen und zu optimieren.",
+                    "KI kann helfen, verlorene Haustiere durch Gesichtserkennung auf Kamerabildern zu finden.",
+                    "Das 'Uncanny Valley' ist ein Begriff, der das unbehagliche Gefühl beschreibt, wenn ein Roboter oder eine Animation fast, aber nicht ganz, menschlich aussieht.",
+                    "KI-Algorithmen können den Stil eines Gemäldes (wie Van Gogh) auf ein gewöhnliches Foto anwenden.",
+                    "Fabel: KI kann ohne Input kreativ sein. Fakt: Die 'Kreativität' der KI basiert auf dem Remixen und Neuinterpretieren der Daten, mit denen sie trainiert wurde.",
+                    "KI wird verwendet, um das Betrugsrisiko bei Kreditkartentransaktionen in Echtzeit zu bewerten.",
+                    "Es gibt KI-Programme, die Debatten mit menschlichen Experten führen können.",
+                    "KI kann helfen, Gebäude zu entwerfen, die erdbebensicherer sind.",
+                    "Der 'Aufmerksamkeitsmechanismus' in modernen KIs ermöglicht es ihnen, sich auf die wichtigsten Teile des Inputs zu 'konzentrieren'.",
+                    "Fabel: KI-Systeme können sich unendlich selbst verbessern. Fakt: Sie sind durch ihre Architektur und die Qualität der Daten begrenzt.",
+                    "KI kann zur Überprüfung der Echtheit von Unterschriften verwendet werden.",
+                    "Auf Text trainierte KI-Modelle können oft auch über Computercode nachdenken.",
+                    "Einige Restaurants nutzen KI, um die Nachfrage nach Zutaten vorherzusagen und Lebensmittelverschwendung zu reduzieren.",
+                    "Eine KI war die erste, die ohne menschliche Hilfe einen neuen mathematischen Satz bewies.",
+                    "Fabel: KI ist dasselbe wie Datenwissenschaft. Fakt: Datenwissenschaft ist ein breiteres Feld; KI ist eines der Werkzeuge, die Datenwissenschaftler verwenden.",
+                    "KI wird verwendet, um die optimale Route für Lieferdienste zu berechnen, was Zeit und Treibstoff spart.",
+                    "Die 'Transformer'-Architektur, die 2017 eingeführt wurde, war ein wichtiger Durchbruch, der moderne Sprachmodelle wie GPT ermöglichte.",
+                    "KI kann helfen, beschädigte oder alte Fotos wiederherzustellen.",
+                    "Ein 'Prompt' ist die Anweisung, die Sie einer generativen KI geben.",
+                    "Fabel: KI versteht Ironie und Sarkasmus perfekt. Fakt: Obwohl sie sich verbessern, ist das Verständnis subtiler menschlicher Kommunikation immer noch eine große Herausforderung.",
+                    "KI wird verwendet, um die Schlafmuster von Menschen über Smartwatches und Fitness-Tracker zu analysieren.",
+                    "Der größte Teil der 'Arbeit' einer KI besteht aus der Durchführung von Milliarden einfacher mathematischer Berechnungen.",
+                    "KI kann helfen, Stromausfälle durch die Analyse des Stromnetzes vorherzusagen."
+                ]
             }
         };
 
@@ -829,7 +1485,11 @@
                 const key = el.dataset.langKey;
                 const translation = translations[lang][key];
                 if (translation) {
-                    if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    if (el.tagName === 'META') {
+                        el.content = translation;
+                    } else if (el.tagName === 'TITLE') {
+                        el.textContent = translation;
+                    } else if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                         el.placeholder = translation;
                     } else if (key === 'hero_title') {
                         el.innerHTML = translation;
@@ -843,7 +1503,9 @@
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
-            // The Mikle widget will handle its own content, so we no longer need to call a news fetching function here.
+            renderGeminiSuggestions();
+            buildTimeline();
+            displayFacts();
         }
 
         document.getElementById('language-switcher').addEventListener('click', (e) => {
@@ -856,6 +1518,7 @@
         // --- ROUTING SCRIPT ---
         const pages = document.querySelectorAll('.page');
         const navLinks = document.querySelectorAll('.nav-link');
+        const navDropdownBtns = document.querySelectorAll('.nav-dropdown-btn');
 
         function handleRouting() {
             const hash = window.location.hash.startsWith('#') ? window.location.hash : '#home';
@@ -867,19 +1530,44 @@
             const activePage = document.getElementById(pageId) || document.querySelector('.page');
             if (activePage) {
                 activePage.style.display = 'block';
+                 // Trigger animations for the new page
+                const animatedElements = activePage.querySelectorAll('.fade-in-up');
+                animatedElements.forEach(el => {
+                    // Use a timeout to ensure the display property has taken effect
+                    setTimeout(() => observer.observe(el), 50);
+                });
+            }
+            if (pageId === 'weetjes') {
+                displayFacts();
+            }
+             if (pageId === 'toekomst') {
+                buildTimeline(); // Build timeline when page is active
             }
             
             navLinks.forEach(link => {
                 link.classList.toggle('active', link.getAttribute('href') === hash);
             });
+            
+            // Highlight dropdown parent
+            navDropdownBtns.forEach(btn => btn.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-link.active`);
+            if (activeLink && activeLink.closest('[data-dropdown-group]')) {
+                const groupName = activeLink.closest('[data-dropdown-group]').dataset.dropdownGroup;
+                document.querySelector(`.nav-dropdown-btn[data-lang-key="nav_${groupName === 'leren' ? 'learn_ai' : 'tools'}"]`).classList.add('active');
+            }
+
+
             window.scrollTo(0, 0);
         }
         
         window.addEventListener('hashchange', handleRouting);
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                window.location.hash = e.target.getAttribute('href');
+                const targetId = this.getAttribute('href');
+                // Unobserve old elements before changing hash
+                document.querySelectorAll('.fade-in-up.visible').forEach(el => observer.unobserve(el));
+                window.location.hash = targetId;
             });
         });
 
@@ -955,6 +1643,7 @@
 
         function buildTools() {
             const container = document.getElementById('tools-container');
+            if (!container) return; // Exit if tools container doesn't exist
             const base = document.getElementById('tool-base');
 
             Object.keys(toolsData).forEach(toolKey => {
@@ -1019,7 +1708,6 @@
                 promptOutput.id = `${toolKey}-prompt-output`;
                 toolClone.querySelector('.copy-btn').dataset.target = promptOutput.id;
                 toolClone.querySelector('.copy-create-btn').dataset.target = promptOutput.id;
-                toolClone.querySelector('.preview-btn').dataset.target = promptOutput.id;
 
                 container.appendChild(toolClone);
             });
@@ -1041,7 +1729,9 @@
         }
 
         function triggerActiveGenerator() {
-            const toolId = getCurrentToolId().replace('tool-', '');
+            const activeTool = document.querySelector('.prompt-tool.active');
+            if (!activeTool) return;
+            const toolId = activeTool.id.replace('tool-', '');
             if(toolsData[toolId]) {
                 let prompt = toolsData[toolId].promptFn();
                 document.getElementById(`${toolId}-prompt-output`).textContent = applyBranding(prompt);
@@ -1070,7 +1760,10 @@
             }
         };
 
-        function getCurrentToolId() { return document.querySelector('.prompt-tool.active').id; }
+        function getCurrentToolId() { 
+            const activeTool = document.querySelector('.prompt-tool.active');
+            return activeTool ? activeTool.id : '';
+        }
 
         function handleMagicClick(type) {
             const subject = document.getElementById('magic-subject').value;
@@ -1104,102 +1797,129 @@
             'photo': { type: "OBJECT", properties: { subject: { type: "STRING" }, action: { type: "STRING" }, setting: { type: "STRING" } } }
         };
 
-        geminiBtn.addEventListener('click', async () => {
-            const userQuery = geminiInput.value.trim();
-            if (!userQuery) return;
+        function renderGeminiSuggestions() {
+            const container = document.getElementById('gemini-suggestions');
+            container.innerHTML = '';
+            const suggestions = [
+                translations[currentLang].gemini_suggestion1,
+                translations[currentLang].gemini_suggestion2,
+                translations[currentLang].gemini_suggestion3,
+                translations[currentLang].gemini_suggestion4,
+            ];
 
-            geminiBtn.disabled = true;
-            geminiBtnText.classList.add('hidden');
-            geminiBtnLoading.classList.remove('hidden');
-            geminiError.classList.add('hidden');
-
-            const activeToolId = getCurrentToolId().replace('tool-', '');
-            const schema = schemas[activeToolId];
-            if (!schema) { /* Handle story tool or other non-schema tools */ return; }
-
-            const systemPrompt = `You are a creative assistant generating ideas for AI image prompts. Based on the user's input, return a single JSON object matching the provided schema. Be creative and descriptive. Respond in the user's language: ${currentLang}.`;
-
-            try {
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                const payload = {
-                    contents: [{ parts: [{ text: userQuery }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] },
-                    generationConfig: { responseMimeType: "application/json", responseSchema: schema }
+            suggestions.forEach(text => {
+                const button = document.createElement('button');
+                button.textContent = text;
+                button.className = 'px-3 py-1 bg-slate-700 rounded-full hover:bg-slate-600 transition';
+                button.onclick = () => {
+                    geminiInput.value = text;
+                    geminiBtn.click();
                 };
+                container.appendChild(button);
+            });
+        }
 
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`API error: ${response.status}`);
-                const result = await response.json();
-                
-                if (result.candidates && result.candidates.length > 0) {
-                    const jsonResponse = JSON.parse(result.candidates[0].content.parts[0].text);
-                    Object.keys(jsonResponse).forEach(key => {
-                        const el = document.getElementById(`${activeToolId}-${key.replace('companyName', 'name')}`);
-                        if (el) el.value = jsonResponse[key];
-                    });
-                    triggerActiveGenerator();
-                } else { throw new Error("No response from Gemini."); }
+        if (geminiBtn) {
+            geminiBtn.addEventListener('click', async () => {
+                const userQuery = geminiInput.value.trim();
+                if (!userQuery) return;
 
-            } catch (error) {
-                console.error("Gemini API error:", error);
-                geminiError.textContent = translations[currentLang].gemini_error_text;
-                geminiError.classList.remove('hidden');
-            } finally {
-                geminiBtn.disabled = false;
-                geminiBtnText.classList.remove('hidden');
-                geminiBtnLoading.classList.add('hidden');
-            }
-        });
+                geminiBtn.disabled = true;
+                geminiBtnText.classList.add('hidden');
+                geminiBtnLoading.classList.remove('hidden');
+                geminiError.classList.add('hidden');
+
+                const activeToolId = getCurrentToolId().replace('tool-', '');
+                const schema = schemas[activeToolId];
+                if (!schema) { return; }
+
+                const systemPrompt = `You are a creative assistant generating ideas for AI image prompts. Based on the user's input, return a single JSON object matching the provided schema. Be creative and descriptive. Respond in the user's language: ${currentLang}.`;
+
+                try {
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        generationConfig: { responseMimeType: "application/json", responseSchema: schema }
+                    };
+
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) throw new Error(`API error: ${response.status}`);
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates.length > 0) {
+                        const jsonResponse = JSON.parse(result.candidates[0].content.parts[0].text);
+                        Object.keys(jsonResponse).forEach(key => {
+                            const el = document.getElementById(`${activeToolId}-${key.replace('companyName', 'name')}`);
+                            if (el) el.value = jsonResponse[key];
+                        });
+                        triggerActiveGenerator();
+                    } else { throw new Error("No response from Gemini."); }
+
+                } catch (error) {
+                    console.error("Gemini API error:", error);
+                    geminiError.textContent = translations[currentLang].gemini_error_text;
+                    geminiError.classList.remove('hidden');
+                } finally {
+                    geminiBtn.disabled = false;
+                    geminiBtnText.classList.remove('hidden');
+                    geminiBtnLoading.classList.add('hidden');
+                }
+            });
+        }
+
 
         // --- Story Generator Script ---
         const generateStoryBtn = document.getElementById('generate-story-btn');
-        const storyOutput = document.getElementById('story-output');
-        const storyError = document.getElementById('story-error');
-        const storyBtnText = document.getElementById('story-btn-text');
-        const storyBtnLoading = document.getElementById('story-btn-loading');
-        const storyCopyCreateBtn = document.getElementById('story-copy-create-btn');
+        if (generateStoryBtn) {
+            const storyOutput = document.getElementById('story-output');
+            const storyError = document.getElementById('story-error');
+            const storyBtnText = document.getElementById('story-btn-text');
+            const storyBtnLoading = document.getElementById('story-btn-loading');
 
-        generateStoryBtn.addEventListener('click', async () => {
-            const character = document.getElementById('story-character').value.trim();
-            const setting = document.getElementById('story-setting').value.trim();
-            const plot = document.getElementById('story-plot').value.trim();
-            const style = document.getElementById('story-style').value;
-            
-            if(!character || !setting || !plot) return;
-
-            generateStoryBtn.disabled = true;
-            storyBtnText.classList.add('hidden');
-            storyBtnLoading.classList.remove('hidden');
-            storyError.classList.add('hidden');
-            storyOutput.textContent = '';
-            
-            const userPrompt = `Write a creative, short story (around 150 words) in the style of a '${style}'. Main character: ${character}. Setting: ${setting}. Plot: ${plot}. Respond in the language: ${currentLang}.`;
-
-            try {
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                const payload = { contents: [{ parts: [{ text: userPrompt }] }] };
-                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                if (!response.ok) throw new Error(`API error: ${response.status}`);
-                const result = await response.json();
+            generateStoryBtn.addEventListener('click', async () => {
+                const character = document.getElementById('story-character').value.trim();
+                const setting = document.getElementById('story-setting').value.trim();
+                const plot = document.getElementById('story-plot').value.trim();
+                const style = document.getElementById('story-style').value;
                 
-                if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
-                    storyOutput.textContent = result.candidates[0].content.parts[0].text;
-                } else { throw new Error("No story generated from Gemini."); }
+                if(!character || !setting || !plot) return;
 
-            } catch (error) {
-                console.error("Gemini Story API error:", error);
-                storyError.textContent = translations[currentLang].gemini_error_text;
-                storyError.classList.remove('hidden');
-            } finally {
-                generateStoryBtn.disabled = false;
-                storyBtnText.classList.remove('hidden');
-                storyBtnLoading.classList.add('hidden');
-            }
-        });
+                generateStoryBtn.disabled = true;
+                storyBtnText.classList.add('hidden');
+                storyBtnLoading.classList.remove('hidden');
+                storyError.classList.add('hidden');
+                storyOutput.textContent = '';
+                
+                const userPrompt = `Write a creative, short story (around 150 words) in the style of a '${style}'. Main character: ${character}. Setting: ${setting}. Plot: ${plot}. Respond in the language: ${currentLang}.`;
+
+                try {
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const payload = { contents: [{ parts: [{ text: userPrompt }] }] };
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) throw new Error(`API error: ${response.status}`);
+                    const result = await response.json();
+                    
+                    if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
+                        storyOutput.textContent = result.candidates[0].content.parts[0].text;
+                    } else { throw new Error("No story generated from Gemini."); }
+
+                } catch (error) {
+                    console.error("Gemini Story API error:", error);
+                    storyError.textContent = translations[currentLang].gemini_error_text;
+                    storyError.classList.remove('hidden');
+                } finally {
+                    generateStoryBtn.disabled = false;
+                    storyBtnText.classList.remove('hidden');
+                    storyBtnLoading.classList.add('hidden');
+                }
+            });
+        }
         
         async function getStoryImagePrompt() {
+            const storyOutput = document.getElementById('story-output');
             const storyText = storyOutput.textContent;
             if (!storyText) return null;
             const userPrompt = `Summarize the following story into a single, descriptive sentence perfect as a prompt for an AI image generator. The sentence should be visual and atmospheric. Story: "${storyText}". Respond in the language: ${currentLang}.`;
@@ -1231,41 +1951,39 @@
 
         // --- EVENT LISTENERS ---
         document.body.addEventListener('click', async (e) => {
+            const copyBtn = e.target.closest('.copy-btn');
+            const copyCreateBtn = e.target.closest('.copy-create-btn');
+            const storyCopyCreateBtn = e.target.closest('#story-copy-create-btn');
+
             // Copy Button
-            if (e.target.matches('.copy-btn')) {
-                const targetId = e.target.dataset.target;
+            if (copyBtn) {
+                const targetId = copyBtn.dataset.target;
                 const text = document.getElementById(targetId).textContent || document.getElementById(targetId).value;
                 copyTextFallback(text);
-                const feedbackEl = e.target.parentElement.querySelector('.copy-feedback');
-                feedbackEl.classList.remove('hidden'); 
-                setTimeout(() => feedbackEl.classList.add('hidden'), 2000);
+                const feedbackEl = copyBtn.parentElement.querySelector('.copy-feedback');
+                if (feedbackEl) {
+                    feedbackEl.classList.remove('hidden'); 
+                    setTimeout(() => feedbackEl.classList.add('hidden'), 2000);
+                }
             }
             // Copy + Create Button
-            if (e.target.matches('.copy-create-btn')) {
-                const targetId = e.target.dataset.target;
+            if (copyCreateBtn && !storyCopyCreateBtn) {
+                const targetId = copyCreateBtn.dataset.target;
                 const text = document.getElementById(targetId).textContent;
                 copyTextFallback(text);
-                window.open(affiliateLink, '_blank');
+                window.open(affiliateLink, '_blank', 'noopener,noreferrer');
             }
             // Story Copy + Create Button
-             if (e.target.closest('#story-copy-create-btn')) {
-                const btn = e.target.closest('#story-copy-create-btn');
+             if (storyCopyCreateBtn) {
+                const btn = storyCopyCreateBtn;
                 const originalText = btn.querySelector('span').textContent;
                 btn.querySelector('span').textContent = translations[currentLang].gemini_loading;
                 btn.disabled = true;
                 const imagePrompt = await getStoryImagePrompt();
                 copyTextFallback(imagePrompt);
-                window.open(affiliateLink, '_blank');
+                window.open(affiliateLink, '_blank', 'noopener,noreferrer');
                 btn.querySelector('span').textContent = originalText;
                 btn.disabled = false;
-            }
-             // Preview Button
-            if (e.target.matches('.preview-btn')) {
-                const targetId = e.target.dataset.target;
-                const prompt = document.getElementById(targetId).textContent;
-                if (prompt) {
-                    await generateImagePreview(prompt, e.target);
-                }
             }
         });
         document.body.addEventListener('input', (e) => {
@@ -1274,67 +1992,6 @@
             }
         });
         
-        // --- IMAGE PREVIEW SCRIPT ---
-        const previewModal = document.getElementById('preview-modal');
-        const previewContent = document.getElementById('preview-content');
-        const previewError = document.getElementById('preview-error');
-        const shareImageBtn = document.getElementById('share-image-btn');
-
-        document.getElementById('close-modal-btn').addEventListener('click', () => {
-            previewModal.classList.add('hidden');
-        });
-        
-        shareImageBtn.addEventListener('click', () => {
-            const prompt = previewModal.dataset.currentPrompt || "";
-            const shortPrompt = prompt.length > 100 ? prompt.substring(0, 100) + '...' : prompt;
-            let text = translations[currentLang].share_image_text;
-            if(prompt) text += `\nPrompt: "${shortPrompt}"`;
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=https://www.aileer.nl`;
-            window.open(twitterUrl, '_blank');
-        });
-
-        async function generateImagePreview(prompt, btn) {
-            previewModal.classList.remove('hidden');
-            previewContent.innerHTML = `<div class="loader"></div><p class="mt-4 text-white">${translations[currentLang].preview_generating}</p>`;
-            previewError.classList.add('hidden');
-            shareImageBtn.classList.add('hidden');
-            
-            const originalText = btn.textContent;
-            btn.textContent = translations[currentLang].gemini_loading;
-            btn.disabled = true;
-
-            try {
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-                const payload = { instances: [{ prompt: prompt }], parameters: { "sampleCount": 1 } };
-                
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                if (!response.ok) throw new Error(`API error: ${response.status}`);
-                const result = await response.json();
-                
-                if (result.predictions && result.predictions[0]?.bytesBase64Encoded) {
-                    const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
-                    previewContent.innerHTML = `<img src="${imageUrl}" alt="AI generated preview" class="max-w-full max-h-[70vh] rounded-lg">`;
-                    previewModal.dataset.currentPrompt = prompt;
-                    shareImageBtn.classList.remove('hidden');
-                } else {
-                    throw new Error("No image data in response.");
-                }
-            } catch(error) {
-                console.error("Image generation error:", error);
-                previewContent.innerHTML = '';
-                previewError.textContent = translations[currentLang].preview_error;
-                previewError.classList.remove('hidden');
-            } finally {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
-        }
-
         // --- QUIZ SCRIPT ---
         let quizData = {};
         const quizTranslations = {
@@ -1387,32 +2044,190 @@
             document.getElementById('share-btn').onclick = () => {
                 const tweetText = translations[currentLang].share_text.replace('SCORE', scorePercentage);
                 const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=https://www.aileer.nl`;
-                window.open(twitterUrl, '_blank');
+                window.open(twitterUrl, '_blank', 'noopener,noreferrer');
             };
         }
         
+        // --- TIMELINE SCRIPT ---
+        const timelineModal = document.getElementById('timeline-modal');
+        function buildTimeline() {
+            const timelineContainer = document.querySelector('.timeline');
+            if (!timelineContainer) return;
+            timelineContainer.innerHTML = ''; // Clear existing timeline
+            const timelineData = [
+                { titleKey: "timeline_title1", descKey: "timeline_desc1" },
+                { titleKey: "timeline_title2", descKey: "timeline_desc2" },
+                { titleKey: "timeline_title3", descKey: "timeline_desc3" },
+                { titleKey: "timeline_title4", descKey: "timeline_desc4" }
+            ];
+
+            timelineData.forEach((item, index) => {
+                const side = index % 2 === 0 ? 'left' : 'right';
+                const container = document.createElement('div');
+                container.className = `timeline-container ${side} fade-in-up`;
+                container.style.setProperty('--delay', `${index * 150}ms`);
+                
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold text-indigo-300">${translations[currentLang][item.titleKey]}</h2>
+                    <p class="mt-2 text-gray-400">${translations[currentLang][item.descKey]}</p>
+                `;
+                content.onclick = () => openTimelineModal(index + 1);
+                
+                container.appendChild(content);
+                timelineContainer.appendChild(container);
+                observer.observe(container);
+            });
+        }
+
+        function openTimelineModal(index) {
+            document.getElementById('timeline-modal-title').textContent = translations[currentLang][`timeline_title${index}`];
+            document.getElementById('timeline-modal-description').textContent = translations[currentLang][`timeline_detail_desc${index}`];
+            document.getElementById('timeline-modal-jobs-title').textContent = translations[currentLang][`timeline_jobs_title${index}`];
+            const list = document.getElementById('timeline-modal-jobs-list');
+            list.innerHTML = '';
+            translations[currentLang][`timeline_jobs${index}`].forEach(job => {
+                const li = document.createElement('li');
+                li.textContent = job;
+                list.appendChild(li);
+            });
+            timelineModal.classList.remove('hidden');
+        }
+        
+        if (timelineModal) {
+            document.getElementById('close-timeline-modal-btn').addEventListener('click', () => {
+                timelineModal.classList.add('hidden');
+            });
+        }
+
+
+        // --- AI FACTS SCRIPT ---
+        let shownFactIndices = [];
+        const factsContainer = document.getElementById('facts-container');
+        const newFactsBtn = document.getElementById('new-facts-btn');
+
+        function displayFacts() {
+            if (!factsContainer) return;
+            
+            const allFacts = translations[currentLang].ai_facts;
+            let availableIndices = [];
+            for (let i = 0; i < allFacts.length; i++) {
+                if (!shownFactIndices.includes(i)) {
+                    availableIndices.push(i);
+                }
+            }
+
+            // If we have shown too many facts, reset the exclusion list
+            if (availableIndices.length < 5) {
+                shownFactIndices = [];
+                for (let i = 0; i < allFacts.length; i++) {
+                    availableIndices.push(i);
+                }
+            }
+            
+            factsContainer.innerHTML = '';
+            let newIndicesToShow = [];
+            for (let i = 0; i < 5; i++) {
+                const randomIndex = Math.floor(Math.random() * availableIndices.length);
+                const factIndex = availableIndices[randomIndex];
+                newIndicesToShow.push(factIndex);
+                availableIndices.splice(randomIndex, 1); // Prevents picking the same fact twice in one batch
+
+                const factText = allFacts[factIndex];
+                const card = document.createElement('div');
+                card.className = 'card p-6 rounded-xl fact-item';
+                const p = document.createElement('p');
+                p.textContent = factText;
+                card.appendChild(p);
+                factsContainer.appendChild(card);
+            }
+            
+            shownFactIndices.push(...newIndicesToShow);
+            // Keep the exclusion list from growing too large (7 clicks * 5 facts = 35)
+            if (shownFactIndices.length > 35) {
+                shownFactIndices.splice(0, 5);
+            }
+        }
+
+        if (newFactsBtn) {
+            newFactsBtn.addEventListener('click', displayFacts);
+        }
+
+
+        // --- 3D Card Hover Effect ---
+        function apply3dHoverEffect(container) {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const { width, height } = rect;
+                const rotateX = (y / height - 0.5) * -15; // Invert for natural feel
+                const rotateY = (x / width - 0.5) * 15;
+                container.style.setProperty('--rotate-x', `${rotateX}deg`);
+                container.style.setProperty('--rotate-y', `${rotateY}deg`);
+            });
+            container.addEventListener('mouseleave', () => {
+                container.style.setProperty('--rotate-x', '0deg');
+                container.style.setProperty('--rotate-y', '0deg');
+            });
+        }
+        
+        // --- Scroll Animation ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.style.getPropertyValue('--delay')) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
              buildTools();
              handleRouting();
              setLanguage(currentLang);
-             document.querySelector('#tool-logo').classList.add('active');
-             triggerActiveGenerator();
+             
+             const firstTool = document.querySelector('.prompt-tool');
+             if(firstTool) {
+                 firstTool.classList.add('active');
+                 triggerActiveGenerator();
+             }
+             
+             renderGeminiSuggestions();
+             buildTimeline();
+
+             document.querySelectorAll('.card').forEach(apply3dHoverEffect);
+             document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
              // Setup event listeners that need the tools to be built first
-             document.querySelector('.auto-btn').addEventListener('click', () => handleMagicClick('auto'));
-             document.querySelector('.fun-btn').addEventListener('click', () => handleMagicClick('fun'));
+             const autoBtn = document.querySelector('.auto-btn');
+             if (autoBtn) autoBtn.addEventListener('click', () => handleMagicClick('auto'));
+             
+             const funBtn = document.querySelector('.fun-btn');
+             if (funBtn) funBtn.addEventListener('click', () => handleMagicClick('fun'));
 
-             document.getElementById('prompt-tabs').addEventListener('click', (e) => {
-                if (!e.target.classList.contains('prompt-tab')) return;
-                document.querySelectorAll('.prompt-tab').forEach(tab => tab.classList.remove('active')); e.target.classList.add('active');
-                const targetToolId = e.target.dataset.target;
-                document.querySelectorAll('.prompt-tool').forEach(tool => tool.classList.toggle('active', tool.id === targetToolId));
-                // Only trigger generator for non-story tools on tab change
-                if(targetToolId !== 'tool-story') {
-                    triggerActiveGenerator();
-                }
-             });
+             const promptTabs = document.getElementById('prompt-tabs');
+             if (promptTabs) {
+                 promptTabs.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('prompt-tab')) return;
+                    document.querySelectorAll('#prompt-tabs .prompt-tab').forEach(tab => tab.classList.remove('active'));
+                    e.target.classList.add('active');
+                    const targetToolId = e.target.dataset.target;
+                    document.querySelectorAll('.prompt-tool').forEach(tool => tool.classList.toggle('active', tool.id === targetToolId));
+                    // Only trigger generator for non-story tools on tab change
+                    if(targetToolId !== 'tool-story') {
+                        triggerActiveGenerator();
+                    }
+                 });
+             }
+
+
              document.querySelectorAll('[id$="-advanced-toggle"]').forEach(toggle => {
                 toggle.addEventListener('change', (e) => {
                     const toolKey = e.target.id.replace('-advanced-toggle', '');
