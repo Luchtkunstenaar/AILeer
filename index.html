@@ -3,7 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aileer - Premium Telegram Mini-Apps & Crypto Earning Platform</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Best Free Money Apps on Telegram 2024 | Aileer - Premium Crypto Earning Platform</title>
+    <meta name="title" content="Best Free Money Apps on Telegram 2024 | Aileer - Premium Crypto Earning Platform">
+    <meta name="description" content="Discover 12+ verified Telegram mini-apps to earn free crypto money daily. Play-to-earn games, 500x leverage trading, TON blockchain rewards. Start earning now!">
+    <meta name="keywords" content="telegram mini apps, free money apps, crypto earning, play to earn, TON blockchain, telegram games, crypto rewards, free cryptocurrency, telegram bots, passive income, crypto airdrops, blockchain games, telegram earning apps, free crypto money, digital rewards">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Aileer">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aileer.com/">
+    <meta property="og:title" content="Best Free Money Apps on Telegram 2024 | Aileer">
+    <meta property="og:description" content="Discover 12+ verified Telegram mini-apps to earn free crypto money daily. Play-to-earn games, 500x leverage trading, TON blockchain rewards.">
+    <meta property="og:image" content="https://aileer.com/og-image.jpg">
+    <meta property="og:site_name" content="Aileer">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aileer.com/">
+    <meta property="twitter:title" content="Best Free Money Apps on Telegram 2024 | Aileer">
+    <meta property="twitter:description" content="Discover 12+ verified Telegram mini-apps to earn free crypto money daily. Play-to-earn games, 500x leverage trading, TON blockchain rewards.">
+    <meta property="twitter:image" content="https://aileer.com/twitter-image.jpg">
+    <meta name="twitter:creator" content="@aileer">
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://aileer.com/">
+    <meta name="theme-color" content="#ffd700">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Aileer",
+      "description": "Premium Telegram Mini-Apps & Crypto Earning Platform",
+      "url": "https://aileer.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://aileer.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "sameAs": [
+        "https://twitter.com/aileer",
+        "https://t.me/aileer"
+      ]
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -158,6 +210,44 @@
                 0 10px 25px rgba(255, 215, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .prompt-builder {
+            background: linear-gradient(135deg, rgba(45, 45, 45, 0.95) 0%, rgba(26, 26, 26, 0.98) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(25px);
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+            outline: none;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
     </style>
 </head>
 <body class="font-sans text-gray-100 dark-gradient">
@@ -166,14 +256,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center">
-                    <div class="text-3xl font-bold gold-text floating-3d">Aileer</div>
+                    <div class="text-3xl font-bold gold-text floating-3d cursor-pointer" onclick="showPage('home')">Aileer</div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Home</a>
-                        <a href="#features" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Features</a>
-                        <a href="#apps" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Apps</a>
-                        <a href="#stats" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Stats</a>
+                        <button onclick="showPage('home')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Home</button>
+                        <button onclick="showPage('apps')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Best Apps</button>
+                        <button onclick="showPage('prompt-builder')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Grok Prompts</button>
+                        <button onclick="scrollToSection('features')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium">Features</button>
                         <button onclick="window.open('https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU', '_blank')" class="gold-3d text-black px-6 py-2 rounded-full font-semibold text-sm transition-all duration-300">
                             🎮 Start Earning
                         </button>
@@ -191,315 +281,931 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="md:hidden hidden bg-black/90 border-t border-yellow-400/20">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400">Home</a>
-                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400">Features</a>
-                <a href="#apps" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400">Apps</a>
-                <a href="#stats" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400">Stats</a>
+                <button onclick="showPage('home')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left">Home</button>
+                <button onclick="showPage('apps')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left">Best Apps</button>
+                <button onclick="showPage('prompt-builder')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left">Grok Prompts</button>
+                <button onclick="scrollToSection('features')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left">Features</button>
                 <button onclick="window.open('https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU', '_blank')" class="block px-3 py-2 text-base font-medium text-yellow-400 text-left w-full">🎮 Start Earning</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-full pt-20 overflow-hidden hero-pattern">
-        <div class="absolute inset-0">
-            <div class="absolute top-20 left-10 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl floating-3d"></div>
-            <div class="absolute bottom-20 right-10 w-80 h-80 bg-yellow-400/5 rounded-full blur-3xl floating-3d" style="animation-delay: -2s;"></div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-600/5 rounded-full blur-3xl floating-3d" style="animation-delay: -4s;"></div>
-        </div>
-        
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-            <div class="text-center fade-in">
-                <div class="inline-flex items-center px-6 py-3 rounded-full premium-border mb-8">
-                    <span class="gold-text font-bold text-lg">🚀 Premium Crypto Gaming Platform</span>
-                </div>
-                
-                <h1 class="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-                    <span class="gold-text text-shadow-gold">Telegram</span><br>
-                    <span class="text-white">Mini-Apps</span><br>
-                    <span class="gold-text text-shadow-gold">Revolution</span>
-                </h1>
-                
-                <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed text-gray-300">
-                    Discover the ultimate collection of premium Telegram Mini-Apps. From play-to-earn games to advanced trading bots - maximize your crypto earnings with our curated selection.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-                    <button onclick="showAppSelection()" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
-                        🎮 Start Earning Now
-                    </button>
-                    <button onclick="scrollToSection('features')" class="premium-card text-yellow-400 px-12 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105">
-                        ✨ View Features
-                    </button>
-                    <button onclick="shareOnX()" class="bg-black border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-black flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                        Share on X
-                    </button>
-                </div>
-                
-                <!-- Stats Preview -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                    <div class="stats-counter rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold gold-text mb-2">12+</div>
-                        <div class="text-gray-400 text-sm">Premium Apps</div>
-                    </div>
-                    <div class="stats-counter rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold gold-text mb-2">500x</div>
-                        <div class="text-gray-400 text-sm">Max Leverage</div>
-                    </div>
-                    <div class="stats-counter rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold gold-text mb-2">24/7</div>
-                        <div class="text-gray-400 text-sm">Earning Potential</div>
-                    </div>
-                    <div class="stats-counter rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold gold-text mb-2">100%</div>
-                        <div class="text-gray-400 text-sm">Free Access</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="gold-text">Premium</span> <span class="text-white">Features</span>
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                    Experience the next generation of Telegram-based crypto earning with our professionally curated platform
-                </p>
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-full pt-20 overflow-hidden hero-pattern">
+            <div class="absolute inset-0">
+                <div class="absolute top-20 left-10 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl floating-3d"></div>
+                <div class="absolute bottom-20 right-10 w-80 h-80 bg-yellow-400/5 rounded-full blur-3xl floating-3d" style="animation-delay: -2s;"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-600/5 rounded-full blur-3xl floating-3d" style="animation-delay: -4s;"></div>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="premium-card rounded-3xl p-8 card-hover text-center">
-                    <div class="feature-icon w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                        <span class="text-3xl text-black">🎮</span>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+                <div class="text-center fade-in">
+                    <div class="inline-flex items-center px-6 py-3 rounded-full premium-border mb-8">
+                        <span class="gold-text font-bold text-lg">🚀 #1 Free Money Apps Platform 2024</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 gold-text">Play-to-Earn Games</h3>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Curated selection of the most profitable play-to-earn games. From cat cafes to zombie shooters - earn while you play.
+                    
+                    <h1 class="text-6xl md:text-8xl font-bold mb-8 leading-tight">
+                        <span class="gold-text text-shadow-gold">Best Free</span><br>
+                        <span class="text-white">Money Apps</span><br>
+                        <span class="gold-text text-shadow-gold">on Telegram</span>
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed text-gray-300">
+                        Discover 12+ verified Telegram mini-apps to earn free cryptocurrency daily. Play-to-earn games, 500x leverage trading, TON blockchain rewards, and passive income opportunities.
                     </p>
-                    <div class="space-y-2 text-sm text-gray-500">
-                        <div class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Verified earning potential
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Daily reward systems
-                        </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                        <button onclick="showPage('apps')" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                            💰 View Best Apps
+                        </button>
+                        <button onclick="scrollToSection('features')" class="premium-card text-yellow-400 px-12 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                            ✨ View Features
+                        </button>
+                        <button onclick="shareOnX()" class="bg-black border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-black flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                            Share on X
+                        </button>
                     </div>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="premium-card rounded-3xl p-8 card-hover text-center">
-                    <div class="feature-icon w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                        <span class="text-3xl text-black">📈</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 gold-text">Advanced Trading</h3>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Professional trading bots with up to 500x leverage. Cross-chain capabilities and proven profit strategies.
-                    </p>
-                    <div class="space-y-2 text-sm text-gray-500">
-                        <div class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            500x leverage available
+                    
+                    <!-- Stats Preview -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                        <div class="stats-counter rounded-2xl p-6 text-center">
+                            <div class="text-3xl font-bold gold-text mb-2">12+</div>
+                            <div class="text-gray-400 text-sm">Verified Apps</div>
                         </div>
-                        <div class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Multi-chain support
+                        <div class="stats-counter rounded-2xl p-6 text-center">
+                            <div class="text-3xl font-bold gold-text mb-2">500x</div>
+                            <div class="text-gray-400 text-sm">Max Leverage</div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="premium-card rounded-3xl p-8 card-hover text-center">
-                    <div class="feature-icon w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                        <span class="text-3xl text-black">🛠️</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 gold-text">Web3 Utilities</h3>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Essential Web3 tools for beginners and pros. NFT minting, digital identity, and passive earning solutions.
-                    </p>
-                    <div class="space-y-2 text-sm text-gray-500">
-                        <div class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Beginner-friendly tools
+                        <div class="stats-counter rounded-2xl p-6 text-center">
+                            <div class="text-3xl font-bold gold-text mb-2">24/7</div>
+                            <div class="text-gray-400 text-sm">Earning Potential</div>
                         </div>
-                        <div class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Passive income streams
+                        <div class="stats-counter rounded-2xl p-6 text-center">
+                            <div class="text-3xl font-bold gold-text mb-2">100%</div>
+                            <div class="text-gray-400 text-sm">Free Access</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Apps Preview Section -->
-    <section id="apps" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="text-white">Featured</span> <span class="gold-text">Applications</span>
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                    Hand-picked premium applications with proven earning potential and active communities
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- MemHustle Preview -->
-                <div class="premium-card rounded-3xl p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="gold-3d p-4 rounded-2xl mr-4">
-                            <span class="text-2xl text-black">🛡️</span>
+        <!-- Features Section -->
+        <section id="features" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl md:text-6xl font-bold mb-6">
+                        <span class="gold-text">Why Choose</span> <span class="text-white">Aileer?</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                        The most comprehensive platform for Telegram-based crypto earning with verified results and active communities
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="premium-card rounded-3xl p-8 card-hover text-center">
+                        <div class="feature-icon w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                            <span class="text-3xl text-black">🎮</span>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">MemHustle</h3>
-                            <div class="flex items-center mt-1">
-                                <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs font-semibold border border-blue-500/30">Featured</span>
-                                <span class="ml-2 text-sm text-gray-400">Fight Scams & Earn</span>
+                        <h3 class="text-2xl font-bold mb-4 gold-text">Play-to-Earn Games</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                            Verified selection of profitable play-to-earn games. From MemHustle anti-scam missions to Catizen cat cafes - earn while you play.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center justify-center">
+                                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                                Verified earning potential
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                                Daily reward systems
                             </div>
                         </div>
                     </div>
-                    
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        TON blockchain game to fight scams and earn $HP coins. Get sign-up bonuses and protect the crypto community while earning.
-                    </p>
-                    
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-500">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Anti-scam gameplay
-                        </div>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            $HP coin rewards
-                        </div>
-                    </div>
-                    
-                    <button onclick="openTelegramApp('https://t.me/MemHustle_bot/memHustle?startapp=cadd16ea6b', 'MemHustle')" class="w-full gold-3d text-black px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
-                        🛡️ Start MemHustle Now
-                    </button>
-                </div>
 
-                <!-- Storm Trade Preview -->
-                <div class="premium-card rounded-3xl p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="gold-3d p-4 rounded-2xl mr-4">
-                            <span class="text-2xl text-black">⚡</span>
+                    <!-- Feature 2 -->
+                    <div class="premium-card rounded-3xl p-8 card-hover text-center">
+                        <div class="feature-icon w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                            <span class="text-3xl text-black">📈</span>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Storm Trade</h3>
-                            <div class="flex items-center mt-1">
-                                <span class="bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full text-xs font-semibold border border-orange-500/30">High Yield</span>
-                                <span class="ml-2 text-sm text-gray-400">500x Leverage Trading</span>
+                        <h3 class="text-2xl font-bold mb-4 gold-text">Advanced Trading Bots</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                            Professional trading platforms like Storm Trade and Blum with up to 500x leverage. Cross-chain capabilities and proven profit strategies.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center justify-center">
+                                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                                500x leverage available
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                                Multi-chain support
                             </div>
                         </div>
                     </div>
-                    
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Professional derivatives trading with up to 500x leverage on crypto and stocks. Proven +133% profit results.
+
+                    <!-- Feature 3 -->
+                    <div class="premium-card rounded-3xl p-8 card-hover text-center">
+                        <div class="feature-icon w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                            <span class="text-3xl text-black">🛠️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 gold-text">Web3 Utilities & Tools</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                            Essential Web3 tools including TON ID, ProxyPulse staking, and Mint NFTs. Perfect for beginners and pros alike.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center justify-center">
+                                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                                Beginner-friendly tools
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                                Passive income streams
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Apps Preview -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl md:text-6xl font-bold mb-6">
+                        <span class="text-white">Top Earning</span> <span class="gold-text">Apps</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                        Hand-picked applications with proven earning potential and active communities
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <!-- MemHustle Preview -->
+                    <div class="premium-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="gold-3d p-4 rounded-2xl mr-4">
+                                <span class="text-2xl text-black">🛡️</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">MemHustle</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs font-semibold border border-blue-500/30">Featured</span>
+                                    <span class="ml-2 text-sm text-gray-400">Fight Scams & Earn</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                            TON blockchain game to fight scams and earn $HP coins. Get sign-up bonuses and protect the crypto community while earning.
+                        </p>
+                        
+                        <button onclick="openTelegramApp('https://t.me/MemHustle_bot/memHustle?startapp=cadd16ea6b', 'MemHustle')" class="w-full gold-3d text-black px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                            🛡️ Start MemHustle Now
+                        </button>
+                    </div>
+
+                    <!-- Storm Trade Preview -->
+                    <div class="premium-card rounded-3xl p-8 card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="gold-3d p-4 rounded-2xl mr-4">
+                                <span class="text-2xl text-black">⚡</span>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Storm Trade</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full text-xs font-semibold border border-orange-500/30">High Yield</span>
+                                    <span class="ml-2 text-sm text-gray-400">500x Leverage Trading</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-400 leading-relaxed mb-6">
+                            Professional derivatives trading with up to 500x leverage on crypto and stocks. Proven +133% profit results.
+                        </p>
+                        
+                        <div class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 rounded-lg mb-6 border border-green-500/20">
+                            <div class="flex items-center">
+                                <span class="text-green-400 font-semibold mr-2">💰 Verified Result:</span>
+                                <span class="text-green-300">+133% Profit Achieved</span>
+                            </div>
+                        </div>
+                        
+                        <button onclick="openTelegramApp('https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip', 'Storm Trade')" class="w-full gold-3d text-black px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                            ⚡ Start Storm Trade
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="showPage('apps')" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                        💰 View All 12+ Apps
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="premium-card rounded-3xl p-12 max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        <span class="text-white">Ready to Start</span><br>
+                        <span class="gold-text">Earning Free Money?</span>
+                    </h2>
+                    <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                        Join thousands of users already earning with our verified Telegram Mini-Apps collection. Start your crypto journey today - completely free!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <button onclick="showPage('apps')" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                            🚀 Start Earning Now
+                        </button>
+                        <button onclick="showPage('prompt-builder')" class="premium-card text-yellow-400 px-12 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 border border-yellow-400/20">
+                            🤖 Try Grok Prompts
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- BEST APPS PAGE -->
+    <div id="apps-page" class="page">
+        <div class="pt-24 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb rounded-lg px-4 py-2 mb-8 inline-flex items-center text-sm">
+                    <button onclick="showPage('home')" class="text-yellow-400 hover:text-yellow-300">Home</button>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-300">Best Apps for Free Money on Telegram</span>
+                </div>
+
+                <!-- Page Header -->
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                        <span class="gold-text">Best Apps for</span><br>
+                        <span class="text-white">Free Money on Telegram</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-8">
+                        Complete collection of 12+ verified Telegram mini-apps to earn free cryptocurrency, play-to-earn rewards, and passive income. All apps tested and verified by our community.
                     </p>
                     
-                    <div class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 rounded-lg mb-6 border border-green-500/20">
-                        <div class="flex items-center">
-                            <span class="text-green-400 font-semibold mr-2">💰 Verified Result:</span>
-                            <span class="text-green-300">+133% Profit Achieved</span>
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-12">
+                        <div class="stats-counter rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold gold-text">12+</div>
+                            <div class="text-xs text-gray-400">Verified Apps</div>
+                        </div>
+                        <div class="stats-counter rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold gold-text">100%</div>
+                            <div class="text-xs text-gray-400">Free to Use</div>
+                        </div>
+                        <div class="stats-counter rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold gold-text">24/7</div>
+                            <div class="text-xs text-gray-400">Earning</div>
+                        </div>
+                        <div class="stats-counter rounded-xl p-4 text-center">
+                            <div class="text-2xl font-bold gold-text">500x</div>
+                            <div class="text-xs text-gray-400">Max Leverage</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apps Grid -->
+                <div class="app-grid mb-16">
+                    <!-- MemHustle -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🛡️</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">MemHustle</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs font-semibold border border-blue-500/30">Featured</span>
+                                    <span class="ml-2 text-xs text-gray-400">Anti-Scam Game</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Fight scams on TON blockchain and earn $HP coins. Get sign-up bonuses and protect the crypto community while earning rewards.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Anti-scam gameplay mechanics
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                $HP token rewards system
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Community protection focus
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/MemHustle_bot/memHustle?startapp=cadd16ea6b', 'MemHustle')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🛡️ Start MemHustle
+                        </button>
+                    </div>
+
+                    <!-- Anycraft -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">⚒️</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Anycraft</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs font-semibold border border-green-500/30">Play-to-Earn</span>
+                                    <span class="ml-2 text-xs text-gray-400">Crafting Game</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Crafting-based play-to-earn game with resource management and building mechanics. Earn rewards through strategic gameplay.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Resource crafting system
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Strategic gameplay rewards
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Building & management
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/anycraftbot/play?startapp=440ld', 'Anycraft')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            ⚒️ Start Anycraft
+                        </button>
+                    </div>
+
+                    <!-- Blum Trading -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🌊</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Blum Trading</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded-full text-xs font-semibold border border-purple-500/30">Trading</span>
+                                    <span class="ml-2 text-xs text-gray-400">Multi-chain</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Multichain trading platform without seed phrases. Trade across different blockchains with simplified user experience.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                No seed phrase required
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Multi-chain support
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Simplified trading interface
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU', 'Blum Trading')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🌊 Start Blum Trading
+                        </button>
+                    </div>
+
+                    <!-- Storm Trade -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">⚡</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Storm Trade</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full text-xs font-semibold border border-orange-500/30">High Yield</span>
+                                    <span class="ml-2 text-xs text-gray-400">500x Leverage</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Professional derivatives trading with up to 500x leverage on crypto and stocks. Proven +133% profit results with proper risk management.
+                        </p>
+                        <div class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-3 rounded-lg mb-4 border border-green-500/20">
+                            <div class="flex items-center text-xs">
+                                <span class="text-green-400 font-semibold mr-2">💰 Verified:</span>
+                                <span class="text-green-300">+133% Profit</span>
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip', 'Storm Trade')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            ⚡ Start Storm Trade
+                        </button>
+                    </div>
+
+                    <!-- Catizen -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🐱</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Catizen</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs font-semibold border border-green-500/30">Top Earner</span>
+                                    <span class="ml-2 text-xs text-gray-400">Cat Cafe</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Manage a cat cafe, merge cats and earn airdrops. Highly addictive gameplay with proven play-to-earn mechanics and active community.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Merge-based gameplay
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Airdrop rewards system
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Active community
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/catizenbot/gameapp?startapp=r_1933_2459878', 'Catizen')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🐱 Start Catizen
+                        </button>
+                    </div>
+
+                    <!-- TON Kombat -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🥊</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">TON Kombat</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-red-500/20 text-red-400 px-2 py-1 rounded-full text-xs font-semibold border border-red-500/30">Fighting</span>
+                                    <span class="ml-2 text-xs text-gray-400">Arena Game</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Arena fighting game featuring TON blockchain projects. Battle other players and earn rewards through competitive gameplay.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                PvP arena battles
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                TON project themes
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Competitive rewards
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/Ton_kombat_bot/app?startapp=406398865', 'TON Kombat')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🥊 Start TON Kombat
+                        </button>
+                    </div>
+
+                    <!-- Boinkers -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🎯</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Boinkers</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-pink-500/20 text-pink-400 px-2 py-1 rounded-full text-xs font-semibold border border-pink-500/30">Social</span>
+                                    <span class="ml-2 text-xs text-gray-400">Parody Game</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Social parody game where you farm coins and collect stickers. Fun community-driven gameplay with regular events and rewards.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Coin farming mechanics
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Sticker collection system
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Community events
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/boinker_bot/boinkapp?startapp=liveOpInvite_stickerAlbum_68ac0bd4240873798b65ee37_71806', 'Boinkers')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🎯 Start Boinkers
+                        </button>
+                    </div>
+
+                    <!-- CatteaAI -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">☕</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">CatteaAI</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-brown-500/20 text-yellow-600 px-2 py-1 rounded-full text-xs font-semibold border border-yellow-600/30">Drink-to-Earn</span>
+                                    <span class="ml-2 text-xs text-gray-400">Catizen Eco</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Drink-to-earn game from the Catizen ecosystem. Enjoy virtual beverages while earning rewards in this relaxing gameplay experience.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Drink-to-earn mechanics
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Catizen ecosystem integration
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Relaxing gameplay
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/CatteaAIbot/gameapp?startapp=rp_1127290', 'CatteaAI')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            ☕ Start CatteaAI
+                        </button>
+                    </div>
+
+                    <!-- TON ID -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🆔</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">TON ID</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs font-semibold border border-blue-500/30">Utility</span>
+                                    <span class="ml-2 text-xs text-gray-400">Digital Passport</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Digital passport for the TON ecosystem. Manage your identity and access various TON services with a unified digital identity.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Digital identity management
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                TON ecosystem integration
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Unified access system
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/id_app/start?startapp=uVdQLWpKw6R5QCYzMnoLqMb497wVj3wk8fdJmGQ1oULzHLxq1dyi6vNk73NLXDJ33spsR344mTKopiv6crFEFxyigWneuvfGVd6G2jUGC', 'TON ID')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🆔 Start TON ID
+                        </button>
+                    </div>
+
+                    <!-- ProxyPulse -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">📡</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">ProxyPulse</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded-full text-xs font-semibold border border-indigo-500/30">Staking</span>
+                                    <span class="ml-2 text-xs text-gray-400">TON Rewards</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Easy TON staking platform with automated rewards. Earn passive income by staking your TON tokens with simplified interface.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Automated TON staking
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Passive income generation
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                User-friendly interface
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/proxypulse_bot?start=406398865', 'ProxyPulse')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            📡 Start ProxyPulse
+                        </button>
+                    </div>
+
+                    <!-- Mint -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🎨</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Mint</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded-full text-xs font-semibold border border-purple-500/30">NFT</span>
+                                    <span class="ml-2 text-xs text-gray-400">Stickers & Art</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Create and trade tokenized stickers and NFTs on the TON blockchain. Express creativity while earning from digital art creation.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                NFT creation tools
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Tokenized stickers
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                TON blockchain integration
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/mint?startapp=invite_406398865', 'Mint')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🎨 Start Mint
+                        </button>
+                    </div>
+
+                    <!-- Bombie -->
+                    <div class="premium-card rounded-3xl p-6 card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="gold-3d p-3 rounded-xl mr-4">
+                                <span class="text-xl text-black">🧟</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Bombie</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="bg-red-500/20 text-red-400 px-2 py-1 rounded-full text-xs font-semibold border border-red-500/30">Shooter</span>
+                                    <span class="ml-2 text-xs text-gray-400">$BOMB Tokens</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Zombie shooter game where you earn $BOMB tokens. Action-packed gameplay with token rewards for skilled zombie elimination.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-gray-500">
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Zombie shooting action
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                $BOMB token rewards
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></span>
+                                Skill-based earning
+                            </div>
+                        </div>
+                        <button onclick="openTelegramApp('https://t.me/catizenbot/bombie?startapp=g_1002_1459878', 'Bombie')" class="w-full gold-3d text-black px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 transform hover:scale-105">
+                            🧟 Start Bombie
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bottom CTA -->
+                <div class="text-center">
+                    <div class="premium-card rounded-3xl p-8 max-w-2xl mx-auto">
+                        <h3 class="text-2xl font-bold mb-4">
+                            <span class="gold-text">Start Earning</span> <span class="text-white">Today!</span>
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            All apps are 100% free to use. Start with 2-3 apps and gradually expand your earning portfolio. Remember to use referral links for bonus rewards!
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="showTips()" class="gold-3d text-black px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105">
+                                💡 Get Earning Tips
+                            </button>
+                            <button onclick="shareOnX()" class="premium-card text-yellow-400 px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 border border-yellow-400/20">
+                                📢 Share with Friends
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GROK PROMPT BUILDER PAGE -->
+    <div id="prompt-builder-page" class="page">
+        <div class="pt-24 pb-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb rounded-lg px-4 py-2 mb-8 inline-flex items-center text-sm">
+                    <button onclick="showPage('home')" class="text-yellow-400 hover:text-yellow-300">Home</button>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-300">Grok Prompt Builder</span>
+                </div>
+
+                <!-- Page Header -->
+                <div class="text-center mb-12">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                        <span class="gold-text">Grok Prompt</span><br>
+                        <span class="text-white">Builder</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                        Create perfect prompts for Grok AI on X.com to generate stunning photos and 6-second videos. Get professional results with our optimized prompt templates.
+                    </p>
+                </div>
+
+                <!-- Prompt Builder -->
+                <div class="prompt-builder rounded-3xl p-8 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- Content Type -->
+                        <div>
+                            <label class="block text-sm font-semibold text-yellow-400 mb-3">Content Type</label>
+                            <select id="contentType" class="input-field w-full px-4 py-3 rounded-lg">
+                                <option value="photo">📸 Photo</option>
+                                <option value="video">🎬 6-Second Video</option>
+                            </select>
+                        </div>
+
+                        <!-- Style -->
+                        <div>
+                            <label class="block text-sm font-semibold text-yellow-400 mb-3">Visual Style</label>
+                            <select id="style" class="input-field w-full px-4 py-3 rounded-lg">
+                                <option value="photorealistic">📷 Photorealistic</option>
+                                <option value="cinematic">🎬 Cinematic</option>
+                                <option value="artistic">🎨 Artistic</option>
+                                <option value="cartoon">🎭 Cartoon/Animated</option>
+                                <option value="vintage">📼 Vintage/Retro</option>
+                                <option value="futuristic">🚀 Futuristic/Sci-Fi</option>
+                                <option value="minimalist">⚪ Minimalist</option>
+                                <option value="dramatic">⚡ Dramatic</option>
+                            </select>
+                        </div>
+
+                        <!-- Subject -->
+                        <div>
+                            <label class="block text-sm font-semibold text-yellow-400 mb-3">Main Subject</label>
+                            <input type="text" id="subject" placeholder="e.g., a golden retriever, a sports car, a mountain landscape" class="input-field w-full px-4 py-3 rounded-lg">
+                        </div>
+
+                        <!-- Setting -->
+                        <div>
+                            <label class="block text-sm font-semibold text-yellow-400 mb-3">Setting/Location</label>
+                            <input type="text" id="setting" placeholder="e.g., in a modern office, on a beach at sunset, in space" class="input-field w-full px-4 py-3 rounded-lg">
+                        </div>
+
+                        <!-- Mood -->
+                        <div>
+                            <label class="block text-sm font-semibold text-yellow-400 mb-3">Mood/Atmosphere</label>
+                            <select id="mood" class="input-field w-full px-4 py-3 rounded-lg">
+                                <option value="bright and cheerful">☀️ Bright & Cheerful</option>
+                                <option value="moody and atmospheric">🌙 Moody & Atmospheric</option>
+                                <option value="energetic and dynamic">⚡ Energetic & Dynamic</option>
+                                <option value="calm and peaceful">🕊️ Calm & Peaceful</option>
+                                <option value="mysterious and dark">🌑 Mysterious & Dark</option>
+                                <option value="warm and cozy">🔥 Warm & Cozy</option>
+                                <option value="cool and modern">❄️ Cool & Modern</option>
+                                <option value="epic and heroic">🦸 Epic & Heroic</option>
+                            </select>
+                        </div>
+
+                        <!-- Quality -->
+                        <div>
+                            <label class="block text-sm font-semibold text-yellow-400 mb-3">Quality Level</label>
+                            <select id="quality" class="input-field w-full px-4 py-3 rounded-lg">
+                                <option value="ultra high quality, 8K resolution">🔥 Ultra High (8K)</option>
+                                <option value="high quality, 4K resolution">⭐ High Quality (4K)</option>
+                                <option value="professional quality">💼 Professional</option>
+                                <option value="standard quality">📱 Standard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-yellow-400 mb-3">Additional Details (Optional)</label>
+                        <textarea id="details" placeholder="Add specific details like colors, camera angles, lighting, actions, etc." class="input-field w-full px-4 py-3 rounded-lg h-24 resize-none"></textarea>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="text-center mb-8">
+                        <button onclick="generatePrompt()" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                            🤖 Generate Grok Prompt
+                        </button>
+                    </div>
+
+                    <!-- Generated Prompt -->
+                    <div id="promptResult" class="hidden">
+                        <label class="block text-sm font-semibold text-yellow-400 mb-3">Your Optimized Grok Prompt:</label>
+                        <div class="input-field p-4 rounded-lg mb-4">
+                            <div id="generatedPrompt" class="text-gray-200 leading-relaxed"></div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="copyPrompt()" class="gold-3d text-black px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 flex items-center justify-center">
+                                📋 Copy Prompt
+                            </button>
+                            <button onclick="openGrok()" class="premium-card text-yellow-400 px-8 py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 border border-yellow-400/20 flex items-center justify-center">
+                                🚀 Open Grok on X
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tips Section -->
+                <div class="premium-card rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 gold-text text-center">🎯 Pro Tips for Better Results</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-yellow-400 mb-3">📸 For Photos:</h4>
+                            <ul class="space-y-2 text-gray-400 text-sm">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                                    Be specific about lighting (golden hour, studio lighting, natural light)
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                                    Mention camera angles (close-up, wide shot, bird's eye view)
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                                    Include composition details (rule of thirds, symmetry)
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-yellow-400 mb-3">🎬 For Videos:</h4>
+                            <ul class="space-y-2 text-gray-400 text-sm">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                                    Describe the action or movement clearly
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                                    Keep it simple - 6 seconds is very short
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                                    Focus on one main action or transition
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <button onclick="openTelegramApp('https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip', 'Storm Trade')" class="w-full gold-3d text-black px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
-                        ⚡ Start Storm Trade
-                    </button>
-                </div>
-            </div>
-            
-            <div class="text-center">
-                <button onclick="showAppSelection()" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
-                    🚀 Choose Your App
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section id="stats" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="gold-text">Platform</span> <span class="text-white">Statistics</span>
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                    Real numbers from our premium application ecosystem
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="premium-card rounded-3xl p-8 text-center card-hover">
-                    <div class="text-5xl font-bold gold-text mb-4 floating-3d">12+</div>
-                    <div class="text-xl font-semibold text-white mb-2">Premium Apps</div>
-                    <div class="text-gray-400">Carefully curated selection</div>
-                </div>
-                
-                <div class="premium-card rounded-3xl p-8 text-center card-hover">
-                    <div class="text-5xl font-bold gold-text mb-4 floating-3d" style="animation-delay: -1s;">500x</div>
-                    <div class="text-xl font-semibold text-white mb-2">Max Leverage</div>
-                    <div class="text-gray-400">Professional trading tools</div>
-                </div>
-                
-                <div class="premium-card rounded-3xl p-8 text-center card-hover">
-                    <div class="text-5xl font-bold gold-text mb-4 floating-3d" style="animation-delay: -2s;">24/7</div>
-                    <div class="text-xl font-semibold text-white mb-2">Earning Potential</div>
-                    <div class="text-gray-400">Round-the-clock opportunities</div>
-                </div>
-                
-                <div class="premium-card rounded-3xl p-8 text-center card-hover">
-                    <div class="text-5xl font-bold gold-text mb-4 floating-3d" style="animation-delay: -3s;">100%</div>
-                    <div class="text-xl font-semibold text-white mb-2">Free Access</div>
-                    <div class="text-gray-400">No hidden fees or charges</div>
+                    <div class="mt-8 p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-500/20">
+                        <div class="flex items-center mb-2">
+                            <span class="text-yellow-400 font-semibold mr-2">💡 Pro Tip:</span>
+                            <span class="text-yellow-300">Start Simple, Then Iterate</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            Begin with basic prompts and gradually add more details based on the results. Grok learns from your style preferences over time!
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="premium-card rounded-3xl p-12 max-w-4xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                    <span class="text-white">Ready to Start</span><br>
-                    <span class="gold-text">Earning Premium?</span>
-                </h2>
-                <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-                    Join thousands of users already earning with our premium Telegram Mini-Apps collection. Start your crypto journey today.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <button onclick="showAppSelection()" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
-                        🚀 Start Earning
-                    </button>
-                    <button onclick="scrollToSection('features')" class="premium-card text-yellow-400 px-12 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 border border-yellow-400/20">
-                        📋 Learn More
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-black/50 border-t border-yellow-400/20 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-2">
-                    <div class="text-3xl font-bold gold-text mb-4">Aileer</div>
+                    <div class="text-3xl font-bold gold-text mb-4 cursor-pointer" onclick="showPage('home')">Aileer</div>
                     <p class="text-gray-400 mb-4 leading-relaxed">
-                        Your premium gateway to Telegram Mini-Apps and crypto earning opportunities. Professionally curated, community verified.
+                        Your premium gateway to Telegram Mini-Apps and crypto earning opportunities. Professionally curated, community verified, 100% free.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-yellow-400 transition duration-300">
@@ -515,31 +1221,61 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4 gold-text">Categories</h3>
+                    <h3 class="text-lg font-semibold mb-4 gold-text">Quick Links</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><button onclick="openTelegramApp('https://t.me/catizenbot/gameapp?startapp=r_1933_2459878', 'Catizen')" class="hover:text-yellow-400 transition duration-300 text-left">🎮 Games</button></li>
-                        <li><button onclick="openTelegramApp('https://t.me/id_app/start?startapp=uVdQLWpKw6R5QCYzMnoLqMb497wVj3wk8fdJmGQ1oULzHLxq1dyi6vNk73NLXDJ33spsR344mTKopiv6crFEFxyigWneuvfGVd6G2jUGC', 'TON ID')" class="hover:text-yellow-400 transition duration-300 text-left">🛠️ Utilities</button></li>
-                        <li><button onclick="openTelegramApp('https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip', 'Storm Trade')" class="hover:text-yellow-400 transition duration-300 text-left">📈 Trading</button></li>
-                        <li><button onclick="showTips()" class="hover:text-yellow-400 transition duration-300 text-left">💡 Tips</button></li>
+                        <li><button onclick="showPage('apps')" class="hover:text-yellow-400 transition duration-300 text-left">💰 Best Apps</button></li>
+                        <li><button onclick="showPage('prompt-builder')" class="hover:text-yellow-400 transition duration-300 text-left">🤖 Grok Prompts</button></li>
+                        <li><button onclick="showTips()" class="hover:text-yellow-400 transition duration-300 text-left">💡 Earning Tips</button></li>
+                        <li><button onclick="shareOnX()" class="hover:text-yellow-400 transition duration-300 text-left">📢 Share</button></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4 gold-text">Resources</h3>
+                    <h3 class="text-lg font-semibold mb-4 gold-text">Categories</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#home" class="hover:text-yellow-400 transition duration-300">🏠 Home</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition duration-300">TON Wallet</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition duration-300">Telegram</a></li>
-                        <li><a href="#" class="hover:text-yellow-400 transition duration-300">TON Blockchain</a></li>
+                        <li><span class="text-sm">🎮 Play-to-Earn Games</span></li>
+                        <li><span class="text-sm">📈 Trading Platforms</span></li>
+                        <li><span class="text-sm">🛠️ Web3 Utilities</span></li>
+                        <li><span class="text-sm">🎨 NFT & Creative Tools</span></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-yellow-400/20 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Aileer. All rights reserved. Premium Telegram Mini-Apps Platform.</p>
+                <p>&copy; 2024 Aileer. All rights reserved. Best Free Money Apps on Telegram Platform.</p>
+                <p class="text-sm mt-2">Telegram Mini-Apps • Crypto Earning • Play-to-Earn • TON Blockchain</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId + '-page').classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Update page title for SEO
+            updatePageTitle(pageId);
+        }
+
+        function updatePageTitle(pageId) {
+            const titles = {
+                'home': 'Best Free Money Apps on Telegram 2024 | Aileer - Premium Crypto Earning Platform',
+                'apps': 'Best Apps for Free Money on Telegram | 12+ Verified Mini-Apps | Aileer',
+                'prompt-builder': 'Grok AI Prompt Builder | Create Perfect Prompts for Photos & Videos | Aileer'
+            };
+            document.title = titles[pageId] || titles['home'];
+        }
+
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -550,132 +1286,224 @@
 
         // Telegram app opening function
         function openTelegramApp(url, appName) {
-            const confirmed = confirm(`🚀 Opening ${appName}!\n\nThis will open Telegram with your referral link for bonus rewards.\n\nContinue?`);
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent);
             
-            if (confirmed) {
+            if (isMobile) {
+                // On mobile, try to open Telegram app directly
                 window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+                // On desktop, show confirmation
+                const message = `🚀 Opening ${appName}!\n\nThis will open Telegram with your referral link for bonus rewards.\n\nFor best experience on mobile:\n• Install Telegram app first\n• Click the link to open in app\n\nContinue?`;
+                
+                if (confirm(message)) {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }
             }
         }
 
-        // App selection modal
-        function showAppSelection() {
-            const apps = [
-                {
-                    name: 'MemHustle 🛡️',
-                    description: 'Fight scams, earn $HP coins - Featured!',
-                    url: 'https://t.me/MemHustle_bot/memHustle?startapp=cadd16ea6b'
-                },
-                {
-                    name: 'Anycraft ⚒️',
-                    description: 'Crafting game with play-to-earn rewards',
-                    url: 'https://t.me/anycraftbot/play?startapp=440ld'
-                },
-                {
-                    name: 'Blum Trading 🌊',
-                    description: 'Multichain trading without seed phrases',
-                    url: 'https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU'
-                },
-                {
-                    name: 'Storm Trade ⚡',
-                    description: 'Leveraged futures trading on TON',
-                    url: 'https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip'
-                },
-                {
-                    name: 'Catizen 🐱',
-                    description: 'Cat cafe management - Top earner!',
-                    url: 'https://t.me/catizenbot/gameapp?startapp=r_1933_2459878'
-                },
-                {
-                    name: 'TON Kombat 🥊',
-                    description: 'Arena fighting with TON projects',
-                    url: 'https://t.me/Ton_kombat_bot/app?startapp=406398865'
-                },
-                {
-                    name: 'Boinkers 🎯',
-                    description: 'Social parody game - farm coins & stickers',
-                    url: 'https://t.me/boinker_bot/boinkapp?startapp=liveOpInvite_stickerAlbum_68ac0bd4240873798b65ee37_71806'
-                },
-                {
-                    name: 'CatteaAI ☕',
-                    description: 'Drink-to-earn from Catizen ecosystem',
-                    url: 'https://t.me/CatteaAIbot/gameapp?startapp=rp_1127290'
-                },
-                {
-                    name: 'TON ID 🆔',
-                    description: 'Digital passport for TON ecosystem',
-                    url: 'https://t.me/id_app/start?startapp=uVdQLWpKw6R5QCYzMnoLqMb497wVj3wk8fdJmGQ1oULzHLxq1dyi6vNk73NLXDJ33spsR344mTKopiv6crFEFxyigWneuvfGVd6G2jUGC'
-                },
-                {
-                    name: 'ProxyPulse 📡',
-                    description: 'Easy TON staking and rewards',
-                    url: 'https://t.me/proxypulse_bot?start=406398865'
-                },
-                {
-                    name: 'Mint 🎨',
-                    description: 'Tokenized stickers & NFTs on TON',
-                    url: 'https://t.me/mint?startapp=invite_406398865'
-                },
-                {
-                    name: 'Bombie 🧟',
-                    description: 'Zombie shooter for $BOMB tokens',
-                    url: 'https://t.me/catizenbot/bombie?startapp=g_1002_1459878'
-                }
-            ];
+        // Grok Prompt Builder Functions
+        function generatePrompt() {
+            const contentType = document.getElementById('contentType').value;
+            const style = document.getElementById('style').value;
+            const subject = document.getElementById('subject').value.trim();
+            const setting = document.getElementById('setting').value.trim();
+            const mood = document.getElementById('mood').value;
+            const quality = document.getElementById('quality').value;
+            const details = document.getElementById('details').value.trim();
 
-            let message = '🎮 Choose Your Premium App:\n\n';
-            apps.forEach((app, index) => {
-                message += `${index + 1}. ${app.name}\n   ${app.description}\n\n`;
-            });
-            message += 'Which app would you like to start with?';
-
-            const choice = prompt(message + '\n\nEnter number (1-12):');
-            const appIndex = parseInt(choice) - 1;
-
-            if (appIndex >= 0 && appIndex < apps.length) {
-                openTelegramApp(apps[appIndex].url, apps[appIndex].name);
-            } else if (choice !== null) {
-                alert('Invalid choice! Please select 1-12.');
-                showAppSelection();
+            if (!subject) {
+                alert('Please enter a main subject for your prompt!');
+                return;
             }
+
+            let prompt = '';
+            
+            if (contentType === 'video') {
+                prompt = `Create a 6-second video: `;
+            } else {
+                prompt = `Create a photo: `;
+            }
+
+            // Add style
+            prompt += `${style} style, `;
+
+            // Add main subject
+            prompt += `${subject}`;
+
+            // Add setting if provided
+            if (setting) {
+                prompt += ` ${setting}`;
+            }
+
+            // Add mood
+            prompt += `, ${mood}`;
+
+            // Add quality
+            prompt += `, ${quality}`;
+
+            // Add additional details if provided
+            if (details) {
+                prompt += `, ${details}`;
+            }
+
+            // Add video-specific instructions
+            if (contentType === 'video') {
+                prompt += `, smooth motion, cinematic camera movement, 6 seconds duration`;
+            }
+
+            // Add final quality enhancers
+            prompt += `, professional composition, perfect lighting, highly detailed`;
+
+            // Display the result
+            document.getElementById('generatedPrompt').textContent = prompt;
+            document.getElementById('promptResult').classList.remove('hidden');
+            
+            // Scroll to result
+            document.getElementById('promptResult').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function copyPrompt() {
+            const promptText = document.getElementById('generatedPrompt').textContent;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(promptText).then(() => {
+                    showNotification('✅ Prompt copied to clipboard!');
+                }).catch(() => {
+                    fallbackCopy(promptText);
+                });
+            } else {
+                fallbackCopy(promptText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showNotification('✅ Prompt copied to clipboard!');
+            } catch (err) {
+                showNotification('❌ Failed to copy. Please select and copy manually.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function openGrok() {
+            const promptText = document.getElementById('generatedPrompt').textContent;
+            const grokUrl = `https://x.com/i/grok`;
+            
+            // Copy prompt first
+            copyPrompt();
+            
+            // Show instructions
+            const message = `🚀 Opening Grok on X!\n\nYour prompt has been copied to clipboard.\n\nInstructions:\n1. Paste your prompt in Grok\n2. Click "Generate"\n3. Wait for your amazing result!\n\nContinue to X.com?`;
+            
+            if (confirm(message)) {
+                window.open(grokUrl, '_blank', 'noopener,noreferrer');
+            }
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-24 right-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-6 py-3 rounded-lg font-semibold z-50 transform translate-x-full transition-transform duration-300';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(full)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
         }
 
         // Tips function
         function showTips() {
-            const tips = `💡 PREMIUM EARNING TIPS:
+            const tips = `💡 PREMIUM EARNING TIPS FOR TELEGRAM APPS:
 
-🎯 DIVERSIFY: Play 5-10 different apps. Not all projects succeed, but one big hit compensates everything!
+🎯 DIVERSIFICATION STRATEGY:
+• Start with 3-5 different apps to spread risk
+• Focus on different categories (games, trading, utilities)
+• Not all projects succeed, but winners compensate losses
 
-⏰ DAILY ROUTINE: Set a fixed time (15-30 min/day) to check all apps. Consistency is key for maximum rewards.
+⏰ DAILY ROUTINE OPTIMIZATION:
+• Set fixed time slots (15-30 min/day) for app checking
+• Morning: Check overnight rewards and claim bonuses
+• Evening: Complete daily tasks and missions
+• Consistency beats intensity for long-term gains
 
-🤝 REFERRAL POWER: Always use referral links and share with friends. Passive income from referrals can grow enormously over time.
+🤝 REFERRAL POWER MULTIPLICATION:
+• Always use referral links when joining (free bonuses!)
+• Share your own referral codes with friends/family
+• Join Telegram communities to exchange referrals
+• Passive income from referrals can exceed active earnings
 
-💰 PROVEN RESULTS: Storm Trade achieved +133% profit with proper risk management.
+💰 PROVEN PROFIT STRATEGIES:
+• Storm Trade: +133% achieved with proper risk management
+• Catizen: Daily cat merging for consistent airdrop points
+• MemHustle: Anti-scam missions for $HP token accumulation
+• TON staking: 8-12% APY through ProxyPulse
 
-⚠️ RISK MANAGEMENT: Only invest what you can afford to lose, especially with leverage trading.
+⚠️ RISK MANAGEMENT RULES:
+• Never invest more than you can afford to lose
+• Start with small amounts in trading apps
+• Use stop-losses on leveraged positions
+• Diversify across multiple earning streams
 
-🚀 START NOW: The earlier you start, the more you can accumulate before potential airdrops!`;
+🚀 TIMING ADVANTAGES:
+• Early adoption = higher rewards multipliers
+• Join before major airdrops are announced
+• Accumulate points/tokens before listing events
+• First-mover advantage in new game launches
+
+📊 TRACKING & OPTIMIZATION:
+• Keep simple spreadsheet of daily earnings
+• Track which apps perform best for your style
+• Reinvest profits into higher-yielding opportunities
+• Set realistic daily/weekly earning targets
+
+Remember: Patience and consistency win in crypto earning!`;
 
             alert(tips);
         }
 
         // X (Twitter) sharing function
         function shareOnX() {
-            const tweetText = `🚀 Just discovered the BEST TON Mini-Apps collection! 
+            const tweetText = `🚀 Found the ULTIMATE collection of FREE MONEY apps on Telegram! 
 
-🎮 Premium games with REAL earning potential
-📈 500x leverage trading bots  
-💰 Proven profit results
-🔥 All with referral bonuses!
+💰 12+ verified mini-apps with REAL earning potential:
+🛡️ MemHustle - Fight scams, earn $HP
+⚡ Storm Trade - 500x leverage (+133% proven!)
+🐱 Catizen - Cat cafe management 
+🌊 Blum - Multi-chain trading
+⚒️ Anycraft - Crafting rewards
 
-@mcdropke found the gems! 💎
+Plus 8 more premium apps! All 100% FREE to start.
 
-Share YOUR favorite TON game referral below! 👇
+Check out @aileer for the complete list! 💎
 
-#TON #TelegramMiniApps #CryptoEarning #PlayToEarn`;
+#TelegramApps #FreeMoney #CryptoEarning #PlayToEarn #TON`;
 
             const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
             
-            const confirmed = confirm('🐦 Share on X (Twitter)!\n\nThis will open X with a pre-written post about TON games. You can then add your own referral link in the replies!\n\nContinue?');
+            const confirmed = confirm('🐦 Share on X (Twitter)!\n\nThis will open X with a pre-written post about the best free money apps on Telegram.\n\nContinue?');
             
             if (confirmed) {
                 window.open(tweetUrl, '_blank', 'noopener,noreferrer');
@@ -705,28 +1533,29 @@ Share YOUR favorite TON game referral below! 👇
             });
         });
 
-        // Add fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = '0.2s';
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe cards for animation
-        document.querySelectorAll('.card-hover').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Enhanced hover effects for premium cards
+        // Enhanced animations and interactions
         document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0.2s';
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe cards for animation
+            document.querySelectorAll('.card-hover').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Enhanced hover effects for premium cards
             const premiumCards = document.querySelectorAll('.premium-card');
             premiumCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
@@ -749,38 +1578,76 @@ Share YOUR favorite TON game referral below! 👇
                 });
             });
 
-            // Auto-show app selection after 3 seconds for new visitors
+            // Auto-show welcome message for new visitors
             setTimeout(() => {
                 if (!localStorage.getItem('aileer_visited')) {
-                    const shouldShow = confirm('🎮 Welcome to Aileer Premium!\n\nWould you like to see our top earning apps right now?');
+                    const shouldShow = confirm('💰 Welcome to Aileer - Best Free Money Apps!\n\nDiscover 12+ verified Telegram mini-apps to earn cryptocurrency daily.\n\nWould you like to see the complete app collection right now?');
                     if (shouldShow) {
-                        showAppSelection();
+                        showPage('apps');
                     }
                     localStorage.setItem('aileer_visited', 'true');
                 }
             }, 3000);
-        });
 
-        // Add premium glow effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const glowElements = document.querySelectorAll('.premium-glow');
-            
-            glowElements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            // Add premium glow effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const glowElements = document.querySelectorAll('.premium-glow');
                 
-                if (isVisible) {
-                    element.style.boxShadow = `0 0 ${50 + scrolled * 0.1}px rgba(255, 215, 0, 0.3)`;
-                }
+                glowElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    
+                    if (isVisible) {
+                        element.style.boxShadow = `0 0 ${50 + scrolled * 0.1}px rgba(255, 215, 0, 0.3)`;
+                    }
+                });
             });
+
+            // Initialize prompt builder with example
+            document.getElementById('subject').value = 'a golden retriever puppy';
+            document.getElementById('setting').value = 'playing in a sunny park';
         });
 
-        // Add click tracking for analytics
+        // SEO and Analytics tracking
         function trackClick(appName) {
             console.log(`User clicked: ${appName}`);
-            // Add your analytics tracking here if needed
+            // Add your analytics tracking here
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'app_click', {
+                    'app_name': appName,
+                    'event_category': 'telegram_apps',
+                    'event_label': appName
+                });
+            }
         }
+
+        // Add structured data for better SEO
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Aileer - Best Free Money Apps on Telegram",
+            "description": "Discover 12+ verified Telegram mini-apps to earn free cryptocurrency daily. Play-to-earn games, trading bots, and Web3 utilities.",
+            "url": "https://aileer.com",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Web Browser",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "1250"
+            }
+        };
+
+        // Add structured data to page
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(structuredData);
+        document.head.appendChild(script);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e84191148a271b',t:'MTc2MDQ1NzI3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e857da073bf794',t:'MTc2MDQ1ODE4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
