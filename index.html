@@ -242,7 +242,7 @@
                 <!-- Stats Preview -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                     <div class="stats-counter rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold gold-text mb-2">15+</div>
+                        <div class="text-3xl font-bold gold-text mb-2">12+</div>
                         <div class="text-gray-400 text-sm">Premium Apps</div>
                     </div>
                     <div class="stats-counter rounded-2xl p-6 text-center">
@@ -354,38 +354,38 @@
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Catizen Preview -->
+                <!-- MemHustle Preview -->
                 <div class="premium-card rounded-3xl p-8 card-hover">
                     <div class="flex items-center mb-6">
                         <div class="gold-3d p-4 rounded-2xl mr-4">
-                            <span class="text-2xl text-black">🐱</span>
+                            <span class="text-2xl text-black">🛡️</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white">Catizen</h3>
+                            <h3 class="text-2xl font-bold text-white">MemHustle</h3>
                             <div class="flex items-center mt-1">
-                                <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-xs font-semibold border border-green-500/30">Top Earner</span>
-                                <span class="ml-2 text-sm text-gray-400">Cat Cafe Management</span>
+                                <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs font-semibold border border-blue-500/30">Featured</span>
+                                <span class="ml-2 text-sm text-gray-400">Fight Scams & Earn</span>
                             </div>
                         </div>
                     </div>
                     
                     <p class="text-gray-400 leading-relaxed mb-6">
-                        Manage a cat cafe, merge cats and earn airdrops. Highly addictive gameplay with proven play-to-earn mechanics.
+                        TON blockchain game to fight scams and earn $HP coins. Get sign-up bonuses and protect the crypto community while earning.
                     </p>
                     
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-500">
                             <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Merge-based gameplay
+                            Anti-scam gameplay
                         </div>
                         <div class="flex items-center text-sm text-gray-500">
                             <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
-                            Airdrop rewards system
+                            $HP coin rewards
                         </div>
                     </div>
                     
-                    <button onclick="openTelegramApp('https://t.me/catizenbot/gameapp?startapp=r_1933_2459878', 'Catizen')" class="w-full gold-3d text-black px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
-                        🐱 Start Catizen Now
+                    <button onclick="openTelegramApp('https://t.me/MemHustle_bot/memHustle?startapp=cadd16ea6b', 'MemHustle')" class="w-full gold-3d text-black px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                        🛡️ Start MemHustle Now
                     </button>
                 </div>
 
@@ -443,7 +443,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="premium-card rounded-3xl p-8 text-center card-hover">
-                    <div class="text-5xl font-bold gold-text mb-4 floating-3d">15+</div>
+                    <div class="text-5xl font-bold gold-text mb-4 floating-3d">12+</div>
                     <div class="text-xl font-semibold text-white mb-2">Premium Apps</div>
                     <div class="text-gray-400">Carefully curated selection</div>
                 </div>
@@ -561,28 +561,63 @@
         function showAppSelection() {
             const apps = [
                 {
+                    name: 'MemHustle 🛡️',
+                    description: 'Fight scams, earn $HP coins - Featured!',
+                    url: 'https://t.me/MemHustle_bot/memHustle?startapp=cadd16ea6b'
+                },
+                {
+                    name: 'Anycraft ⚒️',
+                    description: 'Crafting game with play-to-earn rewards',
+                    url: 'https://t.me/anycraftbot/play?startapp=440ld'
+                },
+                {
+                    name: 'Blum Trading 🌊',
+                    description: 'Multichain trading without seed phrases',
+                    url: 'https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU'
+                },
+                {
+                    name: 'Storm Trade ⚡',
+                    description: 'Leveraged futures trading on TON',
+                    url: 'https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip'
+                },
+                {
                     name: 'Catizen 🐱',
                     description: 'Cat cafe management - Top earner!',
                     url: 'https://t.me/catizenbot/gameapp?startapp=r_1933_2459878'
                 },
                 {
-                    name: 'Storm Trade ⚡',
-                    description: '500x leverage trading - High profits!',
-                    url: 'https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip'
+                    name: 'TON Kombat 🥊',
+                    description: 'Arena fighting with TON projects',
+                    url: 'https://t.me/Ton_kombat_bot/app?startapp=406398865'
                 },
                 {
-                    name: 'Blum Trading 🌊',
-                    description: 'Cross-chain trading with mini-games',
-                    url: 'https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU'
+                    name: 'Boinkers 🎯',
+                    description: 'Social parody game - farm coins & stickers',
+                    url: 'https://t.me/boinker_bot/boinkapp?startapp=liveOpInvite_stickerAlbum_68ac0bd4240873798b65ee37_71806'
+                },
+                {
+                    name: 'CatteaAI ☕',
+                    description: 'Drink-to-earn from Catizen ecosystem',
+                    url: 'https://t.me/CatteaAIbot/gameapp?startapp=rp_1127290'
                 },
                 {
                     name: 'TON ID 🆔',
-                    description: 'Official TON digital passport',
+                    description: 'Digital passport for TON ecosystem',
                     url: 'https://t.me/id_app/start?startapp=uVdQLWpKw6R5QCYzMnoLqMb497wVj3wk8fdJmGQ1oULzHLxq1dyi6vNk73NLXDJ33spsR344mTKopiv6crFEFxyigWneuvfGVd6G2jUGC'
                 },
                 {
+                    name: 'ProxyPulse 📡',
+                    description: 'Easy TON staking and rewards',
+                    url: 'https://t.me/proxypulse_bot?start=406398865'
+                },
+                {
+                    name: 'Mint 🎨',
+                    description: 'Tokenized stickers & NFTs on TON',
+                    url: 'https://t.me/mint?startapp=invite_406398865'
+                },
+                {
                     name: 'Bombie 🧟',
-                    description: 'Zombie shooter for $BOMBIE tokens',
+                    description: 'Zombie shooter for $BOMB tokens',
                     url: 'https://t.me/catizenbot/bombie?startapp=g_1002_1459878'
                 }
             ];
@@ -593,13 +628,13 @@
             });
             message += 'Which app would you like to start with?';
 
-            const choice = prompt(message + '\n\nEnter number (1-5):');
+            const choice = prompt(message + '\n\nEnter number (1-12):');
             const appIndex = parseInt(choice) - 1;
 
             if (appIndex >= 0 && appIndex < apps.length) {
                 openTelegramApp(apps[appIndex].url, apps[appIndex].name);
             } else if (choice !== null) {
-                alert('Invalid choice! Please select 1-5.');
+                alert('Invalid choice! Please select 1-12.');
                 showAppSelection();
             }
         }
@@ -747,5 +782,5 @@ Share YOUR favorite TON game referral below! 👇
             // Add your analytics tracking here if needed
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98c9e726e4baea4b',t:'MTc2MDEzODk5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e84191148a271b',t:'MTc2MDQ1NzI3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
