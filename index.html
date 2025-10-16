@@ -537,6 +537,131 @@
             background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
             margin: 2rem 0;
         }
+
+        /* 3D Dice Animation Styles */
+        .dice-container {
+            perspective: 1000px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .dice {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+            cursor: pointer;
+        }
+
+        .dice:hover {
+            transform: rotateX(15deg) rotateY(15deg);
+        }
+
+        .dice.rolling {
+            animation: diceRoll 2s ease-in-out;
+        }
+
+        .dice-face {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #d97706);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .dice-front { transform: rotateY(0deg) translateZ(60px); }
+        .dice-back { transform: rotateY(180deg) translateZ(60px); }
+        .dice-right { transform: rotateY(90deg) translateZ(60px); }
+        .dice-left { transform: rotateY(-90deg) translateZ(60px); }
+        .dice-top { transform: rotateX(90deg) translateZ(60px); }
+        .dice-bottom { transform: rotateX(-90deg) translateZ(60px); }
+
+        @keyframes diceRoll {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(180deg) rotateY(180deg); }
+            50% { transform: rotateX(360deg) rotateY(360deg); }
+            75% { transform: rotateX(540deg) rotateY(180deg); }
+            100% { transform: rotateX(720deg) rotateY(360deg); }
+        }
+
+        .dice-subject-animation {
+            animation: textGlow 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6); }
+        }
+
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .cookie-banner-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .dice-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .dice, .dice-face {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .dice-face {
+                font-size: 2.5rem;
+            }
+            
+            .dice-front { transform: rotateY(0deg) translateZ(50px); }
+            .dice-back { transform: rotateY(180deg) translateZ(50px); }
+            .dice-right { transform: rotateY(90deg) translateZ(50px); }
+            .dice-left { transform: rotateY(-90deg) translateZ(50px); }
+            .dice-top { transform: rotateX(90deg) translateZ(50px); }
+            .dice-bottom { transform: rotateX(-90deg) translateZ(50px); }
+        }
     </style>
     
     <script>
@@ -956,9 +1081,168 @@ Start vandaag en bouw je crypto portfolio op! 🌟
             });
         }
 
+        function copyAndCreate() {
+            const promptText = document.getElementById('generatedPrompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Gekopieerd!';
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-500');
+                }, 1000);
+                
+                // Direct link opening - meest betrouwbare methode
+                setTimeout(() => {
+                    window.open('https://www.imagine.art/dashboard?a_aid=5b6db501&a_bid=adee0d69', '_blank', 'noopener,noreferrer');
+                }, 500);
+                
+                trackEvent('copy_and_create_clicked', { 
+                    prompt_length: promptText.length,
+                    source: 'manual_builder'
+                });
+            });
+        }
+
+        function copyAutoPrompt() {
+            const promptText = document.getElementById('autoGeneratedPrompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Gekopieerd!';
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-500');
+                }, 2000);
+                
+                trackEvent('auto_prompt_copied', { prompt_length: promptText.length });
+            });
+        }
+
+        function copyAndCreateAuto() {
+            const promptText = document.getElementById('autoGeneratedPrompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Gekopieerd!';
+                button.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-500');
+                }, 1000);
+                
+                // Direct link opening - meest betrouwbare methode
+                setTimeout(() => {
+                    window.open('https://www.imagine.art/dashboard?a_aid=5b6db501&a_bid=adee0d69', '_blank', 'noopener,noreferrer');
+                }, 500);
+                
+                trackEvent('copy_and_create_clicked', { 
+                    prompt_length: promptText.length,
+                    source: 'auto_generator'
+                });
+            });
+        }
+
         function openGrok() {
             trackEvent('grok_opened', { source: 'prompt_builder' });
             window.open('https://x.com/i/grok', '_blank', 'noopener,noreferrer');
+        }
+
+        // Magic Dice Auto-Prompt Generator
+        function rollDiceForPrompt() {
+            const dice = document.getElementById('magicDice').querySelector('.dice');
+            const diceSubject = document.getElementById('diceSubject');
+            const diceFront = document.getElementById('diceFront');
+            const autoPromptResult = document.getElementById('autoPromptResult');
+            const autoGeneratedPrompt = document.getElementById('autoGeneratedPrompt');
+            
+            // Start rolling animation
+            dice.classList.add('rolling');
+            diceSubject.classList.add('dice-subject-animation');
+            
+            // Array of subjects that will cycle during roll
+            const rollingSubjects = [
+                '🎨 Generating...', '🌟 Creating...', '🚀 Building...', '✨ Crafting...', 
+                '💫 Designing...', '🎯 Composing...', '🎪 Mixing...', '🌈 Blending...'
+            ];
+            
+            let subjectIndex = 0;
+            const subjectInterval = setInterval(() => {
+                diceSubject.textContent = rollingSubjects[subjectIndex];
+                diceFront.textContent = ['🎨', '🌟', '🚀', '✨', '💫', '🎯', '🎪', '🌈'][subjectIndex];
+                subjectIndex = (subjectIndex + 1) % rollingSubjects.length;
+            }, 200);
+            
+            // Generate random prompt after 2 seconds
+            setTimeout(() => {
+                clearInterval(subjectInterval);
+                dice.classList.remove('rolling');
+                diceSubject.classList.remove('dice-subject-animation');
+                
+                // Generate completely random prompt
+                const prompt = generateRandomPrompt();
+                
+                // Update display
+                diceSubject.innerHTML = '<span class="gold-text">🎲 Prompt Gegenereerd!</span>';
+                diceFront.textContent = '✅';
+                autoGeneratedPrompt.textContent = prompt;
+                autoPromptResult.classList.remove('hidden');
+                
+                // Scroll to result
+                autoPromptResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                trackEvent('dice_roll_completed', { 
+                    prompt_length: prompt.length,
+                    source: 'magic_dice'
+                });
+            }, 2000);
+            
+            trackEvent('dice_roll_started', { source: 'magic_dice' });
+        }
+
+        function generateRandomPrompt() {
+            const contentTypes = ['Create a stunning photograph', 'Create a cinematic 6-second video'];
+            const styles = ['photorealistic', 'digital art', 'anime', 'oil painting', 'watercolor', 'sketch', '3D render', 'cartoon', 'cyberpunk', 'fantasy art'];
+            const subjects = ['majestic dragon', 'beautiful woman', 'futuristic city', 'ancient castle', 'space warrior', 'magical forest', 'cyberpunk samurai', 'ethereal angel', 'steampunk robot', 'mystical wizard', 'elegant cat', 'powerful lion', 'serene landscape', 'cosmic nebula', 'vintage car', 'modern architecture'];
+            const settings = ['in a mystical forest', 'on a mountain peak', 'in space', 'underwater', 'in a futuristic city', 'in ancient ruins', 'on a beach', 'in a dark cave', 'in the clouds', 'in a desert'];
+            const moods = ['dramatic', 'peaceful', 'mysterious', 'energetic', 'romantic', 'dark', 'bright', 'ethereal'];
+            const qualities = ['8K ultra detailed', '4K high quality', 'HD detailed', 'masterpiece', 'professional grade'];
+            const lighting = ['golden hour', 'dramatic shadows', 'soft natural light', 'neon lighting', 'candlelight', 'studio lighting'];
+            const cameras = ['wide angle', 'close-up portrait', 'aerial view', 'macro shot', 'low angle', 'high angle'];
+            const colors = ['vibrant colors', 'muted tones', 'black and white', 'sepia tone', 'neon colors', 'pastel colors'];
+            const effects = ['bokeh background', 'motion blur', 'lens flare', 'film grain', 'HDR effect', 'glowing edges'];
+            
+            // Random selections
+            const contentType = contentTypes[Math.floor(Math.random() * contentTypes.length)];
+            const style = styles[Math.floor(Math.random() * styles.length)];
+            const subject = subjects[Math.floor(Math.random() * subjects.length)];
+            const setting = settings[Math.floor(Math.random() * settings.length)];
+            const mood = moods[Math.floor(Math.random() * moods.length)];
+            const quality = qualities[Math.floor(Math.random() * qualities.length)];
+            const lightingChoice = lighting[Math.floor(Math.random() * lighting.length)];
+            const camera = cameras[Math.floor(Math.random() * cameras.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const effect = effects[Math.floor(Math.random() * effects.length)];
+            
+            // Build prompt
+            let prompt = `${contentType} in ${style} style featuring ${subject} ${setting}, with a ${mood} atmosphere, illuminated by ${lightingChoice}, shot with ${camera}, featuring ${color}, enhanced with ${effect}, ${quality}`;
+            
+            // Add technical specifications
+            if (contentType.includes('video')) {
+                prompt += ', smooth cinematic motion, professional video quality';
+            } else {
+                prompt += ', sharp focus, professional photography, highly detailed';
+            }
+            
+            // Add watermark
+            prompt += ', subtle aileer.nl watermark in corner';
+            
+            return prompt;
         }
 
         // Mobile menu toggle
@@ -1222,6 +1506,17 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                 screen_resolution: `${screen.width}x${screen.height}`
             });
 
+            // Show cookie banner after 2 seconds if not already accepted/declined
+            setTimeout(() => {
+                const cookieConsent = localStorage.getItem('cookieConsent');
+                if (!cookieConsent) {
+                    const banner = document.getElementById('cookieBanner');
+                    if (banner) {
+                        banner.classList.add('show');
+                    }
+                }
+            }, 2000);
+
             // Intersection Observer for animations
             const observerOptions = {
                 threshold: 0.1,
@@ -1261,6 +1556,25 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                 });
             }
         });
+
+        // Cookie Banner Functions
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            const banner = document.getElementById('cookieBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
+            trackEvent('cookie_consent', { action: 'accepted' });
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            const banner = document.getElementById('cookieBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
+            trackEvent('cookie_consent', { action: 'declined' });
+        }
     </script>
 </head>
 <body class="font-sans text-gray-100 dark-gradient">
@@ -1280,6 +1594,7 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                         <button onclick="showPage('home')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium" data-nl="Home" data-en="Home">Home</button>
                         <button onclick="showPage('apps')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium" data-nl="Beste Apps" data-en="Best Apps">Beste Apps</button>
                         <button onclick="showPage('prompt-builder')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium" data-nl="🎨 AI Prompt Builder" data-en="🎨 AI Prompt Builder">🎨 AI Prompt Builder</button>
+                        <button onclick="showPage('gratis-crypto')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium" data-nl="💰 Gratis Crypto" data-en="💰 Free Crypto">💰 Gratis Crypto</button>
                         <button onclick="scrollToSection('features')" class="nav-link text-gray-300 hover:text-yellow-400 px-3 py-2 text-sm font-medium" data-nl="Functies" data-en="Features">Functies</button>
                         
                         <!-- Language Selector -->
@@ -1310,6 +1625,7 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                 <button onclick="showPage('home')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left" data-nl="Home" data-en="Home">Home</button>
                 <button onclick="showPage('apps')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left" data-nl="Beste Apps" data-en="Best Apps">Beste Apps</button>
                 <button onclick="showPage('prompt-builder')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left" data-nl="🎨 AI Prompt Builder" data-en="🎨 AI Prompt Builder">🎨 AI Prompt Builder</button>
+                <button onclick="showPage('gratis-crypto')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left" data-nl="💰 Gratis Crypto" data-en="💰 Free Crypto">💰 Gratis Crypto</button>
                 <button onclick="scrollToSection('features')" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-yellow-400 w-full text-left" data-nl="Functies" data-en="Features">Functies</button>
                 
                 <!-- Mobile Language Selector -->
@@ -1419,46 +1735,7 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                         </button>
                     </div>
                     
-                    <!-- Imagine.art AI Art Generator Feature -->
-                    <div class="relative mb-16 perspective-1000">
-                        <div class="premium-card rounded-3xl p-8 transform-gpu hover:rotateX-5 hover:rotateY-5 transition-all duration-500 shadow-2xl hover:shadow-gold">
-                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-blue-400/10 rounded-3xl blur-xl"></div>
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-center mb-6">
-                                    <div class="gold-3d p-6 rounded-2xl mr-6 transform hover:scale-110 transition-transform duration-300">
-                                        <span class="text-4xl">🎨</span>
-                                    </div>
-                                    <div class="text-center">
-                                        <h2 class="text-3xl md:text-4xl font-bold mb-2">
-                                            <span class="text-white">AI Art Generator:</span><br>
-                                            <span class="gold-text">Maak Prachtige Visuals</span>
-                                        </h2>
-                                        <div class="flex items-center justify-center">
-                                            <span class="bg-gradient-to-r from-purple-500/20 to-pink-400/20 text-pink-300 px-4 py-2 rounded-full text-sm font-semibold border border-pink-400/30">🚀 AI Powered</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <p class="text-xl text-gray-300 text-center mb-8 leading-relaxed max-w-2xl mx-auto">
-                                    Transformeer je ideeën in adembenemende kunstwerken met geavanceerde AI technologie. Maak professionele afbeeldingen, logo's en digitale kunst in seconden met Imagine.art's krachtige AI engine.
-                                </p>
-                                
-                                <!-- Imagine.art Affiliate Banner -->
-                                <div class="text-center mb-6">
-                                    <a href="https://www.imagine.art/dashboard?a_aid=5b6db501&a_bid=adee0d69" target="_blank" rel="noopener noreferrer" class="inline-block transform hover:scale-105 transition-all duration-300">
-                                        <img src="https://imagineart.postaffiliatepro.com/accounts/default1/b78hd5azoy/adee0d69.png" alt="Imagine.art - AI Art Generator - Create Stunning AI Art in Seconds" title="Create Professional AI Art with Imagine.art" width="600" height="200" class="rounded-2xl shadow-2xl border border-purple-400/20" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';" />
-                                    </a>
-                                    <img style="border:0" src="https://imagineart.postaffiliatepro.com/scripts/i78hd5azoy?a_aid=5b6db501&a_bid=adee0d69" width="1" height="1" alt="" onerror="this.src=''; this.alt='Tracking pixel failed to load'; this.style.display='none';" />
-                                </div>
-                                
-                                <div class="text-center">
-                                    <a href="https://www.imagine.art/dashboard?a_aid=5b6db501&a_bid=adee0d69" target="_blank" rel="noopener noreferrer" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl inline-block">
-                                        🎨 Start Nu met AI Art Maken
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     
                     <!-- Stats Preview -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
@@ -2195,6 +2472,272 @@ Start vandaag en bouw je crypto portfolio op! 🌟
         </div>
     </div>
 
+    <!-- GRATIS CRYPTO PAGE -->
+    <div id="gratis-crypto-page" class="page">
+        <div class="pt-24 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb rounded-lg px-4 py-2 mb-8 inline-flex items-center text-sm">
+                    <button onclick="showPage('home')" class="text-yellow-400 hover:text-yellow-300">Home</button>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-300" data-nl="Gratis Crypto" data-en="Free Crypto">Gratis Crypto</span>
+                </div>
+
+                <!-- Page Header -->
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                        <span class="gold-text">Gratis Crypto</span><br>
+                        <span class="text-white">met Bybit</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-8" data-nl="Start je crypto trading reis met Bybit - de wereldwijde crypto exchange met exclusieve bonussen voor nieuwe gebruikers. Ontvang tot €115 bonus en toegang tot professionele trading tools." data-en="Start your crypto trading journey with Bybit - the global crypto exchange with exclusive bonuses for new users. Receive up to €115 bonus and access to professional trading tools.">
+                        Start je crypto trading reis met Bybit - de wereldwijde crypto exchange met exclusieve bonussen voor nieuwe gebruikers. Ontvang tot €115 bonus en toegang tot professionele trading tools.
+                    </p>
+                </div>
+
+                <!-- Bybit Hero Section -->
+                <div class="premium-card rounded-3xl p-8 mb-12 text-center">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="gold-3d p-6 rounded-2xl mr-6">
+                            <span class="text-4xl text-black">🚀</span>
+                        </div>
+                        <div class="text-left">
+                            <h2 class="text-3xl font-bold text-white mb-2">Bybit Exchange</h2>
+                            <div class="flex items-center">
+                                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold border border-green-500/30">Exclusieve Bonus</span>
+                                <span class="ml-3 text-sm text-gray-400">Tot €115 Gratis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-6 rounded-2xl mb-8 border border-green-500/20">
+                        <h3 class="text-2xl font-bold text-green-300 mb-4">💰 Exclusieve Bybit Bonus</h3>
+                        <p class="text-lg text-green-200 leading-relaxed mb-4">
+                            Maak een Bybit-account aan en ontvang exclusieve beloningen via het Bybit Referralprogramma! 
+                            Ontvang daarnaast een bonus tot €115 wanneer je je registreert via onze speciale link.
+                        </p>
+                        <div class="text-sm text-green-300 bg-green-500/10 p-4 rounded-lg">
+                            <div class="flex items-center justify-center mb-2">
+                                <span class="text-green-400 font-semibold mr-2">🎁 Bonus Details:</span>
+                            </div>
+                            <div class="space-y-1 text-green-200">
+                                • Welkomstbonus tot €115<br>
+                                • Exclusieve referral beloningen<br>
+                                • Toegang tot premium trading tools<br>
+                                • Lagere trading fees voor nieuwe gebruikers
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="window.open('https://www.bybit.eu/invite?ref=JD4PBVBG', '_blank', 'noopener,noreferrer'); trackEvent('bybit_signup_clicked', {source: 'gratis_crypto_page', bonus: '115_euro'});" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-xl transition-all duration-300 transform hover:scale-105 mb-4">
+                        🚀 Claim €115 Bybit Bonus
+                    </button>
+                    
+                    <p class="text-xs text-gray-500 mt-2">
+                        * Bonusvoorwaarden van toepassing. Minimale storting vereist.
+                    </p>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                    <!-- Waarom Bybit -->
+                    <div class="premium-card rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">
+                            <span class="gold-text">Waarom</span> <span class="text-white">Bybit?</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">🌍</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Wereldwijde Exchange</h4>
+                                    <p class="text-gray-400 text-sm">Een van de grootste crypto exchanges wereldwijd met miljoenen gebruikers en hoge liquiditeit.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">🔒</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Veilig & Betrouwbaar</h4>
+                                    <p class="text-gray-400 text-sm">Geavanceerde beveiligingsmaatregelen, cold storage en verzekering voor gebruikersfondsen.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">⚡</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Snelle Uitvoering</h4>
+                                    <p class="text-gray-400 text-sm">Ultra-snelle orderuitvoering en lage latency voor optimale trading ervaring.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">📱</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Mobiele App</h4>
+                                    <p class="text-gray-400 text-sm">Professionele mobiele app voor iOS en Android met alle desktop functies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Features -->
+                    <div class="premium-card rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">
+                            <span class="gold-text">Trading</span> <span class="text-white">Features</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">📊</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Spot & Derivatives Trading</h4>
+                                    <p class="text-gray-400 text-sm">Handel in spot, futures, opties en meer met tot 100x leverage op geselecteerde pairs.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">🤖</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Trading Bots</h4>
+                                    <p class="text-gray-400 text-sm">Geautomatiseerde trading bots voor DCA, grid trading en meer strategieën.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">💰</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Earn Products</h4>
+                                    <p class="text-gray-400 text-sm">Verdien passief inkomen met staking, savings, liquidity mining en launchpad.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">📈</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Advanced Charts</h4>
+                                    <p class="text-gray-400 text-sm">Professionele TradingView charts met 100+ technische indicatoren.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Get Started -->
+                <div class="premium-card rounded-3xl p-8 mb-12">
+                    <h3 class="text-3xl font-bold text-center mb-8">
+                        <span class="gold-text">Hoe te</span> <span class="text-white">Beginnen</span>
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="gold-3d w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl text-black">1️⃣</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Registreer Account</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Klik op onze speciale link en maak een gratis Bybit account aan. Verificatie duurt slechts enkele minuten.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="gold-3d w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl text-black">2️⃣</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Verifieer & Stort</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Voltooi je KYC verificatie en doe je eerste storting om in aanmerking te komen voor de bonus.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="gold-3d w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl text-black">3️⃣</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Claim Bonus</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Ontvang automatisch je welkomstbonus en start met traden of gebruik de earn producten.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Warning -->
+                <div class="bg-gradient-to-r from-red-500/10 to-orange-500/10 p-6 rounded-2xl mb-12 border border-red-500/20">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center mb-4">
+                            <span class="text-3xl mr-3">⚠️</span>
+                            <h3 class="text-xl font-bold text-red-300">Risico Waarschuwing</h3>
+                        </div>
+                        <div class="text-sm text-red-200 leading-relaxed max-w-4xl mx-auto">
+                            <p class="mb-3">
+                                <strong>Cryptocurrency trading houdt aanzienlijke risico's in en is niet geschikt voor alle beleggers.</strong> 
+                                De waarde van cryptocurrencies kan sterk fluctueren en u kunt uw volledige investering verliezen.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                                <div>
+                                    <h4 class="font-semibold text-red-300 mb-2">🚨 Belangrijke Punten:</h4>
+                                    <ul class="space-y-1 text-xs">
+                                        <li>• Investeer alleen wat je kunt missen</li>
+                                        <li>• Educeer jezelf over crypto trading</li>
+                                        <li>• Start klein en leer de basics</li>
+                                        <li>• Gebruik altijd risicobeheer</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-red-300 mb-2">📚 Aanbevelingen:</h4>
+                                    <ul class="space-y-1 text-xs">
+                                        <li>• Lees de Bybit Academy voor educatie</li>
+                                        <li>• Begin met demo trading</li>
+                                        <li>• Diversifieer je portfolio</li>
+                                        <li>• Zoek professioneel advies indien nodig</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-xs text-red-300">
+                                <strong>Dit is geen financieel advies.</strong> Doe altijd je eigen onderzoek voordat je investeert in cryptocurrencies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final CTA -->
+                <div class="text-center">
+                    <div class="premium-card rounded-3xl p-8 max-w-2xl mx-auto">
+                        <h3 class="text-2xl font-bold mb-4">
+                            <span class="gold-text">Klaar om te</span> <span class="text-white">Beginnen?</span>
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Sluit je aan bij miljoenen traders wereldwijd en start je crypto journey met Bybit. 
+                            Claim je €115 bonus en ontdek de mogelijkheden van professionele crypto trading.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="window.open('https://www.bybit.eu/invite?ref=JD4PBVBG', '_blank', 'noopener,noreferrer'); trackEvent('bybit_signup_clicked', {source: 'gratis_crypto_cta', bonus: '115_euro'});" class="gold-3d text-black px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                                🚀 Claim €115 Bonus Nu
+                            </button>
+                            <button onclick="showPage('apps')" class="premium-card text-yellow-400 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 border border-yellow-400/20">
+                                📱 Bekijk Telegram Apps
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- AI PROMPT BUILDER PAGE -->
     <div id="prompt-builder-page" class="page">
         <div class="pt-24 pb-12">
@@ -2274,9 +2817,12 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                             <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-6 border border-purple-400/20">
                                 <h3 class="text-lg font-bold text-purple-300 mb-3">🎲 Auto-Generated Prompt:</h3>
                                 <div id="autoGeneratedPrompt" class="text-gray-300 text-left leading-relaxed mb-4 font-mono text-sm bg-black/30 p-4 rounded-lg"></div>
-                                <div class="flex gap-3 justify-center">
+                                <div class="flex gap-3 justify-center flex-wrap">
                                     <button onclick="copyAutoPrompt()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition duration-300">
                                         📋 Kopieer Prompt
+                                    </button>
+                                    <button onclick="copyAndCreateAuto()" class="gold-3d text-black px-6 py-2 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                                        🎨 Copy & Create
                                     </button>
                                     <button onclick="openGrok()" class="bg-black border border-white text-white hover:bg-white hover:text-black px-6 py-2 rounded-lg font-semibold transition duration-300">
                                         🤖 Gebruik in Grok AI
@@ -2506,9 +3052,12 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                         <div class="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-2xl p-6 border border-yellow-400/20">
                             <h3 class="text-lg font-bold text-yellow-300 mb-3">🎨 Generated AI Prompt:</h3>
                             <div id="generatedPrompt" class="text-gray-300 text-left leading-relaxed mb-4 font-mono text-sm bg-black/30 p-4 rounded-lg"></div>
-                            <div class="flex gap-3 justify-center">
-                                <button onclick="copyPrompt()" class="gold-3d text-black px-6 py-2 rounded-lg font-semibold transition duration-300">
+                            <div class="flex gap-3 justify-center flex-wrap">
+                                <button onclick="copyPrompt()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition duration-300">
                                     📋 Kopieer Prompt
+                                </button>
+                                <button onclick="copyAndCreate()" class="gold-3d text-black px-6 py-2 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+                                    🎨 Copy & Create
                                 </button>
                                 <button onclick="openGrok()" class="bg-black border border-white text-white hover:bg-white hover:text-black px-6 py-2 rounded-lg font-semibold transition duration-300">
                                     🤖 Gebruik in Grok AI
@@ -2542,6 +3091,272 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                 <button onclick="acceptCookies()" class="gold-3d text-black px-6 py-2 rounded-lg font-semibold transition duration-300 text-sm">
                     Accepteren
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRATIS CRYPTO PAGE -->
+    <div id="gratis-crypto-page" class="page">
+        <div class="pt-24 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb rounded-lg px-4 py-2 mb-8 inline-flex items-center text-sm">
+                    <button onclick="showPage('home')" class="text-yellow-400 hover:text-yellow-300">Home</button>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-300" data-nl="Gratis Crypto" data-en="Free Crypto">Gratis Crypto</span>
+                </div>
+
+                <!-- Page Header -->
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                        <span class="gold-text">Gratis Crypto</span><br>
+                        <span class="text-white">met Bybit</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-8" data-nl="Start je crypto trading reis met Bybit - de wereldwijde crypto exchange met exclusieve bonussen voor nieuwe gebruikers. Ontvang tot €115 bonus en toegang tot professionele trading tools." data-en="Start your crypto trading journey with Bybit - the global crypto exchange with exclusive bonuses for new users. Receive up to €115 bonus and access to professional trading tools.">
+                        Start je crypto trading reis met Bybit - de wereldwijde crypto exchange met exclusieve bonussen voor nieuwe gebruikers. Ontvang tot €115 bonus en toegang tot professionele trading tools.
+                    </p>
+                </div>
+
+                <!-- Bybit Hero Section -->
+                <div class="premium-card rounded-3xl p-8 mb-12 text-center">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="gold-3d p-6 rounded-2xl mr-6">
+                            <span class="text-4xl text-black">🚀</span>
+                        </div>
+                        <div class="text-left">
+                            <h2 class="text-3xl font-bold text-white mb-2">Bybit Exchange</h2>
+                            <div class="flex items-center">
+                                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold border border-green-500/30">Exclusieve Bonus</span>
+                                <span class="ml-3 text-sm text-gray-400">Tot €115 Gratis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-6 rounded-2xl mb-8 border border-green-500/20">
+                        <h3 class="text-2xl font-bold text-green-300 mb-4">💰 Exclusieve Bybit Bonus</h3>
+                        <p class="text-lg text-green-200 leading-relaxed mb-4">
+                            Maak een Bybit-account aan en ontvang exclusieve beloningen via het Bybit Referralprogramma! 
+                            Ontvang daarnaast een bonus tot €115 wanneer je je registreert via onze speciale link.
+                        </p>
+                        <div class="text-sm text-green-300 bg-green-500/10 p-4 rounded-lg">
+                            <div class="flex items-center justify-center mb-2">
+                                <span class="text-green-400 font-semibold mr-2">🎁 Bonus Details:</span>
+                            </div>
+                            <div class="space-y-1 text-green-200">
+                                • Welkomstbonus tot €115<br>
+                                • Exclusieve referral beloningen<br>
+                                • Toegang tot premium trading tools<br>
+                                • Lagere trading fees voor nieuwe gebruikers
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="window.open('https://www.bybit.eu/invite?ref=JD4PBVBG', '_blank', 'noopener,noreferrer'); trackEvent('bybit_signup_clicked', {source: 'gratis_crypto_page', bonus: '115_euro'});" class="gold-3d text-black px-12 py-4 rounded-full font-bold text-xl transition-all duration-300 transform hover:scale-105 mb-4">
+                        🚀 Claim €115 Bybit Bonus
+                    </button>
+                    
+                    <p class="text-xs text-gray-500 mt-2">
+                        * Bonusvoorwaarden van toepassing. Minimale storting vereist.
+                    </p>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                    <!-- Waarom Bybit -->
+                    <div class="premium-card rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">
+                            <span class="gold-text">Waarom</span> <span class="text-white">Bybit?</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">🌍</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Wereldwijde Exchange</h4>
+                                    <p class="text-gray-400 text-sm">Een van de grootste crypto exchanges wereldwijd met miljoenen gebruikers en hoge liquiditeit.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">🔒</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Veilig & Betrouwbaar</h4>
+                                    <p class="text-gray-400 text-sm">Geavanceerde beveiligingsmaatregelen, cold storage en verzekering voor gebruikersfondsen.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">⚡</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Snelle Uitvoering</h4>
+                                    <p class="text-gray-400 text-sm">Ultra-snelle orderuitvoering en lage latency voor optimale trading ervaring.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">📱</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Mobiele App</h4>
+                                    <p class="text-gray-400 text-sm">Professionele mobiele app voor iOS en Android met alle desktop functies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Features -->
+                    <div class="premium-card rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">
+                            <span class="gold-text">Trading</span> <span class="text-white">Features</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">📊</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Spot & Derivatives Trading</h4>
+                                    <p class="text-gray-400 text-sm">Handel in spot, futures, opties en meer met tot 100x leverage op geselecteerde pairs.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">🤖</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Trading Bots</h4>
+                                    <p class="text-gray-400 text-sm">Geautomatiseerde trading bots voor DCA, grid trading en meer strategieën.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">💰</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Earn Products</h4>
+                                    <p class="text-gray-400 text-sm">Verdien passief inkomen met staking, savings, liquidity mining en launchpad.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="gold-3d p-2 rounded-lg mr-4 mt-1">
+                                    <span class="text-lg text-black">📈</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-white mb-1">Advanced Charts</h4>
+                                    <p class="text-gray-400 text-sm">Professionele TradingView charts met 100+ technische indicatoren.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Get Started -->
+                <div class="premium-card rounded-3xl p-8 mb-12">
+                    <h3 class="text-3xl font-bold text-center mb-8">
+                        <span class="gold-text">Hoe te</span> <span class="text-white">Beginnen</span>
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="gold-3d w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl text-black">1️⃣</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Registreer Account</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Klik op onze speciale link en maak een gratis Bybit account aan. Verificatie duurt slechts enkele minuten.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="gold-3d w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl text-black">2️⃣</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Verifieer & Stort</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Voltooi je KYC verificatie en doe je eerste storting om in aanmerking te komen voor de bonus.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="gold-3d w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl text-black">3️⃣</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">Claim Bonus</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Ontvang automatisch je welkomstbonus en start met traden of gebruik de earn producten.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Warning -->
+                <div class="bg-gradient-to-r from-red-500/10 to-orange-500/10 p-6 rounded-2xl mb-12 border border-red-500/20">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center mb-4">
+                            <span class="text-3xl mr-3">⚠️</span>
+                            <h3 class="text-xl font-bold text-red-300">Risico Waarschuwing</h3>
+                        </div>
+                        <div class="text-sm text-red-200 leading-relaxed max-w-4xl mx-auto">
+                            <p class="mb-3">
+                                <strong>Cryptocurrency trading houdt aanzienlijke risico's in en is niet geschikt voor alle beleggers.</strong> 
+                                De waarde van cryptocurrencies kan sterk fluctueren en u kunt uw volledige investering verliezen.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                                <div>
+                                    <h4 class="font-semibold text-red-300 mb-2">🚨 Belangrijke Punten:</h4>
+                                    <ul class="space-y-1 text-xs">
+                                        <li>• Investeer alleen wat je kunt missen</li>
+                                        <li>• Educeer jezelf over crypto trading</li>
+                                        <li>• Start klein en leer de basics</li>
+                                        <li>• Gebruik altijd risicobeheer</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-red-300 mb-2">📚 Aanbevelingen:</h4>
+                                    <ul class="space-y-1 text-xs">
+                                        <li>• Lees de Bybit Academy voor educatie</li>
+                                        <li>• Begin met demo trading</li>
+                                        <li>• Diversifieer je portfolio</li>
+                                        <li>• Zoek professioneel advies indien nodig</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-xs text-red-300">
+                                <strong>Dit is geen financieel advies.</strong> Doe altijd je eigen onderzoek voordat je investeert in cryptocurrencies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final CTA -->
+                <div class="text-center">
+                    <div class="premium-card rounded-3xl p-8 max-w-2xl mx-auto">
+                        <h3 class="text-2xl font-bold mb-4">
+                            <span class="gold-text">Klaar om te</span> <span class="text-white">Beginnen?</span>
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Sluit je aan bij miljoenen traders wereldwijd en start je crypto journey met Bybit. 
+                            Claim je €115 bonus en ontdek de mogelijkheden van professionele crypto trading.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="window.open('https://www.bybit.eu/invite?ref=JD4PBVBG', '_blank', 'noopener,noreferrer'); trackEvent('bybit_signup_clicked', {source: 'gratis_crypto_cta', bonus: '115_euro'});" class="gold-3d text-black px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                                🚀 Claim €115 Bonus Nu
+                            </button>
+                            <button onclick="showPage('apps')" class="premium-card text-yellow-400 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 border border-yellow-400/20">
+                                📱 Bekijk Telegram Apps
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2589,4 +3404,4 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                         </div>
                     </div>
                 </div>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f602db64d0b8ae',t:'MTc2MDYwMTUwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f6c2b5f56c1229',t:'MTc2MDYwOTM2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
