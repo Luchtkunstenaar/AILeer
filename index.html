@@ -685,7 +685,7 @@ Start vandaag en bouw je crypto portfolio op! 🌟
             buttonElement.classList.add('selected');
             
             // Auto-generate prompt if we have minimum requirements
-            if (selectedOptions.subject) {
+            if (selectedOptions.subject || selectedOptions.style) {
                 generatePromptFromSelections();
             }
             
@@ -700,85 +700,154 @@ Start vandaag en bouw je crypto portfolio op! 🌟
         function randomContentType() {
             const options = ['image', 'video'];
             const random = options[Math.floor(Math.random() * options.length)];
-            const button = document.querySelector(`[onclick*="contentType"][onclick*="${random}"]`);
-            if (button) button.click();
+            // Find button by checking onclick attribute content
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'contentType', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomStyle() {
             const styles = ['photorealistic', 'digital art', 'anime', 'oil painting', 'watercolor', 'sketch', '3D render', 'cartoon', 'cyberpunk', 'fantasy art'];
             const random = styles[Math.floor(Math.random() * styles.length)];
-            const button = document.querySelector(`[onclick*="style"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'style', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomSubject() {
-            const subjects = ['majestic dragon', 'beautiful woman', 'futuristic city', 'ancient castle', 'space warrior', 'magical forest', 'cyberpunk samurai', 'ethereal angel', 'steampunk robot', 'mystical wizard', 'elegant cat', 'powerful lion', 'serene landscape', 'cosmic nebula', 'vintage car', 'modern architecture', 'fantasy creature', 'ocean waves', 'mountain peak', 'desert sunset'];
+            const subjects = ['majestic dragon', 'beautiful woman', 'futuristic city', 'ancient castle', 'space warrior', 'magical forest', 'cyberpunk samurai', 'ethereal angel', 'steampunk robot', 'mystical wizard', 'elegant cat', 'powerful lion', 'serene landscape', 'cosmic nebula', 'vintage car', 'modern architecture'];
             const random = subjects[Math.floor(Math.random() * subjects.length)];
-            const button = document.querySelector(`[onclick*="subject"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'subject', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomSetting() {
-            const settings = ['in a mystical forest', 'on a mountain peak', 'in space', 'underwater', 'in a futuristic city', 'in ancient ruins', 'on a beach', 'in a dark cave', 'in the clouds', 'in a desert', 'in a garden', 'in a library', 'on a rooftop', 'in a temple', 'in the rain'];
+            const settings = ['in a mystical forest', 'on a mountain peak', 'in space', 'underwater', 'in a futuristic city', 'in ancient ruins', 'on a beach', 'in a dark cave', 'in the clouds', 'in a desert'];
             const random = settings[Math.floor(Math.random() * settings.length)];
-            const button = document.querySelector(`[onclick*="setting"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'setting', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomMood() {
-            const moods = ['dramatic', 'peaceful', 'mysterious', 'energetic', 'romantic', 'dark', 'bright', 'ethereal', 'intense', 'serene'];
+            const moods = ['dramatic', 'peaceful', 'mysterious', 'energetic', 'romantic', 'dark', 'bright', 'ethereal'];
             const random = moods[Math.floor(Math.random() * moods.length)];
-            const button = document.querySelector(`[onclick*="mood"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'mood', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomQuality() {
             const qualities = ['8K ultra detailed', '4K high quality', 'HD detailed', 'masterpiece', 'professional grade'];
             const random = qualities[Math.floor(Math.random() * qualities.length)];
-            const button = document.querySelector(`[onclick*="quality"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'quality', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomLighting() {
-            const lighting = ['golden hour', 'dramatic shadows', 'soft natural light', 'neon lighting', 'candlelight', 'studio lighting', 'moonlight', 'sunset glow', 'harsh sunlight', 'ambient lighting'];
+            const lighting = ['golden hour', 'dramatic shadows', 'soft natural light', 'neon lighting', 'candlelight', 'studio lighting'];
             const random = lighting[Math.floor(Math.random() * lighting.length)];
-            const button = document.querySelector(`[onclick*="lighting"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'lighting', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomCamera() {
-            const cameras = ['wide angle', 'close-up portrait', 'aerial view', 'macro shot', 'panoramic', 'low angle', 'high angle', 'medium shot', 'extreme close-up', 'bird\'s eye view'];
+            const cameras = ['wide angle', 'close-up portrait', 'aerial view', 'macro shot', 'low angle', 'high angle'];
             const random = cameras[Math.floor(Math.random() * cameras.length)];
-            const button = document.querySelector(`[onclick*="camera"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'camera', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomColors() {
-            const colors = ['vibrant colors', 'muted tones', 'black and white', 'sepia tone', 'neon colors', 'pastel colors', 'warm colors', 'cool colors', 'monochromatic', 'high contrast'];
+            const colors = ['vibrant colors', 'muted tones', 'black and white', 'sepia tone', 'neon colors', 'pastel colors'];
             const random = colors[Math.floor(Math.random() * colors.length)];
-            const button = document.querySelector(`[onclick*="colors"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'colors', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         function randomEffects() {
-            const effects = ['bokeh background', 'motion blur', 'lens flare', 'film grain', 'vintage filter', 'HDR effect', 'double exposure', 'light rays', 'particle effects', 'glowing edges'];
+            const effects = ['bokeh background', 'motion blur', 'lens flare', 'film grain', 'HDR effect', 'glowing edges'];
             const random = effects[Math.floor(Math.random() * effects.length)];
-            const button = document.querySelector(`[onclick*="effects"][onclick*="${random}"]`);
-            if (button) button.click();
+            const buttons = document.querySelectorAll('.option-button');
+            for (let button of buttons) {
+                if (button.onclick && button.onclick.toString().includes(`'effects', '${random}'`)) {
+                    button.click();
+                    break;
+                }
+            }
         }
 
         // Generate All Random
         function generateAllRandom() {
-            randomContentType();
-            setTimeout(() => randomStyle(), 100);
-            setTimeout(() => randomSubject(), 200);
-            setTimeout(() => randomSetting(), 300);
-            setTimeout(() => randomMood(), 400);
-            setTimeout(() => randomQuality(), 500);
-            setTimeout(() => randomLighting(), 600);
-            setTimeout(() => randomCamera(), 700);
-            setTimeout(() => randomColors(), 800);
-            setTimeout(() => randomEffects(), 900);
+            // Clear previous selections
+            document.querySelectorAll('.option-button.selected').forEach(btn => btn.classList.remove('selected'));
+            
+            // Reset selections
+            selectedOptions = {
+                contentType: 'image',
+                style: '',
+                subject: '',
+                setting: '',
+                mood: '',
+                quality: '',
+                lighting: '',
+                camera: '',
+                colors: '',
+                effects: ''
+            };
+            
+            // Generate random selections with delays for visual effect
+            setTimeout(() => randomContentType(), 100);
+            setTimeout(() => randomStyle(), 200);
+            setTimeout(() => randomSubject(), 300);
+            setTimeout(() => randomSetting(), 400);
+            setTimeout(() => randomMood(), 500);
+            setTimeout(() => randomQuality(), 600);
+            setTimeout(() => randomLighting(), 700);
+            setTimeout(() => randomCamera(), 800);
+            setTimeout(() => randomColors(), 900);
+            setTimeout(() => randomEffects(), 1000);
             
             trackEvent('prompt_all_random_generated');
         }
@@ -787,57 +856,86 @@ Start vandaag en bouw je crypto portfolio op! 🌟
         function generatePromptFromSelections() {
             let prompt = '';
             
+            // Start with basic structure
             if (selectedOptions.contentType === 'video') {
-                prompt = `Create a 6-second video of ${selectedOptions.subject}`;
+                prompt = 'Create a cinematic 6-second video';
             } else {
-                prompt = `Create a ${selectedOptions.style} photo of ${selectedOptions.subject}`;
+                prompt = 'Create a stunning photograph';
             }
 
+            // Add style if selected
+            if (selectedOptions.style) {
+                prompt += ` in ${selectedOptions.style} style`;
+            }
+
+            // Add subject
+            if (selectedOptions.subject) {
+                prompt += ` featuring ${selectedOptions.subject}`;
+            } else if (selectedOptions.style) {
+                // If no subject but has style, add generic subject
+                prompt += ' of a captivating scene';
+            }
+
+            // Add setting
             if (selectedOptions.setting) {
                 prompt += ` ${selectedOptions.setting}`;
             }
 
+            // Add mood
             if (selectedOptions.mood) {
-                prompt += `, ${selectedOptions.mood} atmosphere`;
+                prompt += `, with a ${selectedOptions.mood} atmosphere`;
             }
 
+            // Add lighting
             if (selectedOptions.lighting) {
-                prompt += `, ${selectedOptions.lighting}`;
+                prompt += `, illuminated by ${selectedOptions.lighting}`;
             }
 
+            // Add camera angle
             if (selectedOptions.camera) {
-                prompt += `, ${selectedOptions.camera}`;
+                prompt += `, shot with ${selectedOptions.camera}`;
             }
 
+            // Add colors
             if (selectedOptions.colors) {
-                prompt += `, ${selectedOptions.colors}`;
+                prompt += `, featuring ${selectedOptions.colors}`;
             }
 
+            // Add effects
             if (selectedOptions.effects) {
-                prompt += `, ${selectedOptions.effects}`;
+                prompt += `, enhanced with ${selectedOptions.effects}`;
             }
 
+            // Add quality
             if (selectedOptions.quality) {
                 prompt += `, ${selectedOptions.quality}`;
             }
 
+            // Add technical specifications
             if (selectedOptions.contentType === 'video') {
-                prompt += ', smooth motion, cinematic movement';
+                prompt += ', smooth cinematic motion, professional video quality';
             } else {
-                prompt += ', sharp focus, perfect lighting';
+                prompt += ', sharp focus, professional photography, highly detailed';
             }
 
-            // Add aileer.nl watermark to every prompt
-            prompt += ', small discrete aileer.nl text watermark in corner';
+            // Add watermark
+            prompt += ', subtle aileer.nl watermark in corner';
 
-            document.getElementById('generatedPrompt').textContent = prompt;
-            document.getElementById('promptResult').classList.remove('hidden');
-            document.getElementById('promptPlaceholder').style.display = 'none';
+            // Update display
+            const promptElement = document.getElementById('generatedPrompt');
+            const resultElement = document.getElementById('promptResult');
+            const placeholderElement = document.getElementById('promptPlaceholder');
+            
+            if (promptElement && resultElement && placeholderElement) {
+                promptElement.textContent = prompt;
+                resultElement.classList.remove('hidden');
+                placeholderElement.style.display = 'none';
+            }
             
             trackEvent('prompt_generated_from_selections', {
                 content_type: selectedOptions.contentType,
                 style: selectedOptions.style,
-                has_all_options: Object.values(selectedOptions).every(val => val !== '')
+                has_subject: !!selectedOptions.subject
             });
         }
 
@@ -2140,4 +2238,355 @@ Start vandaag en bouw je crypto portfolio op! 🌟
                         </div>
                     </div>
                 </div>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f5ee2645ca0df6',t:'MTc2MDYwMDY1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+                <!-- Magic Dice Auto-Prompt Generator -->
+                <div class="text-center mb-16">
+                    <div class="premium-card rounded-3xl p-8 max-w-2xl mx-auto">
+                        <h2 class="text-3xl font-bold mb-6">
+                            <span class="gold-text">🎲 Magic Dice</span> <span class="text-white">Auto-Prompt</span>
+                        </h2>
+                        <p class="text-gray-400 mb-8">Klik op de dobbelsteen voor een willekeurige AI prompt!</p>
+                        
+                        <!-- Animated Dice -->
+                        <div class="relative mb-8">
+                            <div id="magicDice" class="dice-container mx-auto cursor-pointer" onclick="rollDiceForPrompt()">
+                                <div class="dice">
+                                    <div class="dice-face dice-front" id="diceFront">🎨</div>
+                                    <div class="dice-face dice-back">🌟</div>
+                                    <div class="dice-face dice-right">🚀</div>
+                                    <div class="dice-face dice-left">✨</div>
+                                    <div class="dice-face dice-top">💫</div>
+                                    <div class="dice-face dice-bottom">🎯</div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div id="diceSubject" class="text-2xl font-bold gold-text mb-2">Klik de dobbelsteen!</div>
+                                <div class="text-sm text-gray-400">Automatische prompt generatie</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="rollDiceForPrompt()" class="gold-3d text-black px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 mb-4">
+                            🎲 Rol de Dobbelsteen!
+                        </button>
+                        
+                        <!-- Auto-Generated Prompt Display -->
+                        <div id="autoPromptResult" class="hidden mt-6">
+                            <div class="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl p-6 border border-purple-400/20">
+                                <h3 class="text-lg font-bold text-purple-300 mb-3">🎲 Auto-Generated Prompt:</h3>
+                                <div id="autoGeneratedPrompt" class="text-gray-300 text-left leading-relaxed mb-4 font-mono text-sm bg-black/30 p-4 rounded-lg"></div>
+                                <div class="flex gap-3 justify-center">
+                                    <button onclick="copyAutoPrompt()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition duration-300">
+                                        📋 Kopieer Prompt
+                                    </button>
+                                    <button onclick="openGrok()" class="bg-black border border-white text-white hover:bg-white hover:text-black px-6 py-2 rounded-lg font-semibold transition duration-300">
+                                        🤖 Gebruik in Grok AI
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Prompt Builder -->
+                <div class="prompt-builder rounded-3xl p-8 mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-8">
+                        <span class="gold-text">Manual Prompt</span> <span class="text-white">Builder</span>
+                    </h2>
+                    
+                    <!-- Content Type -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">📱 Content Type</h3>
+                            <button onclick="randomContentType()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('contentType', 'image', this)" class="option-button px-4 py-3 rounded-lg">📸 Image</button>
+                            <button onclick="selectOption('contentType', 'video', this)" class="option-button px-4 py-3 rounded-lg">🎬 Video</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Style -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">🎨 Style</h3>
+                            <button onclick="randomStyle()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('style', 'photorealistic', this)" class="option-button px-4 py-3 rounded-lg">📷 Photorealistic</button>
+                            <button onclick="selectOption('style', 'digital art', this)" class="option-button px-4 py-3 rounded-lg">🖥️ Digital Art</button>
+                            <button onclick="selectOption('style', 'anime', this)" class="option-button px-4 py-3 rounded-lg">🎌 Anime</button>
+                            <button onclick="selectOption('style', 'oil painting', this)" class="option-button px-4 py-3 rounded-lg">🖼️ Oil Painting</button>
+                            <button onclick="selectOption('style', 'watercolor', this)" class="option-button px-4 py-3 rounded-lg">🎨 Watercolor</button>
+                            <button onclick="selectOption('style', 'sketch', this)" class="option-button px-4 py-3 rounded-lg">✏️ Sketch</button>
+                            <button onclick="selectOption('style', '3D render', this)" class="option-button px-4 py-3 rounded-lg">🎯 3D Render</button>
+                            <button onclick="selectOption('style', 'cartoon', this)" class="option-button px-4 py-3 rounded-lg">🎪 Cartoon</button>
+                            <button onclick="selectOption('style', 'cyberpunk', this)" class="option-button px-4 py-3 rounded-lg">🤖 Cyberpunk</button>
+                            <button onclick="selectOption('style', 'fantasy art', this)" class="option-button px-4 py-3 rounded-lg">🧙 Fantasy Art</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Subject -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">👤 Subject</h3>
+                            <button onclick="randomSubject()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('subject', 'majestic dragon', this)" class="option-button px-4 py-3 rounded-lg">🐉 Majestic Dragon</button>
+                            <button onclick="selectOption('subject', 'beautiful woman', this)" class="option-button px-4 py-3 rounded-lg">👩 Beautiful Woman</button>
+                            <button onclick="selectOption('subject', 'futuristic city', this)" class="option-button px-4 py-3 rounded-lg">🏙️ Futuristic City</button>
+                            <button onclick="selectOption('subject', 'ancient castle', this)" class="option-button px-4 py-3 rounded-lg">🏰 Ancient Castle</button>
+                            <button onclick="selectOption('subject', 'space warrior', this)" class="option-button px-4 py-3 rounded-lg">👨‍🚀 Space Warrior</button>
+                            <button onclick="selectOption('subject', 'magical forest', this)" class="option-button px-4 py-3 rounded-lg">🌲 Magical Forest</button>
+                            <button onclick="selectOption('subject', 'cyberpunk samurai', this)" class="option-button px-4 py-3 rounded-lg">⚔️ Cyberpunk Samurai</button>
+                            <button onclick="selectOption('subject', 'ethereal angel', this)" class="option-button px-4 py-3 rounded-lg">👼 Ethereal Angel</button>
+                            <button onclick="selectOption('subject', 'steampunk robot', this)" class="option-button px-4 py-3 rounded-lg">🤖 Steampunk Robot</button>
+                            <button onclick="selectOption('subject', 'mystical wizard', this)" class="option-button px-4 py-3 rounded-lg">🧙‍♂️ Mystical Wizard</button>
+                            <button onclick="selectOption('subject', 'elegant cat', this)" class="option-button px-4 py-3 rounded-lg">🐱 Elegant Cat</button>
+                            <button onclick="selectOption('subject', 'powerful lion', this)" class="option-button px-4 py-3 rounded-lg">🦁 Powerful Lion</button>
+                            <button onclick="selectOption('subject', 'serene landscape', this)" class="option-button px-4 py-3 rounded-lg">🏞️ Serene Landscape</button>
+                            <button onclick="selectOption('subject', 'cosmic nebula', this)" class="option-button px-4 py-3 rounded-lg">🌌 Cosmic Nebula</button>
+                            <button onclick="selectOption('subject', 'vintage car', this)" class="option-button px-4 py-3 rounded-lg">🚗 Vintage Car</button>
+                            <button onclick="selectOption('subject', 'modern architecture', this)" class="option-button px-4 py-3 rounded-lg">🏢 Modern Architecture</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Setting -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">🌍 Setting</h3>
+                            <button onclick="randomSetting()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('setting', 'in a mystical forest', this)" class="option-button px-4 py-3 rounded-lg">🌲 Mystical Forest</button>
+                            <button onclick="selectOption('setting', 'on a mountain peak', this)" class="option-button px-4 py-3 rounded-lg">⛰️ Mountain Peak</button>
+                            <button onclick="selectOption('setting', 'in space', this)" class="option-button px-4 py-3 rounded-lg">🚀 In Space</button>
+                            <button onclick="selectOption('setting', 'underwater', this)" class="option-button px-4 py-3 rounded-lg">🌊 Underwater</button>
+                            <button onclick="selectOption('setting', 'in a futuristic city', this)" class="option-button px-4 py-3 rounded-lg">🏙️ Futuristic City</button>
+                            <button onclick="selectOption('setting', 'in ancient ruins', this)" class="option-button px-4 py-3 rounded-lg">🏛️ Ancient Ruins</button>
+                            <button onclick="selectOption('setting', 'on a beach', this)" class="option-button px-4 py-3 rounded-lg">🏖️ On a Beach</button>
+                            <button onclick="selectOption('setting', 'in a dark cave', this)" class="option-button px-4 py-3 rounded-lg">🕳️ Dark Cave</button>
+                            <button onclick="selectOption('setting', 'in the clouds', this)" class="option-button px-4 py-3 rounded-lg">☁️ In the Clouds</button>
+                            <button onclick="selectOption('setting', 'in a desert', this)" class="option-button px-4 py-3 rounded-lg">🏜️ In a Desert</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Mood -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">😊 Mood</h3>
+                            <button onclick="randomMood()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('mood', 'dramatic', this)" class="option-button px-4 py-3 rounded-lg">🎭 Dramatic</button>
+                            <button onclick="selectOption('mood', 'peaceful', this)" class="option-button px-4 py-3 rounded-lg">☮️ Peaceful</button>
+                            <button onclick="selectOption('mood', 'mysterious', this)" class="option-button px-4 py-3 rounded-lg">🔮 Mysterious</button>
+                            <button onclick="selectOption('mood', 'energetic', this)" class="option-button px-4 py-3 rounded-lg">⚡ Energetic</button>
+                            <button onclick="selectOption('mood', 'romantic', this)" class="option-button px-4 py-3 rounded-lg">💕 Romantic</button>
+                            <button onclick="selectOption('mood', 'dark', this)" class="option-button px-4 py-3 rounded-lg">🌑 Dark</button>
+                            <button onclick="selectOption('mood', 'bright', this)" class="option-button px-4 py-3 rounded-lg">☀️ Bright</button>
+                            <button onclick="selectOption('mood', 'ethereal', this)" class="option-button px-4 py-3 rounded-lg">✨ Ethereal</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Quality -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">⭐ Quality</h3>
+                            <button onclick="randomQuality()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('quality', '8K ultra detailed', this)" class="option-button px-4 py-3 rounded-lg">🔥 8K Ultra Detailed</button>
+                            <button onclick="selectOption('quality', '4K high quality', this)" class="option-button px-4 py-3 rounded-lg">💎 4K High Quality</button>
+                            <button onclick="selectOption('quality', 'HD detailed', this)" class="option-button px-4 py-3 rounded-lg">📺 HD Detailed</button>
+                            <button onclick="selectOption('quality', 'masterpiece', this)" class="option-button px-4 py-3 rounded-lg">🏆 Masterpiece</button>
+                            <button onclick="selectOption('quality', 'professional grade', this)" class="option-button px-4 py-3 rounded-lg">👔 Professional Grade</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Lighting -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">💡 Lighting</h3>
+                            <button onclick="randomLighting()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('lighting', 'golden hour', this)" class="option-button px-4 py-3 rounded-lg">🌅 Golden Hour</button>
+                            <button onclick="selectOption('lighting', 'dramatic shadows', this)" class="option-button px-4 py-3 rounded-lg">🌑 Dramatic Shadows</button>
+                            <button onclick="selectOption('lighting', 'soft natural light', this)" class="option-button px-4 py-3 rounded-lg">☀️ Soft Natural Light</button>
+                            <button onclick="selectOption('lighting', 'neon lighting', this)" class="option-button px-4 py-3 rounded-lg">🌈 Neon Lighting</button>
+                            <button onclick="selectOption('lighting', 'candlelight', this)" class="option-button px-4 py-3 rounded-lg">🕯️ Candlelight</button>
+                            <button onclick="selectOption('lighting', 'studio lighting', this)" class="option-button px-4 py-3 rounded-lg">💡 Studio Lighting</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Camera -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">📷 Camera Angle</h3>
+                            <button onclick="randomCamera()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('camera', 'wide angle', this)" class="option-button px-4 py-3 rounded-lg">📐 Wide Angle</button>
+                            <button onclick="selectOption('camera', 'close-up portrait', this)" class="option-button px-4 py-3 rounded-lg">👤 Close-up Portrait</button>
+                            <button onclick="selectOption('camera', 'aerial view', this)" class="option-button px-4 py-3 rounded-lg">🚁 Aerial View</button>
+                            <button onclick="selectOption('camera', 'macro shot', this)" class="option-button px-4 py-3 rounded-lg">🔍 Macro Shot</button>
+                            <button onclick="selectOption('camera', 'low angle', this)" class="option-button px-4 py-3 rounded-lg">📐 Low Angle</button>
+                            <button onclick="selectOption('camera', 'high angle', this)" class="option-button px-4 py-3 rounded-lg">📐 High Angle</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Colors -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">🎨 Colors</h3>
+                            <button onclick="randomColors()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('colors', 'vibrant colors', this)" class="option-button px-4 py-3 rounded-lg">🌈 Vibrant Colors</button>
+                            <button onclick="selectOption('colors', 'muted tones', this)" class="option-button px-4 py-3 rounded-lg">🎨 Muted Tones</button>
+                            <button onclick="selectOption('colors', 'black and white', this)" class="option-button px-4 py-3 rounded-lg">⚫ Black & White</button>
+                            <button onclick="selectOption('colors', 'sepia tone', this)" class="option-button px-4 py-3 rounded-lg">🟤 Sepia Tone</button>
+                            <button onclick="selectOption('colors', 'neon colors', this)" class="option-button px-4 py-3 rounded-lg">💫 Neon Colors</button>
+                            <button onclick="selectOption('colors', 'pastel colors', this)" class="option-button px-4 py-3 rounded-lg">🌸 Pastel Colors</button>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- Effects -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">✨ Effects</h3>
+                            <button onclick="randomEffects()" class="random-button px-4 py-2 rounded-lg text-sm">🎲 Random</button>
+                        </div>
+                        <div class="button-grid">
+                            <button onclick="selectOption('effects', 'bokeh background', this)" class="option-button px-4 py-3 rounded-lg">🔵 Bokeh Background</button>
+                            <button onclick="selectOption('effects', 'motion blur', this)" class="option-button px-4 py-3 rounded-lg">💨 Motion Blur</button>
+                            <button onclick="selectOption('effects', 'lens flare', this)" class="option-button px-4 py-3 rounded-lg">✨ Lens Flare</button>
+                            <button onclick="selectOption('effects', 'film grain', this)" class="option-button px-4 py-3 rounded-lg">📽️ Film Grain</button>
+                            <button onclick="selectOption('effects', 'HDR effect', this)" class="option-button px-4 py-3 rounded-lg">🌟 HDR Effect</button>
+                            <button onclick="selectOption('effects', 'glowing edges', this)" class="option-button px-4 py-3 rounded-lg">💫 Glowing Edges</button>
+                        </div>
+                    </div>
+
+                    <!-- Generate All Random Button -->
+                    <div class="text-center mb-8">
+                        <button onclick="generateAllRandom()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105">
+                            🎲 Genereer Volledig Random Prompt
+                        </button>
+                    </div>
+
+                    <!-- Generated Prompt Display -->
+                    <div id="promptPlaceholder" class="text-center text-gray-500 mb-8">
+                        <div class="bg-gray-800/30 rounded-2xl p-8 border-2 border-dashed border-gray-600">
+                            <div class="text-4xl mb-4">🎨</div>
+                            <h3 class="text-xl font-semibold mb-2">Je AI Prompt verschijnt hier</h3>
+                            <p class="text-sm">Selecteer opties hierboven of klik op een random knop om te beginnen</p>
+                        </div>
+                    </div>
+
+                    <div id="promptResult" class="hidden">
+                        <div class="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-2xl p-6 border border-yellow-400/20">
+                            <h3 class="text-lg font-bold text-yellow-300 mb-3">🎨 Generated AI Prompt:</h3>
+                            <div id="generatedPrompt" class="text-gray-300 text-left leading-relaxed mb-4 font-mono text-sm bg-black/30 p-4 rounded-lg"></div>
+                            <div class="flex gap-3 justify-center">
+                                <button onclick="copyPrompt()" class="gold-3d text-black px-6 py-2 rounded-lg font-semibold transition duration-300">
+                                    📋 Kopieer Prompt
+                                </button>
+                                <button onclick="openGrok()" class="bg-black border border-white text-white hover:bg-white hover:text-black px-6 py-2 rounded-lg font-semibold transition duration-300">
+                                    🤖 Gebruik in Grok AI
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-banner-content">
+            <div class="flex-1">
+                <div class="flex items-center mb-2">
+                    <span class="text-2xl mr-3">🍪</span>
+                    <h3 class="text-lg font-bold text-white">Cookie Voorkeuren</h3>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    We gebruiken cookies om je ervaring te verbeteren en om te analyseren hoe onze website wordt gebruikt. 
+                    Door op "Accepteren" te klikken, stem je in met het gebruik van alle cookies. 
+                    <a href="#" class="text-yellow-400 hover:text-yellow-300 underline">Meer info</a>
+                </p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="declineCookies()" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                    Weigeren
+                </button>
+                <button onclick="acceptCookies()" class="gold-3d text-black px-6 py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                    Accepteren
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI PROMPT BUILDER PAGE -->
+    <div id="prompt-builder-page" class="page">
+        <div class="pt-24 pb-12">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb rounded-lg px-4 py-2 mb-8 inline-flex items-center text-sm">
+                    <button onclick="showPage('home')" class="text-yellow-400 hover:text-yellow-300">Home</button>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-300">AI Prompt Builder</span>
+                </div>
+
+                <!-- Page Header -->
+                <div class="text-center mb-16 perspective-1000">
+                    <div class="transform-gpu hover:rotateX-2 transition-all duration-500">
+                        <h1 class="text-6xl md:text-8xl font-bold mb-6 text-shadow-gold">
+                            <span class="gold-text">AI Prompt</span><br>
+                            <span class="text-white">Builder</span>
+                        </h1>
+                        <p class="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
+                            Klik je weg naar perfecte AI prompts! Duizenden combinaties mogelijk - van fotorealistisch tot anime, van portret tot landschap. Elke klik brengt je dichter bij je perfecte creatie.
+                        </p>
+                        
+                        <!-- Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-12">
+                            <div class="stats-counter rounded-xl p-4 text-center transform hover:scale-105 transition-transform duration-300">
+                                <div class="text-2xl font-bold gold-text">🎨</div>
+                                <div class="text-xs text-gray-400">AI Art</div>
+                            </div>
+                            <div class="stats-counter rounded-xl p-4 text-center transform hover:scale-105 transition-transform duration-300">
+                                <div class="text-2xl font-bold gold-text">⚡</div>
+                                <div class="text-xs text-gray-400">1-Click</div>
+                            </div>
+                            <div class="stats-counter rounded-xl p-4 text-center transform hover:scale-105 transition-transform duration-300">
+                                <div class="text-2xl font-bold gold-text">🎯</div>
+                                <div class="text-xs text-gray-400">Precise</div>
+                            </div>
+                            <div class="stats-counter rounded-xl p-4 text-center transform hover:scale-105 transition-transform duration-300">
+                                <div class="text-2xl font-bold gold-text">∞</div>
+                                <div class="text-xs text-gray-400">Endless</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f602db64d0b8ae',t:'MTc2MDYwMTUwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
