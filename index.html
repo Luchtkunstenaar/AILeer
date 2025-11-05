@@ -65,14 +65,15 @@
             send_page_view: true
         });
     </script><!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-." crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-. " crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-."><!-- AdSense Auto Ads -->
   <script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-.",
             enable_page_level_ads: true
         });
-    </script>
+    </script><!-- Buy Me a Coffee Widget -->
+  <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="mcdropket" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
         tailwind.config = {
@@ -223,26 +224,52 @@
             transform: translateY(-30px) scale(1.05);
         }
 
-        /* Enhanced Glass Effects */
+        /* Enhanced 3D Glass Effects */
         .glass-card {
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: inherit;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(14, 165, 233, 0.3);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(14, 165, 233, 0.4);
+            transform: translateY(-4px) rotateX(2deg) rotateY(1deg);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 10px 25px rgba(14, 165, 233, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        /* Interactive Elements */
+        .glass-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Enhanced 3D Interactive Elements */
         .interactive-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .interactive-card::before {
@@ -252,8 +279,9 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s;
+            z-index: 1;
         }
 
         .interactive-card:hover::before {
@@ -261,8 +289,16 @@
         }
 
         .interactive-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+            transform: translateY(-12px) scale(1.03) rotateX(5deg) rotateY(-2deg);
+            box-shadow: 
+                0 25px 50px rgba(14, 165, 233, 0.3),
+                0 15px 35px rgba(16, 185, 129, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            filter: brightness(1.1);
+        }
+
+        .interactive-card:active {
+            transform: translateY(-8px) scale(1.01) rotateX(2deg) rotateY(-1deg);
         }
 
         /* Navigation Enhancements */
@@ -288,18 +324,23 @@
             width: 100%;
         }
 
-        /* Button Enhancements */
+        /* Enhanced 3D Button Effects */
         .btn-primary {
             background: var(--primary-gradient);
             color: white;
             font-weight: 600;
             padding: 0.75rem 2rem;
             border-radius: 9999px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 
+                0 8px 25px rgba(14, 165, 233, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary::before {
@@ -309,8 +350,9 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s;
+            z-index: 1;
         }
 
         .btn-primary:hover::before {
@@ -318,8 +360,20 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-dark);
+            transform: translateY(-4px) rotateX(-5deg) scale(1.02);
+            box-shadow: 
+                0 15px 35px rgba(14, 165, 233, 0.4),
+                0 8px 20px rgba(16, 185, 129, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            filter: brightness(1.1);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-2px) rotateX(-2deg) scale(1.01);
+            box-shadow: 
+                0 8px 20px rgba(14, 165, 233, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .btn-secondary {
@@ -329,16 +383,44 @@
             font-weight: 600;
             padding: 0.75rem 2rem;
             border-radius: 9999px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 
+                0 4px 15px rgba(14, 165, 233, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-secondary:hover::before {
+            left: 100%;
         }
 
         .btn-secondary:hover {
             background: #0ea5e9;
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-4px) rotateX(-3deg) scale(1.02);
+            box-shadow: 
+                0 12px 30px rgba(14, 165, 233, 0.4),
+                0 6px 15px rgba(14, 165, 233, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: #0ea5e9;
+        }
+
+        .btn-secondary:active {
+            transform: translateY(-2px) rotateX(-1deg) scale(1.01);
         }
 
         /* Animated Backgrounds */
@@ -423,130 +505,438 @@
             }
         }
 
-        /* Professional 3D Dice */
-        .dice-container {
-            perspective: 1200px;
+        /* Epic 3D AUTOPROMPT Button */
+        .autoprompt-container {
+            perspective: 1500px;
             perspective-origin: center center;
-            transition: all 0.3s ease;
-        }
-
-        .dice-container:hover {
-            transform: scale(1.05);
-        }
-
-        .dice-3d {
+            transition: all 0.4s ease;
             position: relative;
-            width: 128px;
-            height: 128px;
+        }
+
+        .autoprompt-container:hover {
+            transform: scale(1.1);
+        }
+
+        .autoprompt-3d {
+            position: relative;
+            width: 200px;
+            height: 80px;
             transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
-            animation: diceFloat 4s ease-in-out infinite;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 25px 50px rgba(245, 158, 11, 0.4));
+            animation: autopromptFloat 5s ease-in-out infinite;
+            margin: 0 auto;
         }
 
-        .dice-3d:hover {
-            transform: rotateX(-15deg) rotateY(15deg);
-            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+        .autoprompt-3d:hover {
+            transform: rotateX(-20deg) rotateY(30deg);
+            filter: drop-shadow(0 35px 70px rgba(245, 158, 11, 0.7));
         }
 
-        .dice-face {
+        .autoprompt-face {
             position: absolute;
-            width: 128px;
-            height: 128px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 3px solid #cbd5e1;
-            border-radius: 12px;
+            width: 200px;
+            height: 80px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            border: 3px solid #fbbf24;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
             backface-visibility: hidden;
             box-shadow: 
                 inset 0 0 0 2px rgba(255, 255, 255, 0.3),
-                inset 0 0 20px rgba(255, 255, 255, 0.1),
-                0 10px 30px rgba(0, 0, 0, 0.2);
+                inset 0 0 30px rgba(255, 255, 255, 0.2),
+                0 15px 40px rgba(245, 158, 11, 0.5);
+            color: #fff;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .dice-face:before {
+        .autoprompt-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .autoprompt-icon {
+            font-size: 2.5rem;
+        }
+
+        .autoprompt-face::before {
             content: '';
             position: absolute;
-            top: 8px;
-            left: 8px;
-            right: 8px;
-            bottom: 8px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
-            border-radius: 8px;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%, rgba(0, 0, 0, 0.2) 100%);
+            border-radius: 12px;
             pointer-events: none;
         }
 
-        /* Cube Face Positioning */
-        .dice-front { transform: translateZ(64px); }
-        .dice-back { transform: rotateY(180deg) translateZ(64px); }
-        .dice-right { transform: rotateY(90deg) translateZ(64px); }
-        .dice-left { transform: rotateY(-90deg) translateZ(64px); }
-        .dice-top { transform: rotateX(90deg) translateZ(64px); }
-        .dice-bottom { transform: rotateX(-90deg) translateZ(64px); }
+        /* Button Face Positioning */
+        .autoprompt-front { transform: translateZ(40px); }
+        .autoprompt-back { transform: rotateY(180deg) translateZ(40px); }
+        .autoprompt-right { transform: rotateY(90deg) translateZ(40px); }
+        .autoprompt-left { transform: rotateY(-90deg) translateZ(40px); }
+        .autoprompt-top { transform: rotateX(90deg) translateZ(40px); }
+        .autoprompt-bottom { transform: rotateX(-90deg) translateZ(40px); }
 
-        @keyframes diceFloat {
+        @keyframes autopromptFloat {
             0%, 100% { 
-                transform: translateY(0px) rotateX(-10deg) rotateY(15deg); 
+                transform: translateY(0px) rotateX(-15deg) rotateY(20deg); 
             }
             25% { 
-                transform: translateY(-8px) rotateX(-8deg) rotateY(18deg); 
+                transform: translateY(-15px) rotateX(-12deg) rotateY(25deg); 
             }
             50% { 
-                transform: translateY(-12px) rotateX(-12deg) rotateY(20deg); 
+                transform: translateY(-20px) rotateX(-18deg) rotateY(30deg); 
             }
             75% { 
-                transform: translateY(-8px) rotateX(-8deg) rotateY(18deg); 
+                transform: translateY(-15px) rotateX(-12deg) rotateY(25deg); 
             }
         }
 
-        .dice-rolling {
-            animation: diceRoll 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            filter: drop-shadow(0 30px 60px rgba(14, 165, 233, 0.4));
+        .autoprompt-activating {
+            animation: autopromptActivate 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            filter: drop-shadow(0 40px 80px rgba(245, 158, 11, 0.8));
         }
 
-        @keyframes diceRoll {
+        @keyframes autopromptActivate {
             0% {
-                transform: rotateX(-10deg) rotateY(15deg) rotateZ(0deg) scale(1);
+                transform: rotateX(-15deg) rotateY(20deg) scale(1);
             }
-            15% {
-                transform: rotateX(90deg) rotateY(180deg) rotateZ(45deg) scale(1.05);
+            20% {
+                transform: rotateX(45deg) rotateY(180deg) scale(1.2);
             }
-            30% {
-                transform: rotateX(270deg) rotateY(360deg) rotateZ(90deg) scale(1.1);
-            }
-            45% {
-                transform: rotateX(450deg) rotateY(540deg) rotateZ(180deg) scale(1.15);
+            40% {
+                transform: rotateX(180deg) rotateY(360deg) scale(1.4);
             }
             60% {
-                transform: rotateX(630deg) rotateY(720deg) rotateZ(270deg) scale(1.2);
+                transform: rotateX(270deg) rotateY(540deg) scale(1.6);
             }
-            75% {
-                transform: rotateX(810deg) rotateY(900deg) rotateZ(315deg) scale(1.1);
-            }
-            90% {
-                transform: rotateX(900deg) rotateY(1080deg) rotateZ(350deg) scale(1.05);
+            80% {
+                transform: rotateX(360deg) rotateY(720deg) scale(1.8);
             }
             100% {
-                transform: rotateX(900deg) rotateY(1080deg) rotateZ(360deg) scale(1);
+                transform: rotateX(450deg) rotateY(900deg) scale(2);
             }
         }
 
-        .dice-landed {
-            animation: diceLand 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        /* Screen Crack Effect */
+        .screen-crack-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
         }
 
-        @keyframes diceLand {
+        .screen-crack-overlay.active {
+            opacity: 1;
+            animation: screenCrack 3s ease-out forwards;
+        }
+
+        @keyframes screenCrack {
             0% {
-                transform: rotateX(900deg) rotateY(1080deg) rotateZ(360deg) scale(1);
+                background: transparent;
+            }
+            20% {
+                background: 
+                    linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.8) 49%, rgba(255, 255, 255, 0.8) 51%, transparent 52%),
+                    linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.6) 49%, rgba(255, 255, 255, 0.6) 51%, transparent 52%),
+                    linear-gradient(30deg, transparent 48%, rgba(255, 255, 255, 0.4) 49%, rgba(255, 255, 255, 0.4) 51%, transparent 52%);
             }
             50% {
-                transform: rotateX(-10deg) rotateY(15deg) rotateZ(0deg) scale(1.15);
+                background: 
+                    linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.9) 45%, rgba(255, 255, 255, 0.9) 55%, transparent 60%),
+                    linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.7) 55%, transparent 60%),
+                    linear-gradient(30deg, transparent 40%, rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0.5) 55%, transparent 60%),
+                    linear-gradient(120deg, transparent 40%, rgba(255, 255, 255, 0.3) 45%, rgba(255, 255, 255, 0.3) 55%, transparent 60%);
             }
             100% {
-                transform: rotateX(-10deg) rotateY(15deg) rotateZ(0deg) scale(1);
+                background: rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        /* Epic Prompt Reveal */
+        .prompt-reveal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .prompt-reveal-container.active {
+            opacity: 1;
+            pointer-events: auto;
+            animation: promptReveal 4s ease-out forwards;
+        }
+
+        .prompt-reveal-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 25%, #8b5cf6 50%, #06b6d4 75%, #10b981 100%);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 0 0 50px rgba(245, 158, 11, 0.8);
+            animation: gradientShift 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate;
+            transform: scale(0) rotateX(90deg);
+            max-width: 90%;
+            padding: 2rem;
+        }
+
+        @keyframes promptReveal {
+            0% {
+                transform: scale(0) rotateX(90deg);
+            }
+            30% {
+                transform: scale(1.2) rotateX(0deg);
+            }
+            50% {
+                transform: scale(1) rotateX(0deg);
+            }
+            100% {
+                transform: scale(1) rotateX(0deg);
+            }
+        }
+
+        @keyframes textGlow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.8));
+            }
+            100% {
+                filter: drop-shadow(0 0 40px rgba(245, 158, 11, 1));
+            }
+        }
+
+        .prompt-actions {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10001;
+            opacity: 0;
+            animation: actionsSlideUp 1s ease-out 2s forwards;
+        }
+
+        @keyframes actionsSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .epic-button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .epic-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .epic-button:hover::before {
+            left: 100%;
+        }
+
+        .epic-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .imagine-button {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+
+        .grok-button {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            color: white;
+        }
+
+        .close-button {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        /* Energy Burst Effects */
+        .energy-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            margin: -100px 0 0 -100px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .energy-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #0ea5e9 0%, #10b981 50%, #f59e0b 100%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: energyBurst 1.5s ease-out forwards;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes energyBurst {
+            0% {
+                opacity: 1;
+                transform: scale(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1.5) rotate(72deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) rotate(360deg) translateX(150px);
+            }
+        }
+
+        .energy-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            margin: -60px 0 0 -60px;
+            border: 3px solid #0ea5e9;
+            border-radius: 50%;
+            opacity: 0;
+            animation: energyRing 1s ease-out forwards;
+        }
+
+        @keyframes energyRing {
+            0% {
+                opacity: 1;
+                transform: scale(0.5);
+                border-color: #0ea5e9;
+                box-shadow: 0 0 20px #0ea5e9;
+            }
+            50% {
+                opacity: 0.8;
+                border-color: #10b981;
+                box-shadow: 0 0 40px #10b981;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3);
+                border-color: #f59e0b;
+                box-shadow: 0 0 60px #f59e0b;
+            }
+        }
+
+        .energy-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            margin: -30px 0 0 -30px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.6) 0%, rgba(16, 185, 129, 0.4) 50%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: energyWave 1.2s ease-out forwards;
+        }
+
+        @keyframes energyWave {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(4);
+            }
+        }
+
+        .lightning-bolt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(to bottom, #f59e0b, #0ea5e9, #10b981);
+            margin: -40px 0 0 -2px;
+            opacity: 0;
+            animation: lightningBolt 0.8s ease-out forwards;
+            border-radius: 2px;
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        @keyframes lightningBolt {
+            0% {
+                opacity: 1;
+                transform: scale(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1) rotate(45deg);
+            }
+            40% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(90deg);
+            }
+            60% {
+                opacity: 0.6;
+                transform: scale(1) rotate(135deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) rotate(180deg);
             }
         }
 
@@ -558,14 +948,18 @@
         }
 
         .option-button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(14, 165, 233, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(14, 165, 233, 0.25);
             color: #e5e7eb;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.9rem;
             font-weight: 500;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .option-button::before {
@@ -575,8 +969,9 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.15), transparent);
             transition: left 0.5s;
+            z-index: 1;
         }
 
         .option-button:hover::before {
@@ -584,11 +979,14 @@
         }
 
         .option-button:hover {
-            border-color: rgba(14, 165, 233, 0.4);
-            background: rgba(14, 165, 233, 0.1);
+            border-color: rgba(14, 165, 233, 0.5);
+            background: rgba(14, 165, 233, 0.15);
             color: #0ea5e9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);
+            transform: translateY(-3px) rotateX(-2deg) scale(1.02);
+            box-shadow: 
+                0 8px 20px rgba(14, 165, 233, 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
         .option-button.selected {
@@ -596,8 +994,17 @@
             border-color: #0ea5e9;
             color: #fff;
             font-weight: 600;
-            box-shadow: 0 5px 20px rgba(14, 165, 233, 0.4);
+            transform: translateY(-2px) rotateX(-1deg);
+            box-shadow: 
+                0 10px 25px rgba(14, 165, 233, 0.4),
+                0 5px 15px rgba(16, 185, 129, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
             animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .option-button:active {
+            transform: translateY(-1px) rotateX(-1deg) scale(1.01);
         }
 
         /* Mobile Optimizations */
@@ -643,6 +1050,363 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #10b981, #0ea5e9);
         }
+
+        /* 3D Warning Sign */
+        .warning-3d-container {
+            perspective: 1200px;
+            perspective-origin: center center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .warning-3d {
+            position: relative;
+            width: 128px;
+            height: 128px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 20px 40px rgba(255, 165, 0, 0.3));
+            animation: warningFloat 4s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        .warning-3d:hover {
+            transform: rotateX(-15deg) rotateY(15deg) scale(1.1);
+            filter: drop-shadow(0 25px 50px rgba(255, 165, 0, 0.5));
+        }
+
+        .warning-face {
+            position: absolute;
+            width: 128px;
+            height: 128px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            border: 3px solid #fbbf24;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            backface-visibility: hidden;
+            box-shadow: 
+                inset 0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1),
+                0 10px 30px rgba(245, 158, 11, 0.4);
+        }
+
+        .warning-face::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        /* Warning Face Positioning */
+        .warning-front { transform: translateZ(64px); }
+        .warning-back { transform: rotateY(180deg) translateZ(64px); }
+        .warning-right { transform: rotateY(90deg) translateZ(64px); }
+        .warning-left { transform: rotateY(-90deg) translateZ(64px); }
+        .warning-top { transform: rotateX(90deg) translateZ(64px); }
+        .warning-bottom { transform: rotateX(-90deg) translateZ(64px); }
+
+        @keyframes warningFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(-10deg) rotateY(15deg); 
+            }
+            25% { 
+                transform: translateY(-12px) rotateX(-8deg) rotateY(18deg); 
+            }
+            50% { 
+                transform: translateY(-18px) rotateX(-12deg) rotateY(20deg); 
+            }
+            75% { 
+                transform: translateY(-12px) rotateX(-8deg) rotateY(18deg); 
+            }
+        }
+
+        /* Warning Sparkles */
+        .warning-sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: warningSparkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes warningSparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+        }
+
+        /* 3D Cube Buttons */
+        .cube-button-container {
+            perspective: 1200px;
+            perspective-origin: center center;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .cube-button-container:hover {
+            transform: scale(1.1);
+        }
+
+        .cube-button {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 15px 30px rgba(14, 165, 233, 0.4));
+            animation: cubeFloat 4s ease-in-out infinite;
+            margin: 0 auto 10px;
+        }
+
+        .cube-button:hover {
+            transform: rotateX(-20deg) rotateY(30deg);
+            filter: drop-shadow(0 20px 40px rgba(14, 165, 233, 0.6));
+        }
+
+        .cube-button.cube-purple {
+            filter: drop-shadow(0 15px 30px rgba(147, 51, 234, 0.4));
+        }
+
+        .cube-button.cube-purple:hover {
+            filter: drop-shadow(0 20px 40px rgba(147, 51, 234, 0.6));
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            backface-visibility: hidden;
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 50%, #0ea5e9 100%);
+            box-shadow: 
+                inset 0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1),
+                0 8px 25px rgba(14, 165, 233, 0.4);
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .cube-purple .cube-face {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #8b5cf6 100%);
+            box-shadow: 
+                inset 0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1),
+                0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .cube-face::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        /* Cube Face Positioning */
+        .cube-front { transform: translateZ(40px); }
+        .cube-back { transform: rotateY(180deg) translateZ(40px); }
+        .cube-right { transform: rotateY(90deg) translateZ(40px); }
+        .cube-left { transform: rotateY(-90deg) translateZ(40px); }
+        .cube-top { transform: rotateX(90deg) translateZ(40px); }
+        .cube-bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+        @keyframes cubeFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(-10deg) rotateY(15deg); 
+            }
+            25% { 
+                transform: translateY(-8px) rotateX(-8deg) rotateY(18deg); 
+            }
+            50% { 
+                transform: translateY(-12px) rotateX(-12deg) rotateY(20deg); 
+            }
+            75% { 
+                transform: translateY(-8px) rotateX(-8deg) rotateY(18deg); 
+            }
+        }
+
+        .cube-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            text-align: center;
+            margin-top: 8px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+
+        .cube-button-container:hover .cube-label {
+            color: #0ea5e9;
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .cube-button-container:active .cube-button {
+            transform: rotateX(-10deg) rotateY(15deg) scale(0.95);
+        }
+
+        /* 3D Surprise Box */
+        .surprise-box {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            z-index: 100;
+            cursor: pointer;
+            perspective: 1000px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+
+        .surprise-box.visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+            animation: surpriseFloat 4s ease-in-out infinite;
+        }
+
+        .surprise-box.clicked {
+            animation: surpriseExplode 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .box-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: boxRotate 8s linear infinite;
+        }
+
+        .surprise-box:hover .box-3d {
+            transform: rotateX(-15deg) rotateY(25deg) scale(1.1);
+            animation-play-state: paused;
+        }
+
+        .box-face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid #fbbf24;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            backface-visibility: hidden;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%);
+            box-shadow: 
+                inset 0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1),
+                0 10px 30px rgba(245, 158, 11, 0.4);
+        }
+
+        .box-face::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* Box Face Positioning */
+        .box-front { transform: translateZ(40px); }
+        .box-back { transform: rotateY(180deg) translateZ(40px); }
+        .box-right { transform: rotateY(90deg) translateZ(40px); }
+        .box-left { transform: rotateY(-90deg) translateZ(40px); }
+        .box-top { transform: rotateX(90deg) translateZ(40px); }
+        .box-bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+        @keyframes surpriseFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1); 
+            }
+            25% { 
+                transform: translateY(-10px) rotate(2deg) scale(1.05); 
+            }
+            50% { 
+                transform: translateY(-15px) rotate(-1deg) scale(1.1); 
+            }
+            75% { 
+                transform: translateY(-8px) rotate(1deg) scale(1.05); 
+            }
+        }
+
+        @keyframes boxRotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(15deg) rotateY(90deg); }
+            50% { transform: rotateX(0deg) rotateY(180deg); }
+            75% { transform: rotateX(-15deg) rotateY(270deg); }
+            100% { transform: rotateX(0deg) rotateY(360deg); }
+        }
+
+        @keyframes surpriseExplode {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Surprise Box Sparkles */
+        .box-sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fbbf24;
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+        }
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -653,7 +1417,33 @@
    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7S8HBQ7" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript><!-- End Google Tag Manager (noscript) --> <!-- Scroll Progress Indicator -->
   <div class="scroll-indicator" id="scrollIndicator"></div><!-- Particle Background -->
-  <div class="particles" id="particles"></div><!-- Modern Navigation -->
+  <div class="particles" id="particles"></div><!-- 3D Surprise Box -->
+  <div id="surpriseBox" class="surprise-box" onclick="clickSurpriseBox()">
+   <div class="box-3d">
+    <div class="box-face box-front">
+     🎁
+    </div>
+    <div class="box-face box-back">
+     🛍️
+    </div>
+    <div class="box-face box-right">
+     👕
+    </div>
+    <div class="box-face box-left">
+     🏳️‍🌈
+    </div>
+    <div class="box-face box-top">
+     🍊
+    </div>
+    <div class="box-face box-bottom">
+     ✨
+    </div>
+   </div><!-- Sparkles -->
+   <div class="box-sparkle" style="top: -10px; left: 10px; animation-delay: 0s;"></div>
+   <div class="box-sparkle" style="top: 20px; right: -5px; animation-delay: 0.5s;"></div>
+   <div class="box-sparkle" style="bottom: -8px; left: 30px; animation-delay: 1s;"></div>
+   <div class="box-sparkle" style="top: 5px; right: 20px; animation-delay: 1.5s;"></div>
+  </div><!-- Modern Navigation -->
   <nav class="fixed top-0 w-full z-50 glass-card bg-slate-900/80 backdrop-blur-xl border-b border-slate-700">
    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16"><!-- Logo -->
@@ -673,13 +1463,12 @@
        </div><span class="text-xs bg-primary-500 text-white px-2 py-1 rounded-full animate-pulse">2025</span>
       </div>
      </div><!-- Desktop Navigation -->
-     <div class="hidden md:flex items-center space-x-8"><a href="#" onclick="showPage('home')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="home" data-translate="nav_home">Home</a> <a href="#" onclick="showPage('ai-builder')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="ai-builder" data-translate="nav_ai_builder">AI Builder</a> <a href="#" onclick="showPage('ton-games')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="ton-games" data-translate="nav_ton_games">TON Games</a> <a href="#" onclick="showPage('nieuws')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="nieuws" data-translate="nav_nieuws">Nieuws</a> <a href="#" onclick="showPage('merch')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="merch" data-translate="nav_merch">Merch</a> <!-- Language Selector -->
+     <div class="hidden md:flex items-center space-x-8"><a href="#" onclick="showPage('ai-builder')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="ai-builder" data-translate="nav_ai_builder">AI Builder</a> <a href="#" onclick="showPage('ton-games')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="ton-games" data-translate="nav_ton_games">TON Games</a> <a href="#" onclick="showPage('trading')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="trading" data-translate="nav_trading">Trading</a> <a href="#" onclick="showPage('nieuws')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="nieuws" data-translate="nav_nieuws">Nieuws</a> <a href="#" onclick="showPage('merch')" class="nav-item text-slate-300 hover:text-white transition-colors font-medium" data-page="merch" data-translate="nav_merch">Merch</a> <!-- Language Selector -->
       <div class="relative"><button onclick="toggleLanguageMenu()" class="flex items-center space-x-2 p-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span id="currentLanguageFlag">🇳🇱</span> <span id="currentLanguageCode" class="text-sm font-medium">NL</span>
         <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg></button> <!-- Language Dropdown -->
-       <div id="languageMenu" class="hidden absolute right-0 top-12 bg-slate-800 rounded-lg shadow-xl border border-slate-700 z-50 min-w-[160px]">
-        <div class="py-2"><button onclick="changeLanguage('nl')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇳🇱</span> <span class="text-sm">Nederlands</span> </button> <button onclick="changeLanguage('en')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇺🇸</span> <span class="text-sm">English</span> </button> <button onclick="changeLanguage('de')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇩🇪</span> <span class="text-sm">Deutsch</span> </button> <button onclick="changeLanguage('fr')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇫🇷</span> <span class="text-sm">Français</span> </button> <button onclick="changeLanguage('es')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇪🇸</span> <span class="text-sm">Español</span> </button>
-         <div class="border-t border-slate-700 my-1"></div><button onclick="changeLanguage('auto')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🌍</span> <span class="text-sm">Auto-detect</span> </button>
+       <div id="languageMenu" class="hidden absolute right-0 top-12 bg-slate-800 rounded-lg shadow-xl border border-slate-700 z-50 min-w-[140px]">
+        <div class="py-2"><button onclick="changeLanguage('nl')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇳🇱</span> <span class="text-sm">Nederlands</span> </button> <button onclick="changeLanguage('en')" class="w-full flex items-center space-x-3 px-4 py-2 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"> <span>🇺🇸</span> <span class="text-sm">English</span> </button>
         </div>
        </div>
       </div><!-- Theme Toggle --> <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">
@@ -704,11 +1493,18 @@
        Aileer
       </div>
      </div>
-     <nav class="space-y-4"><a href="#" onclick="showPage('home'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_home">🏠 Home</a> <a href="#" onclick="showPage('ai-builder'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_ai_builder">🎨 AI Builder</a> <a href="#" onclick="showPage('ton-games'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_ton_games">🎮 TON Games</a> <a href="#" onclick="showPage('nieuws'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_nieuws">📰 Nieuws</a> <a href="#" onclick="showPage('merch'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_merch">👕 Merch</a>
+     <nav class="space-y-4"><a href="#" onclick="showPage('ai-builder'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_ai_builder">🎨 AI Builder</a> <a href="#" onclick="showPage('ton-games'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_ton_games">🎮 TON Games</a> <a href="#" onclick="showPage('trading'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_trading">📈 Trading</a> <a href="#" onclick="showPage('nieuws'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_nieuws">📰 Nieuws</a> <a href="#" onclick="showPage('merch'); toggleMobileMenu()" class="block text-slate-300 hover:text-white transition-colors font-medium py-2 px-4 rounded-lg hover:bg-slate-800" data-translate="nav_merch">👕 Merch</a>
      </nav>
     </div>
    </div>
-  </nav><!-- Page Container -->
+  </nav><!-- Screen Crack Overlay -->
+  <div id="screenCrackOverlay" class="screen-crack-overlay"></div><!-- Epic Prompt Reveal -->
+  <div id="promptRevealContainer" class="prompt-reveal-container">
+   <div class="prompt-reveal-text" id="epicPromptText"><!-- Generated prompt will appear here -->
+   </div>
+   <div class="prompt-actions"><button class="epic-button copy-button" onclick="copyEpicPrompt()"> 📋 Kopieer </button> <button class="epic-button imagine-button" onclick="openEpicImagineArt()"> 🎨 Imagine.art </button> <button class="epic-button grok-button" onclick="openGrokAI()"> 🤖 Grok AI </button> <button class="epic-button close-button" onclick="closeEpicPrompt()"> ✕ Sluiten </button>
+   </div>
+  </div><!-- Page Container -->
   <div class="page-container relative"><!-- HOME PAGE -->
    <div id="home-page" class="page active">
     <section class="min-h-screen hero-bg relative overflow-hidden flex items-center"><!-- Hero Content -->
@@ -717,8 +1513,14 @@
        <div class="inline-flex items-center px-6 py-3 rounded-full glass-card mb-8 animate-scale-in"><span class="text-white font-semibold" data-translate="home_badge">🚀 #1 AI Prompt Builder 2025</span>
        </div><!-- Main Heading -->
        <h1 class="text-6xl md:text-8xl font-bold mb-8 leading-tight text-white animate-slide-up"><span class="block" data-translate="home_title">AI Prompt Builder</span> <span class="block bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" data-translate="home_subtitle">Perfecte Prompts</span></h1><!-- Subtitle -->
-       <p class="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up" style="animation-delay: 0.2s;" data-translate="home_description">Genereer perfecte AI prompts voor Midjourney, DALL-E, Stable Diffusion en meer. Magic Dice generator, stap-voor-stap builder en duizenden combinaties voor stunning resultaten.</p><!-- CTA Buttons -->
+       <p class="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed animate-slide-up" style="animation-delay: 0.2s;" data-translate="home_description">Genereer perfecte AI prompts voor Midjourney, DALL-E, Stable Diffusion en meer. <a href="https://aileer.nl/" class="text-yellow-400 hover:text-yellow-300 underline transition-colors font-semibold">Aileer.nl</a> biedt Magic Dice generator, stap-voor-stap builder en duizenden combinaties voor stunning resultaten.</p><!-- CTA Buttons -->
        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-slide-up" style="animation-delay: 0.4s;"><button onclick="showPage('ai-builder')" class="btn-primary text-xl px-10 py-4 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25" data-translate="home_cta_ai"> 🎨 Start AI Builder </button> <button onclick="showPage('ton-games')" class="btn-secondary text-xl px-10 py-4 bg-white/20 border-white/30 text-white hover:bg-white hover:text-slate-900 shadow-2xl" data-translate="home_cta_games"> 🎮 TON Games </button> <button onclick="showPage('nieuws')" class="btn-secondary text-xl px-10 py-4 bg-blue-500/20 border-blue-500/30 text-white hover:bg-blue-500 hover:text-white shadow-2xl" data-translate="home_cta_news"> 📰 AI Nieuws </button> <button onclick="showPage('merch')" class="btn-secondary text-xl px-10 py-4 bg-pink-500/20 border-pink-500/30 text-white hover:bg-pink-500 hover:text-white shadow-2xl" data-translate="home_cta_merch"> 👕 Merch Shop </button>
+       </div><!-- AdSense Banner Ad - Home Page Top -->
+       <div class="text-center mb-12">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-." data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
        </div><!-- Interactive Stats -->
        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto animate-slide-up" style="animation-delay: 0.6s;">
         <div class="interactive-card glass-card rounded-2xl p-6 text-center">
@@ -763,6 +1565,135 @@
        </div>
       </div>
      </div>
+    </section><!-- Exclusive Merchandise SEO Section -->
+    <section class="py-20 bg-gradient-to-br from-slate-800 via-purple-900 to-slate-800">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+       <h2 class="text-4xl md:text-5xl font-bold mb-6"><span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">Exclusieve Aileer Merchandise</span></h2>
+       <p class="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed">Ontdek onze premium collectie van AI-geïnspireerde kleding en accessoires. Van kleurrijke Fruitastic designs tot krachtige LGBTIQ+ Pride statements - draag je passie voor technologie en diversiteit met trots.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16"><!-- Fruitastic Collection Highlight -->
+       <div class="interactive-card glass-card rounded-3xl p-8 bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border-2 border-orange-500/20">
+        <div class="flex items-center mb-6">
+         <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-white text-2xl mr-4 animate-bounce-slow">
+          🍊
+         </div>
+         <div>
+          <h3 class="text-2xl font-bold text-white mb-2">Fruitastic Collection</h3><span class="text-sm bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full">Bestseller</span>
+         </div>
+        </div>
+        <p class="text-slate-300 mb-6 leading-relaxed">Vrolijke, kleurrijke designs geïnspireerd door fruit en natuur. Perfect voor positieve uitstraling en zomerse vibes. Beschikbaar op premium t-shirts, hoodies, tank tops en tote bags.</p>
+        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+         <div>
+          <h4 class="font-semibold text-white mb-2">✨ Kenmerken:</h4>
+          <ul class="text-slate-300 space-y-1">
+           <li>• 100% biologisch katoen</li>
+           <li>• Eco-vriendelijke prints</li>
+           <li>• Unisex &amp; fitted opties</li>
+           <li>• Duurzame productie</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-semibold text-white mb-2">🌍 Beschikbaar:</h4>
+          <ul class="text-slate-300 space-y-1">
+           <li>• Wereldwijde verzending</li>
+           <li>• Maten XS t/m 5XL</li>
+           <li>• 30+ kleuren</li>
+           <li>• Snelle levering</li>
+          </ul>
+         </div>
+        </div><button onclick="openLink('https://everpress.com/fruitastic', 'Fruitastic Collection')" class="w-full btn-primary bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"> 🍊 Shop Fruitastic Collection </button>
+       </div><!-- LGBTIQ+ Pride Collection Highlight -->
+       <div class="interactive-card glass-card rounded-3xl p-8 bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-2 border-purple-500/20">
+        <div class="flex items-center mb-6">
+         <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-2xl mr-4 animate-bounce-slow" style="animation-delay: 0.2s;">
+          🏳️‍🌈
+         </div>
+         <div>
+          <h3 class="text-2xl font-bold text-white mb-2">LGBTIQ+ Pride Collection</h3><span class="text-sm bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full">Pride Support</span>
+         </div>
+        </div>
+        <p class="text-slate-300 mb-6 leading-relaxed">Krachtige designs die diversiteit en inclusiviteit vieren. Inclusief onze iconische disco pride hoodie en statement pieces voor elke Pride gelegenheid.</p>
+        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+         <div>
+          <h4 class="font-semibold text-white mb-2">🏳️‍🌈 Collectie:</h4>
+          <ul class="text-slate-300 space-y-1">
+           <li>• Disco Pride Hoodie</li>
+           <li>• Rainbow statement tees</li>
+           <li>• Pride flag designs</li>
+           <li>• Inclusivity messages</li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-semibold text-white mb-2">💝 Impact:</h4>
+          <ul class="text-slate-300 space-y-1">
+           <li>• Deel van opbrengst naar LGBTIQ+ organisaties</li>
+           <li>• Ethische productie</li>
+           <li>• Inclusieve maten</li>
+           <li>• Community support</li>
+          </ul>
+         </div>
+        </div><button onclick="openLink('https://everpress.com/lhbtiq', 'LGBTIQ Pride Collection')" class="w-full btn-primary bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"> 🏳️‍🌈 Shop Pride Collection </button>
+       </div>
+      </div><!-- Merchandise Features & SEO Content -->
+      <div class="glass-card rounded-3xl p-8 mb-12">
+       <h3 class="text-3xl font-bold text-center text-white mb-8">Waarom Kiezen voor Aileer Merchandise?</h3>
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="text-center">
+         <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-3xl mx-auto mb-4 animate-bounce-slow">
+          ♻️
+         </div>
+         <h4 class="text-xl font-bold text-white mb-3">Duurzaam &amp; Ethisch</h4>
+         <p class="text-slate-300 text-sm leading-relaxed">100% biologisch katoen, eco-vriendelijke prints en eerlijke arbeidsomstandigheden. Onze merchandise wordt geproduceerd met respect voor mens en milieu.</p>
+        </div>
+        <div class="text-center">
+         <div class="w-20 h-20 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center text-white text-3xl mx-auto mb-4 animate-bounce-slow" style="animation-delay: 0.2s;">
+          ⭐
+         </div>
+         <h4 class="text-xl font-bold text-white mb-3">Premium Kwaliteit</h4>
+         <p class="text-slate-300 text-sm leading-relaxed">Hoogwaardige stoffen, duurzame prints en perfecte pasvorm. Onze kleding gaat jaren mee en behoudt zijn kleur en vorm na vele wasbeurten.</p>
+        </div>
+        <div class="text-center">
+         <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-3xl mx-auto mb-4 animate-bounce-slow" style="animation-delay: 0.4s;">
+          🚚
+         </div>
+         <h4 class="text-xl font-bold text-white mb-3">Wereldwijde Verzending</h4>
+         <p class="text-slate-300 text-sm leading-relaxed">Snelle en betrouwbare levering naar 100+ landen. Gratis verzending vanaf €50 en 30 dagen retourrecht voor volledige tevredenheid.</p>
+        </div>
+       </div><!-- SEO Rich Content -->
+       <div class="bg-slate-800/50 rounded-2xl p-6">
+        <h4 class="text-lg font-bold text-white mb-4">🎨 AI-Geïnspireerde Fashion voor Tech Enthusiasten</h4>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4"><a href="https://aileer.nl/" class="text-primary-400 hover:text-primary-300 underline transition-colors">Aileer.nl</a> Merchandise combineert cutting-edge AI technologie met moderne fashion. Onze designs zijn gemaakt door AI-kunstenaars en vertalen de digitale revolutie naar draagbare kunst. Of je nu een AI-developer, crypto-trader, of tech-liefhebber bent - de <a href="https://aileer.nl/" class="text-primary-400 hover:text-primary-300 underline transition-colors">Aileer.nl</a> collectie spreekt jouw taal.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+         <div>
+          <h5 class="font-semibold text-white mb-2">🤖 AI &amp; Tech Merchandise:</h5>
+          <ul class="text-slate-300 space-y-1">
+           <li>• Machine Learning inspired designs</li>
+           <li>• Blockchain &amp; cryptocurrency themes</li>
+           <li>• Neural network patterns</li>
+           <li>• Future tech aesthetics</li>
+           <li>• Developer &amp; programmer humor</li>
+          </ul>
+         </div>
+         <div>
+          <h5 class="font-semibold text-white mb-2">🌈 Inclusiviteit &amp; Diversiteit:</h5>
+          <ul class="text-slate-300 space-y-1">
+           <li>• LGBTIQ+ Pride collecties</li>
+           <li>• Inclusieve maten (XS-5XL)</li>
+           <li>• Genderneutrale designs</li>
+           <li>• Culturele diversiteit</li>
+           <li>• Community support initiatieven</li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div><!-- Call to Action -->
+      <div class="text-center"><button onclick="showPage('merch')" class="btn-primary text-xl px-12 py-4 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 transform hover:scale-105 shadow-2xl mb-6"> 👕 Ontdek Volledige Merchandise Collectie </button> <!-- Buy Me a Coffee Support Button -->
+       <div class="mb-6"><a href="https://www.buymeacoffee.com/mcdropket" target="_blank" rel="noopener noreferrer" class="inline-block"> <img src="https://img.buymeacoffee.com/button-api/?text=AILEER support&amp;emoji=&amp;slug=mcdropket&amp;button_colour=FFDD00&amp;font_colour=000000&amp;font_family=Poppins&amp;outline_colour=000000&amp;coffee_colour=ffffff" alt="Buy Me A Coffee" class="rounded-lg hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl"> </a>
+       </div>
+       <p class="text-slate-400 text-sm mt-4">Gratis verzending vanaf €50 • 30 dagen retourrecht • Wereldwijde levering</p>
+      </div>
+     </div>
     </section>
    </div><!-- AI BUILDER PAGE -->
    <div id="ai-builder-page" class="page">
@@ -770,43 +1701,99 @@
      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Page Header -->
       <div class="text-center mb-16 animate-fade-in">
        <h1 class="text-5xl md:text-6xl font-bold mb-6"><span class="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent" data-translate="ai_title">AI Prompt Builder</span></h1>
-       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="ai_description">Kies stap voor stap je perfecte AI prompt! Simpel, overzichtelijk en speciaal voor Nederlandse gebruikers.</p>
+       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="ai_description">Kies stap voor stap je perfecte AI prompt! <a href="https://aileer.nl/" class="text-primary-400 hover:text-primary-300 underline transition-colors">Aileer.nl</a> is simpel, overzichtelijk en speciaal voor Nederlandse gebruikers.</p>
+      </div><!-- AdSense Rectangle Ad - AI Builder Top -->
+      <div class="text-center mb-12">
+       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-." data-ad-slot="2345678901" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+       <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
       </div><!-- Magic Dice Section -->
       <div class="text-center mb-16">
        <div class="glass-card rounded-3xl p-8 max-w-2xl mx-auto interactive-card">
         <h2 class="text-3xl font-bold mb-6"><span class="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent" data-translate="ai_dice_title">🎲 Magic Dice Auto-Prompt</span></h2>
-        <p class="text-slate-300 mb-8" data-translate="ai_dice_description">Klik op de dobbelsteen voor een willekeurige AI prompt!</p><!-- Professional 3D Dice -->
+        <p class="text-slate-300 mb-8" data-translate="ai_dice_description">Click the AUTOPROMPT button for an epic AI prompt!</p><!-- Epic 3D AUTOPROMPT Button -->
         <div class="relative mb-8">
-         <div id="magicDice" class="dice-container mx-auto cursor-pointer" onclick="rollDiceForPrompt()">
-          <div class="dice-3d mx-auto"><!-- Dice Faces -->
-           <div class="dice-face dice-front"><span id="diceFace">🎨</span>
+         <div id="autoPromptButton" class="autoprompt-container mx-auto cursor-pointer" onclick="triggerAutoPrompt()">
+          <div class="autoprompt-3d mx-auto"><!-- Button Faces -->
+           <div class="autoprompt-face autoprompt-front"><span class="autoprompt-text">AUTO</span>
            </div>
-           <div class="dice-face dice-back"><span>🎯</span>
+           <div class="autoprompt-face autoprompt-back"><span class="autoprompt-text">PROMPT</span>
            </div>
-           <div class="dice-face dice-right"><span>⚡</span>
+           <div class="autoprompt-face autoprompt-right"><span class="autoprompt-icon">🚀</span>
            </div>
-           <div class="dice-face dice-left"><span>✨</span>
+           <div class="autoprompt-face autoprompt-left"><span class="autoprompt-icon">⚡</span>
            </div>
-           <div class="dice-face dice-top"><span>🚀</span>
+           <div class="autoprompt-face autoprompt-top"><span class="autoprompt-icon">✨</span>
            </div>
-           <div class="dice-face dice-bottom"><span>💫</span>
+           <div class="autoprompt-face autoprompt-bottom"><span class="autoprompt-icon">💫</span>
            </div>
           </div>
          </div>
          <div class="mt-6">
-          <div id="diceSubject" class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent mb-2" data-translate="ai_dice_subtitle">
-           Klik de dobbelsteen!
+          <div id="autoPromptSubject" class="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent mb-2" data-translate="ai_dice_subtitle">
+           Click AUTOPROMPT!
           </div>
           <div class="text-sm text-slate-400" data-translate="ai_dice_auto">
-           Automatische prompt generatie
+           Automatic prompt generation
           </div>
          </div>
-        </div><button onclick="rollDiceForPrompt()" class="btn-primary text-lg px-8 py-3 mb-4 transform hover:scale-105" data-translate="ai_dice_button"> 🎲 Rol de Dobbelsteen! </button> <!-- Auto-Generated Prompt Display -->
+        </div><button onclick="triggerAutoPrompt()" class="btn-primary text-lg px-8 py-3 mb-4 transform hover:scale-105" data-translate="ai_dice_button"> 🚀 ACTIVATE AUTOPROMPT! </button> <!-- Auto-Generated Prompt Display -->
         <div id="autoPromptResult" class="hidden mt-6 animate-scale-in">
          <div class="glass-card bg-primary-500/10 rounded-2xl p-6 border border-primary-500/20">
           <h3 class="text-lg font-bold text-primary-400 mb-3" data-translate="ai_dice_result">🎲 Auto-Generated Prompt:</h3>
           <div id="autoGeneratedPrompt" class="bg-slate-800/50 text-slate-200 text-left leading-relaxed mb-4 p-4 rounded-lg font-mono text-sm"></div>
-          <div class="flex gap-3 justify-center flex-wrap"><button onclick="copyAutoPrompt()" class="btn-primary text-sm px-6 py-2" data-translate="ai_dice_copy"> 📋 Kopieer Prompt </button> <button onclick="openImagineArtAuto()" class="btn-secondary text-sm px-6 py-2 bg-purple-500 hover:bg-purple-600 text-white border-purple-500" data-translate="ai_dice_imagine"> 🎨 Maak Foto met Imagine.art </button>
+          <div class="flex gap-6 justify-center flex-wrap"><!-- 3D Copy Button -->
+           <div class="cube-button-container" onclick="copyAutoPrompt()">
+            <div class="cube-button">
+             <div class="cube-face cube-front">
+              📋
+             </div>
+             <div class="cube-face cube-back">
+              ✅
+             </div>
+             <div class="cube-face cube-right">
+              📋
+             </div>
+             <div class="cube-face cube-left">
+              ✅
+             </div>
+             <div class="cube-face cube-top">
+              📋
+             </div>
+             <div class="cube-face cube-bottom">
+              ✅
+             </div>
+            </div>
+            <div class="cube-label" data-translate="ai_dice_copy">
+             Kopieer Prompt
+            </div>
+           </div><!-- 3D Imagine.art Button -->
+           <div class="cube-button-container" onclick="openImagineArtAuto()">
+            <div class="cube-button cube-purple">
+             <div class="cube-face cube-front">
+              🎨
+             </div>
+             <div class="cube-face cube-back">
+              🚀
+             </div>
+             <div class="cube-face cube-right">
+              🎨
+             </div>
+             <div class="cube-face cube-left">
+              🚀
+             </div>
+             <div class="cube-face cube-top">
+              🎨
+             </div>
+             <div class="cube-face cube-bottom">
+              🚀
+             </div>
+            </div>
+            <div class="cube-label" data-translate="ai_dice_imagine">
+             Maak Foto met Imagine.art
+            </div>
+           </div>
           </div>
          </div>
         </div>
@@ -881,19 +1868,72 @@
      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Page Header -->
       <div class="text-center mb-16 animate-fade-in">
        <h1 class="text-5xl md:text-6xl font-bold mb-6"><span class="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent" data-translate="ton_title">TON Blockchain Games</span></h1>
-       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="ton_description">Ontdek The Open Network - de snelste blockchain ter wereld. Speel gratis games, verdien crypto!</p>
-      </div><!-- Personal Success Story -->
-      <div class="glass-card bg-green-500/10 border-2 border-green-500/20 rounded-3xl p-8 mb-8">
-       <div class="text-center">
-        <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white text-3xl mx-auto mb-4 animate-bounce-slow">
-         💰
+       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="ton_description">Ontdek The Open Network - de snelste blockchain ter wereld. <a href="https://aileer.nl/" class="text-purple-400 hover:text-purple-300 underline transition-colors">Aileer.nl</a> helpt je gratis games te vinden en crypto te verdienen!</p>
+      </div><!-- TON Ecosystem Statistics & Web3 Revolution -->
+      <div class="glass-card bg-blue-500/10 border-2 border-blue-500/20 rounded-3xl p-8 mb-8">
+       <div class="text-center mb-8">
+        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-3xl mx-auto mb-4 animate-bounce-slow">
+         🌐
         </div>
-        <h2 class="text-2xl font-bold text-green-400 mb-4" data-translate="ton_success_title">Mijn Persoonlijke Succes</h2>
-        <div class="text-4xl font-bold text-white mb-2" data-translate="ton_success_amount">
-         $1,750
+        <h2 class="text-2xl font-bold text-blue-400 mb-4" data-translate="ton_ecosystem_title">TON Ecosysteem Explosie</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+         <div class="text-center">
+          <div class="text-3xl font-bold text-white mb-1" data-translate="ton_users_count">
+           950M+
+          </div>
+          <div class="text-blue-300 text-sm" data-translate="ton_users_label">
+           Telegram Gebruikers
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-3xl font-bold text-white mb-1" data-translate="ton_apps_count">
+           500M+
+          </div>
+          <div class="text-blue-300 text-sm" data-translate="ton_apps_label">
+           Mini App Gebruikers
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-3xl font-bold text-white mb-1" data-translate="ton_money_count">
+           $2.5B+
+          </div>
+          <div class="text-blue-300 text-sm" data-translate="ton_money_label">
+           Gratis Te Verdienen
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-3xl font-bold text-white mb-1" data-translate="ton_speed_count">
+           1M+
+          </div>
+          <div class="text-blue-300 text-sm" data-translate="ton_speed_label">
+           TPS Snelheid
+          </div>
+         </div>
         </div>
-        <p class="text-green-300 mb-4" data-translate="ton_success_description">Dit heb ik verdiend met <strong>Catizen</strong> - mijn meest succesvolle TON game!</p>
-        <p class="text-slate-300 text-sm" data-translate="ton_success_proof">Bewijs dat deze games echt uitbetalen. Start vandaag nog!</p>
+       </div><!-- Web3 Revolution -->
+       <div class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-6">
+        <h3 class="text-xl font-bold text-purple-400 mb-4 flex items-center"><span class="mr-2">🚀</span> <span data-translate="ton_web3_title">Telegram = Het Nieuwe Web3 OS</span></h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+         <div>
+          <h4 class="font-semibold text-white mb-2" data-translate="ton_no_downloads">🚫 Geen Downloads Meer:</h4>
+          <ul class="space-y-2 text-slate-300">
+           <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="ton_benefit_instant">Instant toegang tot alle apps</span></li>
+           <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="ton_benefit_storage">Geen opslagruimte vereist</span></li>
+           <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="ton_benefit_updates">Automatische updates</span></li>
+          </ul>
+         </div>
+         <div>
+          <h4 class="font-semibold text-white mb-2" data-translate="ton_privacy_title">🔒 Privacy &amp; Snelheid:</h4>
+          <ul class="space-y-2 text-slate-300">
+           <li class="flex items-start"><span class="text-purple-400 mr-2">🍪</span> <span data-translate="ton_no_cookies">Geen cookies of tracking</span></li>
+           <li class="flex items-start"><span class="text-purple-400 mr-2">⚡</span> <span data-translate="ton_instant_load">Instant laden van apps</span></li>
+           <li class="flex items-start"><span class="text-purple-400 mr-2">🔐</span> <span data-translate="ton_secure">End-to-end versleuteling</span></li>
+          </ul>
+         </div>
+        </div>
+        <div class="mt-4 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg">
+         <p class="text-blue-300 text-sm font-medium text-center" data-translate="ton_revolution_tip">🌐 TON + Telegram = De toekomst van internet zonder downloads, cookies of wachttijden!</p>
+        </div>
        </div>
       </div><!-- What is TON -->
       <div class="glass-card rounded-3xl p-8 mb-16 interactive-card">
@@ -941,6 +1981,12 @@
          </div>
         </div>
        </div>
+      </div><!-- AdSense Banner Ad - TON Games -->
+      <div class="text-center mb-12">
+       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-." data-ad-slot="3456789012" data-ad-format="auto" data-full-width-responsive="true"></ins>
+       <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
       </div><!-- Games Grid -->
       <div class="mb-16">
        <h2 class="text-3xl font-bold text-center mb-8"><span class="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent" data-translate="ton_games_title">🎮 Gratis TON Games</span></h2>
@@ -1011,29 +2057,6 @@
          <p class="text-slate-300 text-sm mb-4 leading-relaxed">Digitaal paspoort voor het TON ecosysteem. Krijg je unieke TON identiteit.</p><button onclick="openLink('https://t.me/id_app/start?startapp=uVdQLWpKw6R5QCYzMnoLqMb497wVj3wk8fdJmGQ1oULzHLxq1dyi6vNk73NLXDJ33spsR344mTKopiv6crFEFxyigWneuvfGVd6G2jUGC', 'TON ID')" class="w-full btn-primary text-sm py-2"> 🆔 Start TON ID </button>
         </div>
        </div>
-      </div><!-- Trading Warning -->
-      <div class="glass-card bg-red-500/10 border-2 border-red-500/20 rounded-2xl p-8 mb-16">
-       <div class="text-center">
-        <div class="w-16 h-16 bg-red-500 rounded-xl flex items-center justify-center text-white text-2xl mx-auto mb-4">
-         ⚠️
-        </div>
-        <h2 class="text-2xl font-bold text-red-400 mb-4" data-translate="ton_warning_title">Trading Apps - Alleen voor Experts!</h2>
-        <p class="text-red-300 mb-6" data-translate="ton_warning_description">Trading apps zijn ALLEEN voor ervaren traders. Je kunt je geld verliezen!</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-         <div class="interactive-card glass-card rounded-xl p-6">
-          <h3 class="font-bold text-white mb-2">Bybit Exchange</h3>
-          <p class="text-slate-300 text-sm mb-4">World's 2nd largest crypto exchange</p><button onclick="openLink('https://www.bybit.com/invite?ref=XQYGEZ', 'Bybit')" class="w-full btn-secondary text-sm py-2"> ⚠️ Bybit (Experts Only) </button>
-         </div>
-         <div class="interactive-card glass-card rounded-xl p-6">
-          <h3 class="font-bold text-white mb-2">Blum Trading</h3>
-          <p class="text-slate-300 text-sm mb-4">AI-powered multichain trading platform</p><button onclick="openLink('https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU', 'Blum')" class="w-full btn-secondary text-sm py-2"> ⚠️ Blum (Experts Only) </button>
-         </div>
-         <div class="interactive-card glass-card rounded-xl p-6">
-          <h3 class="font-bold text-white mb-2">Storm Trade</h3>
-          <p class="text-slate-300 text-sm mb-4">500x leverage derivatives trading</p><button onclick="openLink('https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip', 'Storm Trade')" class="w-full btn-secondary text-sm py-2"> ⚠️ Storm (Experts Only) </button>
-         </div>
-        </div>
-       </div>
       </div><!-- Community CTA -->
       <div class="text-center">
        <div class="glass-card rounded-2xl p-8 max-w-2xl mx-auto">
@@ -1049,7 +2072,7 @@
      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Page Header -->
       <div class="text-center mb-16 animate-fade-in">
        <h1 class="text-5xl md:text-6xl font-bold mb-6"><span class="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent" data-translate="news_title">AI &amp; Crypto Nieuws</span></h1>
-       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="news_description">Blijf op de hoogte van de laatste ontwikkelingen in AI, blockchain en cryptocurrency.</p>
+       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="news_description">Blijf op de hoogte van de laatste ontwikkelingen in AI, blockchain en cryptocurrency via <a href="https://aileer.nl/" class="text-blue-400 hover:text-blue-300 underline transition-colors">Aileer.nl</a>.</p>
       </div><!-- Live RSS News Feed -->
       <div class="glass-card bg-blue-500/10 border-2 border-blue-500/20 rounded-2xl p-6 mb-12">
        <div class="flex items-center justify-between mb-4">
@@ -1089,7 +2112,16 @@
          </div>
         </div>
        </div><!-- Sidebar Articles -->
-       <div class="space-y-6"><!-- Imagine.art Banner -->
+       <div class="space-y-6"><!-- AdSense Sidebar Ad - News Page -->
+        <div class="glass-card rounded-2xl p-4 text-center mb-6">
+         <div class="text-xs text-slate-400 mb-2">
+          Advertentie
+         </div>
+         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-." data-ad-slot="4567890123" data-ad-format="auto" data-full-width-responsive="true"></ins>
+         <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+        </div><!-- Imagine.art Banner -->
         <div class="glass-card rounded-2xl p-4 text-center">
          <div class="text-xs text-slate-400 mb-2">
           Aanbevolen AI Tool
@@ -1124,13 +2156,175 @@
       </div>
      </div>
     </section>
+   </div><!-- TRADING APPS PAGE -->
+   <div id="trading-page" class="page">
+    <section class="min-h-screen bg-gradient-to-br from-red-900 via-slate-900 to-orange-900 py-20">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Page Header -->
+      <div class="text-center mb-16 animate-fade-in">
+       <h1 class="text-5xl md:text-6xl font-bold mb-6"><span class="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent" data-translate="trading_title">Crypto Trading Platforms</span></h1>
+       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="trading_description">Professionele trading platforms voor ervaren cryptocurrency traders. Hoge risico, hoge beloning.</p>
+      </div><!-- Professional Warning Section -->
+      <div class="glass-card bg-orange-500/10 border-2 border-orange-500/20 rounded-3xl p-8 mb-16">
+       <div class="text-center"><!-- 3D Floating Warning Sign -->
+        <div class="relative mx-auto mb-6 w-32 h-32">
+         <div class="warning-3d-container perspective-1000">
+          <div class="warning-3d transform-style-preserve-3d animate-float"><!-- Warning Sign Faces -->
+           <div class="warning-face warning-front">
+            ⚠️
+           </div>
+           <div class="warning-face warning-back">
+            ⚠️
+           </div>
+           <div class="warning-face warning-right">
+            ⚠️
+           </div>
+           <div class="warning-face warning-left">
+            ⚠️
+           </div>
+           <div class="warning-face warning-top">
+            ⚠️
+           </div>
+           <div class="warning-face warning-bottom">
+            ⚠️
+           </div>
+          </div>
+         </div><!-- Floating particles around warning -->
+         <div class="warning-sparkle" style="top: 10px; left: 20px; animation-delay: 0s;"></div>
+         <div class="warning-sparkle" style="top: 40px; right: 15px; animation-delay: 0.5s;"></div>
+         <div class="warning-sparkle" style="bottom: 20px; left: 30px; animation-delay: 1s;"></div>
+         <div class="warning-sparkle" style="top: 15px; right: 40px; animation-delay: 1.5s;"></div>
+        </div>
+        <h2 class="text-2xl font-bold text-orange-400 mb-4" data-translate="trading_warning_title">Belangrijk - Voor Ervaren Traders</h2>
+        <div class="max-w-4xl mx-auto">
+         <p class="text-orange-300 text-base mb-6" data-translate="trading_warning_main">Trading brengt risico's met zich mee. Investeer alleen wat je kunt missen en zorg voor goede kennis.</p>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+          <div class="bg-red-500/10 rounded-2xl p-6">
+           <h3 class="text-lg font-bold text-red-400 mb-4" data-translate="trading_risks_title">🚨 Risico's:</h3>
+           <ul class="space-y-2 text-red-300 text-sm">
+            <li class="flex items-start"><span class="text-red-400 mr-2">•</span> <span data-translate="trading_risk_1">Totaal verlies van investering mogelijk</span></li>
+            <li class="flex items-start"><span class="text-red-400 mr-2">•</span> <span data-translate="trading_risk_2">Extreme volatiliteit en prijsschommelingen</span></li>
+            <li class="flex items-start"><span class="text-red-400 mr-2">•</span> <span data-translate="trading_risk_3">Leverage kan verliezen vergroten</span></li>
+            <li class="flex items-start"><span class="text-red-400 mr-2">•</span> <span data-translate="trading_risk_4">Emotionele stress en beslissingsdruk</span></li>
+           </ul>
+          </div>
+          <div class="bg-yellow-500/10 rounded-2xl p-6">
+           <h3 class="text-lg font-bold text-yellow-400 mb-4" data-translate="trading_requirements_title">✅ Vereisten:</h3>
+           <ul class="space-y-2 text-yellow-300 text-sm">
+            <li class="flex items-start"><span class="text-yellow-400 mr-2">•</span> <span data-translate="trading_req_1">Uitgebreide kennis van crypto markten</span></li>
+            <li class="flex items-start"><span class="text-yellow-400 mr-2">•</span> <span data-translate="trading_req_2">Ervaring met technische analyse</span></li>
+            <li class="flex items-start"><span class="text-yellow-400 mr-2">•</span> <span data-translate="trading_req_3">Sterke emotionele controle</span></li>
+            <li class="flex items-start"><span class="text-yellow-400 mr-2">•</span> <span data-translate="trading_req_4">Risicomanagement strategieën</span></li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Trading Platforms -->
+      <div class="mb-16">
+       <h2 class="text-3xl font-bold text-center mb-12"><span class="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent" data-translate="trading_platforms_title">📈 Trading Platforms</span></h2>
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Bybit Exchange -->
+        <div class="interactive-card glass-card rounded-2xl p-6 border-2 border-red-500/20">
+         <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center text-white text-xl mr-3">
+           🏛️
+          </div>
+          <div>
+           <h3 class="font-bold text-white">Bybit Exchange</h3><span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full">Top Exchange</span>
+          </div>
+         </div>
+         <p class="text-slate-300 text-sm mb-4 leading-relaxed" data-translate="bybit_description">'s Werelds op één na grootste cryptocurrency exchange. Professionele trading tools, futures, opties en spot trading. Hoge liquiditeit en geavanceerde ordertypen.</p>
+         <div class="mb-4">
+          <h4 class="font-semibold text-white mb-2 text-sm" data-translate="features">Features:</h4>
+          <ul class="text-xs text-slate-300 space-y-1">
+           <li>• Spot &amp; Derivatives Trading</li>
+           <li>• Tot 100x Leverage</li>
+           <li>• Advanced Trading Tools</li>
+           <li>• Copy Trading</li>
+          </ul>
+         </div><button onclick="openLink('https://www.bybit.com/invite?ref=XQYGEZ', 'Bybit')" class="w-full btn-secondary bg-red-500/20 border-red-500 text-red-300 hover:bg-red-500 hover:text-white text-sm py-2"> ⚠️ Bybit (Experts Only) </button>
+        </div><!-- Blum Trading -->
+        <div class="interactive-card glass-card rounded-2xl p-6 border-2 border-red-500/20">
+         <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-xl mr-3">
+           🤖
+          </div>
+          <div>
+           <h3 class="font-bold text-white">Blum Trading</h3><span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">AI-Powered</span>
+          </div>
+         </div>
+         <p class="text-slate-300 text-sm mb-4 leading-relaxed" data-translate="blum_description">AI-aangedreven multichain trading platform geïntegreerd in Telegram. Ondersteunt meerdere blockchains en biedt geautomatiseerde trading strategieën met machine learning.</p>
+         <div class="mb-4">
+          <h4 class="font-semibold text-white mb-2 text-sm" data-translate="features">Features:</h4>
+          <ul class="text-xs text-slate-300 space-y-1">
+           <li>• AI Trading Algorithms</li>
+           <li>• Multichain Support</li>
+           <li>• Telegram Integration</li>
+           <li>• Automated Strategies</li>
+          </ul>
+         </div><button onclick="openLink('https://t.me/BlumCryptoTradingBot?start=7ZBeiLONAP_T_EQBbIiA9g8eohAbE9-gCCjlAqz3_i5EyvCW0daegABESATqU', 'Blum')" class="w-full btn-secondary bg-red-500/20 border-red-500 text-red-300 hover:bg-red-500 hover:text-white text-sm py-2"> ⚠️ Blum (Experts Only) </button>
+        </div><!-- Storm Trade -->
+        <div class="interactive-card glass-card rounded-2xl p-6 border-2 border-red-500/20">
+         <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-xl mr-3">
+           ⚡
+          </div>
+          <div>
+           <h3 class="font-bold text-white">Storm Trade</h3><span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded-full">High Leverage</span>
+          </div>
+         </div>
+         <p class="text-slate-300 text-sm mb-4 leading-relaxed" data-translate="storm_description">Extreem hoge leverage derivatives trading platform op TON blockchain. Tot 500x leverage voor ervaren traders. Zeer risicovol maar potentieel hoge returns.</p>
+         <div class="mb-4">
+          <h4 class="font-semibold text-white mb-2 text-sm" data-translate="features">Features:</h4>
+          <ul class="text-xs text-slate-300 space-y-1">
+           <li>• Tot 500x Leverage</li>
+           <li>• TON Blockchain</li>
+           <li>• Perpetual Futures</li>
+           <li>• Lightning Fast Execution</li>
+          </ul>
+         </div><button onclick="openLink('https://t.me/StormTradeBot/trade?startapp=9n2pzpPbiSKccwqfr4EgxRykgxkzdFm3624i1qvaqwz49ji6xw7HQ4digfbWozhaDMRbe11G6QxM2BV8P7vgS5cip', 'Storm Trade')" class="w-full btn-secondary bg-red-500/20 border-red-500 text-red-300 hover:bg-red-500 hover:text-white text-sm py-2"> ⚠️ Storm (Experts Only) </button>
+        </div>
+       </div>
+      </div><!-- Educational Resources -->
+      <div class="glass-card rounded-3xl p-8 mb-16">
+       <h2 class="text-2xl font-bold text-center text-white mb-8" data-translate="trading_education_title">📚 Leer Eerst, Handel Daarna</h2>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+         <h3 class="text-lg font-bold text-white mb-4" data-translate="trading_learn_title">🎓 Wat Te Leren:</h3>
+         <ul class="space-y-3 text-slate-300 text-sm">
+          <li class="flex items-start"><span class="text-blue-400 mr-2">📊</span> <span data-translate="learn_1">Technische analyse en chart patronen</span></li>
+          <li class="flex items-start"><span class="text-blue-400 mr-2">📈</span> <span data-translate="learn_2">Fundamentele analyse van projecten</span></li>
+          <li class="flex items-start"><span class="text-blue-400 mr-2">🎯</span> <span data-translate="learn_3">Risicomanagement strategieën</span></li>
+          <li class="flex items-start"><span class="text-blue-400 mr-2">🧠</span> <span data-translate="learn_4">Psychologie van trading</span></li>
+          <li class="flex items-start"><span class="text-blue-400 mr-2">⚙️</span> <span data-translate="learn_5">Platform functionaliteiten</span></li>
+         </ul>
+        </div>
+        <div>
+         <h3 class="text-lg font-bold text-white mb-4" data-translate="trading_tips_title">💡 Belangrijke Tips:</h3>
+         <ul class="space-y-3 text-slate-300 text-sm">
+          <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="tip_1">Start met kleine bedragen</span></li>
+          <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="tip_2">Gebruik altijd stop-losses</span></li>
+          <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="tip_3">Diversifieer je portfolio</span></li>
+          <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="tip_4">Handel nooit op emoties</span></li>
+          <li class="flex items-start"><span class="text-green-400 mr-2">✅</span> <span data-translate="tip_5">Oefen eerst met demo accounts</span></li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Alternative Recommendation -->
+      <div class="text-center">
+       <div class="glass-card bg-green-500/10 border-2 border-green-500/20 rounded-2xl p-8 max-w-2xl mx-auto">
+        <h2 class="text-2xl font-bold text-green-400 mb-4" data-translate="trading_alternative_title">🎮 Veiliger Alternatief</h2>
+        <p class="text-slate-300 mb-6" data-translate="trading_alternative_description">Nieuw in crypto? Probeer eerst onze TON Games voor risicovrije ervaring met blockchain technologie.</p><button onclick="showPage('ton-games')" class="btn-primary" data-translate="trading_alternative_button"> 🎮 Ontdek TON Games </button>
+       </div>
+      </div>
+     </div>
+    </section>
    </div><!-- MERCH PAGE -->
    <div id="merch-page" class="page">
     <section class="min-h-screen bg-gradient-to-br from-pink-900 via-slate-900 to-orange-900 py-20">
      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Page Header -->
       <div class="text-center mb-16 animate-fade-in">
        <h1 class="text-5xl md:text-6xl font-bold mb-6"><span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent" data-translate="merch_title">Aileer Merchandise</span></h1>
-       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="merch_description">Draag je passie voor AI en crypto met onze exclusieve merchandise collectie.</p>
+       <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed" data-translate="merch_description">Draag je passie voor AI en crypto met de exclusieve <a href="https://aileer.nl/" class="text-pink-400 hover:text-pink-300 underline transition-colors">Aileer.nl</a> merchandise collectie.</p>
       </div><!-- Merch Collections -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"><!-- Fruitastic Collection -->
        <div class="interactive-card glass-card rounded-2xl p-8 h-full flex flex-col"><!-- Header Section - Fixed Height -->
@@ -1240,11 +2434,7 @@
    </div>
   </div><!-- Mobile Bottom Navigation -->
   <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-t border-slate-700 z-50">
-   <div class="flex justify-around items-center py-2"><a href="#" onclick="showPage('home')" class="mobile-nav-item flex flex-col items-center py-2 px-3 text-slate-400 hover:text-white transition-colors">
-     <div class="w-6 h-6 mb-1">
-      <svg fill="currentColor" viewbox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-      </svg>
-     </div><span class="text-xs font-medium" data-translate="nav_home">Home</span> </a> <a href="#" onclick="showPage('ai-builder')" class="mobile-nav-item flex flex-col items-center py-2 px-3 text-slate-400 hover:text-white transition-colors">
+   <div class="flex justify-around items-center py-2"><a href="#" onclick="showPage('ai-builder')" class="mobile-nav-item flex flex-col items-center py-2 px-3 text-slate-400 hover:text-white transition-colors">
      <div class="w-6 h-6 mb-1">
       <svg fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
       </svg>
@@ -1252,7 +2442,11 @@
      <div class="w-6 h-6 mb-1">
       <svg fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 000 2h.01a1 1 0 000-2H7z" clip-rule="evenodd" />
       </svg>
-     </div><span class="text-xs font-medium" data-translate="nav_ton_games">Games</span> </a> <a href="#" onclick="showPage('nieuws')" class="mobile-nav-item flex flex-col items-center py-2 px-3 text-slate-400 hover:text-white transition-colors">
+     </div><span class="text-xs font-medium" data-translate="nav_ton_games">Games</span> </a> <a href="#" onclick="showPage('trading')" class="mobile-nav-item flex flex-col items-center py-2 px-3 text-slate-400 hover:text-white transition-colors">
+     <div class="w-6 h-6 mb-1">
+      <svg fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+      </svg>
+     </div><span class="text-xs font-medium" data-translate="nav_trading">Trading</span> </a> <a href="#" onclick="showPage('nieuws')" class="mobile-nav-item flex flex-col items-center py-2 px-3 text-slate-400 hover:text-white transition-colors">
      <div class="w-6 h-6 mb-1">
       <svg fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd" /> <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
       </svg>
@@ -1262,10 +2456,23 @@
       </svg>
      </div><span class="text-xs font-medium" data-translate="nav_merch">Merch</span> </a>
    </div>
-  </nav><!-- Floating Action Button --> <button class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full shadow-2xl hover:shadow-primary-500/25 transition-all duration-300 hover:scale-110 z-40 hidden md:flex items-center justify-center" onclick="showPage('ai-builder')" title="Start AI Builder"> 🎨 </button>
+  </nav><!-- AdSense Footer Ad - Global -->
+  <div class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-t border-slate-700 z-30 md:block hidden">
+   <div class="max-w-7xl mx-auto px-4 py-2">
+    <div class="text-center">
+     <div class="text-xs text-slate-400 mb-1">
+      Advertentie
+     </div>
+     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-." data-ad-slot="5678901234" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+     <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+    </div>
+   </div>
+  </div><!-- Floating Action Button --> <button class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full shadow-2xl hover:shadow-primary-500/25 transition-all duration-300 hover:scale-110 z-40 hidden md:flex items-center justify-center" onclick="showPage('ai-builder')" title="Start AI Builder"> 🎨 </button>
   <script>
         // Global Variables
-        let currentPage = 'home';
+        let currentPage = 'ai-builder';
         let selectedOptions = {
             onderwerp: '',
             stijl: '',
@@ -1282,27 +2489,14 @@
             nl: {
                 flag: '🇳🇱',
                 name: 'Nederlands',
-                code: 'NL'
+                code: 'NL',
+                font: 'Inter'
             },
             en: {
                 flag: '🇺🇸',
                 name: 'English',
-                code: 'EN'
-            },
-            de: {
-                flag: '🇩🇪',
-                name: 'Deutsch',
-                code: 'DE'
-            },
-            fr: {
-                flag: '🇫🇷',
-                name: 'Français',
-                code: 'FR'
-            },
-            es: {
-                flag: '🇪🇸',
-                name: 'Español',
-                code: 'ES'
+                code: 'EN',
+                font: 'Inter'
             }
         };
 
@@ -1313,6 +2507,7 @@
                 nav_home: 'Home',
                 nav_ai_builder: 'AI Builder',
                 nav_ton_games: 'TON Games',
+                nav_trading: 'Trading',
                 nav_nieuws: 'Nieuws',
                 nav_merch: 'Merch',
                 
@@ -1320,25 +2515,25 @@
                 home_badge: '🚀 #1 AI Prompt Builder 2025',
                 home_title: 'AI Prompt Builder',
                 home_subtitle: 'Perfecte Prompts',
-                home_description: 'Genereer perfecte AI prompts voor Midjourney, DALL-E, Stable Diffusion en meer. Magic Dice generator, stap-voor-stap builder en duizenden combinaties voor stunning resultaten.',
+                home_description: 'Genereer perfecte AI prompts voor Midjourney, DALL-E, Stable Diffusion en meer. <a href="https://aileer.nl/" class="text-yellow-400 hover:text-yellow-300 underline transition-colors font-semibold">Aileer.nl</a> biedt Magic Dice generator, stap-voor-stap builder en duizenden combinaties voor stunning resultaten.',
                 home_cta_ai: '🎨 Start AI Builder',
                 home_cta_games: '🎮 TON Games',
                 home_cta_news: '📰 AI Nieuws',
                 home_cta_merch: '👕 Merch Shop',
                 home_stats_combinations: 'Combinaties',
-                home_stats_dice: 'Magic Dice',
+                home_stats_dice: 'AUTOPROMPT',
                 home_stats_generators: 'AI Generators',
                 home_stats_free: 'Gratis',
                 
                 // AI Builder Page
                 ai_title: 'AI Prompt Builder',
-                ai_description: 'Kies stap voor stap je perfecte AI prompt! Simpel, overzichtelijk en speciaal voor Nederlandse gebruikers.',
-                ai_dice_title: '🎲 Magic Dice Auto-Prompt',
-                ai_dice_description: 'Klik op de dobbelsteen voor een willekeurige AI prompt!',
-                ai_dice_subtitle: 'Klik de dobbelsteen!',
+                ai_description: 'Kies stap voor stap je perfecte AI prompt! <a href="https://aileer.nl/" class="text-primary-400 hover:text-primary-300 underline transition-colors">Aileer.nl</a> is simpel, overzichtelijk en speciaal voor Nederlandse gebruikers.',
+                ai_dice_title: '🚀 AUTOPROMPT Generator',
+                ai_dice_description: 'Klik op de AUTOPROMPT knop voor een epische AI prompt!',
+                ai_dice_subtitle: 'Klik AUTOPROMPT!',
                 ai_dice_auto: 'Automatische prompt generatie',
-                ai_dice_button: '🎲 Rol de Dobbelsteen!',
-                ai_dice_result: '🎲 Auto-Generated Prompt:',
+                ai_dice_button: '🚀 ACTIVEER AUTOPROMPT!',
+                ai_dice_result: '🚀 Auto-Generated Prompt:',
                 ai_dice_copy: '📋 Kopieer Prompt',
                 ai_dice_imagine: '🎨 Maak Foto met Imagine.art',
                 ai_step_title: 'Stap-voor-Stap Builder',
@@ -1357,24 +2552,74 @@
                 
                 // TON Games Page
                 ton_title: 'TON Blockchain Games',
-                ton_description: 'Ontdek The Open Network - de snelste blockchain ter wereld. Speel gratis games, verdien crypto!',
-                ton_success_title: 'Mijn Persoonlijke Succes',
-                ton_success_amount: '$1,750',
-                ton_success_description: 'Dit heb ik verdiend met <strong>Catizen</strong> - mijn meest succesvolle TON game!',
-                ton_success_proof: 'Bewijs dat deze games echt uitbetalen. Start vandaag nog!',
+                ton_description: 'Ontdek The Open Network - de snelste blockchain ter wereld. <a href="https://aileer.nl/" class="text-purple-400 hover:text-purple-300 underline transition-colors">Aileer.nl</a> helpt je gratis games te vinden en crypto te verdienen!',
+                ton_ecosystem_title: 'TON Ecosysteem Explosie',
+                ton_users_count: '950M+',
+                ton_users_label: 'Telegram Gebruikers',
+                ton_apps_count: '500M+',
+                ton_apps_label: 'Mini App Gebruikers',
+                ton_money_count: '$2.5B+',
+                ton_money_label: 'Gratis Te Verdienen',
+                ton_speed_count: '1M+',
+                ton_speed_label: 'TPS Snelheid',
+                ton_web3_title: 'Telegram = Het Nieuwe Web3 OS',
+                ton_no_downloads: '🚫 Geen Downloads Meer:',
+                ton_benefit_instant: 'Instant toegang tot alle apps',
+                ton_benefit_storage: 'Geen opslagruimte vereist',
+                ton_benefit_updates: 'Automatische updates',
+                ton_privacy_title: '🔒 Privacy & Snelheid:',
+                ton_no_cookies: 'Geen cookies of tracking',
+                ton_instant_load: 'Instant laden van apps',
+                ton_secure: 'End-to-end versleuteling',
+                ton_revolution_tip: '🌐 TON + Telegram = De toekomst van internet zonder downloads, cookies of wachttijden!',
                 ton_what_title: '💎 Wat is TON?',
                 ton_why_title: '🚀 Waarom TON Bijzonder Is:',
                 ton_how_title: '🎮 Hoe Te Gebruiken:',
                 ton_games_title: '🎮 Gratis TON Games',
-                ton_warning_title: 'Trading Apps - Alleen voor Experts!',
-                ton_warning_description: 'Trading apps zijn ALLEEN voor ervaren traders. Je kunt je geld verliezen!',
                 ton_community_title: 'Join onze Community',
                 ton_community_description: 'Deel referral links, krijg tips en blijf op de hoogte van nieuwe apps.',
                 ton_community_button: '💬 Join Telegram Groep',
                 
+                // Trading Page
+                trading_title: 'Crypto Trading Platforms',
+                trading_description: 'Professionele trading platforms voor ervaren cryptocurrency traders. Hoge risico, hoge beloning.',
+                trading_warning_title: 'Belangrijk - Voor Ervaren Traders',
+                trading_warning_main: 'Trading brengt risico\'s met zich mee. Investeer alleen wat je kunt missen en zorg voor goede kennis.',
+                trading_risks_title: '🚨 Risico\'s:',
+                trading_risk_1: 'Totaal verlies van investering mogelijk',
+                trading_risk_2: 'Extreme volatiliteit en prijsschommelingen',
+                trading_risk_3: 'Leverage kan verliezen vergroten',
+                trading_risk_4: 'Emotionele stress en beslissingsdruk',
+                trading_requirements_title: '✅ Vereisten:',
+                trading_req_1: 'Uitgebreide kennis van crypto markten',
+                trading_req_2: 'Ervaring met technische analyse',
+                trading_req_3: 'Sterke emotionele controle',
+                trading_req_4: 'Risicomanagement strategieën',
+                trading_platforms_title: '📈 Trading Platforms',
+                bybit_description: '\'s Werelds op één na grootste cryptocurrency exchange. Professionele trading tools, futures, opties en spot trading. Hoge liquiditeit en geavanceerde ordertypen.',
+                blum_description: 'AI-aangedreven multichain trading platform geïntegreerd in Telegram. Ondersteunt meerdere blockchains en biedt geautomatiseerde trading strategieën met machine learning.',
+                storm_description: 'Extreem hoge leverage derivatives trading platform op TON blockchain. Tot 500x leverage voor ervaren traders. Zeer risicovol maar potentieel hoge returns.',
+                features: 'Features:',
+                trading_education_title: '📚 Leer Eerst, Handel Daarna',
+                trading_learn_title: '🎓 Wat Te Leren:',
+                learn_1: 'Technische analyse en chart patronen',
+                learn_2: 'Fundamentele analyse van projecten',
+                learn_3: 'Risicomanagement strategieën',
+                learn_4: 'Psychologie van trading',
+                learn_5: 'Platform functionaliteiten',
+                trading_tips_title: '💡 Belangrijke Tips:',
+                tip_1: 'Start met kleine bedragen',
+                tip_2: 'Gebruik altijd stop-losses',
+                tip_3: 'Diversifieer je portfolio',
+                tip_4: 'Handel nooit op emoties',
+                tip_5: 'Oefen eerst met demo accounts',
+                trading_alternative_title: '🎮 Veiliger Alternatief',
+                trading_alternative_description: 'Nieuw in crypto? Probeer eerst onze TON Games voor risicovrije ervaring met blockchain technologie.',
+                trading_alternative_button: '🎮 Ontdek TON Games',
+                
                 // News Page
                 news_title: 'AI & Crypto Nieuws',
-                news_description: 'Blijf op de hoogte van de laatste ontwikkelingen in AI, blockchain en cryptocurrency.',
+                news_description: 'Blijf op de hoogte van de laatste ontwikkelingen in AI, blockchain en cryptocurrency via <a href="https://aileer.nl/" class="text-blue-400 hover:text-blue-300 underline transition-colors">Aileer.nl</a>.',
                 news_live_title: 'Live RSS Nieuws Feed',
                 news_refresh: '🔄 Vernieuwen',
                 news_loading: 'Laden van actueel nieuws...',
@@ -1392,7 +2637,7 @@
                 
                 // Merch Page
                 merch_title: 'Aileer Merchandise',
-                merch_description: 'Draag je passie voor AI en crypto met onze exclusieve merchandise collectie.',
+                merch_description: 'Draag je passie voor AI en crypto met de exclusieve <a href="https://aileer.nl/" class="text-pink-400 hover:text-pink-300 underline transition-colors">Aileer.nl</a> merchandise collectie.',
                 merch_fruitastic: 'Fruitastic Collection',
                 merch_pride: 'LGBTIQ+ Pride',
                 merch_why_title: 'Waarom Onze Merchandise?',
@@ -1412,6 +2657,7 @@
                 nav_home: 'Home',
                 nav_ai_builder: 'AI Builder',
                 nav_ton_games: 'TON Games',
+                nav_trading: 'Trading',
                 nav_nieuws: 'News',
                 nav_merch: 'Merch',
                 
@@ -1419,25 +2665,25 @@
                 home_badge: '🚀 #1 AI Prompt Builder 2025',
                 home_title: 'AI Prompt Builder',
                 home_subtitle: 'Perfect Prompts',
-                home_description: 'Generate perfect AI prompts for Midjourney, DALL-E, Stable Diffusion and more. Magic Dice generator, step-by-step builder and thousands of combinations for stunning results.',
+                home_description: 'Generate perfect AI prompts for Midjourney, DALL-E, Stable Diffusion and more. <a href="https://aileer.nl/" class="text-yellow-400 hover:text-yellow-300 underline transition-colors font-semibold">Aileer.nl</a> offers AUTOPROMPT generator, step-by-step builder and thousands of combinations for stunning results.',
                 home_cta_ai: '🎨 Start AI Builder',
                 home_cta_games: '🎮 TON Games',
                 home_cta_news: '📰 AI News',
                 home_cta_merch: '👕 Merch Shop',
                 home_stats_combinations: 'Combinations',
-                home_stats_dice: 'Magic Dice',
+                home_stats_dice: 'AUTOPROMPT',
                 home_stats_generators: 'AI Generators',
                 home_stats_free: 'Free',
                 
                 // AI Builder Page
                 ai_title: 'AI Prompt Builder',
-                ai_description: 'Choose your perfect AI prompt step by step! Simple, clear and specially designed for users.',
-                ai_dice_title: '🎲 Magic Dice Auto-Prompt',
-                ai_dice_description: 'Click the dice for a random AI prompt!',
-                ai_dice_subtitle: 'Click the dice!',
+                ai_description: 'Choose your perfect AI prompt step by step! <a href="https://aileer.nl/" class="text-primary-400 hover:text-primary-300 underline transition-colors">Aileer.nl</a> is simple, clear and specially designed for users.',
+                ai_dice_title: '🚀 AUTOPROMPT Generator',
+                ai_dice_description: 'Click the AUTOPROMPT button for an epic AI prompt!',
+                ai_dice_subtitle: 'Click AUTOPROMPT!',
                 ai_dice_auto: 'Automatic prompt generation',
-                ai_dice_button: '🎲 Roll the Dice!',
-                ai_dice_result: '🎲 Auto-Generated Prompt:',
+                ai_dice_button: '🚀 ACTIVATE AUTOPROMPT!',
+                ai_dice_result: '🚀 Auto-Generated Prompt:',
                 ai_dice_copy: '📋 Copy Prompt',
                 ai_dice_imagine: '🎨 Create Image with Imagine.art',
                 ai_step_title: 'Step-by-Step Builder',
@@ -1456,20 +2702,70 @@
                 
                 // TON Games Page
                 ton_title: 'TON Blockchain Games',
-                ton_description: 'Discover The Open Network - the fastest blockchain in the world. Play free games, earn crypto!',
-                ton_success_title: 'My Personal Success',
-                ton_success_amount: '$1,750',
-                ton_success_description: 'This is what I earned with <strong>Catizen</strong> - my most successful TON game!',
-                ton_success_proof: 'Proof that these games really pay out. Start today!',
+                ton_description: 'Discover The Open Network - the fastest blockchain in the world. Play free games, earn cryptocurrency by getting in early on new projects.',
+                ton_ecosystem_title: 'TON Ecosystem Explosion',
+                ton_users_count: '950M+',
+                ton_users_label: 'Telegram Users',
+                ton_apps_count: '500M+',
+                ton_apps_label: 'Mini App Users',
+                ton_money_count: '$2.5B+',
+                ton_money_label: 'Free to Earn',
+                ton_speed_count: '1M+',
+                ton_speed_label: 'TPS Speed',
+                ton_web3_title: 'Telegram = The New Web3 OS',
+                ton_no_downloads: '🚫 No More Downloads:',
+                ton_benefit_instant: 'Instant access to all apps',
+                ton_benefit_storage: 'No storage space required',
+                ton_benefit_updates: 'Automatic updates',
+                ton_privacy_title: '🔒 Privacy & Speed:',
+                ton_no_cookies: 'No cookies or tracking',
+                ton_instant_load: 'Instant app loading',
+                ton_secure: 'End-to-end encryption',
+                ton_revolution_tip: '🌐 TON + Telegram = The future of internet without downloads, cookies or waiting times!',
                 ton_what_title: '💎 What is TON?',
                 ton_why_title: '🚀 Why TON is Special:',
                 ton_how_title: '🎮 How to Use:',
                 ton_games_title: '🎮 Free TON Games',
-                ton_warning_title: 'Trading Apps - Experts Only!',
-                ton_warning_description: 'Trading apps are ONLY for experienced traders. You can lose your money!',
                 ton_community_title: 'Join our Community',
                 ton_community_description: 'Share referral links, get tips and stay updated on new apps.',
                 ton_community_button: '💬 Join Telegram Group',
+                
+                // Trading Page
+                trading_title: 'Crypto Trading Platforms',
+                trading_description: 'Professional trading platforms for experienced cryptocurrency traders. High risk, high reward.',
+                trading_warning_title: 'Important - For Experienced Traders',
+                trading_warning_main: 'Trading involves risks. Only invest what you can afford to lose and ensure proper knowledge.',
+                trading_risks_title: '🚨 Risks:',
+                trading_risk_1: 'Total loss of investment possible',
+                trading_risk_2: 'Extreme volatility and price swings',
+                trading_risk_3: 'Leverage can amplify losses',
+                trading_risk_4: 'Emotional stress and decision pressure',
+                trading_requirements_title: '✅ Requirements:',
+                trading_req_1: 'Extensive knowledge of crypto markets',
+                trading_req_2: 'Experience with technical analysis',
+                trading_req_3: 'Strong emotional control',
+                trading_req_4: 'Risk management strategies',
+                trading_platforms_title: '📈 Trading Platforms',
+                bybit_description: 'World\'s second-largest cryptocurrency exchange. Professional trading tools, futures, options and spot trading. High liquidity and advanced order types.',
+                blum_description: 'AI-powered multichain trading platform integrated in Telegram. Supports multiple blockchains and offers automated trading strategies with machine learning.',
+                storm_description: 'Extremely high leverage derivatives trading platform on TON blockchain. Up to 500x leverage for experienced traders. Very risky but potentially high returns.',
+                features: 'Features:',
+                trading_education_title: '📚 Learn First, Trade Later',
+                trading_learn_title: '🎓 What to Learn:',
+                learn_1: 'Technical analysis and chart patterns',
+                learn_2: 'Fundamental analysis of projects',
+                learn_3: 'Risk management strategies',
+                learn_4: 'Psychology of trading',
+                learn_5: 'Platform functionalities',
+                trading_tips_title: '💡 Important Tips:',
+                tip_1: 'Start with small amounts',
+                tip_2: 'Always use stop-losses',
+                tip_3: 'Diversify your portfolio',
+                tip_4: 'Never trade on emotions',
+                tip_5: 'Practice with demo accounts first',
+                trading_alternative_title: '🎮 Safer Alternative',
+                trading_alternative_description: 'New to crypto? Try our TON Games first for risk-free experience with blockchain technology.',
+                trading_alternative_button: '🎮 Discover TON Games',
                 
                 // News Page
                 news_title: 'AI & Crypto News',
@@ -1505,303 +2801,6 @@
                 copied: '✅ Prompt copied!',
                 opening_imagine: '🎨 Opening Imagine.art...',
                 language_changed: '🌍 Language changed to {lang}'
-            },
-            de: {
-                // Navigation
-                nav_home: 'Startseite',
-                nav_ai_builder: 'KI Builder',
-                nav_ton_games: 'TON Spiele',
-                nav_nieuws: 'Nachrichten',
-                nav_merch: 'Merch',
-                
-                // Home Page
-                home_badge: '🚀 #1 KI Prompt Builder 2025',
-                home_title: 'KI Prompt Builder',
-                home_subtitle: 'Perfekte Prompts',
-                home_description: 'Generiere perfekte KI-Prompts für Midjourney, DALL-E, Stable Diffusion und mehr. Magic Dice Generator, Schritt-für-Schritt Builder und tausende Kombinationen für atemberaubende Ergebnisse.',
-                home_cta_ai: '🎨 KI Builder Starten',
-                home_cta_games: '🎮 TON Spiele',
-                home_cta_news: '📰 KI Nachrichten',
-                home_cta_merch: '👕 Merch Shop',
-                home_stats_combinations: 'Kombinationen',
-                home_stats_dice: 'Magic Dice',
-                home_stats_generators: 'KI Generatoren',
-                home_stats_free: 'Kostenlos',
-                
-                // AI Builder Page
-                ai_title: 'KI Prompt Builder',
-                ai_description: 'Wähle Schritt für Schritt deinen perfekten KI-Prompt! Einfach, übersichtlich und speziell für Benutzer entwickelt.',
-                ai_dice_title: '🎲 Magic Dice Auto-Prompt',
-                ai_dice_description: 'Klicke auf den Würfel für einen zufälligen KI-Prompt!',
-                ai_dice_subtitle: 'Klicke den Würfel!',
-                ai_dice_auto: 'Automatische Prompt-Generierung',
-                ai_dice_button: '🎲 Würfel Werfen!',
-                ai_dice_result: '🎲 Auto-Generierter Prompt:',
-                ai_dice_copy: '📋 Prompt Kopieren',
-                ai_dice_imagine: '🎨 Bild mit Imagine.art Erstellen',
-                ai_step_title: 'Schritt-für-Schritt Builder',
-                ai_step_description: 'Erstelle deinen perfekten Prompt in 4 einfachen Schritten!',
-                ai_step_reset: '🔄 Neu Beginnen',
-                ai_progress: 'Fortschritt',
-                ai_step_of: 'Schritt {current} von {total}',
-                ai_step1_title: 'Was möchtest du erstellen?',
-                ai_step2_title: 'In welchem Stil?',
-                ai_step3_title: 'Welche Stimmung?',
-                ai_step4_title: 'Welche Qualität?',
-                ai_result_title: '🎨 Dein Perfekter KI-Prompt:',
-                ai_result_copy: '📋 Prompt Kopieren',
-                ai_result_imagine: '🎨 Bild mit Imagine.art Erstellen',
-                ai_result_new: '🔄 Neuer Prompt',
-                
-                // TON Games Page
-                ton_title: 'TON Blockchain Spiele',
-                ton_description: 'Entdecke The Open Network - die schnellste Blockchain der Welt. Spiele kostenlose Spiele, verdiene Krypto!',
-                ton_success_title: 'Mein Persönlicher Erfolg',
-                ton_success_amount: '$1,750',
-                ton_success_description: 'Das habe ich mit <strong>Catizen</strong> verdient - mein erfolgreichstes TON-Spiel!',
-                ton_success_proof: 'Beweis, dass diese Spiele wirklich auszahlen. Starte heute!',
-                ton_what_title: '💎 Was ist TON?',
-                ton_why_title: '🚀 Warum TON Besonders Ist:',
-                ton_how_title: '🎮 Wie zu Verwenden:',
-                ton_games_title: '🎮 Kostenlose TON Spiele',
-                ton_warning_title: 'Trading Apps - Nur für Experten!',
-                ton_warning_description: 'Trading Apps sind NUR für erfahrene Trader. Du kannst dein Geld verlieren!',
-                ton_community_title: 'Tritt unserer Community bei',
-                ton_community_description: 'Teile Referral-Links, erhalte Tipps und bleibe über neue Apps informiert.',
-                ton_community_button: '💬 Telegram Gruppe Beitreten',
-                
-                // News Page
-                news_title: 'KI & Krypto Nachrichten',
-                news_description: 'Bleibe über die neuesten Entwicklungen in KI, Blockchain und Kryptowährung informiert.',
-                news_live_title: 'Live RSS Nachrichten Feed',
-                news_refresh: '🔄 Aktualisieren',
-                news_loading: 'Lade aktuelle Nachrichten...',
-                news_updates: 'Aktuelle Updates',
-                news_follow: '🐦 Folge @mcdropke für Live Updates',
-                news_error: 'Konnte Nachrichten nicht laden',
-                news_retry: '🔄 Erneut Versuchen',
-                news_all: 'Alle Nachrichten',
-                news_ai: '🤖 KI & Tech',
-                news_crypto: '₿ Krypto',
-                news_gaming: '🎮 Gaming',
-                news_follow_title: 'Folge @mcdropke auf X',
-                news_follow_description: 'Echtzeit-Updates über KI, Krypto und TON-Spiele. Tägliche Einblicke und Breaking News!',
-                news_follow_button: '🐦 Auf X Folgen',
-                
-                // Merch Page
-                merch_title: 'Aileer Merchandise',
-                merch_description: 'Trage deine Leidenschaft für KI und Krypto mit unserer exklusiven Merchandise-Kollektion.',
-                merch_fruitastic: 'Fruitastic Kollektion',
-                merch_pride: 'LGBTIQ+ Pride',
-                merch_why_title: 'Warum Unser Merchandise?',
-                merch_sustainable: 'Nachhaltig',
-                merch_quality: 'Premium Qualität',
-                merch_shipping: 'Weltweiter Versand',
-                
-                // Common
-                start_building: 'Jetzt Starten',
-                read_more: 'Mehr lesen →',
-                copied: '✅ Prompt kopiert!',
-                opening_imagine: '🎨 Öffne Imagine.art...',
-                language_changed: '🌍 Sprache geändert zu {lang}'
-            },
-            fr: {
-                // Navigation
-                nav_home: 'Accueil',
-                nav_ai_builder: 'Générateur IA',
-                nav_ton_games: 'Jeux TON',
-                nav_nieuws: 'Actualités',
-                nav_merch: 'Boutique',
-                
-                // Home Page
-                home_badge: '🚀 #1 Générateur de Prompts IA 2025',
-                home_title: 'Générateur de Prompts IA',
-                home_subtitle: 'Prompts Parfaits',
-                home_description: 'Générez des prompts IA parfaits pour Midjourney, DALL-E, Stable Diffusion et plus. Générateur Magic Dice, constructeur étape par étape et des milliers de combinaisons pour des résultats époustouflants.',
-                home_cta_ai: '🎨 Démarrer le Générateur IA',
-                home_cta_games: '🎮 Jeux TON',
-                home_cta_news: '📰 Actualités IA',
-                home_cta_merch: '👕 Boutique',
-                home_stats_combinations: 'Combinaisons',
-                home_stats_dice: 'Magic Dice',
-                home_stats_generators: 'Générateurs IA',
-                home_stats_free: 'Gratuit',
-                
-                // AI Builder Page
-                ai_title: 'Générateur de Prompts IA',
-                ai_description: 'Choisissez votre prompt IA parfait étape par étape! Simple, clair et spécialement conçu pour les utilisateurs.',
-                ai_dice_title: '🎲 Magic Dice Auto-Prompt',
-                ai_dice_description: 'Cliquez sur le dé pour un prompt IA aléatoire!',
-                ai_dice_subtitle: 'Cliquez sur le dé!',
-                ai_dice_auto: 'Génération automatique de prompt',
-                ai_dice_button: '🎲 Lancer le Dé!',
-                ai_dice_result: '🎲 Prompt Auto-Généré:',
-                ai_dice_copy: '📋 Copier le Prompt',
-                ai_dice_imagine: '🎨 Créer une Image avec Imagine.art',
-                ai_step_title: 'Constructeur Étape par Étape',
-                ai_step_description: 'Créez votre prompt parfait en 4 étapes simples!',
-                ai_step_reset: '🔄 Recommencer',
-                ai_progress: 'Progrès',
-                ai_step_of: 'Étape {current} sur {total}',
-                ai_step1_title: 'Que voulez-vous créer?',
-                ai_step2_title: 'Dans quel style?',
-                ai_step3_title: 'Quelle ambiance?',
-                ai_step4_title: 'Quelle qualité?',
-                ai_result_title: '🎨 Votre Prompt IA Parfait:',
-                ai_result_copy: '📋 Copier le Prompt',
-                ai_result_imagine: '🎨 Créer une Image avec Imagine.art',
-                ai_result_new: '🔄 Nouveau Prompt',
-                
-                // TON Games Page
-                ton_title: 'Jeux Blockchain TON',
-                ton_description: 'Découvrez The Open Network - la blockchain la plus rapide au monde. Jouez à des jeux gratuits, gagnez de la crypto!',
-                ton_success_title: 'Mon Succès Personnel',
-                ton_success_amount: '$1,750',
-                ton_success_description: 'C\'est ce que j\'ai gagné avec <strong>Catizen</strong> - mon jeu TON le plus réussi!',
-                ton_success_proof: 'Preuve que ces jeux paient vraiment. Commencez aujourd\'hui!',
-                ton_what_title: '💎 Qu\'est-ce que TON?',
-                ton_why_title: '🚀 Pourquoi TON est Spécial:',
-                ton_how_title: '🎮 Comment Utiliser:',
-                ton_games_title: '🎮 Jeux TON Gratuits',
-                ton_warning_title: 'Apps de Trading - Experts Seulement!',
-                ton_warning_description: 'Les apps de trading sont SEULEMENT pour les traders expérimentés. Vous pouvez perdre votre argent!',
-                ton_community_title: 'Rejoignez notre Communauté',
-                ton_community_description: 'Partagez des liens de parrainage, obtenez des conseils et restez informé des nouvelles apps.',
-                ton_community_button: '💬 Rejoindre le Groupe Telegram',
-                
-                // News Page
-                news_title: 'Actualités IA & Crypto',
-                news_description: 'Restez informé des derniers développements en IA, blockchain et cryptomonnaie.',
-                news_live_title: 'Flux d\'Actualités RSS en Direct',
-                news_refresh: '🔄 Actualiser',
-                news_loading: 'Chargement des actualités...',
-                news_updates: 'Mises à Jour Actuelles',
-                news_follow: '🐦 Suivez @mcdropke pour les Mises à Jour en Direct',
-                news_error: 'Impossible de charger les actualités',
-                news_retry: '🔄 Réessayer',
-                news_all: 'Toutes les Actualités',
-                news_ai: '🤖 IA & Tech',
-                news_crypto: '₿ Crypto',
-                news_gaming: '🎮 Gaming',
-                news_follow_title: 'Suivez @mcdropke sur X',
-                news_follow_description: 'Mises à jour en temps réel sur l\'IA, la crypto et les jeux TON. Insights quotidiens et breaking news!',
-                news_follow_button: '🐦 Suivre sur X',
-                
-                // Merch Page
-                merch_title: 'Merchandise Aileer',
-                merch_description: 'Portez votre passion pour l\'IA et la crypto avec notre collection de merchandise exclusive.',
-                merch_fruitastic: 'Collection Fruitastic',
-                merch_pride: 'LGBTIQ+ Pride',
-                merch_why_title: 'Pourquoi Notre Merchandise?',
-                merch_sustainable: 'Durable',
-                merch_quality: 'Qualité Premium',
-                merch_shipping: 'Expédition Mondiale',
-                
-                // Common
-                start_building: 'Commencer',
-                read_more: 'Lire plus →',
-                copied: '✅ Prompt copié!',
-                opening_imagine: '🎨 Ouverture d\'Imagine.art...',
-                language_changed: '🌍 Langue changée en {lang}'
-            },
-            es: {
-                // Navigation
-                nav_home: 'Inicio',
-                nav_ai_builder: 'Generador IA',
-                nav_ton_games: 'Juegos TON',
-                nav_nieuws: 'Noticias',
-                nav_merch: 'Tienda',
-                
-                // Home Page
-                home_badge: '🚀 #1 Generador de Prompts IA 2025',
-                home_title: 'Generador de Prompts IA',
-                home_subtitle: 'Prompts Perfectos',
-                home_description: 'Genera prompts de IA perfectos para Midjourney, DALL-E, Stable Diffusion y más. Generador Magic Dice, constructor paso a paso y miles de combinaciones para resultados impresionantes.',
-                home_cta_ai: '🎨 Iniciar Generador IA',
-                home_cta_games: '🎮 Juegos TON',
-                home_cta_news: '📰 Noticias IA',
-                home_cta_merch: '👕 Tienda',
-                home_stats_combinations: 'Combinaciones',
-                home_stats_dice: 'Magic Dice',
-                home_stats_generators: 'Generadores IA',
-                home_stats_free: 'Gratis',
-                
-                // AI Builder Page
-                ai_title: 'Generador de Prompts IA',
-                ai_description: '¡Elige tu prompt de IA perfecto paso a paso! Simple, claro y especialmente diseñado para usuarios.',
-                ai_dice_title: '🎲 Magic Dice Auto-Prompt',
-                ai_dice_description: '¡Haz clic en el dado para un prompt de IA aleatorio!',
-                ai_dice_subtitle: '¡Haz clic en el dado!',
-                ai_dice_auto: 'Generación automática de prompt',
-                ai_dice_button: '🎲 ¡Lanzar el Dado!',
-                ai_dice_result: '🎲 Prompt Auto-Generado:',
-                ai_dice_copy: '📋 Copiar Prompt',
-                ai_dice_imagine: '🎨 Crear Imagen con Imagine.art',
-                ai_step_title: 'Constructor Paso a Paso',
-                ai_step_description: '¡Crea tu prompt perfecto en 4 pasos simples!',
-                ai_step_reset: '🔄 Empezar de Nuevo',
-                ai_progress: 'Progreso',
-                ai_step_of: 'Paso {current} de {total}',
-                ai_step1_title: '¿Qué quieres crear?',
-                ai_step2_title: '¿En qué estilo?',
-                ai_step3_title: '¿Qué ambiente?',
-                ai_step4_title: '¿Qué calidad?',
-                ai_result_title: '🎨 Tu Prompt IA Perfecto:',
-                ai_result_copy: '📋 Copiar Prompt',
-                ai_result_imagine: '🎨 Crear Imagen con Imagine.art',
-                ai_result_new: '🔄 Nuevo Prompt',
-                
-                // TON Games Page
-                ton_title: 'Juegos Blockchain TON',
-                ton_description: 'Descubre The Open Network - la blockchain más rápida del mundo. ¡Juega juegos gratis, gana crypto!',
-                ton_success_title: 'Mi Éxito Personal',
-                ton_success_amount: '$1,750',
-                ton_success_description: '¡Esto es lo que gané con <strong>Catizen</strong> - mi juego TON más exitoso!',
-                ton_success_proof: 'Prueba de que estos juegos realmente pagan. ¡Empieza hoy!',
-                ton_what_title: '💎 ¿Qué es TON?',
-                ton_why_title: '🚀 Por Qué TON es Especial:',
-                ton_how_title: '🎮 Cómo Usar:',
-                ton_games_title: '🎮 Juegos TON Gratis',
-                ton_warning_title: 'Apps de Trading - ¡Solo para Expertos!',
-                ton_warning_description: 'Las apps de trading son SOLO para traders experimentados. ¡Puedes perder tu dinero!',
-                ton_community_title: 'Únete a nuestra Comunidad',
-                ton_community_description: 'Comparte enlaces de referencia, obtén consejos y mantente actualizado sobre nuevas apps.',
-                ton_community_button: '💬 Unirse al Grupo de Telegram',
-                
-                // News Page
-                news_title: 'Noticias IA & Crypto',
-                news_description: 'Mantente actualizado sobre los últimos desarrollos en IA, blockchain y criptomoneda.',
-                news_live_title: 'Feed de Noticias RSS en Vivo',
-                news_refresh: '🔄 Actualizar',
-                news_loading: 'Cargando noticias actuales...',
-                news_updates: 'Actualizaciones Actuales',
-                news_follow: '🐦 Sigue @mcdropke para Actualizaciones en Vivo',
-                news_error: 'No se pudieron cargar las noticias',
-                news_retry: '🔄 Intentar de Nuevo',
-                news_all: 'Todas las Noticias',
-                news_ai: '🤖 IA & Tech',
-                news_crypto: '₿ Crypto',
-                news_gaming: '🎮 Gaming',
-                news_follow_title: 'Sigue @mcdropke en X',
-                news_follow_description: '¡Actualizaciones en tiempo real sobre IA, crypto y juegos TON. Insights diarios y breaking news!',
-                news_follow_button: '🐦 Seguir en X',
-                
-                // Merch Page
-                merch_title: 'Merchandise Aileer',
-                merch_description: 'Lleva tu pasión por la IA y crypto con nuestra colección exclusiva de merchandise.',
-                merch_fruitastic: 'Colección Fruitastic',
-                merch_pride: 'LGBTIQ+ Pride',
-                merch_why_title: '¿Por Qué Nuestro Merchandise?',
-                merch_sustainable: 'Sostenible',
-                merch_quality: 'Calidad Premium',
-                merch_shipping: 'Envío Mundial',
-                
-                // Common
-                start_building: 'Empezar',
-                read_more: 'Leer más →',
-                copied: '✅ ¡Prompt copiado!',
-                opening_imagine: '🎨 Abriendo Imagine.art...',
-                language_changed: '🌍 Idioma cambiado a {lang}'
             }
         };
         
@@ -1872,7 +2871,8 @@
             const pageUrls = {
                 'home': '/',
                 'ai-builder': '/ai-builder',
-                'ton-games': '/ton-games', 
+                'ton-games': '/ton-games',
+                'trading': '/trading',
                 'nieuws': '/nieuws',
                 'merch': '/merch'
             };
@@ -1898,6 +2898,9 @@
                 case 'ton-games':
                     title += t.ton_title || 'TON Blockchain Games';
                     break;
+                case 'trading':
+                    title += t.trading_title || 'Crypto Trading Platforms';
+                    break;
                 case 'nieuws':
                     title += t.news_title || 'AI & Crypto News';
                     break;
@@ -1913,18 +2916,21 @@
         // Handle URL routing
         function handleRouting() {
             const path = window.location.pathname;
-            let pageId = 'home';
+            let pageId = 'ai-builder';
             
             switch(path) {
                 case '/':
                 case '/home':
-                    pageId = 'home';
+                    pageId = 'ai-builder';
                     break;
                 case '/ai-builder':
                     pageId = 'ai-builder';
                     break;
                 case '/ton-games':
                     pageId = 'ton-games';
+                    break;
+                case '/trading':
+                    pageId = 'trading';
                     break;
                 case '/nieuws':
                 case '/news':
@@ -2178,82 +3184,305 @@
             updateStepProgress();
         }
 
-        // Magic Dice Functions
-        const diceOptions = {
+        // Epic AUTOPROMPT Functions
+        const autoPromptOptions = {
             subjects: [
-                'een mystieke draak met kristallen schubben',
-                'een elegante vrouw in vintage kleding',
-                'een futuristische stad met neon verlichting',
-                'een majestueuze kat met gouden ogen',
-                'een gotisch kasteel op dramatische klif',
-                'een underwater palace met coral gardens',
-                'een stoere cyberpunk warrior',
-                'een magische forest met glowing mushrooms'
+                'een mystieke draak met kristallen schubben die vuur spuwt',
+                'een elegante vrouw in vintage haute couture kleding',
+                'een futuristische neon-verlichte cyberpunk metropolis',
+                'een majestueuze witte tijger met gouden ogen in jungle',
+                'een gotisch kasteel op dramatische klif bij onweer',
+                'een underwater crystal palace met bioluminescent coral gardens',
+                'een stoere space marine warrior in power armor',
+                'een magische enchanted forest met glowing mushrooms en fairy lights',
+                'een phoenix die herrijst uit gouden vlammen',
+                'een steampunk airship boven victoriaanse stad'
             ],
             styles: [
-                'hyperrealistisch fotografie stijl',
-                'premium digitale kunst met HDR lighting',
-                'high-end anime met cel-shading',
-                'klassiek olieverf meesterwerk',
-                'cinema-quality 3D render',
-                'epic fantasy artwork',
-                'surrealistisch met dreamlike qualities',
-                'fashion photography excellence'
+                'hyperrealistisch 8K fotografie met perfecte belichting',
+                'premium digitale kunst met HDR lighting en ray tracing',
+                'high-end anime studio quality met cel-shading perfectie',
+                'klassiek Renaissance olieverf meesterwerk stijl',
+                'cinema-quality 3D render met volumetric lighting',
+                'epic fantasy artwork in Frank Frazetta stijl',
+                'surrealistisch Salvador Dali dreamscape',
+                'fashion photography Vogue magazine cover excellence',
+                'Art Nouveau Gustav Klimt gouden decoratieve stijl',
+                'cyberpunk neon aesthetic met holographic effects'
             ],
             moods: [
-                'dramatisch en mysterieus',
-                'vrolijk en kleurrijk',
-                'rustig en vredig',
-                'energiek en levendig',
-                'romantisch en warm',
-                'episch en grootse',
-                'futuristisch en modern',
-                'donker en gothic'
+                'dramatisch en mysterieus met donkere schaduwen',
+                'vrolijk en kleurrijk met regenboog kleuren',
+                'rustig en vredig met zachte pastel tinten',
+                'energiek en levendig met explosieve kleuren',
+                'romantisch en warm met gouden hour lighting',
+                'episch en grootse met heroïsche compositie',
+                'futuristisch en modern met neon accenten',
+                'donker en gothic met supernatural atmosfeer',
+                'magisch en betoverend met sparkles en glitter',
+                'elegant en sophisticated met luxe details'
             ],
             qualities: [
-                '8K ultra-high resolution, museum quality',
-                '4K premium detail, magazine cover quality',
-                'award-winning masterpiece quality',
-                'commercial photography grade',
-                'cinematographic excellence',
-                'fine art print quality'
+                '8K ultra-high resolution, museum masterpiece quality',
+                '4K premium detail, magazine cover perfection',
+                'award-winning photography competition quality',
+                'commercial advertising campaign excellence',
+                'cinematographic Hollywood blockbuster quality',
+                'fine art gallery exhibition standard',
+                'trending on ArtStation featured artwork',
+                'Behance portfolio showcase quality',
+                'Instagram viral sensation potential',
+                'NFT collection premium standard'
             ]
         };
 
-        function rollDiceForPrompt() {
-            const dice = document.getElementById('magicDice').querySelector('.dice-3d');
-            const subjectEl = document.getElementById('diceSubject');
+        let currentEpicPrompt = '';
+
+        function triggerAutoPrompt() {
+            const buttonContainer = document.getElementById('autoPromptButton');
+            const button3d = buttonContainer.querySelector('.autoprompt-3d');
             
-            // Add rolling animation
-            dice.classList.add('dice-rolling');
+            // Start button activation animation
+            button3d.classList.add('autoprompt-activating');
             
-            // Generate random selections
-            const subject = diceOptions.subjects[Math.floor(Math.random() * diceOptions.subjects.length)];
-            const style = diceOptions.styles[Math.floor(Math.random() * diceOptions.styles.length)];
-            const mood = diceOptions.moods[Math.floor(Math.random() * diceOptions.moods.length)];
-            const quality = diceOptions.qualities[Math.floor(Math.random() * diceOptions.qualities.length)];
+            // Generate epic prompt
+            const subject = autoPromptOptions.subjects[Math.floor(Math.random() * autoPromptOptions.subjects.length)];
+            const style = autoPromptOptions.styles[Math.floor(Math.random() * autoPromptOptions.styles.length)];
+            const mood = autoPromptOptions.moods[Math.floor(Math.random() * autoPromptOptions.moods.length)];
+            const quality = autoPromptOptions.qualities[Math.floor(Math.random() * autoPromptOptions.qualities.length)];
             
-            // Update dice face
-            const faces = ['🎨', '🎯', '⚡', '✨', '🚀', '💫'];
-            const randomFace = faces[Math.floor(Math.random() * faces.length)];
-            document.getElementById('diceFace').textContent = randomFace;
+            currentEpicPrompt = `${subject}, ${style}, ${mood}, ${quality}, professional studio lighting, highly detailed, masterpiece quality, trending on artstation`;
+            
+            // Start screen crack effect after 1 second
+            setTimeout(() => {
+                startScreenCrackEffect();
+            }, 1000);
+            
+            // Show epic prompt after 2.5 seconds
+            setTimeout(() => {
+                showEpicPrompt();
+            }, 2500);
+            
+            // Reset button after animation
+            setTimeout(() => {
+                button3d.classList.remove('autoprompt-activating');
+            }, 2000);
+        }
+
+        function startScreenCrackEffect() {
+            const overlay = document.getElementById('screenCrackOverlay');
+            overlay.classList.add('active');
+            
+            // Add crack sound effect (if you want to add audio)
+            // playSound('crack');
+        }
+
+        function showEpicPrompt() {
+            // Skip the epic reveal screen and go directly to the result
+            // Show in the auto prompt result section immediately
+            document.getElementById('autoGeneratedPrompt').textContent = currentEpicPrompt;
+            document.getElementById('autoPromptResult').classList.remove('hidden');
+            
+            // Scroll to the result
+            document.getElementById('autoPromptResult').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+            
+            // Remove screen crack overlay if active
+            const overlay = document.getElementById('screenCrackOverlay');
+            overlay.classList.remove('active');
+            
+            // Track the epic prompt generation
+            trackEvent('epic_autoprompt_generated', { 
+                prompt_length: currentEpicPrompt.length,
+                timestamp: new Date().toISOString()
+            });
+        }
+
+        function copyEpicPrompt() {
+            copyToClipboard(currentEpicPrompt);
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✅ Gekopieerd!';
+            button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
             
             setTimeout(() => {
-                dice.classList.remove('dice-rolling');
-                dice.classList.add('dice-landed');
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }, 2000);
+            
+            trackEvent('epic_prompt_copied', { prompt: currentEpicPrompt });
+        }
+
+        function openEpicImagineArt() {
+            const encodedPrompt = encodeURIComponent(currentEpicPrompt);
+            const url = `https://www.imagine.art/dashboard?a_aid=5b6db501&prompt=${encodedPrompt}`;
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '🚀 Opening...';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+            
+            window.open(url, '_blank', 'noopener,noreferrer');
+            trackEvent('epic_prompt_imagine_art', { prompt: currentEpicPrompt });
+        }
+
+        function openGrokAI() {
+            // Grok AI with @mcdropke referral
+            const grokPrompt = `Create an AI art prompt: ${currentEpicPrompt}`;
+            const encodedPrompt = encodeURIComponent(grokPrompt);
+            
+            // Try to open Grok directly, fallback to X with mention
+            const grokUrl = `https://grok.x.ai/?prompt=${encodedPrompt}`;
+            const xUrl = `https://twitter.com/intent/tweet?text=Hey%20@mcdropke%20check%20this%20epic%20AI%20prompt%3A%20${encodeURIComponent(currentEpicPrompt)}%20%23AIart%20%23Grok%20%23AIprompts`;
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '🤖 Opening Grok...';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+            
+            // Try Grok first, fallback to X mention
+            try {
+                window.open(grokUrl, '_blank', 'noopener,noreferrer');
+            } catch (error) {
+                window.open(xUrl, '_blank', 'noopener,noreferrer');
+            }
+            
+            trackEvent('epic_prompt_grok_ai', { 
+                prompt: currentEpicPrompt,
+                referral: '@mcdropke'
+            });
+        }
+
+        function closeEpicPrompt() {
+            const container = document.getElementById('promptRevealContainer');
+            const overlay = document.getElementById('screenCrackOverlay');
+            
+            // Hide with animation
+            container.style.opacity = '0';
+            container.style.transform = 'scale(0.8)';
+            overlay.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.classList.remove('active');
+                overlay.classList.remove('active');
+                container.style.opacity = '';
+                container.style.transform = '';
+                overlay.style.opacity = '';
+            }, 500);
+            
+            trackEvent('epic_prompt_closed');
+        }
+
+        // Legacy dice function for backward compatibility
+        function rollDiceForPrompt() {
+            triggerAutoPrompt();
+        }
+
+        function createEnergyBurst(container) {
+            // Create energy burst container
+            const burstContainer = document.createElement('div');
+            burstContainer.className = 'energy-burst';
+            container.appendChild(burstContainer);
+            
+            // Create multiple energy particles
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'energy-particle';
                 
-                // Update subject display
-                subjectEl.textContent = subject;
+                // Random positioning around the center
+                const angle = (i * 30) + Math.random() * 30; // 30 degrees apart with randomness
+                const distance = 50 + Math.random() * 50;
                 
-                // Generate and show prompt
-                const autoPrompt = `${subject}, ${style}, ${mood}, ${quality}, professional lighting, highly detailed, masterpiece quality`;
-                document.getElementById('autoGeneratedPrompt').textContent = autoPrompt;
-                document.getElementById('autoPromptResult').classList.remove('hidden');
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.transform = `rotate(${angle}deg) translateX(${distance}px)`;
+                particle.style.animationDelay = Math.random() * 0.3 + 's';
                 
-                setTimeout(() => {
-                    dice.classList.remove('dice-landed');
-                }, 800);
-            }, 3000);
+                burstContainer.appendChild(particle);
+            }
+            
+            // Create energy ring
+            const ring = document.createElement('div');
+            ring.className = 'energy-ring';
+            container.appendChild(ring);
+            
+            // Create energy wave
+            const wave = document.createElement('div');
+            wave.className = 'energy-wave';
+            container.appendChild(wave);
+            
+            // Create lightning bolts
+            for (let i = 0; i < 6; i++) {
+                const bolt = document.createElement('div');
+                bolt.className = 'lightning-bolt';
+                bolt.style.transform = `rotate(${i * 60}deg)`;
+                bolt.style.animationDelay = (i * 0.1) + 's';
+                container.appendChild(bolt);
+            }
+            
+            // Clean up after animation
+            setTimeout(() => {
+                if (container.contains(burstContainer)) {
+                    container.removeChild(burstContainer);
+                }
+                if (container.contains(ring)) {
+                    container.removeChild(ring);
+                }
+                if (container.contains(wave)) {
+                    container.removeChild(wave);
+                }
+                container.querySelectorAll('.lightning-bolt').forEach(bolt => {
+                    if (container.contains(bolt)) {
+                        container.removeChild(bolt);
+                    }
+                });
+            }, 2000);
+        }
+
+        function createLandingEffect(container) {
+            // Create smaller energy effect for landing
+            const landingWave = document.createElement('div');
+            landingWave.className = 'energy-wave';
+            landingWave.style.animationDuration = '0.6s';
+            container.appendChild(landingWave);
+            
+            // Create small particles
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'energy-particle';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.transform = `rotate(${i * 45}deg) translateX(30px)`;
+                particle.style.animationDuration = '0.8s';
+                particle.style.animationDelay = Math.random() * 0.2 + 's';
+                container.appendChild(particle);
+            }
+            
+            // Clean up
+            setTimeout(() => {
+                if (container.contains(landingWave)) {
+                    container.removeChild(landingWave);
+                }
+                container.querySelectorAll('.energy-particle').forEach(particle => {
+                    if (container.contains(particle)) {
+                        container.removeChild(particle);
+                    }
+                });
+            }, 1000);
         }
 
         // Copy Functions
@@ -2329,52 +3558,124 @@
             }, 2000);
         }
 
-        function loadMockNews() {
+        async function loadMockNews() {
             const newsGrid = document.getElementById('newsGrid');
             const timestamp = new Date().toLocaleString(currentLanguage === 'nl' ? 'nl-NL' : 'en-US');
             
             document.getElementById('newsTimestamp').textContent = timestamp;
             
-            const mockNews = [
-                {
-                    title: 'OpenAI Releases GPT-5 with Revolutionary Capabilities',
-                    summary: 'The latest AI model shows unprecedented reasoning abilities...',
-                    category: 'AI',
-                    time: '2 uur geleden'
-                },
-                {
-                    title: 'TON Blockchain Reaches 1 Million Daily Active Users',
-                    summary: 'The Open Network continues its explosive growth...',
-                    category: 'Crypto',
-                    time: '4 uur geleden'
-                },
-                {
-                    title: 'Midjourney V7 Beta Now Available',
-                    summary: 'Enhanced image generation with better prompt understanding...',
-                    category: 'AI',
-                    time: '6 uur geleden'
-                },
-                {
-                    title: 'Telegram Mini Apps Hit 500M Users',
-                    summary: 'Gaming and utility apps drive massive adoption...',
-                    category: 'Gaming',
-                    time: '8 uur geleden'
+            try {
+                // Load real RSS feeds
+                const newsArticles = await loadRSSFeeds();
+                
+                if (newsArticles.length > 0) {
+                    newsGrid.innerHTML = newsArticles.slice(0, 8).map(article => `
+                        <div class="glass-card rounded-lg p-4 hover:bg-white/10 transition-colors cursor-pointer" onclick="openLink('${article.link}', 'News Article')">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400">${article.category}</span>
+                                <span class="text-xs text-slate-400">${article.time}</span>
+                            </div>
+                            <h4 class="font-semibold text-white text-sm mb-2 line-clamp-2">${article.title}</h4>
+                            <p class="text-slate-300 text-xs line-clamp-2">${article.summary}</p>
+                        </div>
+                    `).join('');
+                } else {
+                    throw new Error('No articles loaded');
                 }
-            ];
-            
-            newsGrid.innerHTML = mockNews.map(article => `
-                <div class="glass-card rounded-lg p-4 hover:bg-white/10 transition-colors cursor-pointer">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400">${article.category}</span>
-                        <span class="text-xs text-slate-400">${article.time}</span>
+            } catch (error) {
+                console.log('RSS feeds not available, using fallback content');
+                // Fallback to curated tech news
+                const fallbackNews = [
+                    {
+                        title: 'AI Revolution: ChatGPT and Beyond Transform Industries',
+                        summary: 'Artificial Intelligence continues to reshape business landscapes across sectors...',
+                        category: 'AI',
+                        time: '2h ago',
+                        link: 'https://techcrunch.com/ai/'
+                    },
+                    {
+                        title: 'Cryptocurrency Market Reaches New Heights in 2025',
+                        summary: 'Bitcoin and altcoins show strong performance as institutional adoption grows...',
+                        category: 'Crypto',
+                        time: '4h ago',
+                        link: 'https://cointelegraph.com/'
+                    },
+                    {
+                        title: 'Midjourney and DALL-E 3 Push Creative Boundaries',
+                        summary: 'Latest AI image generators deliver unprecedented quality and control...',
+                        category: 'AI',
+                        time: '6h ago',
+                        link: 'https://www.theverge.com/ai-artificial-intelligence'
+                    },
+                    {
+                        title: 'Telegram Mini Apps Ecosystem Explodes to 500M Users',
+                        summary: 'TON blockchain integration drives massive growth in gaming and utility apps...',
+                        category: 'Gaming',
+                        time: '8h ago',
+                        link: 'https://telegram.org/'
+                    },
+                    {
+                        title: 'Machine Learning Breakthrough in Medical Diagnostics',
+                        summary: 'New AI models achieve 99% accuracy in early disease detection...',
+                        category: 'AI',
+                        time: '10h ago',
+                        link: 'https://www.nature.com/subjects/machine-learning'
+                    },
+                    {
+                        title: 'DeFi Protocols See Record TVL Growth',
+                        summary: 'Decentralized finance platforms attract billions in new investments...',
+                        category: 'Crypto',
+                        time: '12h ago',
+                        link: 'https://defipulse.com/'
+                    },
+                    {
+                        title: 'OpenAI Announces GPT-5 Development Progress',
+                        summary: 'Next-generation language model promises enhanced reasoning capabilities...',
+                        category: 'AI',
+                        time: '14h ago',
+                        link: 'https://openai.com/blog'
+                    },
+                    {
+                        title: 'Blockchain Gaming Market Surpasses $10 Billion',
+                        summary: 'Play-to-earn games and NFT integration drive unprecedented growth...',
+                        category: 'Gaming',
+                        time: '16h ago',
+                        link: 'https://www.coindesk.com/business/gaming/'
+                    }
+                ];
+                
+                newsGrid.innerHTML = fallbackNews.map(article => `
+                    <div class="glass-card rounded-lg p-4 hover:bg-white/10 transition-colors cursor-pointer" onclick="openLink('${article.link}', 'News Article')">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400">${article.category}</span>
+                            <span class="text-xs text-slate-400">${article.time}</span>
+                        </div>
+                        <h4 class="font-semibold text-white text-sm mb-2 line-clamp-2">${article.title}</h4>
+                        <p class="text-slate-300 text-xs line-clamp-2">${article.summary}</p>
                     </div>
-                    <h4 class="font-semibold text-white text-sm mb-2 line-clamp-2">${article.title}</h4>
-                    <p class="text-slate-300 text-xs line-clamp-2">${article.summary}</p>
-                </div>
-            `).join('');
+                `).join('');
+            }
             
             // Load sidebar articles
             loadSidebarArticles();
+        }
+
+        async function loadRSSFeeds() {
+            const articles = [];
+            
+            // RSS feed URLs (using CORS proxy for client-side access)
+            const feeds = [
+                { url: 'https://feeds.feedburner.com/techcrunch/startups', category: 'Tech' },
+                { url: 'https://cointelegraph.com/rss', category: 'Crypto' },
+                { url: 'https://www.artificialintelligence-news.com/feed/', category: 'AI' },
+                { url: 'https://decrypt.co/feed', category: 'Crypto' }
+            ];
+            
+            // Note: In a real implementation, you would need a backend service or CORS proxy
+            // to fetch RSS feeds due to browser CORS restrictions
+            // For now, we'll return empty array to trigger fallback content
+            
+            return articles;
         }
 
         function loadSidebarArticles() {
@@ -2457,6 +3758,78 @@
             document.getElementById('scrollIndicator').style.width = scrolled + '%';
         }
 
+        // Surprise Box Functions
+        let surpriseBoxTimer;
+        let surpriseBoxVisible = false;
+        
+        const merchLinks = [
+            { url: 'https://everpress.com/fruitastic', name: 'Fruitastic Collection' },
+            { url: 'https://everpress.com/lhbtiq', name: 'LGBTIQ+ Pride Collection' }
+        ];
+        
+        function showSurpriseBox() {
+            if (surpriseBoxVisible) return;
+            
+            const box = document.getElementById('surpriseBox');
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Random position (avoiding edges)
+            const x = Math.random() * (viewportWidth - 120) + 20;
+            const y = Math.random() * (viewportHeight - 120) + 20;
+            
+            box.style.left = x + 'px';
+            box.style.top = y + 'px';
+            box.classList.add('visible');
+            
+            surpriseBoxVisible = true;
+            
+            // Auto-hide after 8 seconds if not clicked
+            setTimeout(() => {
+                if (surpriseBoxVisible) {
+                    hideSurpriseBox();
+                }
+            }, 8000);
+        }
+        
+        function hideSurpriseBox() {
+            const box = document.getElementById('surpriseBox');
+            box.classList.remove('visible');
+            surpriseBoxVisible = false;
+            
+            // Schedule next appearance (random interval between 30-120 seconds)
+            const nextAppearance = Math.random() * 90000 + 30000; // 30-120 seconds
+            surpriseBoxTimer = setTimeout(showSurpriseBox, nextAppearance);
+        }
+        
+        function clickSurpriseBox() {
+            const box = document.getElementById('surpriseBox');
+            box.classList.add('clicked');
+            
+            // Select random merch link
+            const randomMerch = merchLinks[Math.floor(Math.random() * merchLinks.length)];
+            
+            // Track click
+            trackEvent('surprise_box_click', { merch: randomMerch.name });
+            
+            // Open merch link
+            setTimeout(() => {
+                openLink(randomMerch.url, randomMerch.name);
+            }, 400);
+            
+            // Hide and reset box
+            setTimeout(() => {
+                box.classList.remove('clicked');
+                hideSurpriseBox();
+            }, 800);
+        }
+        
+        function startSurpriseBoxSystem() {
+            // First appearance after 45-90 seconds
+            const initialDelay = Math.random() * 45000 + 45000;
+            surpriseBoxTimer = setTimeout(showSurpriseBox, initialDelay);
+        }
+
         // Initialize Application
         function initializeApp() {
             // Set initial language
@@ -2468,6 +3841,9 @@
             
             // Create particles
             createParticles();
+            
+            // Start surprise box system
+            startSurpriseBoxSystem();
             
             // Initialize scroll progress
             window.addEventListener('scroll', updateScrollProgress);
@@ -2497,5 +3873,5 @@
         // Start the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99861b3dd4b7f5c3',t:'MTc2MjExMjQ1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99991091973b6570',t:'MTc2MjMxMTI0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
